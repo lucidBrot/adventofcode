@@ -17,12 +17,13 @@ std::vector<int> parse(std::string inputStr);
 
 // ---------- PROGRAM -----------
 int main(int argc, char* argv[]){
-    std::cout << "Hello World" << std::endl;
     testSimple();
+    std::cout << "Hello World" << std::endl;
 
     std::vector<int> inputs = parse(inputString);
     struct VectorContainer vectorContainer;
     vectorContainer.vectorptr = new std::vector<int>;
+    std::cout << "Hello World" << std::endl;
     TreeNode rootNode = TreeBuilder::buildTree(vectorContainer);
     delete vectorContainer.vectorptr;
     std::cout << "metadata total in p and children: " << rootNode.getMetadataTotal() << std::endl;

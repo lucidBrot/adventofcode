@@ -52,7 +52,11 @@ class TreeBuilder {
             int i = 0;
             int numChildren = inputs.vectorptr->at(i++);
             int numMetadata = inputs.vectorptr->at(i++);
+            std::cout << "pls" << std::endl;
             TreeNode root = TreeNode(numChildren);
+
+            std::cout << "creating TreeNode with numChildren=" << numChildren
+                << "and numMetadata=" << numMetadata << std::endl;
 
             // consume first two entries which are numChildren and numMetadata
             std::vector<int>* tailptr = new std::vector<int>;
