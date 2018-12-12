@@ -52,7 +52,7 @@ class TreeBuilder {
             int i = 0;
             int numChildren = inputs.vectorptr->at(i++);
             int numMetadata = inputs.vectorptr->at(i++);
-            std::cout << "pls" << std::endl;
+            std::cout << "[Checkpoint Recursion]" << std::endl;
             TreeNode root = TreeNode(numChildren);
 
             std::cout << "creating TreeNode with numChildren=" << numChildren

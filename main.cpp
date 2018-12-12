@@ -23,7 +23,6 @@ int main(int argc, char* argv[]){
     std::vector<int> inputs = parse(inputString);
     struct VectorContainer vectorContainer;
     vectorContainer.vectorptr = new std::vector<int>;
-    std::cout << "Hello World" << std::endl;
     TreeNode rootNode = TreeBuilder::buildTree(vectorContainer);
     delete vectorContainer.vectorptr;
     std::cout << "metadata total in p and children: " << rootNode.getMetadataTotal() << std::endl;
@@ -45,6 +44,7 @@ std::vector<int> parse(std::string inputStr){
 }
 
 void testSimple(){
+    std::cout << "--- Test: testSimple() start ---" << std::endl << std::endl;
     TreeNode t = TreeNode(0);
     t.addMetadata(3);
     t.addMetadata(4);
@@ -56,4 +56,5 @@ void testSimple(){
     int total = p.getMetadataTotal();
     std::cout << "metadata total in p and children: " << total << std::endl;
     assert(total == 8);
+    std::cout << "--- Test: testSimple() done ---" << std::endl;
 }
