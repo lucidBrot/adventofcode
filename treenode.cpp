@@ -49,29 +49,31 @@ class TreeBuilder {
     public:
         // modifies inputs content
         static TreeNode buildTree(VectorContainer & inputs){
-            std::cout << "[B]: vectorptr = " << inputs.vectorptr << std::endl;
-            int i = 0;
-            int numChildren = inputs.vectorptr->at(i++);
-            int numMetadata = inputs.vectorptr->at(i++);
-            std::cout << "[Checkpoint Recursion]" << std::endl;
+            ///std::cout << "[B]: vectorptr = " << inputs.vectorptr << std::endl;
+            int numChildren = inputs.vectorptr->at(0);
+            int numMetadata = inputs.vectorptr->at(1);
+            ///std::cout << "[Checkpoint Recursion]" << std::endl;
             TreeNode root = TreeNode(numChildren);
 
             std::cout << "creating TreeNode with numChildren=" << numChildren
-                << "and numMetadata=" << numMetadata << std::endl;
+                << " and numMetadata=" << numMetadata << std::endl;
 
             // consume first two entries which are numChildren and numMetadata
-            std::vector<int>* tailptr = new std::vector<int>;
+            std::vector<int>* tailptr = new std::vector<int>();
             *tailptr = std::vector<int>(inputs.vectorptr->begin()+2, inputs.vectorptr->end());
 
+            std::cout << "debug output 1" << std::endl;
             // pack tail into vectorContainer so the next buildTree call operates on what remains for the children
             delete inputs.vectorptr;
             inputs.vectorptr = tailptr;
+            std::cout << "debug output 2" << std::endl;
 
             // set up children count by passing the tail (consuming the inputs)
             for (int j=0; j<numChildren; j++){
                 TreeNode child = buildTree(inputs); // tail gets modified so what remains is for the next child
                 root.addChild(child);
             }
+            std::cout << "debug output 3" << std::endl;
 
             // at this point, inputs.vectorptr contains only the numbers for the this.parent.nextchild and so on. In other words:
             // inputs.vectorptr should now contain the remaining string that has not yet been parsed

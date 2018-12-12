@@ -20,13 +20,12 @@ int main(int argc, char* argv[]){
     testSimple();
     std::cout << "Hello World" << std::endl;
 
-    std::vector<int> inputs = parse(inputString);
+    std::vector<int>* inputs = new std::vector<int>(parse(inputString));
     std::cout << "Finished Parsing." << std::endl;
     struct VectorContainer vectorContainer;
     std::cout << "Declared empty struct at " << &vectorContainer << std::endl;
-    std::vector<int> tmpvec;
-    vectorContainer.vectorptr = &tmpvec;
-    std::cout << "[A]: vectorptr = " << vectorContainer.vectorptr;
+    vectorContainer.vectorptr = inputs;
+    std::cout << "[A]: vectorptr = " << vectorContainer.vectorptr << std::endl;
     TreeNode rootNode = TreeBuilder::buildTree(vectorContainer);
     std::cout << "metadata total in p and children: " << rootNode.getMetadataTotal() << std::endl;
 }
