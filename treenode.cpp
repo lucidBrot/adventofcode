@@ -78,10 +78,14 @@ class TreeBuilder {
             // at this point, inputs.vectorptr contains only the numbers for the this.parent.nextchild and so on. In other words:
             // inputs.vectorptr should now contain the remaining string that has not yet been parsed
             // recursion stops when a node has no children. Then the next numMetadata numbers are the metadata
+            int consumeTailBy = 0;
             for(int j=0; j<numMetadata; j++){
                 root.addMetadata(inputs.vectorptr->back());
                 inputs.vectorptr->pop_back();
+                consumeTailBy++;
             }
+            // update tail consumption
+            *inputs.vectorptr = std::vector<int>(inputs.vectorptr->begin()+consumeTailBy, inputs.vectorptr->end());
             return root;
         }
 };

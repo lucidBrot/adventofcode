@@ -14,6 +14,7 @@ static const std::string inputString = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"; //
 // ---------- HEADERS -----------
 void testSimple();
 std::vector<int> parse(std::string inputStr);
+void printVector(std::vector<int> v);
 
 // ---------- PROGRAM -----------
 int main(int argc, char* argv[]){
@@ -21,7 +22,9 @@ int main(int argc, char* argv[]){
     std::cout << "Hello World" << std::endl;
 
     std::vector<int>* inputs = new std::vector<int>(parse(inputString));
-    std::cout << "Finished Parsing." << std::endl;
+    std::cout << "Finished Parsing:" << std::endl << "\t";
+    printVector(*inputs);
+    std::cout << std::endl;
     struct VectorContainer vectorContainer;
     std::cout << "Declared empty struct at " << &vectorContainer << std::endl;
     vectorContainer.vectorptr = inputs;
@@ -33,14 +36,10 @@ int main(int argc, char* argv[]){
 std::vector<int> parse(std::string inputStr){
 //  https://stackoverflow.com/questions/17724925/parse-string-containing-numbers-into-integer-array
     std::vector<int> inputs;
-    std::stringstream ss(inputStr);
-    int n; char ch;
-    while(ss >> n){
-        if(ss >> ch){
-            inputs.push_back(n);
-        } else {
-            inputs.push_back(n);
-        }
+    std::stringstream stream(inputStr);
+    int n;
+    while (stream >> n){
+        inputs.push_back(n);
     }
     return inputs;
 }
@@ -59,4 +58,10 @@ void testSimple(){
     std::cout << "metadata total in p and children: " << total << std::endl;
     assert(total == 8);
     std::cout << "--- Test: testSimple() done ---" << std::endl;
+}
+
+void printVector(std::vector<int> v){
+    for (std::vector<int>::const_iterator i = v.begin(); i != v.end(); i++){
+        std::cout << *i << ' ';
+    }
 }
