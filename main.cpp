@@ -25,6 +25,7 @@ int main(int argc, char* argv[]){
     vectorContainer.vectorptr = new std::vector<int>;
     TreeNode rootNode = TreeBuilder::buildTree(vectorContainer);
     delete vectorContainer.vectorptr;
+    std::cout << "metadata total in p and children: " << rootNode.getMetadataTotal() << std::endl;
 }
 
 std::vector<int> parse(std::string inputStr){
