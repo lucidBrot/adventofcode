@@ -23,7 +23,7 @@ int main(int argc, char* argv[]){
     std::vector<int> inputs = parse(inputString);
     struct VectorContainer vectorContainer;
     vectorContainer.vectorptr = new std::vector<int>;
-    TreeNode rootNode = TreeBuilder::buildTree(vectorcontainer);
+    TreeNode rootNode = TreeBuilder::buildTree(vectorContainer);
     delete vectorContainer.vectorptr;
 }
 
