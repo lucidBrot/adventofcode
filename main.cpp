@@ -21,7 +21,10 @@ int main(int argc, char* argv[]){
     testSimple();
 
     std::vector<int> inputs = parse(inputString);
-    TreeNode rootNode = TreeBuilder::buildTree(inputs);
+    struct VectorContainer vectorContainer;
+    vectorContainer.vectorptr = new std::vector<int>;
+    TreeNode rootNode = TreeBuilder::buildTree(vectorcontainer);
+    delete vectorContainer.vectorptr;
 }
 
 std::vector<int> parse(std::string inputStr){

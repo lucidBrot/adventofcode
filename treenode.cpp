@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <numeric>
+#include <cassert>
 
 class TreeNode {
 
@@ -40,10 +41,32 @@ class TreeNode {
 
 };
 
+struct VectorContainer {
+    std::vector<int>* vectorptr;
+}
+
 class TreeBuilder {
     public:
-        static TreeNode buildTree(std::vector<int> inputs){
-            TreeNode root = TreeNode(1);
+        // modifies inputs content
+        static TreeNode buildTree(VectorContainer & inputs){
+            int i = 0;
+            int numChildren = inputs.vector.get(i++);
+            int numMetadata = inputs.vector.get(i++);
+            TreeNode root = TreeNode(numChildren);
+
+            // set up children count by passing the tail (consuming the inputs)
+            std::vector<int>* tailptr = new std::vector<int>;
+            *tailptr = std::vector<int>(inputs->begin()+2, inputs->end());
+            for (int j=0; j<numChildren; j++){
+                TreeNode child = buildTree(&tail); // tail gets modified
+                root.addChild(child);
+            }
+
+            // modify inputs
+            delete inputs.vectorptr;
+            inputs.vectorptr = tailptr;
+            // inputs.vectorptr should now contain the remaining string that has not yet been parsed
+            assert(root.metadata.size() == numMetadata);
             return root;
         }
 };
