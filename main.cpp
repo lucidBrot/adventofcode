@@ -21,8 +21,15 @@ int main(int argc, char* argv[]){
     std::cout << "Hello World" << std::endl;
 
     std::vector<int> inputs = parse(inputString);
+    std::cout << "Finished Parsing." << std::endl;
     struct VectorContainer vectorContainer;
-    vectorContainer.vectorptr = new std::vector<int>;
+    std::cout << "Declared empty struct at " << &vectorContainer << std::endl;
+    std::vector<int>* tmpptr = new std::vector<int>();
+    std::cout << "Tmp pointer: " << tmpptr << std::endl;
+    vectorContainer = (struct VectorContainer){.vectorptr = tmpptr};
+    std::cout << "[0]: vectorptr = " << vectorContainer.vectorptr;
+    vectorContainer.vectorptr = tmpptr;
+    std::cout << "[A]: vectorptr = " << vectorContainer.vectorptr;
     TreeNode rootNode = TreeBuilder::buildTree(vectorContainer);
     delete vectorContainer.vectorptr;
     std::cout << "metadata total in p and children: " << rootNode.getMetadataTotal() << std::endl;

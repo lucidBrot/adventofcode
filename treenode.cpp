@@ -49,6 +49,7 @@ class TreeBuilder {
     public:
         // modifies inputs content
         static TreeNode buildTree(VectorContainer & inputs){
+            std::cout << "[B]: vectorptr = " << inputs.vectorptr << std::endl;
             int i = 0;
             int numChildren = inputs.vectorptr->at(i++);
             int numMetadata = inputs.vectorptr->at(i++);
