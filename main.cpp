@@ -4,9 +4,9 @@ using Eigen::MatrixXd;
 #include <sstream>
 #include <string>
 #include <cassert>
+#include <tuple>
 
-enum class Cart {None=0, Up, Down, Left, Right, Crashed};
-
+enum class Cart : int {None=0, Up, Down, Left, Right, Crashed};
 
 MatrixXd parseCartsPositions(std::string filecontents, unsigned int maxX, unsigned int maxY){
     MatrixXd cartStorage = MatrixXd::Zero(maxY, maxX);
@@ -49,14 +49,46 @@ MatrixXd parseCartsPositions(std::string filecontents, unsigned int maxX, unsign
 
 }
 
-int main() { 
-    std::cout << std::endl;
-  MatrixXd m(2,2); 
-  m(0,0) = 3; 
-  m(1,0) = 2.5; 
-  m(0,1) = -1; 
-  m(1,1) = m(1,0) + m(0,1); 
-  std::cout << m << std::endl; 
+enum class Track : int {Slash, Backslash, Minus, Plus, Pipe, None};
 
-  std::cout << parseCartsPositions("asdv\nfgv>", 4, 2) << std::endl;
+MatrixXd parseTracks(std::string filecontents, unsigned int maxX, unsigned int maxY){
+
+    MatrixXd trackStorage = MatrixXd::Zero(maxY, maxX);
+    std::istringstream f(filecontents);
+    std::string line;
+    unsigned int x = 0;
+    unsigned int y = 0;
+    while (std::getline(f, line)) {
+        for (char& c : line){
+            // read track positions and nothing else
+            Track track;
+            switch(c){
+                case '/':
+                    track = Track::Slash; break;
+                case '\\':
+                    track = Track::Backslash; break;
+                case '-':
+                    track = Track::Minus; break;
+                case '+':
+                    track = Track::Plus; break;
+                case '|':
+                    track = Track::Pipe; break;
+                default:
+                    track = Track::None; break;
+            }
+            trackStorage(y,x) = static_cast<int>(track);
+            x++;
+        }
+        x=0;
+        y++;
+    }
+    assert( maxY == y);
+    return trackStorage;
+}
+
+int main() { 
+    std::cout << parseCartsPositions("asdv\nfgv>", 4, 2) << std::endl;
+    std::string tracks = "/----\\\n|    |\n|    |\n\\----/";
+    std::cout << parseTracks(tracks, 6, 4) << std::endl;
+
 }
