@@ -6,6 +6,7 @@
 #include <cassert>
 #include <vector>
 #include <sstream>
+#include <fstream>
 #include <string>
 #include "main.h"
 #include "treenode.cpp"
@@ -16,7 +17,7 @@ int main(int argc, char* argv[]){
     testGiven(); std::cout << std::endl;
 
     // load actual input
-    assert(argc == 1);
+    assert(argc == 2);
     std::ifstream in(argv[1]);
     std::stringstream buffer;
     buffer << in.rdbuf();
@@ -24,11 +25,15 @@ int main(int argc, char* argv[]){
 
     // actually run
     std::vector<int>* inputs = new std::vector<int>(parse(inputString));
+#if verbose
     std::cout << "Finished Parsing:" << std::endl << "\t";
     printVector(*inputs);
     std::cout << std::endl;
+#endif
     struct VectorContainer vectorContainer;
+#if verbose
     std::cout << "Declared empty struct at " << &vectorContainer << std::endl;
+#endif
     vectorContainer.vectorptr = inputs;
     TreeNode rootNode = TreeBuilder::buildTree(vectorContainer);
     std::cout << "metadata total in p and children: " << rootNode.getMetadataTotal() << std::endl;
