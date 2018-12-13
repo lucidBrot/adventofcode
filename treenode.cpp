@@ -3,6 +3,12 @@
 #include <numeric>
 #include <cassert>
 
+#include "main.h" // for printing vector
+
+#ifndef MY_MAIN
+#include "main.cpp"
+#endif
+
 class TreeNode {
 
     private:
@@ -78,6 +84,8 @@ class TreeBuilder {
             // at this point, inputs.vectorptr contains only the numbers for the this.parent.nextchild and so on. In other words:
             // inputs.vectorptr should now contain the remaining string that has not yet been parsed
             // recursion stops when a node has no children. Then the next numMetadata numbers are the metadata
+            std::cout << "Tail before consumption: "; printVector(*inputs.vectorptr); std::cout << std::endl; 
+
             int consumeTailBy = 0;
             for(int j=0; j<numMetadata; j++){
                 root.addMetadata(inputs.vectorptr->back());

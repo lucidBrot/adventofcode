@@ -1,12 +1,14 @@
 /*
  * (c) Eric Mink 2018
  */
+#define MY_MAIN true
 #include <iostream>
 #include <cassert>
-#include "treenode.cpp"
 #include <vector>
 #include <sstream>
 #include <string>
+#include "main.h"
+#include "treenode.cpp"
 
 // hardcoded input
 static const std::string inputString = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"; // result should be 138
