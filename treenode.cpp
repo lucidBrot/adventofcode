@@ -47,6 +47,21 @@ class TreeNode {
             return metadataOfChildren + this->getMetadataSum();
         }
 
+        int getNodeValue(){
+            if (this->numChildren == 0){
+                return this->getMetadataSum();
+            } else {
+                int value = 0;
+                for(size_t m : this->metadata){
+                    if (m >= this->children.size() || m==0){
+                        continue;   
+                    }
+                    TreeNode child = this->children.at(m-1);
+                    value += child.getNodeValue();
+                }
+            }
+        }
+
 };
 
 struct VectorContainer {
