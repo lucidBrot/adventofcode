@@ -1,6 +1,7 @@
 #include <iostream>
 #include <Eigen/Dense>
 using Eigen::MatrixXd;
+using Eigen::SparseMatrix;
 #include <sstream>
 #include <string>
 #include <cassert>
@@ -10,8 +11,8 @@ using Eigen::MatrixXd;
 
 enum class Cart : int {None=0, Up, Down, Left, Right, Crashed};
 
-MatrixXd parseCartsPositions(std::string filecontents, unsigned int maxX, unsigned int maxY){
-    MatrixXd cartStorage = MatrixXd::Zero(maxY, maxX);
+SparseMatrix<Eigen::RowMajor> parseCartsPositions(std::string filecontents, unsigned int maxX, unsigned int maxY){
+    SparseMatrix<Eigen::RowMajor> cartStorage = MatrixXd::Zero(maxY, maxX);
     std::istringstream f(filecontents);
     std::string line;
     unsigned int x = 0;
@@ -98,7 +99,7 @@ std::string readFileToString(std::string filename){
 int main() { 
     std::cout << std::endl;
     std::string input = readFileToString("input1.txt");
-    MatrixXd carts = parseCartsPositions(input, 13, 6); 
+    SparseMatrix<Eigen::RowMajor> carts = parseCartsPositions(input, 13, 6); 
     std::cout << carts << std::endl << std::endl;
     MatrixXd tracks = parseTracks(input, 13, 6);
     std::cout << tracks << std::endl;
