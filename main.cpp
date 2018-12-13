@@ -15,6 +15,10 @@ static const std::string inputString = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"; //
 
 // ---------- PROGRAM -----------
 int main(int argc, char* argv[]){
+    testSimple(); std::cout << std::endl;
+    testGiven(); std::cout << std::endl;
+
+    // actually run
     std::vector<int>* inputs = new std::vector<int>(parse(inputString));
     std::cout << "Finished Parsing:" << std::endl << "\t";
     printVector(*inputs);
@@ -51,6 +55,18 @@ void testSimple(){
     std::cout << "metadata total in p and children: " << total << std::endl;
     assert(total == 8);
     std::cout << "--- Test: testSimple() done ---" << std::endl;
+}
+
+void testGiven(){
+    std::cout << "--- Test: testGiven() start ---" << std::endl << std::endl;
+    const std::string inputString = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"; // result should be 138
+    std::vector<int>* parsedptr = new std::vector<int>(parse(inputString));
+    struct VectorContainer vectorContainer = (struct VectorContainer){.vectorptr = parsedptr};
+    TreeNode rootNode = TreeBuilder::buildTree(vectorContainer);
+    int total = rootNode.getMetadataTotal();
+    std::cout << "total: " << total << std::endl;
+    assert(total == 138);
+    std::cout << "--- Test: testGiven() done ---" << std::endl;
 }
 
 void printVector(std::vector<int> v){
