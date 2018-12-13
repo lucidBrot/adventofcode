@@ -11,6 +11,7 @@ typedef Eigen::SparseMatrix<int, Eigen::RowMajor> SMatrix;
 #include <streambuf>
 
 enum class Cart : int {None=0, Up, Down, Left, Right, Crashed};
+const Cart InverseCart[] = {Cart::None, Cart::Up, Cart::Down, Cart::Left, Cart::Right, Cart::Crashed};
 
 SMatrix parseCartsPositions(std::string filecontents, unsigned int maxX, unsigned int maxY){
     SMatrix cartStorage; cartStorage.resize(maxY, maxX); cartStorage.reserve(20);
@@ -56,6 +57,7 @@ SMatrix parseCartsPositions(std::string filecontents, unsigned int maxX, unsigne
 }
 
 enum class Track : int {None=0, Slash, Backslash, Minus, Plus, Pipe};
+const Track InverseTrack[] = {Track::None, Track::Slash, Track::Backslash, Track::Minus, Track::Plus, Track::Pipe};
 
 SMatrix parseTracks(std::string filecontents, unsigned int maxX, unsigned int maxY){
 
@@ -102,20 +104,69 @@ std::string readFileToString(std::string filename){
     return buffer.str();
 }
 
-void moveCarts(SMatrix carts, SMatrix data){
+struct TrackWithPos {
+    Track track;
+    size_t x;
+    size_t y;
+};
 
+struct TrackWithPos getNextTrackForCart(SMatrix trackData, size_t cartX, size_t cartY, Cart cartOrientation){
+    size_t x=0, y=0;
+    switch(cartOrientation){
+        case Cart::Up:
+            y=-1;
+            break;
+        case Cart::Down:
+            y=1;
+            break;
+        case Cart::Left:
+            x=-1;
+            break;
+        case Cart::Right:
+            x=1;
+            break;
+        case Cart::Crashed:
+            assert(0 && "A crashed cart has no next destination!");
+            break;
+        case Cart::None:
+            assert(0 && "The cart isn't real");
+            break;
+    }
+
+    size_t nextX = cartX+x;
+    size_t nextY = cartY+y;
+
+    int trackNum = trackData.coeffRef(cartY, cartX);
+    struct TrackWithPos twp = {InverseTrack[trackNum], // track
+                                nextX, // x
+                                nextY // y
+                                };
+    return twp;
+
+}
+
+
+void moveCarts(SMatrix carts, SMatrix trackData){
+
+    // get nonzero entries - since zero stands for None
+    std::cout << "Carts: ";
     for (int k=0; k<carts.outerSize(); ++k)
         for (SMatrix::InnerIterator it(carts,k); it; ++it)
         {
-            it.value();
             it.row();   // row index
             it.col();   // col index (here it is equal to k)
             it.index(); // inner index, here it is equal to it.row()
             std::cout << "(" << it.row() << ", " << it.col() << ")\t";
+
+            // find the next track to be driven on
+            Cart cart = InverseCart[it.value()];
+            struct TrackWithPos nextTrack = getNextTrackForCart(trackData, it.row(), it.col(), cart);
+
+            // figure out where to go next
         }
     std::cout << std::endl;
+    
 }
-
 
 int main() { 
     std::cout << std::endl << "carts:" << std::endl;
@@ -124,6 +175,8 @@ int main() {
     std::cout << carts << std::endl << std::endl << "tracks:" << std::endl;
     SMatrix tracks = parseTracks(input, 13, 6);
     std::cout << tracks << std::endl;
+
+    // TODO: replace carts in input SMatrix with straight tracks
 
     moveCarts(carts, tracks);
 
