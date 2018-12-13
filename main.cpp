@@ -14,11 +14,13 @@ void parseCartsPositions(std::string filecontents){
     while (std::getline(f, line)) {
         for (char& c : line){
             // read cart positions and nothing else
+            Cart cart;
             switch(c){
                 case 'v':
                     // down cart
-                    Cart cart = Cart::Down;
-                    std::cout << "c is of enum : " << cart << std::endl;
+                    cart = Cart::Down;
+                    std::cout << "c is of enum : " << static_cast<int>(cart) << std::endl;
+                    break;
                 default:
                     // not a cart, but increases coordinate nonetheless
                     break;
