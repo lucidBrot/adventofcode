@@ -55,39 +55,38 @@ class TreeBuilder {
     public:
         // modifies inputs content
         static TreeNode buildTree(VectorContainer & inputs){
-            std::cout << std::endl; "------------------------------------" << std::endl;
+            std::cout << std::endl << "------------------------------------" << std::endl;
             std::cout << "input tail: "; printVector(*inputs.vectorptr); std::cout << std::endl;
-            std::cout << "------------------------------------" << std::endl << std::endl;
+            std::cout << "------------------------------------" << std::endl;
 
             int numChildren = inputs.vectorptr->at(0);
             int numMetadata = inputs.vectorptr->at(1);
             ///std::cout << "[Checkpoint Recursion]" << std::endl;
             TreeNode root = TreeNode(numChildren);
 
-            std::cout << "creating TreeNode with numChildren=" << numChildren
-                << " and numMetadata=" << numMetadata << std::endl;
+            //std::cout << "creating TreeNode with numChildren=" << numChildren << " and numMetadata=" << numMetadata << std::endl;
 
             // consume first two entries which are numChildren and numMetadata
             std::vector<int>* tailptr = new std::vector<int>();
             *tailptr = std::vector<int>(inputs.vectorptr->begin()+2, inputs.vectorptr->end());
 
-            std::cout << "debug output 1" << std::endl;
+            std::cout << "(" << numChildren << ", " << numMetadata << ")  debug output 1" << std::endl;
             // pack tail into vectorContainer so the next buildTree call operates on what remains for the children
             delete inputs.vectorptr;
             inputs.vectorptr = tailptr;
-            std::cout << "debug output 2" << std::endl;
+            std::cout <<  "(" << numChildren << ", " << numMetadata << ")  debug output 2" << std::endl;
 
             // set up children count by passing the tail (consuming the inputs)
             for (int j=0; j<numChildren; j++){
                 TreeNode child = buildTree(inputs); // tail gets modified so what remains is for the next child
                 root.addChild(child);
             }
-            std::cout << "debug output 3" << std::endl;
+            std::cout << "(" << numChildren << ", " << numMetadata << ")  debug output 3" << std::endl;
 
             // at this point, inputs.vectorptr contains only the numbers for the this.parent.nextchild and so on. In other words:
             // inputs.vectorptr should now contain the remaining string that has not yet been parsed
             // recursion stops when a node has no children. Then the next numMetadata numbers are the metadata
-            std::cout << "Tail before consumption: "; printVector(*inputs.vectorptr); std::cout << std::endl; 
+            std::cout << "Tail before metadata consumption: "; printVector(*inputs.vectorptr); std::cout << std::endl; 
 
             int consumeTailBy = 0;
             for(int j=0; j<numMetadata; j++){
@@ -97,6 +96,7 @@ class TreeBuilder {
             }
             // update tail consumption
             *inputs.vectorptr = std::vector<int>(inputs.vectorptr->begin()+consumeTailBy, inputs.vectorptr->end());
+            std::cout <<  "(" << numChildren << ", " << numMetadata << ")  debug output 4" << std::endl;
             return root;
         }
 };

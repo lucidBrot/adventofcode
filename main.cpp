@@ -13,16 +13,8 @@
 // hardcoded input
 static const std::string inputString = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"; // result should be 138
 
-// ---------- HEADERS -----------
-void testSimple();
-std::vector<int> parse(std::string inputStr);
-void printVector(std::vector<int> v);
-
 // ---------- PROGRAM -----------
 int main(int argc, char* argv[]){
-    testSimple();
-    std::cout << "Hello World" << std::endl;
-
     std::vector<int>* inputs = new std::vector<int>(parse(inputString));
     std::cout << "Finished Parsing:" << std::endl << "\t";
     printVector(*inputs);
@@ -30,7 +22,6 @@ int main(int argc, char* argv[]){
     struct VectorContainer vectorContainer;
     std::cout << "Declared empty struct at " << &vectorContainer << std::endl;
     vectorContainer.vectorptr = inputs;
-    std::cout << "[A]: vectorptr = " << vectorContainer.vectorptr << std::endl;
     TreeNode rootNode = TreeBuilder::buildTree(vectorContainer);
     std::cout << "metadata total in p and children: " << rootNode.getMetadataTotal() << std::endl;
 }
