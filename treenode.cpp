@@ -95,8 +95,6 @@ class TreeBuilder {
                 inputs.vectorptr->erase(inputs.vectorptr->begin());
                 consumeTailBy++;
             }
-            // update tail consumption
-            //*inputs.vectorptr = std::vector<int>(inputs.vectorptr->begin()+consumeTailBy, inputs.vectorptr->end());
             std::cout <<  "(" << numChildren << ", " << numMetadata << ")  ";
             std::cout << "Tail after metadata consumption: "; printVector(*inputs.vectorptr); std::cout << std::endl; 
             return root;

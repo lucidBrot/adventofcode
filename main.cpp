@@ -10,13 +10,17 @@
 #include "main.h"
 #include "treenode.cpp"
 
-// hardcoded input
-static const std::string inputString = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"; // result should be 138
-
 // ---------- PROGRAM -----------
 int main(int argc, char* argv[]){
     testSimple(); std::cout << std::endl;
     testGiven(); std::cout << std::endl;
+
+    // load actual input
+    assert(argc == 1);
+    std::ifstream in(argv[1]);
+    std::stringstream buffer;
+    buffer << in.rdbuf();
+    std::string inputString = buffer.str();
 
     // actually run
     std::vector<int>* inputs = new std::vector<int>(parse(inputString));
