@@ -13,8 +13,10 @@
 
 // ---------- PROGRAM -----------
 int main(int argc, char* argv[]){
+#if verbose
     testSimple(); std::cout << std::endl;
     testGiven(); std::cout << std::endl;
+#endif
 
     // load actual input
     assert(argc == 2);
