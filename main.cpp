@@ -42,7 +42,9 @@ SMatrix parseCartsPositions(std::string filecontents, unsigned int maxX, unsigne
                     cart = Cart::None;
                     break;
             }
-            cartStorage.coeffRef(y,x) = static_cast<int>(cart);
+            if (cart != Cart::None){
+                cartStorage.coeffRef(y,x) = static_cast<int>(cart);
+            }
             x++;
         }
         x=0;
@@ -80,7 +82,10 @@ SMatrix parseTracks(std::string filecontents, unsigned int maxX, unsigned int ma
                 default:
                     track = Track::None; break;
             }
-            trackStorage.coeffRef(y,x) = static_cast<int>(track);
+
+            if(track != Track::None){
+                trackStorage.coeffRef(y,x) = static_cast<int>(track);
+            }
             x++;
         }
         x=0;
