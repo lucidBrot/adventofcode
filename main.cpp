@@ -4,7 +4,7 @@ using Eigen::MatrixXd;
 #include <sstream>
 #include <string>
 
-enum class Cart {Up=0, Down=1, Left=2, Right=3, Crashed=4};
+enum class Cart {None=0, Up, Down, Left, Right, Crashed};
 
 void parseCartsPositions(std::string filecontents){
     std::istringstream f(filecontents);
