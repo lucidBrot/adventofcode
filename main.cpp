@@ -38,7 +38,7 @@ int main(int argc, char* argv[]){
 #endif
     vectorContainer.vectorptr = inputs;
     TreeNode rootNode = TreeBuilder::buildTree(vectorContainer);
-    std::cout << "metadata total in p and children: " << rootNode.getMetadataTotal() << std::endl;
+    std::cout << std::endl << "metadata total in p and children: " << rootNode.getMetadataTotal() << std::endl;
 }
 
 std::vector<int> parse(std::string inputStr){
