@@ -91,12 +91,12 @@ class TreeBuilder {
 
             int consumeTailBy = 0;
             for(int j=0; j<numMetadata; j++){
-                root.addMetadata(inputs.vectorptr->back());
-                inputs.vectorptr->pop_back();
+                root.addMetadata(inputs.vectorptr->at(0));
+                inputs.vectorptr->erase(inputs.vectorptr->begin());
                 consumeTailBy++;
             }
             // update tail consumption
-            *inputs.vectorptr = std::vector<int>(inputs.vectorptr->begin()+consumeTailBy, inputs.vectorptr->end());
+            //*inputs.vectorptr = std::vector<int>(inputs.vectorptr->begin()+consumeTailBy, inputs.vectorptr->end());
             std::cout <<  "(" << numChildren << ", " << numMetadata << ")  ";
             std::cout << "Tail after metadata consumption: "; printVector(*inputs.vectorptr); std::cout << std::endl; 
             return root;
