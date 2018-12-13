@@ -151,7 +151,7 @@ struct TrackWithPos getNextTrackForCart(SMatrix trackData, size_t cartX, size_t 
 
 }
 
-struct CartWithPos moveCart(struct CartWithPos originalCart, struct TrackWithPos nextTrack){
+struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWithPos nextTrack){
     assert(originalCart.cart!=Cart::Crashed); assert(originalCart.cart!=Cart::None);
     assert(nextTrack.track != Track::None);
     struct CartWithPos nextCart;
@@ -276,6 +276,9 @@ void moveCarts(SMatrix carts, SMatrix trackData){
             struct TrackWithPos nextTrack = getNextTrackForCart(trackData, it.row(), it.col(), cart);
 
             // figure out where to go next
+            struct CartWithPos nextCart = getNextCart(cart, nextTrack);
+
+            // TODO: update carts matrix
         }
     std::cout << std::endl;
     
