@@ -96,6 +96,7 @@ std::string readFileToString(std::string filename){
 }
 
 int main() { 
+    std::cout << std::endl;
     std::string input = readFileToString("input1.txt");
     std::cout << parseCartsPositions(input, 13, 6) << std::endl << std::endl;
     std::cout << parseTracks(input, 13, 6) << std::endl;
