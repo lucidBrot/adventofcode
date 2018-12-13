@@ -53,11 +53,11 @@ SMatrix parseCartsPositions(std::string filecontents, unsigned int maxX, unsigne
 
 }
 
-enum class Track : int {Slash, Backslash, Minus, Plus, Pipe, None};
+enum class Track : int {None=0, Slash, Backslash, Minus, Plus, Pipe};
 
-MatrixXd parseTracks(std::string filecontents, unsigned int maxX, unsigned int maxY){
+SMatrix parseTracks(std::string filecontents, unsigned int maxX, unsigned int maxY){
 
-    MatrixXd trackStorage = MatrixXd::Zero(maxY, maxX);
+    SMatrix trackStorage; trackStorage.resize(maxY, maxX); trackStorage.reserve(20);
     std::istringstream f(filecontents);
     std::string line;
     unsigned int x = 0;
@@ -80,7 +80,7 @@ MatrixXd parseTracks(std::string filecontents, unsigned int maxX, unsigned int m
                 default:
                     track = Track::None; break;
             }
-            trackStorage(y,x) = static_cast<int>(track);
+            trackStorage.coeffRef(y,x) = static_cast<int>(track);
             x++;
         }
         x=0;
@@ -97,12 +97,27 @@ std::string readFileToString(std::string filename){
     return buffer.str();
 }
 
-int main() { 
+void moveCarts(SMatrix mat, SMatrix data){
+
+    for (int k=0; k<mat.outerSize(); ++k)
+        for (SMatrix::InnerIterator it(mat,k); it; ++it)
+        {
+            it.value();
+            it.row();   // row index
+            it.col();   // col index (here it is equal to k)
+            it.index(); // inner index, here it is equal to it.row()
+            std::cout << "(" << it.row() << ", " << it.col() << ")\t";
+        }
     std::cout << std::endl;
+}
+
+
+int main() { 
+    std::cout << std::endl << "carts:" << std::endl;
     std::string input = readFileToString("input1.txt");
     SMatrix carts = parseCartsPositions(input, 13, 6); 
-    std::cout << carts << std::endl << std::endl;
-    MatrixXd tracks = parseTracks(input, 13, 6);
+    std::cout << carts << std::endl << std::endl << "tracks:" << std::endl;
+    SMatrix tracks = parseTracks(input, 13, 6);
     std::cout << tracks << std::endl;
 
 }
