@@ -110,6 +110,12 @@ struct TrackWithPos {
     size_t y;
 };
 
+struct CartWithPos {
+    Cart cart;
+    size_t x;
+    size_t y;
+};
+
 struct TrackWithPos getNextTrackForCart(SMatrix trackData, size_t cartX, size_t cartY, Cart cartOrientation){
     size_t x=0, y=0;
     switch(cartOrientation){
@@ -145,6 +151,113 @@ struct TrackWithPos getNextTrackForCart(SMatrix trackData, size_t cartX, size_t 
 
 }
 
+struct CartWithPos moveCart(struct CartWithPos originalCart, struct TrackWithPos nextTrack){
+    assert(originalCart.cart!=Cart::Crashed); assert(originalCart.cart!=Cart::None);
+    assert(nextTrack.track != Track::None);
+    struct CartWithPos nextCart;
+    nextCart.x = nextTrack.x;
+    nextCart.y = nextTrack.y;
+
+    // TODO: handle intersections
+
+    switch(originalCart.cart){
+        case Cart::Up:
+            {
+                switch(nextTrack.track){
+                    case Track::Slash:
+                        nextCart.cart = Cart::Right;
+                        break;
+                    case Track::Backslash:
+                        nextCart.cart = Cart::Left;
+                        break;
+                    case Track::Minus:
+                        assert(0 && "This should not happen: Moving upwards onto horizontal track!");
+                        break;
+                    case Track::Pipe:
+                        nextCart.cart = Cart::Up;
+                        break;
+                    case Track::None:
+                        assert(0);
+                        break;
+
+                }
+            }
+            break;
+        case Cart::Down:
+            {
+                switch(nextTrack.track){
+                    case Track::Slash:
+                        nextCart.cart = Cart::Left;
+                        break;
+                    case Track::Backslash:
+                        nextCart.cart = Cart::Right;
+                        break;
+                    case Track::Minus:
+                        assert(0 && "This should not happen: Moving down onto horizontal track!");
+                        break;
+                    case Track::Pipe:
+                        nextCart.cart = Cart::Down;
+                        break;
+                    case Track::None:
+                        assert(0);
+                        break;
+
+                }
+            }
+            break;
+        case Cart::Right:
+            {
+                switch(nextTrack.track){
+                    case Track::Slash:
+                        nextCart.cart = Cart::Up;
+                        break;
+                    case Track::Backslash:
+                        nextCart.cart = Cart::Down;
+                        break;
+                    case Track::Minus:
+                        nextCart.cart = Cart::Right;
+                        break;
+                    case Track::Pipe:
+                        assert(0 && "Bad things are happening: Moving horizontallin onto a pipe!");
+                        break;
+                    case Track::None:
+                        assert(0);
+                        break;
+
+                }
+            }
+            break;
+        case Cart::Left:
+            {
+                switch(nextTrack.track){
+                    case Track::Slash:
+                        nextCart.cart = Cart::Down;
+                        break;
+                    case Track::Backslash:
+                        nextCart.cart = Cart::Up;
+                        break;
+                    case Track::Minus:
+                        nextCart.cart = Cart::Left;
+                        break;
+                    case Track::Pipe:
+                        assert(0 && "Bad things are happening: Moving horizontallin onto a pipe!");
+                        break;
+                    case Track::None:
+                        assert(0);
+                        break;
+
+                }
+            }
+            break;
+        // these won't happen. Let the compiler know that it does not need warnings.
+        case Cart::Crashed:
+            [[fallthrough]];
+        case Cart::None:
+            assert(0);
+    }
+
+    return nextCart;
+}
 
 void moveCarts(SMatrix carts, SMatrix trackData){
 
