@@ -120,4 +120,6 @@ int main() {
     SMatrix tracks = parseTracks(input, 13, 6);
     std::cout << tracks << std::endl;
 
+    moveCarts(carts, tracks)
+
 }
