@@ -55,7 +55,10 @@ class TreeBuilder {
     public:
         // modifies inputs content
         static TreeNode buildTree(VectorContainer & inputs){
-            ///std::cout << "[B]: vectorptr = " << inputs.vectorptr << std::endl;
+            std::cout << std::endl; "------------------------------------" << std::endl;
+            std::cout << "input tail: "; printVector(*inputs.vectorptr); std::cout << std::endl;
+            std::cout << "------------------------------------" << std::endl << std::endl;
+
             int numChildren = inputs.vectorptr->at(0);
             int numMetadata = inputs.vectorptr->at(1);
             ///std::cout << "[Checkpoint Recursion]" << std::endl;
