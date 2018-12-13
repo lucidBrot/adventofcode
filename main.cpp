@@ -97,10 +97,10 @@ std::string readFileToString(std::string filename){
     return buffer.str();
 }
 
-void moveCarts(SMatrix mat, SMatrix data){
+void moveCarts(SMatrix carts, SMatrix data){
 
-    for (int k=0; k<mat.outerSize(); ++k)
-        for (SMatrix::InnerIterator it(mat,k); it; ++it)
+    for (int k=0; k<carts.outerSize(); ++k)
+        for (SMatrix::InnerIterator it(carts,k); it; ++it)
         {
             it.value();
             it.row();   // row index
@@ -120,6 +120,6 @@ int main() {
     SMatrix tracks = parseTracks(input, 13, 6);
     std::cout << tracks << std::endl;
 
-    moveCarts(carts, tracks)
+    moveCarts(carts, tracks);
 
 }
