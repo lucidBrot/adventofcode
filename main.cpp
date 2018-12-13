@@ -5,6 +5,8 @@ using Eigen::MatrixXd;
 #include <string>
 #include <cassert>
 #include <tuple>
+#include <fstream>
+#include <streambuf>
 
 enum class Cart : int {None=0, Up, Down, Left, Right, Crashed};
 
@@ -88,13 +90,14 @@ MatrixXd parseTracks(std::string filecontents, unsigned int maxX, unsigned int m
 
 std::string readFileToString(std::string filename){
     std::ifstream t(filename);
-    return std::string((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
+    std::stringstream buffer;
+    buffer << t.rdbuf();
+    return buffer.str();
 }
 
 int main() { 
     std::string input = readFileToString("input1.txt");
-    std::cout << parseCartsPositions(input, 6, 4) << std::endl;
-    std::string tracks = "/----\\\n|    |\n|    |\n\\----/";
-    std::cout << parseTracks(tracks, 6, 4) << std::endl;
+    std::cout << parseCartsPositions(input, 13, 6) << std::endl << std::endl;
+    std::cout << parseTracks(input, 13, 6) << std::endl;
 
 }
