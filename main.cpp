@@ -106,14 +106,14 @@ std::string readFileToString(std::string filename){
 
 struct TrackWithPos {
     Track track;
-    size_t x;
-    size_t y;
+    long int x;
+    long int y;
 };
 
 struct CartWithPos {
     Cart cart;
-    size_t x;
-    size_t y;
+    long int x;
+    long int y;
 };
 
 struct TrackWithPos getNextTrackForCart(SMatrix trackData, size_t cartX, size_t cartY, Cart cartOrientation){
@@ -274,9 +274,14 @@ void moveCarts(SMatrix carts, SMatrix trackData){
             // find the next track to be driven on
             Cart cart = InverseCart[it.value()];
             struct TrackWithPos nextTrack = getNextTrackForCart(trackData, it.row(), it.col(), cart);
+            struct CartWithPos originalCart = {
+                cart, // cart
+                it.row(), // x
+                it.col(), // y
+            };
 
             // figure out where to go next
-            struct CartWithPos nextCart = getNextCart(cart, nextTrack);
+            struct CartWithPos nextCart = getNextCart(originalCart, nextTrack);
 
             // TODO: update carts matrix
         }
