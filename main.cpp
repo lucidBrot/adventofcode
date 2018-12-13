@@ -86,8 +86,14 @@ MatrixXd parseTracks(std::string filecontents, unsigned int maxX, unsigned int m
     return trackStorage;
 }
 
+std::string readFileToString(std::string filename){
+    std::ifstream t(filename);
+    return std::string((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
+}
+
 int main() { 
-    std::cout << parseCartsPositions("asdv\nfgv>", 4, 2) << std::endl;
+    std::string input = readFileToString("input1.txt");
+    std::cout << parseCartsPositions(input, 6, 4) << std::endl;
     std::string tracks = "/----\\\n|    |\n|    |\n\\----/";
     std::cout << parseTracks(tracks, 6, 4) << std::endl;
 
