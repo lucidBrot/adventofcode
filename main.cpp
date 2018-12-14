@@ -367,6 +367,10 @@ void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions){
             it.row();   // row index
             it.col();   // col index (here it is equal to k)
             it.index(); // inner index, here it is equal to it.row()
+
+            if(it.value() == static_cast<int>(Cart::None)){
+                continue;
+            }
             std::cout << "(" << it.col() << ", " << it.row() << ")\t";
 
             // find the next track to be driven on
@@ -455,10 +459,12 @@ int main() {
     // another SMatrix which contains info about the next intersection turn
     SMatrix cartDecisions = generateInitialDecisionMatrix(x,y,carts);
 
-    try{
-        moveCarts(carts, repTracks, cartDecisions);
-    } catch (CartCrashedException& e){
-        std::cout << "Crash at (" << e.m_x << ", " << e.m_y << ")!" << std::endl;
+    while (1){
+        try{
+            moveCarts(carts, repTracks, cartDecisions);
+        } catch (CartCrashedException& e){
+            std::cout << "Crash at (" << e.m_x << ", " << e.m_y << ")!" << std::endl;
+        }
     }
 
 }
