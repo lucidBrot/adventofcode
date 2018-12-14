@@ -151,14 +151,13 @@ struct TrackWithPos getNextTrackForCart(SMatrix trackData, size_t cartX, size_t 
 
 }
 
+enum class Decision : int {left, straight, right};
+
 // function :: cart coordinates, orientation, fact that next is an intersection --> which orientation is next
-Cart getOrientationAfterIntersection(Cart originalOrientation){
+Cart getOrientationAfterIntersection(Cart originalOrientation, Decision lastestCartDecision){
     assert(originalOrientation != Cart::None && originalOrientation != Cart::Crashed);
     
-    // TODO: store, and get, carts latest decision
-    enum class Decision : int {left, straight, right};
-    Decision decision = Decision::left;
-    std::cout << "TODO: don't hardcode decision!" << std::endl;
+    Decision decision = latestCartDecision;
 
     if(decision==Decision::straight){
         return originalOrientation;
@@ -209,7 +208,7 @@ Cart getOrientationAfterIntersection(Cart originalOrientation){
 }
 
 
-struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWithPos nextTrack){
+struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWithPos nextTrack, Decision previousCartDecision){
     assert(originalCart.cart!=Cart::Crashed); assert(originalCart.cart!=Cart::None);
     assert(nextTrack.track != Track::None);
     struct CartWithPos nextCart;
@@ -218,7 +217,7 @@ struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWith
 
     // handle intersections
     if(nextTrack.track == Track::Plus){
-        nextCart.cart = getOrientationAfterIntersection(originalCart.cart);
+        nextCart.cart = getOrientationAfterIntersection(originalCart.cart, previousCartDecision);
         return nextCart;
     }
 
@@ -321,7 +320,7 @@ struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWith
     return nextCart;
 }
 
-void moveCarts(SMatrix carts, SMatrix trackData){
+void moveCarts(SMatrix carts, SMatrix trackData, SMatrix cartsDecisions){
 
     // get nonzero entries - since zero stands for None
     std::cout << "Carts: ";
@@ -342,8 +341,11 @@ void moveCarts(SMatrix carts, SMatrix trackData){
                 (long unsigned int) it.col(), // y
             };
 
+            // figure out what decision the cart has taken last time
+            // TODO:
+
             // figure out where to go next
-            struct CartWithPos nextCart = getNextCart(originalCart, nextTrack);
+            struct CartWithPos nextCart = getNextCart(originalCart, nextTrack, previousCartDecision);
 
             // TODO: update carts matrix
         }
