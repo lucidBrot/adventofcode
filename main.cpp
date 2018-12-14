@@ -152,7 +152,7 @@ struct TrackWithPos getNextTrackForCart(SMatrix trackData, size_t cartX, size_t 
 }
 
 // function :: cart coordinates, orientation, fact that next is an intersection --> which orientation is next
-Cart getOrientationAfterIntersection(long int xCart, long int yCart, Cart originalOrientation){
+Cart getOrientationAfterIntersection(Cart originalOrientation){
     assert(originalOrientation != Cart::None && originalOrientation != Cart::Crashed);
     
     // TODO: store, and get, carts latest decision
@@ -199,6 +199,8 @@ Cart getOrientationAfterIntersection(long int xCart, long int yCart, Cart origin
                 return Cart::Right;
             case Cart::Right:
                 return Cart::Left;
+            default:
+                assert(0);
         }
     };
 
@@ -332,8 +334,8 @@ void moveCarts(SMatrix carts, SMatrix trackData){
             struct TrackWithPos nextTrack = getNextTrackForCart(trackData, it.row(), it.col(), cart);
             struct CartWithPos originalCart = {
                 cart, // cart
-                it.row(), // x
-                it.col(), // y
+                (long unsigned int) it.row(), // x
+                (long unsigned int) it.col(), // y
             };
 
             // figure out where to go next
