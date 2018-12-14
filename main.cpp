@@ -9,6 +9,23 @@ typedef Eigen::SparseMatrix<int, Eigen::RowMajor> SMatrix;
 #include <tuple>
 #include <fstream>
 #include <streambuf>
+#include <exception>
+
+struct CartCrashedException : public std::exception
+{
+    public:
+        long unsigned int m_x, m_y;
+
+	const char * what () const throw ()
+    {
+    	return "Cart Crashed!";
+    }
+
+    CartCrashedException(long unsigned int x, long unsigned int y){
+        m_x = x;
+        m_y = y;
+    }
+};
 
 enum class Cart : int {None=0, Up, Down, Left, Right, Crashed};
 const Cart InverseCart[] = {Cart::None, Cart::Up, Cart::Down, Cart::Left, Cart::Right, Cart::Crashed};
@@ -216,7 +233,7 @@ struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWith
     nextCart.x = nextTrack.x;
     nextCart.y = nextTrack.y;
 
-    std::cout << "[getNextCart] " << yee++ << std::endl;
+    //std::cout << "[getNextCart] " << yee++ << std::endl;
 
     // handle intersections
     if(nextTrack.track == Track::Plus){
@@ -343,22 +360,22 @@ Decision incDecision(Decision decision){
 void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions){
 
     // get nonzero entries - since zero stands for None
-    std::cout << "Carts: ";
+    std::cout << "Carts: " << std::endl;
     for (int k=0; k<carts.outerSize(); ++k)
         for (SMatrix::InnerIterator it(carts,k); it; ++it)
         {
             it.row();   // row index
             it.col();   // col index (here it is equal to k)
             it.index(); // inner index, here it is equal to it.row()
-            std::cout << "(" << it.row() << ", " << it.col() << ")\t";
+            std::cout << "(" << it.col() << ", " << it.row() << ")\t";
 
             // find the next track to be driven on
             Cart cart = InverseCart[it.value()];
-            struct TrackWithPos nextTrack = getNextTrackForCart(trackData, it.row(), it.col(), cart);
+            struct TrackWithPos nextTrack = getNextTrackForCart(trackData, it.col(), it.row(), cart);
             struct CartWithPos originalCart = {
                 cart, // cart
-                (long unsigned int) it.row(), // x
-                (long unsigned int) it.col(), // y
+                (long unsigned int) it.col(), // x
+                (long unsigned int) it.row(), // y
             };
 
             // figure out what decision the cart has taken last time
@@ -366,7 +383,11 @@ void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions){
 
             // figure out where to go next
             struct CartWithPos nextCart = getNextCart(originalCart, nextTrack, previousCartDecision);
-            // TODO: check if crash
+            // check if crash
+            if (carts.coeffRef(nextCart.y, nextCart.x) != static_cast<int>(Cart::None)){
+                // crash happened
+                throw CartCrashedException(/*x*/nextCart.x, /*y*/nextCart.y);
+            }
 
             // update carts matrix and their decision
             // Carts update
@@ -434,7 +455,10 @@ int main() {
     // another SMatrix which contains info about the next intersection turn
     SMatrix cartDecisions = generateInitialDecisionMatrix(x,y,carts);
 
-
-    moveCarts(carts, repTracks, cartDecisions);
+    try{
+        moveCarts(carts, repTracks, cartDecisions);
+    } catch (CartCrashedException& e){
+        std::cout << "Crash at (" << e.m_x << ", " << e.m_y << ")!" << std::endl;
+    }
 
 }
