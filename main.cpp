@@ -151,7 +151,7 @@ struct TrackWithPos getNextTrackForCart(SMatrix trackData, size_t cartX, size_t 
 
 }
 
-enum class Decision : int {left, straight, right};
+enum class Decision : int {left=0, straight, right};
 
 // function :: cart coordinates, orientation, fact that next is an intersection --> which orientation is next
 Cart getOrientationAfterIntersection(Cart originalOrientation, Decision lastestCartDecision){
@@ -320,7 +320,12 @@ struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWith
     return nextCart;
 }
 
-void moveCarts(SMatrix carts, SMatrix trackData, SMatrix cartsDecisions){
+Decision incDecision(Decision decision){
+    if (decision == Decision::right){return Decision::left}
+    else{return decision++;}
+}
+
+void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions){
 
     // get nonzero entries - since zero stands for None
     std::cout << "Carts: ";
@@ -342,12 +347,23 @@ void moveCarts(SMatrix carts, SMatrix trackData, SMatrix cartsDecisions){
             };
 
             // figure out what decision the cart has taken last time
-            // TODO:
+            Decision prevDec = cartsDecisions.coeffRef(originalCart.y, originalCart.x);
 
             // figure out where to go next
             struct CartWithPos nextCart = getNextCart(originalCart, nextTrack, previousCartDecision);
+            // TODO: check if crash
 
-            // TODO: update carts matrix
+            // update carts matrix and their decision
+            // Carts update
+            carts.coeffRef(originalCart.y, originalCart.x) = Cart::None;
+            carts.coeffRef(nextCart.y, nextCart.x) = nextCart.cart;
+            // decision update
+            if (nextTrack.track == Track::Plus){
+                Decision nextDecision =  incDecision(previousCartDecision);
+                // cartsDecisions.coeffRef(originalCart.y, originalCart.x) has become irrelevant and can be overwritten
+                cartsDecision.coeffRef(nextCart.y, nextCart.x) = nextDecision;
+            }
+
         }
     std::cout << std::endl;
     
