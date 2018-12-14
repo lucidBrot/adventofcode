@@ -159,7 +159,7 @@ struct TrackWithPos getNextTrackForCart(SMatrix trackData, size_t cartX, size_t 
     size_t nextX = cartX+x;
     size_t nextY = cartY+y;
 
-    int trackNum = trackData.coeffRef(cartY, cartX);
+    int trackNum = trackData.coeffRef(nextY, nextX);
     struct TrackWithPos twp = {InverseTrack[trackNum], // track
                                 nextX, // x
                                 nextY // y
@@ -368,6 +368,7 @@ void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions){
             it.col();   // col index (here it is equal to k)
             it.index(); // inner index, here it is equal to it.row()
 
+            // not sure if this is neccessary
             if(it.value() == static_cast<int>(Cart::None)){
                 continue;
             }
@@ -459,12 +460,11 @@ int main() {
     // another SMatrix which contains info about the next intersection turn
     SMatrix cartDecisions = generateInitialDecisionMatrix(x,y,carts);
 
-    while (1){
-        try{
+    try{
+        while(1)
             moveCarts(carts, repTracks, cartDecisions);
-        } catch (CartCrashedException& e){
-            std::cout << "Crash at (" << e.m_x << ", " << e.m_y << ")!" << std::endl;
-        }
+    } catch (CartCrashedException& e){
+        std::cout << "Crash at (" << e.m_x << ", " << e.m_y << ")!" << std::endl;
     }
 
 }
