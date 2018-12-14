@@ -154,7 +154,7 @@ struct TrackWithPos getNextTrackForCart(SMatrix trackData, size_t cartX, size_t 
 enum class Decision : int {left=0, straight, right};
 
 // function :: cart coordinates, orientation, fact that next is an intersection --> which orientation is next
-Cart getOrientationAfterIntersection(Cart originalOrientation, Decision lastestCartDecision){
+Cart getOrientationAfterIntersection(Cart originalOrientation, Decision latestCartDecision){
     assert(originalOrientation != Cart::None && originalOrientation != Cart::Crashed);
     
     Decision decision = latestCartDecision;
@@ -240,6 +240,9 @@ struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWith
                     case Track::None:
                         assert(0);
                         break;
+                    case Track::Plus:
+                        assert(0);
+                        break;
 
                 }
             }
@@ -260,6 +263,9 @@ struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWith
                         nextCart.cart = Cart::Down;
                         break;
                     case Track::None:
+                        assert(0);
+                        break;
+                    case Track::Plus:
                         assert(0);
                         break;
 
@@ -284,6 +290,9 @@ struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWith
                     case Track::None:
                         assert(0);
                         break;
+                    case Track::Plus:
+                        assert(0);
+                        break;
 
                 }
             }
@@ -306,6 +315,9 @@ struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWith
                     case Track::None:
                         assert(0);
                         break;
+                    case Track::Plus:
+                        assert(0);
+                        break;
 
                 }
             }
@@ -321,8 +333,8 @@ struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWith
 }
 
 Decision incDecision(Decision decision){
-    if (decision == Decision::right){return Decision::left}
-    else{return decision++;}
+    if (decision == Decision::right){return Decision::left;}
+    else{return (Decision)(((int)decision)+1);}
 }
 
 void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions){
@@ -347,7 +359,7 @@ void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions){
             };
 
             // figure out what decision the cart has taken last time
-            Decision prevDec = cartsDecisions.coeffRef(originalCart.y, originalCart.x);
+            Decision previousCartDecision = (Decision) cartsDecisions.coeffRef(originalCart.y, originalCart.x);
 
             // figure out where to go next
             struct CartWithPos nextCart = getNextCart(originalCart, nextTrack, previousCartDecision);
@@ -355,13 +367,13 @@ void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions){
 
             // update carts matrix and their decision
             // Carts update
-            carts.coeffRef(originalCart.y, originalCart.x) = Cart::None;
-            carts.coeffRef(nextCart.y, nextCart.x) = nextCart.cart;
+            carts.coeffRef(originalCart.y, originalCart.x) = static_cast<int>(Cart::None);
+            carts.coeffRef(nextCart.y, nextCart.x) = static_cast<int>(nextCart.cart);
             // decision update
             if (nextTrack.track == Track::Plus){
                 Decision nextDecision =  incDecision(previousCartDecision);
                 // cartsDecisions.coeffRef(originalCart.y, originalCart.x) has become irrelevant and can be overwritten
-                cartsDecision.coeffRef(nextCart.y, nextCart.x) = nextDecision;
+                cartsDecisions.coeffRef(nextCart.y, nextCart.x) = static_cast<int>(nextDecision);
             }
 
         }
@@ -369,17 +381,57 @@ void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions){
     
 }
 
+SMatrix generateInitialDecisionMatrix(size_t x, size_t y, SMatrix & carts){
+    SMatrix decs; decs.resize(y,x);
+    for (int k=0; k<carts.outerSize(); ++k){
+        for (SMatrix::InnerIterator cart(carts,k); cart; ++cart){
+            if(cart.value()!=static_cast<int>(Cart::None)){
+                decs.coeffRef(cart.row(), cart.col()) = static_cast<int>(Decision::left);
+            }
+        }
+    }
+    return decs;
+}
+
+SMatrix replaceCartsWithTracks(SMatrix carts, SMatrix input){
+    SMatrix rep = SMatrix(input); // copy
+    for (int k=0; k<carts.outerSize(); ++k){
+        for (SMatrix::InnerIterator cart(carts,k); cart; ++cart){
+            if(cart.value() == static_cast<int>(Cart::Left) || cart.value() == static_cast<int>(Cart::Right)){
+                rep.coeffRef(cart.row(), cart.col()) = static_cast<int>(Track::Minus);
+            }
+            else if (cart.value() ==static_cast<int>(Cart::Up) || cart.value()==static_cast<int>(Cart::Down)){
+                rep.coeffRef(cart.row(), cart.col()) = static_cast<int>(Track::Pipe);
+            }
+            else if (cart.value() == static_cast<int>(Cart::Crashed)){
+                assert(0 && "Initial input is not supposed to contain crashed carts");
+            }
+            else {
+                std::cout << "WAIT.... this iteration contains 0 values?" << std::endl;
+            }
+        }
+    }
+    return rep;
+}
+
 int main() { 
+    int x=13;
+    int y=6;
+    // parse carts
     std::cout << std::endl << "carts:" << std::endl;
     std::string input = readFileToString("input1.txt");
-    SMatrix carts = parseCartsPositions(input, 13, 6); 
+    SMatrix carts = parseCartsPositions(input, x,y); 
+    // parse tracks
     std::cout << carts << std::endl << std::endl << "tracks:" << std::endl;
-    SMatrix tracks = parseTracks(input, 13, 6);
+    SMatrix tracks = parseTracks(input, x,y);
+    // replace carts in input SMatrix with straight tracks
+    SMatrix repTracks = replaceCartsWithTracks(carts, tracks);
     std::cout << tracks << std::endl;
 
-    // TODO: replace carts in input SMatrix with straight tracks
-    // TODO: another SMatrix which contains info about the next intersection turn
+    // another SMatrix which contains info about the next intersection turn
+    SMatrix cartDecisions = generateInitialDecisionMatrix(x,y,carts);
 
-    moveCarts(carts, tracks);
+
+    moveCarts(carts, repTracks, cartDecisions);
 
 }
