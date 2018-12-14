@@ -216,7 +216,11 @@ struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWith
     nextCart.x = nextTrack.x;
     nextCart.y = nextTrack.y;
 
-    // TODO: handle intersections
+    // handle intersections
+    if(nextTrack.track == Track::Plus){
+        nextCart.cart = getOrientationAfterIntersection(originalCart.cart);
+        return nextCart;
+    }
 
     switch(originalCart.cart){
         case Cart::Up:
