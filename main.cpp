@@ -273,7 +273,7 @@ Cart getOrientationAfterIntersection(long int xCart, long int yCart, Cart origin
     }
 
     // compute assuming decision==left
-    Decision leftDecision;
+    Cart leftDecision;
     // We know that cart drives in direction of its orientation. So there lies the intersection.
     switch(originalOrientation){
         case Cart::Up:
@@ -286,9 +286,32 @@ Cart getOrientationAfterIntersection(long int xCart, long int yCart, Cart origin
             leftDecision = Cart::Down;
             break;
         case Cart::Right:
-            rightDecision = Cart::Up;
+            leftDecision = Cart::Up;
             break;
         default: // TODO: do default case, and make sure to invert leftdecision i decision == right
+            assert(0 && "Broken Orientation parameter!");
+            break;
+    }
+
+    if(decision==left){
+        return leftDecision;
+    }
+
+    auto invertDecision = [](Cart decision){
+        switch(decision){
+            case Cart::Up:
+                return Cart::Down;
+            case Cart::Down:
+                return Cart::Up;
+            case Cart::Left:
+                return cart::Right;
+            case Cart::Right:
+                return Cart::Left;
+        }
+    }
+
+    if(decision==right){
+        return invertDecision(leftDecision);
     }
 }
 
