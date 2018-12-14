@@ -208,12 +208,15 @@ Cart getOrientationAfterIntersection(Cart originalOrientation, Decision latestCa
 }
 
 
+static int yee = 0;
 struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWithPos nextTrack, Decision previousCartDecision){
     assert(originalCart.cart!=Cart::Crashed); assert(originalCart.cart!=Cart::None);
     assert(nextTrack.track != Track::None);
     struct CartWithPos nextCart;
     nextCart.x = nextTrack.x;
     nextCart.y = nextTrack.y;
+
+    std::cout << "[getNextCart] " << yee++ << std::endl;
 
     // handle intersections
     if(nextTrack.track == Track::Plus){
