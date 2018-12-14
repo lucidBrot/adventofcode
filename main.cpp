@@ -106,14 +106,14 @@ std::string readFileToString(std::string filename){
 
 struct TrackWithPos {
     Track track;
-    long int x;
-    long int y;
+    long unsigned int x;
+    long unsigned int y;
 };
 
 struct CartWithPos {
     Cart cart;
-    long int x;
-    long int y;
+    long unsigned int x;
+    long unsigned int y;
 };
 
 struct TrackWithPos getNextTrackForCart(SMatrix trackData, size_t cartX, size_t cartY, Cart cartOrientation){
@@ -150,6 +150,62 @@ struct TrackWithPos getNextTrackForCart(SMatrix trackData, size_t cartX, size_t 
     return twp;
 
 }
+
+// function :: cart coordinates, orientation, fact that next is an intersection --> which orientation is next
+Cart getOrientationAfterIntersection(long int xCart, long int yCart, Cart originalOrientation){
+    assert(originalOrientation != Cart::None && originalOrientation != Cart::Crashed);
+    
+    // TODO: store, and get, carts latest decision
+    enum class Decision : int {left, straight, right};
+    Decision decision = Decision::left;
+    std::cout << "TODO: don't hardcode decision!" << std::endl;
+
+    if(decision==Decision::straight){
+        return originalOrientation;
+    }
+
+    // compute assuming decision==left
+    Cart leftDecision;
+    // We know that cart drives in direction of its orientation. So there lies the intersection.
+    switch(originalOrientation){
+        case Cart::Up:
+            leftDecision = Cart::Left;
+            break;
+        case Cart::Down:
+            leftDecision = Cart::Right;
+            break;
+        case Cart::Left:
+            leftDecision = Cart::Down;
+            break;
+        case Cart::Right:
+            leftDecision = Cart::Up;
+            break;
+        default: // TODO: do default case, and make sure to invert leftdecision i decision == right
+            assert(0 && "Broken Orientation parameter!");
+            break;
+    }
+
+    if(decision==Decision::left){
+        return leftDecision;
+    }
+
+    auto invertDecision = [](Cart decision){
+        switch(decision){
+            case Cart::Up:
+                return Cart::Down;
+            case Cart::Down:
+                return Cart::Up;
+            case Cart::Left:
+                return Cart::Right;
+            case Cart::Right:
+                return Cart::Left;
+        }
+    };
+
+    //: if(decision==Decision::right){
+    return invertDecision(leftDecision);
+}
+
 
 struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWithPos nextTrack){
     assert(originalCart.cart!=Cart::Crashed); assert(originalCart.cart!=Cart::None);
@@ -257,62 +313,6 @@ struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWith
     }
 
     return nextCart;
-}
-
-// function :: cart coordinates, orientation, fact that next is an intersection --> which orientation is next
-Cart getOrientationAfterIntersection(long int xCart, long int yCart, Cart originalOrientation){
-    assert(originalOrientation != Cart::None && originalOrientation != Cart::Crashed);
-    
-    // TODO: store, and get, carts latest decision
-    enum class Decision : int {left, straight, right};
-    Decision decision = left;
-    std::cout << "TODO: don't hardcode decision!" << std::cout;
-
-    if(decision==Decision::straight){
-        return originalOrientation;
-    }
-
-    // compute assuming decision==left
-    Cart leftDecision;
-    // We know that cart drives in direction of its orientation. So there lies the intersection.
-    switch(originalOrientation){
-        case Cart::Up:
-            leftDecision = Cart::Left;
-            break;
-        case Cart::Down:
-            leftDecision = Cart::Right;
-            break;
-        case Cart::Left:
-            leftDecision = Cart::Down;
-            break;
-        case Cart::Right:
-            leftDecision = Cart::Up;
-            break;
-        default: // TODO: do default case, and make sure to invert leftdecision i decision == right
-            assert(0 && "Broken Orientation parameter!");
-            break;
-    }
-
-    if(decision==Decision::left){
-        return leftDecision;
-    }
-
-    auto invertDecision = [](Cart decision){
-        switch(decision){
-            case Cart::Up:
-                return Cart::Down;
-            case Cart::Down:
-                return Cart::Up;
-            case Cart::Left:
-                return cart::Right;
-            case Cart::Right:
-                return Cart::Left;
-        }
-    }
-
-    if(decision==Decision::right){
-        return invertDecision(leftDecision);
-    }
 }
 
 void moveCarts(SMatrix carts, SMatrix trackData){
