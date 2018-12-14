@@ -218,7 +218,7 @@ struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWith
                         nextCart.cart = Cart::Right;
                         break;
                     case Track::Pipe:
-                        assert(0 && "Bad things are happening: Moving horizontallin onto a pipe!");
+                        assert(0 && "Bad things are happening: Moving horizontally onto a pipe!");
                         break;
                     case Track::None:
                         assert(0);
@@ -240,7 +240,7 @@ struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWith
                         nextCart.cart = Cart::Left;
                         break;
                     case Track::Pipe:
-                        assert(0 && "Bad things are happening: Moving horizontallin onto a pipe!");
+                        assert(0 && "Bad things are happening: Moving horizontallii onto a pipe!");
                         break;
                     case Track::None:
                         assert(0);
@@ -257,6 +257,39 @@ struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWith
     }
 
     return nextCart;
+}
+
+// function :: cart coordinates, orientation, fact that next is an intersection --> which orientation is next
+Cart getOrientationAfterIntersection(long int xCart, long int yCart, Cart originalOrientation){
+    assert(originalOrientation != Cart::None && originalOrientation != Cart::Crashed);
+    
+    // TODO: store, and get, carts latest decision
+    enum class Decision : int {left, straight, right};
+    Decision decision = left;
+    std::cout << "TODO: don't hardcode decision!" << std::cout;
+
+    if(decision==straight){
+        return originalOrientation;
+    }
+
+    // compute assuming decision==left
+    Decision leftDecision;
+    // We know that cart drives in direction of its orientation. So there lies the intersection.
+    switch(originalOrientation){
+        case Cart::Up:
+            leftDecision = Cart::Left;
+            break;
+        case Cart::Down:
+            leftDecision = Cart::Right;
+            break;
+        case Cart::Left:
+            leftDecision = Cart::Down;
+            break;
+        case Cart::Right:
+            rightDecision = Cart::Up;
+            break;
+        default: // TODO: do default case, and make sure to invert leftdecision i decision == right
+    }
 }
 
 void moveCarts(SMatrix carts, SMatrix trackData){
@@ -298,6 +331,7 @@ int main() {
     std::cout << tracks << std::endl;
 
     // TODO: replace carts in input SMatrix with straight tracks
+    // TODO: another SMatrix which contains info about the next intersection turn
 
     moveCarts(carts, tracks);
 
