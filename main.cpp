@@ -293,7 +293,7 @@ Cart getOrientationAfterIntersection(long int xCart, long int yCart, Cart origin
             break;
     }
 
-    if(decision==left){
+    if(decision==Decision::left){
         return leftDecision;
     }
 
@@ -310,7 +310,7 @@ Cart getOrientationAfterIntersection(long int xCart, long int yCart, Cart origin
         }
     }
 
-    if(decision==right){
+    if(decision==Decision::right){
         return invertDecision(leftDecision);
     }
 }
