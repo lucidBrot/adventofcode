@@ -268,7 +268,7 @@ Cart getOrientationAfterIntersection(long int xCart, long int yCart, Cart origin
     Decision decision = left;
     std::cout << "TODO: don't hardcode decision!" << std::cout;
 
-    if(decision==straight){
+    if(decision==Decision::straight){
         return originalOrientation;
     }
 
