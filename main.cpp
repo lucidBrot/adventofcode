@@ -252,6 +252,7 @@ struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWith
                         nextCart.cart = Cart::Left;
                         break;
                     case Track::Minus:
+                        std::cout << std::flush;
                         assert(0 && "This should not happen: Moving upwards onto horizontal track!");
                         break;
                     case Track::Pipe:
@@ -277,6 +278,7 @@ struct CartWithPos getNextCart(struct CartWithPos originalCart, struct TrackWith
                         nextCart.cart = Cart::Right;
                         break;
                     case Track::Minus:
+                        std::cout << std::flush;
                         assert(0 && "This should not happen: Moving down onto horizontal track!");
                         break;
                     case Track::Pipe:
@@ -358,11 +360,13 @@ Decision incDecision(Decision decision){
 }
 
 void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions){
+    // create copies so that new cart positions are not considered in previous runs.
+    SMatrix originalCarts = SMatrix(carts);
 
     // get nonzero entries - since zero stands for None
     std::cout << "Carts: " << std::endl;
-    for (int k=0; k<carts.outerSize(); ++k)
-        for (SMatrix::InnerIterator it(carts,k); it; ++it)
+    for (int k=0; k<originalCarts.outerSize(); ++k)
+        for (SMatrix::InnerIterator it(originalCarts,k); it; ++it)
         {
             it.row();   // row index
             it.col();   // col index (here it is equal to k)
@@ -372,7 +376,7 @@ void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions){
             if(it.value() == static_cast<int>(Cart::None)){
                 continue;
             }
-            std::cout << "(" << it.col() << ", " << it.row() << ")\t";
+            std::cout << "(" << it.col() << ", " << it.row() << ")[" << it.value() << "]\t";
 
             // find the next track to be driven on
             Cart cart = InverseCart[it.value()];
@@ -384,6 +388,7 @@ void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions){
             };
 
             // figure out what decision the cart has taken last time
+            ///std::cout << std::endl << "Decision Matrix: " << cartsDecisions << std::endl << std::endl;
             Decision previousCartDecision = (Decision) cartsDecisions.coeffRef(originalCart.y, originalCart.x);
 
             // figure out where to go next
@@ -403,6 +408,10 @@ void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions){
                 Decision nextDecision =  incDecision(previousCartDecision);
                 // cartsDecisions.coeffRef(originalCart.y, originalCart.x) has become irrelevant and can be overwritten
                 cartsDecisions.coeffRef(nextCart.y, nextCart.x) = static_cast<int>(nextDecision);
+                std::cout << "set next decision for (" << nextCart.x << ", " << nextCart.y << ") from " << static_cast<int>(carts.coeffRef(originalCart.y, originalCart.x)) << " to " << static_cast<int>(nextDecision) << "\t" <<  std::flush;
+            } else {
+                // Need to carry over decision information
+                cartsDecisions.coeffRef(nextCart.y, nextCart.x) = static_cast<int>(previousCartDecision);
             }
 
         }
@@ -464,7 +473,7 @@ int main() {
         while(1)
             moveCarts(carts, repTracks, cartDecisions);
     } catch (CartCrashedException& e){
-        std::cout << "Crash at (" << e.m_x << ", " << e.m_y << ")!" << std::endl;
+        std::cout << std::endl << "Crash at (" << e.m_x << ", " << e.m_y << ")!" << std::endl;
     }
 
 }
