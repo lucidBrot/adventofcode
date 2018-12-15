@@ -10,6 +10,7 @@ typedef Eigen::SparseMatrix<int, Eigen::RowMajor> SMatrix;
 #include <fstream>
 #include <streambuf>
 #include <exception>
+#include <cstdlib>
 
 struct CartCrashedException : public std::exception
 {
@@ -30,12 +31,12 @@ struct CartCrashedException : public std::exception
 enum class Cart : int {None=0, Up, Down, Left, Right, Crashed};
 const Cart InverseCart[] = {Cart::None, Cart::Up, Cart::Down, Cart::Left, Cart::Right, Cart::Crashed};
 
-SMatrix parseCartsPositions(std::string filecontents, unsigned int maxX, unsigned int maxY){
+SMatrix parseCartsPositions(std::string filecontents, long unsigned int maxX, long unsigned int maxY){
     SMatrix cartStorage; cartStorage.resize(maxY, maxX); cartStorage.reserve(20);
     std::istringstream f(filecontents);
     std::string line;
-    unsigned int x = 0;
-    unsigned int y = 0;
+    long unsigned int x = 0;
+    long unsigned int y = 0;
     while (std::getline(f, line)) {
         for (char& c : line){
             // read cart positions and nothing else
@@ -452,13 +453,23 @@ SMatrix replaceCartsWithTracks(SMatrix carts, SMatrix input){
     return rep;
 }
 
-int main() { 
-    int x=13;
-    int y=6;
+int main(int argc, char* argv[]) { 
+    std::string filename = "input1.txt";
+    // actually when counting from 1! I.e. the numbers that vim displays at G$
+    long unsigned int x=13;
+    long unsigned int y=6;
+    if (argc >= 4){
+        filename = std::string(argv[1]);
+        x = atoi(argv[2]);
+        y = atoi(argv[3]);
+    }
+    std::cout << "File: " << filename << std::endl << std::endl;
     // parse carts
     std::cout << std::endl << "carts:" << std::endl;
-    std::string input = readFileToString("input1.txt");
+    std::string input = readFileToString(filename);
+    std::cout << "." << std::flush;
     SMatrix carts = parseCartsPositions(input, x,y); 
+    std::cout << "." << std::flush;
     // parse tracks
     std::cout << carts << std::endl << std::endl << "tracks:" << std::endl;
     SMatrix tracks = parseTracks(input, x,y);
