@@ -544,10 +544,22 @@ char printCartMap(int cart){
     return std::get<1>(*cartMap.find(static_cast<Cart>(cart)));
 }
 
-void visualize(SMatrix & tracks, SMatrix carts){
+void visualize(SMatrix & tracks, SMatrix & carts){
 
     PMatrix<int> trackz = PMatrix<int>(tracks); // copy
-    PMatrix<char> trackc = trackz.unaryExpr(&printTrackMap);
+    PMatrix<char> trackc = trackz.unaryExpr(&printTrackMap); // store tracks as chars
+
+    // overwrite with carts
+    for (int k=0; k<carts.outerSize(); ++k){
+        for (SMatrix::InnerIterator cart(carts,k); cart; ++cart){
+            if(cart.value() != static_cast<int>(Cart::None)){
+                trackc(cart.row(), cart.col()) = printCartMap(cart.value());
+            }
+        }
+    }
+
+    // print
+    std::cerr << std::endl << std::endl << trackc << std::endl << std::endl;
 
 }
 
@@ -582,11 +594,15 @@ int main(int argc, char* argv[]) {
     bool doTask2 = true;
 
     try{
-        while(1)
+        while(1){
+            visualize(repTracks, carts);
             moveCarts(carts, repTracks, cartDecisions, 1);
+        }
     } catch (CartCrashedException& e){
         std::cout << std::endl << "Crash at (" << e.m_x << ", " << e.m_y << ")!" << std::endl;
     }
+
+    visualize(repTracks, carts);
 
 
     // task 2:
@@ -605,6 +621,7 @@ int main(int argc, char* argv[]) {
         } catch (CartCrashedException& e){
             std::cout << std::endl << "Crash at (" << e.m_x << ", " << e.m_y << ")!" << std::endl;
         }
+        visualize(repTracks, carts);
     }
 
 }
