@@ -11,6 +11,8 @@ typedef Eigen::SparseMatrix<int, Eigen::RowMajor> SMatrix;
 #include <streambuf>
 #include <exception>
 #include <cstdlib>
+#include <map>
+#include <iterator>
 
 struct CartCrashedException : public std::exception
 {
@@ -512,6 +514,23 @@ SMatrix replaceCartsWithTracks(SMatrix carts, SMatrix input){
     return rep;
 }
 
+void visualize(SMatrix tracks, SMatrix carts){
+    std::map<Track, char> trackMap;
+    trackMap.insert(std::make_pair(Track::None, ' '));
+    trackMap.insert(std::make_pair(Track::Slash, '/'));
+    trackMap.insert(std::make_pair(Track::Backslash, '\\'));
+    trackMap.insert(std::make_pair(Track::Minus, '-'));
+    trackMap.insert(std::make_pair(Track::Plus, '+'));
+    trackMap.insert(std::make_pair(Track::Pipe, '|'));
+
+    std::map<Cart, char> cartMap;
+    cartMap.insert(std::make_pair(Cart::None, '?'));
+    cartMap.insert(std::make_pair(Cart::Up, '^'));
+    cartMap.insert(std::make_pair(Cart::Down, 'v'));
+    cartMap.insert(std::make_pair(Cart::Left, '<'));
+    cartMap.insert(std::make_pair(Cart::Right, '>'));
+    cartMap.insert(std::make_pair(Cart::Crashed, 'X'));
+}
 
 int main(int argc, char* argv[]) { 
     std::string filename = "input1.txt";
