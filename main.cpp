@@ -455,15 +455,28 @@ SMatrix replaceCartsWithTracks(SMatrix carts, SMatrix input){
     return rep;
 }
 
+// modifies carts SMatrix
 void removeCrashed(SMatrix & carts){
     for (int k=0; k<carts.outerSize(); ++k){
         for (SMatrix::InnerIterator cart(carts,k); cart; ++cart){
-            if(cart.value()!=static_cast<int>(Cart::None)){
-                decs.coeffRef(cart.row(), cart.col()) = static_cast<int>(Decision::left);
+            if(cart.value()==static_cast<int>(Cart::Crashed)){
+                carts.coeffRef(cart.row(), cart.col()) = static_cast<int>(Cart::None);
             }
         }
     }
-    // TODO replace inner content of loop and add return
+}
+
+bool isLessThanTwoCartsLeft(SMatrix carts){
+    int numCarts = 0;
+    for (int k=0; k<carts.outerSize(); ++k){
+        for (SMatrix::InnerIterator cart(carts,k); cart; ++cart){
+            if(cart.value()!=static_cast<int>(Cart::Crashed) && cart.value()!=static_cast<int>(Cart::None){
+                numCarts++;
+                if(numCarts > 1){return false;}
+            }
+        }
+    }
+    return true;
 }
 
 int main(int argc, char* argv[]) { 
@@ -508,7 +521,9 @@ int main(int argc, char* argv[]) {
     removeCrashed(carts);
 
     // check if only one cart is left
-    //
+    if(isLessThanTwoCartsLeft(carts)){
+
+    }
     // else loop
 
 }
