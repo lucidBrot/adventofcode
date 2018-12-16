@@ -13,6 +13,7 @@ typedef Eigen::SparseMatrix<int, Eigen::RowMajor> SMatrix;
 #include <cstdlib>
 #include <map>
 #include <iterator>
+#include <Eigen/Core>
 
 struct CartCrashedException : public std::exception
 {
@@ -514,7 +515,11 @@ SMatrix replaceCartsWithTracks(SMatrix carts, SMatrix input){
     return rep;
 }
 
-void visualize(SMatrix tracks, SMatrix carts){
+template <typename T>
+using PMatrix = Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor>; 
+
+char printTrackMap(int track){
+
     std::map<Track, char> trackMap;
     trackMap.insert(std::make_pair(Track::None, ' '));
     trackMap.insert(std::make_pair(Track::Slash, '/'));
@@ -523,6 +528,11 @@ void visualize(SMatrix tracks, SMatrix carts){
     trackMap.insert(std::make_pair(Track::Plus, '+'));
     trackMap.insert(std::make_pair(Track::Pipe, '|'));
 
+    return std::get<1>(*trackMap.find(static_cast<Track>(track)));
+}
+
+char printCartMap(int cart){
+
     std::map<Cart, char> cartMap;
     cartMap.insert(std::make_pair(Cart::None, '?'));
     cartMap.insert(std::make_pair(Cart::Up, '^'));
@@ -530,6 +540,15 @@ void visualize(SMatrix tracks, SMatrix carts){
     cartMap.insert(std::make_pair(Cart::Left, '<'));
     cartMap.insert(std::make_pair(Cart::Right, '>'));
     cartMap.insert(std::make_pair(Cart::Crashed, 'X'));
+
+    return std::get<1>(*cartMap.find(static_cast<Cart>(cart)));
+}
+
+void visualize(SMatrix & tracks, SMatrix carts){
+
+    PMatrix<int> trackz = PMatrix<int>(tracks); // copy
+    PMatrix<char> trackc = trackz.unaryExpr(&printTrackMap);
+
 }
 
 int main(int argc, char* argv[]) { 
