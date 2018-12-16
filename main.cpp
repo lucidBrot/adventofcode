@@ -360,7 +360,42 @@ Decision incDecision(Decision decision){
     else{return (Decision)(((int)decision)+1);}
 }
 
-void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions){
+// modifies carts SMatrix
+void removeCrashed(SMatrix & carts){
+    for (int k=0; k<carts.outerSize(); ++k){
+        for (SMatrix::InnerIterator cart(carts,k); cart; ++cart){
+            if(cart.value()==static_cast<int>(Cart::Crashed)){
+                carts.coeffRef(cart.row(), cart.col()) = static_cast<int>(Cart::None);
+            }
+        }
+    }
+}
+
+bool isLessThanTwoCartsLeft(SMatrix carts){
+    int numCarts = 0;
+    for (int k=0; k<carts.outerSize(); ++k){
+        for (SMatrix::InnerIterator cart(carts,k); cart; ++cart){
+            if(cart.value()!=static_cast<int>(Cart::Crashed) && cart.value()!=static_cast<int>(Cart::None)){
+                numCarts++;
+                if(numCarts > 1){return false;}
+            }
+        }
+    }
+    return true;
+}
+
+std::string anyCartsCoordsAsString(SMatrix carts){
+    for (int k=0; k<carts.outerSize(); ++k){
+        for (SMatrix::InnerIterator cart(carts,k); cart; ++cart){
+            std::stringstream ret;
+            ret << "(";
+            ret << cart.col() << ", " << cart.row() << ")";
+            return ret.str();
+        }
+    }
+    return "No Coors";
+}
+void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions, int version){
     // create copies so that new cart positions are not considered in previous runs.
     SMatrix originalCarts = SMatrix(carts);
 
@@ -369,6 +404,16 @@ void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions){
     for (int k=0; k<originalCarts.outerSize(); ++k)
         for (SMatrix::InnerIterator it(originalCarts,k); it; ++it)
         {
+
+            if (version == 2){
+                // check if only one cart is left
+                if(isLessThanTwoCartsLeft(carts)){
+
+                    std::cout << std::endl <<  "Fin: " << anyCartsCoordsAsString(carts) << std::endl;
+                    return;
+                }
+            }
+
             it.row();   // row index
             it.col();   // col index (here it is equal to k)
             it.index(); // inner index, here it is equal to it.row()
@@ -394,13 +439,21 @@ void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions){
 
             // figure out where to go next
             struct CartWithPos nextCart = getNextCart(originalCart, nextTrack, previousCartDecision);
+            bool crashed = false;
             // check if crash
             if (carts.coeffRef(nextCart.y, nextCart.x) != static_cast<int>(Cart::None)){
                 // crash happened
                 carts.coeffRef(originalCart.y, originalCart.x) = static_cast<int>(Cart::None);
                 carts.coeffRef(nextCart.y, nextCart.x) = static_cast<int>(Cart::Crashed);
-                throw CartCrashedException(/*x*/nextCart.x, /*y*/nextCart.y);
-            }
+                if(version==1){
+                    throw CartCrashedException(/*x*/nextCart.x, /*y*/nextCart.y);
+                } else if (version == 2){
+                    crashed = true;
+                    // remove crashed car and continue wihth next loop
+                    removeCrashed(carts);
+                    continue;
+                }
+            }       
 
             // update carts matrix and their decision
             // Carts update
@@ -455,29 +508,6 @@ SMatrix replaceCartsWithTracks(SMatrix carts, SMatrix input){
     return rep;
 }
 
-// modifies carts SMatrix
-void removeCrashed(SMatrix & carts){
-    for (int k=0; k<carts.outerSize(); ++k){
-        for (SMatrix::InnerIterator cart(carts,k); cart; ++cart){
-            if(cart.value()==static_cast<int>(Cart::Crashed)){
-                carts.coeffRef(cart.row(), cart.col()) = static_cast<int>(Cart::None);
-            }
-        }
-    }
-}
-
-bool isLessThanTwoCartsLeft(SMatrix carts){
-    int numCarts = 0;
-    for (int k=0; k<carts.outerSize(); ++k){
-        for (SMatrix::InnerIterator cart(carts,k); cart; ++cart){
-            if(cart.value()!=static_cast<int>(Cart::Crashed) && cart.value()!=static_cast<int>(Cart::None){
-                numCarts++;
-                if(numCarts > 1){return false;}
-            }
-        }
-    }
-    return true;
-}
 
 int main(int argc, char* argv[]) { 
     std::string filename = "input1.txt";
@@ -507,23 +537,33 @@ int main(int argc, char* argv[]) {
     SMatrix cartDecisions = generateInitialDecisionMatrix(x,y,carts);
 
     // task 1:
+    bool doTask2 = true;
 
     try{
         while(1)
-            moveCarts(carts, repTracks, cartDecisions);
+            moveCarts(carts, repTracks, cartDecisions, 1);
     } catch (CartCrashedException& e){
         std::cout << std::endl << "Crash at (" << e.m_x << ", " << e.m_y << ")!" << std::endl;
     }
 
 
     // task 2:
-    // remove the crashed carts
-    removeCrashed(carts);
+    while(doTask2){
+        // remove the crashed carts
+        removeCrashed(carts);
 
-    // check if only one cart is left
-    if(isLessThanTwoCartsLeft(carts)){
-
+        // check if only one cart is left
+        if(isLessThanTwoCartsLeft(carts)){
+            std::cout << "Fin: " << anyCartsCoordsAsString(carts) << std::endl;
+            break;
+        }
+        // else loop
+        try{
+            while(1)
+                moveCarts(carts, repTracks, cartDecisions,2);
+        } catch (CartCrashedException& e){
+            std::cout << std::endl << "Crash at (" << e.m_x << ", " << e.m_y << ")!" << std::endl;
+        }
     }
-    // else loop
 
 }
