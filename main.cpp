@@ -387,6 +387,10 @@ bool isLessThanTwoCartsLeft(SMatrix carts){
 std::string anyCartsCoordsAsString(SMatrix carts){
     for (int k=0; k<carts.outerSize(); ++k){
         for (SMatrix::InnerIterator cart(carts,k); cart; ++cart){
+            if(cart.value()==static_cast<int>(Cart::Crashed) 
+                    || cart.value()==static_cast<int>(Cart::None)){
+                continue;
+            }
             std::stringstream ret;
             ret << "(";
             ret << cart.col() << ", " << cart.row() << ")";
@@ -405,7 +409,7 @@ void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions, i
         for (SMatrix::InnerIterator it(originalCarts,k); it; ++it)
         {
 
-            if (version == 2){
+            if (version == 2 && false){ // true to stop instantly, false to stop at end of tick
                 // check if only one cart is left
                 if(isLessThanTwoCartsLeft(carts)){
 
@@ -554,13 +558,12 @@ int main(int argc, char* argv[]) {
 
         // check if only one cart is left
         if(isLessThanTwoCartsLeft(carts)){
-            std::cout << "Fin: " << anyCartsCoordsAsString(carts) << std::endl;
+            std::cout << "Fini: " << anyCartsCoordsAsString(carts) << std::endl;
             break;
         }
         // else loop
         try{
-            while(1)
-                moveCarts(carts, repTracks, cartDecisions,2);
+            moveCarts(carts, repTracks, cartDecisions,2);
         } catch (CartCrashedException& e){
             std::cout << std::endl << "Crash at (" << e.m_x << ", " << e.m_y << ")!" << std::endl;
         }
