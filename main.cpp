@@ -397,6 +397,8 @@ void moveCarts(SMatrix & carts, SMatrix & trackData, SMatrix & cartsDecisions){
             // check if crash
             if (carts.coeffRef(nextCart.y, nextCart.x) != static_cast<int>(Cart::None)){
                 // crash happened
+                carts.coeffRef(originalCart.y, originalCart.x) = static_cast<int>(Cart::None);
+                carts.coeffRef(nextCart.y, nextCart.x) = static_cast<int>(Cart::Crashed);
                 throw CartCrashedException(/*x*/nextCart.x, /*y*/nextCart.y);
             }
 
@@ -453,6 +455,17 @@ SMatrix replaceCartsWithTracks(SMatrix carts, SMatrix input){
     return rep;
 }
 
+void removeCrashed(SMatrix & carts){
+    for (int k=0; k<carts.outerSize(); ++k){
+        for (SMatrix::InnerIterator cart(carts,k); cart; ++cart){
+            if(cart.value()!=static_cast<int>(Cart::None)){
+                decs.coeffRef(cart.row(), cart.col()) = static_cast<int>(Decision::left);
+            }
+        }
+    }
+    // TODO replace inner content of loop and add return
+}
+
 int main(int argc, char* argv[]) { 
     std::string filename = "input1.txt";
     // actually when counting from 1! I.e. the numbers that vim displays at G$
@@ -480,11 +493,22 @@ int main(int argc, char* argv[]) {
     // another SMatrix which contains info about the next intersection turn
     SMatrix cartDecisions = generateInitialDecisionMatrix(x,y,carts);
 
+    // task 1:
+
     try{
         while(1)
             moveCarts(carts, repTracks, cartDecisions);
     } catch (CartCrashedException& e){
         std::cout << std::endl << "Crash at (" << e.m_x << ", " << e.m_y << ")!" << std::endl;
     }
+
+
+    // task 2:
+    // remove the crashed carts
+    removeCrashed(carts);
+
+    // check if only one cart is left
+    //
+    // else loop
 
 }
