@@ -41,6 +41,8 @@ class Search:
     # clay_veins LIKE [{'x': 12, 'y': 3}]
     # clay_map has y as outer array
     def __init__(self, clay_veins : list, spring={'x':500, 'y':0}):
+        # add spring to clay so that the map is big enough, then later overwrite it
+        clay_veins.append(spring)
         # sort by y, then x
         self.sorted_clay_veins = sorted(clay_veins, key=lambda dic:(dic['y'], dic['x']))
         self.x_max = max(self.sorted_clay_veins, key = lambda dic:(dic['x']))['x']
@@ -71,7 +73,7 @@ class Search:
 
 class SearchBuilder:
     regexp_x_first = re.compile('x=(?P<x_num>[0-9]+),\sy=(?P<y_first>[0-9]+)\.\.(?P<y_second>[0-9]+)')
-    regexp_y_first = re.compile('y=(?P<x_first>[0-9]+)\.\.(?P<x_second>[0-9]+),(?P<y_num>[0-9])')
+    regexp_y_first = re.compile('y=(?P<y_num>[0-9]+),\sx=(?P<x_first>[0-9]+)\.\.(?P<x_second>[0-9]+)')
     
     def __init__(self):
         self.veins = [] # LIKE [{'x':123, 'y':12}]
@@ -83,14 +85,16 @@ class SearchBuilder:
             res_y_first = re.match(SearchBuilder.regexp_y_first, line)
             if res_x_first is not None:
                 x = int(res_x_first.group('x_num'))
-                r = range(int(res_x_first.group('y_first')), int(res_x_first.group('y_second')))
+                r = range(int(res_x_first.group('y_first')), int(res_x_first.group('y_second'))+1)
                 for y in r:
                     self.veins.append({'x': x, 'y': y})
             elif res_y_first is not None:
                 y = int(res_y_first.group('y_num'))
-                r = range(int(res_y_first.group('x_first')), int(res_y_first.group('x_second')))
+                r = range(int(res_y_first.group('x_first')), int(res_y_first.group('x_second'))+1)
                 for x in r:
                     self.veins.append({'x': x, 'y': y})
+            else:
+                raise ValueError('Regexp did not match')
 
         return Search(self.veins)
 
@@ -107,7 +111,6 @@ if __name__ == '__main__':
             'x=498, y=10..13',
             'x=504, y=10..13',
             'y=13, x=498..504',
-            'y=20, x=495..506',
         ]
     )
     print(s.render())
