@@ -39,7 +39,7 @@ class Block:
 
 class Search:
     # clay_veins LIKE [{'x': 12, 'y': 3}]
-    def __init__(self, clay_veins : list):
+    def __init__(self, clay_veins : list, spring={'x':500, 'y':0}):
         # sort by y, then x
         self.sorted_clay_veins = sorted(clay_veins, key=lambda dic:(dic['y'], dic['x']))
         self.x_max = max(self.sorted_clay_veins, key = lambda dic:(dic['x']))['x']
@@ -49,9 +49,17 @@ class Search:
         print('[Search#__init__]: sorted clay veins')
         print(self.sorted_clay_veins)
         self.clay_map = np.full((1 + self.y_max - self.y_min, 1 + self.x_max - self.x_min), fill_value=Block(Ground.UNINITIALIZED))
+        for dic in self.sorted_clay_veins:
+            xx = dic['x']
+            yy = dic['y']
+            self.set(xx,yy, val=Block(Ground.CLAY))
+        self.set(spring['x'], spring['y'], val=Block(Ground.SPRING))
 
     def at(self, x,y):
-        return self.clay_map[x - self.x_min, y - self.y_min]
+        return self.clay_map[y - self.y_min, x - self.x_min]
+
+    def set(self, x, y, val):
+        self.clay_map[y - self.y_min, x - self.x_min] = val
 
     def render(self):
         def block_render(block: Block):
@@ -101,5 +109,5 @@ if __name__ == '__main__':
         ]
     )
     print(s.at(506, 1).ground_type.render())
-    s.render()
+    print(s.render())
 
