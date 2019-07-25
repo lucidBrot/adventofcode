@@ -10,6 +10,7 @@ class Ground(Enum):
     SPRING = 2
     FLOWING_WATER = 3
     STILL_WATER = 4
+    UNINITIALIZED = 5
 
     def render(self):
         render_dict = {
@@ -18,6 +19,7 @@ class Ground(Enum):
                Ground.SPRING : '+',
                Ground.FLOWING_WATER : '|',
                Ground.STILL_WATER : '~',
+               Ground.UNINITIALIZED: 'x',
                 }
         return render_dict[self]
 
@@ -46,11 +48,17 @@ class Search:
         self.y_min = self.sorted_clay_veins[0]['y']
         print('[Search#__init__]: sorted clay veins')
         print(self.sorted_clay_veins)
-        self.clay_map = np.empty((1 + self.y_max - self.y_min, 1 + self.x_max - self.x_min))
+        self.clay_map = np.full((1 + self.y_max - self.y_min, 1 + self.x_max - self.x_min), fill_value=Block(Ground.UNINITIALIZED))
         print(self.clay_map.shape)
 
     def at(self, x,y):
         return self.clay_map[x - self.x_min, y - self.y_min]
+
+    def render(self):
+        def block_render(block: Block):
+            return block.ground_type.render()
+        vec_block_render = np.vectorize(block_render)
+        print(vec_block_render(self.clay_map))
 
 class SearchBuilder:
     regexp_x_first = re.compile('x=(?P<x_num>[0-9]+),\sy=(?P<y_first>[0-9]+)\.\.(?P<y_second>[0-9]+)')
@@ -93,4 +101,5 @@ if __name__ == '__main__':
         ]
     )
     print(s.at(506, 1))
+    s.render()
 
