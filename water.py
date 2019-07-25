@@ -45,14 +45,13 @@ class Search:
         clay_veins.append(spring)
         # sort by y, then x
         self.sorted_clay_veins = sorted(clay_veins, key=lambda dic:(dic['y'], dic['x']))
-        self.x_max = max(self.sorted_clay_veins, key = lambda dic:(dic['x']))['x']
-        self.x_min = min(self.sorted_clay_veins, key = lambda dic:(dic['x']))['x']
+        self.x_max = max(self.sorted_clay_veins, key = lambda dic:(dic['x']))['x'] +1
+        self.x_min = min(self.sorted_clay_veins, key = lambda dic:(dic['x']))['x'] -1
         self.y_max = self.sorted_clay_veins[-1]['y']
         self.y_min = self.sorted_clay_veins[0]['y']
         print('[Search#__init__]: sorted clay veins')
         print(self.sorted_clay_veins)
-        # make map one wider that there is clay, so that it can fall down on the sides
-        self.clay_map = np.full((1 + self.y_max - self.y_min, 1+1 + self.x_max - self.x_min), fill_value=Block(Ground.SAND))
+        self.clay_map = np.full((1 + self.y_max - self.y_min, 1 + self.x_max - self.x_min), fill_value=Block(Ground.SAND))
         for dic in self.sorted_clay_veins:
             xx = dic['x']
             yy = dic['y']
