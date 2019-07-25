@@ -43,6 +43,7 @@ class Search:
     def __init__(self, clay_veins : list, spring={'x':500, 'y':0}):
         # add spring to clay so that the map is big enough, then later overwrite it
         clay_veins.append(spring)
+        self.spring = spring
         # sort by y, then x
         self.sorted_clay_veins = sorted(clay_veins, key=lambda dic:(dic['y'], dic['x']))
         self.x_max = max(self.sorted_clay_veins, key = lambda dic:(dic['x']))['x'] +1
@@ -105,9 +106,39 @@ class SearchBuilder:
                 lis.append(line)
         return lis
 
+class Solver:
+    def __init__(self, layout : Search):
+        self.layout = layout
+
+    def start(self):
+        self.floaties = {self.layout.spring}
+        for i in range(0,10):
+            for floatie in self.floaties:
+                self.step_for_block(floatie)
+
+    ### floatie is of type {'x':123, 'y':12}
+    def step_for_block(self, floatie):
+        moving_downwards_is_allowed = True
+        if self.layout.y_max == floatie['y']:
+            # no more moving downwards
+            moving_downwards_is_allowed = False
+
+        if moving_downwards_is_allowed:
+            block_below = self.layout.at(floatie['x'], floatie['y']+1)
+            if block_below.is_conductive():
+                # move down
+                self.layout.set(floatie['x'], floatie['y']+1, Block(Ground.FLOWING_WATER))
+                self.floaties.remove(floatie)
+                self.floaties.add({'x': floatie['x'], 'y': floatie['y']+1})
+                return
+
+        return
 
 if __name__ == '__main__':
     sb = SearchBuilder()
-    a = sb.build_search(sb.from_file('input.txt'))
-    print(a.render())
+    my_map = sb.build_search(sb.from_file('input.txt'))
+    print(my_map.render())
+    solver = Solver(my_map)
+    solver.start()
+    print(solver.layout.render())
 
