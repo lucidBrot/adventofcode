@@ -98,6 +98,13 @@ class SearchBuilder:
 
         return Search(self.veins)
 
+    def from_file(self, filepath):
+        lis = []
+        with open(filepath) as fp:
+            for line in fp:
+                lis.append(line)
+        return lis
+
 
 if __name__ == '__main__':
     sb = SearchBuilder()
@@ -113,5 +120,6 @@ if __name__ == '__main__':
             'y=13, x=498..504',
         ]
     )
-    print(s.render())
+    a = sb.build_search(sb.from_file('input.txt'))
+    print(a.render())
 
