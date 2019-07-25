@@ -19,7 +19,7 @@ class Ground(Enum):
                Ground.SPRING : '+',
                Ground.FLOWING_WATER : '|',
                Ground.STILL_WATER : '~',
-               Ground.UNINITIALIZED: 'x',
+               Ground.UNINITIALIZED: '☻',
                 }
         return render_dict[self]
 
@@ -39,6 +39,7 @@ class Block:
 
 class Search:
     # clay_veins LIKE [{'x': 12, 'y': 3}]
+    # clay_map has y as outer array
     def __init__(self, clay_veins : list, spring={'x':500, 'y':0}):
         # sort by y, then x
         self.sorted_clay_veins = sorted(clay_veins, key=lambda dic:(dic['y'], dic['x']))
@@ -48,7 +49,7 @@ class Search:
         self.y_min = self.sorted_clay_veins[0]['y']
         print('[Search#__init__]: sorted clay veins')
         print(self.sorted_clay_veins)
-        self.clay_map = np.full((1 + self.y_max - self.y_min, 1 + self.x_max - self.x_min), fill_value=Block(Ground.UNINITIALIZED))
+        self.clay_map = np.full((1 + self.y_max - self.y_min, 1 + self.x_max - self.x_min), fill_value=Block(Ground.SAND))
         for dic in self.sorted_clay_veins:
             xx = dic['x']
             yy = dic['y']
@@ -106,8 +107,8 @@ if __name__ == '__main__':
             'x=498, y=10..13',
             'x=504, y=10..13',
             'y=13, x=498..504',
+            'y=20, x=495..506',
         ]
     )
-    print(s.at(506, 1).ground_type.render())
     print(s.render())
 
