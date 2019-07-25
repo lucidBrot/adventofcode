@@ -51,7 +51,8 @@ class Search:
         self.y_min = self.sorted_clay_veins[0]['y']
         print('[Search#__init__]: sorted clay veins')
         print(self.sorted_clay_veins)
-        self.clay_map = np.full((1 + self.y_max - self.y_min, 1 + self.x_max - self.x_min), fill_value=Block(Ground.SAND))
+        # make map one wider that there is clay, so that it can fall down on the sides
+        self.clay_map = np.full((1 + self.y_max - self.y_min, 1+1 + self.x_max - self.x_min), fill_value=Block(Ground.SAND))
         for dic in self.sorted_clay_veins:
             xx = dic['x']
             yy = dic['y']
