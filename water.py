@@ -49,7 +49,6 @@ class Search:
         print('[Search#__init__]: sorted clay veins')
         print(self.sorted_clay_veins)
         self.clay_map = np.full((1 + self.y_max - self.y_min, 1 + self.x_max - self.x_min), fill_value=Block(Ground.UNINITIALIZED))
-        print(self.clay_map.shape)
 
     def at(self, x,y):
         return self.clay_map[x - self.x_min, y - self.y_min]
@@ -58,7 +57,8 @@ class Search:
         def block_render(block: Block):
             return block.ground_type.render()
         vec_block_render = np.vectorize(block_render)
-        print(vec_block_render(self.clay_map))
+        #print(vec_block_render(self.clay_map))
+        return vec_block_render(self.clay_map)
 
 class SearchBuilder:
     regexp_x_first = re.compile('x=(?P<x_num>[0-9]+),\sy=(?P<y_first>[0-9]+)\.\.(?P<y_second>[0-9]+)')
@@ -100,6 +100,6 @@ if __name__ == '__main__':
             'y=13, x=498..504',
         ]
     )
-    print(s.at(506, 1))
+    print(s.at(506, 1).ground_type.render())
     s.render()
 
