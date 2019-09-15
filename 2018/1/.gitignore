@@ -3,3 +3,6 @@
 
 # rustfmt backup files
 /day1/**/*.rs.bk
+
+# vim swap file
+*.swp
