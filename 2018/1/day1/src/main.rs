@@ -64,7 +64,7 @@ mod day1_mod {
         let s2 = "+1\n-2\n-3\n";
         let mut vec = Vec::new();
         scan!(s2; ([ let ns2: i32 ]*, "\n") => {
-            println!("ns2: {}", ns2);
+            println!("ns2: {:?}", ns2);
         }).unwrap(); 
         return -1;
     }
