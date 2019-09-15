@@ -3,6 +3,9 @@
  * Author: Eric Mink
  */
 
+// macro for parsing strings
+#[macro_use] extern crate scan_rules;
+
 /// My module *supports* **markdown** in the documentation
 mod main_mod {
     /// entry point for my hello world module
@@ -47,11 +50,22 @@ mod day1_mod {
         let mut buffer = String::new();
         f.read_to_string(&mut buffer)?;
 
+        let result: i32 = parse_buffer(&buffer);
 
         println!("Sum not yet ready!");
         println!("But the input starts with: {}", &buffer[..6]);
 
         return Ok(());
+    }
+
+    /// Expects a buffer with content of multiple lines
+    /// where each line consists of exactly one number preceded by either a plus or a minus.
+    fn parse_buffer(buffer: &String) -> i32{
+        let s2 = "(-0.7 0.8 1.8)";
+        scan!(s2; ("(", [ let ns2: f64 ]*, ")") => {
+            println!("ns2: {:?}", ns2);
+        }).unwrap(); 
+        return -1;
     }
 }
 
@@ -73,7 +87,7 @@ pub fn main() {
     main_mod::run();
     let result = day1_mod::run();
     match result {
-        Ok(v) => (),
+        Ok(_v) => (),
         Err(e) => println!("error parsing file: {:?}", e),
     }
 }
