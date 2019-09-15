@@ -52,7 +52,8 @@ mod day1_mod {
 
         let result: i32 = parse_buffer(&buffer);
 
-        println!("Sum: {}", result);
+        println!("Sum not yet ready!");
+        println!("But the input starts with: {}", &buffer[..6]);
 
         return Ok(());
     }
@@ -60,15 +61,19 @@ mod day1_mod {
     /// Expects a buffer with content of multiple lines
     /// where each line consists of exactly one number preceded by either a plus or a minus.
     fn parse_buffer(buffer: &String) -> i32{
-        let s2 = "+1\n-2\n-3\n";
+<<<<<<< HEAD
         let mut my_sum: Option<i32> = None;
-        scan!(s2; ([ let ns2: i32 ]*, "\n") => {
+        scan!(*buffer; ([ let ns2: i32 ]*, "\n") => {
             my_sum = Some(ns2.iter().sum());
+=======
+        let s2 = "+1\n-2\n-3\n";
+        let mut vec = Vec::<i32>::new();
+        scan!(s2; ([ let ns2: i32 ]*, "\n") => {
+            let a : () = ns2;
+            println!("ns2: {:?}", ns2);
+>>>>>>> parent of eb0c745... building a sum
         }).unwrap(); 
-        if let None = my_sum {
-            panic!("Parsing failed!");
-        }
-        return my_sum.unwrap();
+        return -1;
     }
 }
 
