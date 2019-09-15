@@ -19,6 +19,19 @@ mod main_mod {
             return format!("Hello {}",(x+&self.val));
         }
     }
+
+
+    // TESTING
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn test_sample(){
+            let my_struct = SampleStruct{val: 10};
+            assert_eq!(my_struct.sample(15), "Hello 25");
+        }
+    }
 }
 
 fn main() {
