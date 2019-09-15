@@ -6,3 +6,6 @@
 
 # vim swap file
 *.swp
+
+# binaries
+*.exe
