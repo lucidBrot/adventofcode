@@ -37,6 +37,24 @@ mod main_mod {
     }
 }
 
+mod day1_mod {
+    /// reads from `input.txt` and prints the sum
+    pub fn run() -> std::io::Result<()>{
+        use std::io::prelude::*;
+        use std::fs::File;
+
+        let mut f = File::open("input.txt")?;
+        let mut buffer = String::new();
+        f.read_to_string(&mut buffer)?;
+
+
+        println!("Sum not yet ready!");
+        println!("But the input starts with: {}", &buffer[..6]);
+
+        return Ok(());
+    }
+}
+
 /// # main function documentation  
 /// only public functions are documented
 /// unless generated with
@@ -53,4 +71,9 @@ mod main_mod {
 pub fn main() {
     println!("Hello, world!");
     main_mod::run();
+    let result = day1_mod::run();
+    match result {
+        Ok(v) => (),
+        Err(e) => println!("error parsing file: {:?}", e),
+    }
 }
