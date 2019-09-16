@@ -54,6 +54,9 @@ mod day1_mod {
 
         println!("Sum: {}", result);
 
+        let list = parse_day2_buffer(&buffer);
+        find_first_duplicate_frequency(&list);
+
         return Ok(());
     }
 
@@ -68,6 +71,46 @@ mod day1_mod {
             panic!("Parsing failed!");
         }
         return my_sum.unwrap();
+    }
+
+    /// Computes the first number that appears twice in the list
+    fn find_first_duplicate_frequency(list: &Vec<i32>) -> i32 {
+        use std::collections::HashSet;
+        let mut encountered_frequencies : HashSet::<i32> = HashSet::new();
+        let mut prev : i32 = 0;
+        println!("Starting with list of size {}", list.len());
+        'outer: loop {
+        for elem in list {
+            let i : i32 = prev + elem;
+            if encountered_frequencies.contains(&i) {
+                println!("First Duplicate Frequency: {}", i);
+                return i;
+            }
+            encountered_frequencies.insert(i);
+            prev = i;
+        }
+        }
+    }
+
+    fn parse_day2_buffer(buffer: &String) -> Vec<i32> {
+        let mut list : Vec<i32> = Vec::<i32>::new();
+        scan!(buffer; ([ let ns2: i32 ]*, "\n") => {
+            list = ns2;
+        }).unwrap();
+        return list;
+    }
+
+    // TESTING
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn test_1(){
+            let mylist : Vec<i32> = vec![10,2,-10];
+            let dupfr : i32 = find_first_duplicate_frequency(&mylist);
+            assert_eq!(dupfr, 12);
+        }
     }
 }
 
