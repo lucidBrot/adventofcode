@@ -18,12 +18,16 @@ impl Reader<'_> {
         use std::io::prelude::*;
         use std::fs::File;
 
-        let mut f = File::open(&self.filename)?;
+        let mut f = File::open(self.filename)?;
 
         output.clear();
         f.read_to_string(&mut output)?;
     
         return Ok(());
+    }
+
+    fn better_read(&self) -> std::io::Result<String>{
+        Ok(std::fs::read_to_string(self.filename)?)
     }
 }
 
