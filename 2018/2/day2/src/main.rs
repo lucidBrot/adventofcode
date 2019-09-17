@@ -42,9 +42,6 @@ fn main() {
     };
     println!("File length: {}", len);
 
-    #![feature(result_map_or_else)]
-    reader.better_read().map_or_else(
-            /*fallback*/ |e| println!("Error BetterRead: {:?}", e),
-            /*function*/ |s| println!("File length BetterRead: {}", s.len())
-        );
+    let s2 = reader.better_read().expect("Better Read");
+    println!("File length BetterRead: {}", s2.len())
 }
