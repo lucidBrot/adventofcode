@@ -9,9 +9,9 @@ struct Reader<'a> {
 }
 
 // define functionality of reader
-impl<'a> Reader<'a> {
+impl Reader<'_> {
 
-    fn new(filename: &'a str) -> Reader<'a> {
+    fn new(filename: &str) -> Reader {
         Reader {filename: filename, content: String::new()}
     }
 
