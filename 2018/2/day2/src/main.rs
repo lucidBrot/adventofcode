@@ -4,25 +4,31 @@
 // define type Reader to learn how to use types
 #[derive(Debug)]
 struct Reader<'a> {
-    filename: &'a str
+    filename: &'a str,
+    content: String,
 }
 
 // define functionality of reader
-impl Reader<'_> {
-    fn read(&self) -> std::io::Result<String> {
+impl<'a> Reader<'a> {
+
+    fn new(filename: &'a str) -> Reader<'a> {
+        Reader {filename: filename, content: String::new()}
+    }
+
+    fn read(&mut self) -> std::io::Result<&String> {
         use std::io::prelude::*;
         use std::fs::File;
 
         let mut f = File::open(&self.filename)?;
-        let mut buffer = String::new();
-        f.read_to_string(&mut buffer)?;
-        return Ok(buffer);
+        self.content = String::new();
+        f.read_to_string(&mut self.content)?;
+        return Ok(&self.content);
     }
 }
 
 fn main() {
     println!("Hello, world!");
-    let reader = Reader {filename: "input.txt"};
+    let mut reader = Reader::new("input.txt");
     println!("Reader: {:?}", reader);
     let len = match reader.read() {
         Ok(s) => s.len(),
