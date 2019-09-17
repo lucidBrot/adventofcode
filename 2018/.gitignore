@@ -1,5 +1,5 @@
 # generated cargo files and executables
-/day1/target/
+**/target/
 
 # rustfmt backup files
 /day1/**/*.rs.bk
