@@ -41,4 +41,10 @@ fn main() {
         Err(e) => { println!("Error parsing file: {:?}", e); 0 },
     };
     println!("File length: {}", len);
+
+    #![feature(result_map_or_else)]
+    reader.better_read().map_or_else(
+            /*fallback*/ |e| println!("Error BetterRead: {:?}", e),
+            /*function*/ |s| println!("File length BetterRead: {}", s.len())
+        );
 }
