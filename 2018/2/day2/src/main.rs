@@ -1,6 +1,3 @@
-// macro for parsing strings
-#[macro_use] extern crate scan_rules;
-
 use std::iter::FromIterator;
 use std::collections::HashSet;
 
@@ -29,6 +26,15 @@ fn count_appearing_chars(sorted_chars : &[char]) -> (i32, i32){
     return (goal_2, goal_3);
 }
 
+fn parse_buffer(buffer: &String) -> (i32, i32) {
+    let mut score_2 : i32 = 0;
+    let mut score_3 : i32 = 0;
+    let res = buffer.lines().map(|s| count_appearing_chars(&str_to_sorted_vec(s)));
+    let (score_2, score_3) = res.fold((0,0), |(a,b), (c,d)| (a+b, c+d));
+    println!("scores:: {:?}", (score_2, score_3));
+    return (score_2, score_3);
+}
+
 fn main() {
     // read from file to string
     let filename = "input.txt";
@@ -38,5 +44,7 @@ fn main() {
     println!("File length: {}", text.len());
 
     // parse text into number of exactly two-times-occurring characters
+    let results = parse_buffer(&text);
+    println!("Checksum: {}", results.0*results.1);
 
 }
