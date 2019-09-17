@@ -1,28 +1,37 @@
 // macro for parsing strings
 #[macro_use] extern crate scan_rules;
 
+use std::cell::{RefCell,RefMut,Ref};
+
 // define type Reader to learn how to use types
 #[derive(Debug)]
 struct Reader<'a> {
     filename: &'a str,
-    content: String,
+    content_rc: RefCell<String>,
 }
 
 // define functionality of reader
 impl Reader<'_> {
 
     fn new(filename: &str) -> Reader {
-        Reader {filename: filename, content: String::new()}
+        Reader {filename: filename, content_rc: RefCell::new(String::new())}
     }
 
-    fn read(&mut self) -> std::io::Result<&String> {
+    fn read(&self) -> std::io::Result<Ref<String>> {
         use std::io::prelude::*;
         use std::fs::File;
 
         let mut f = File::open(&self.filename)?;
-        self.content = String::new();
-        f.read_to_string(&mut self.content)?;
-        return Ok(&self.content);
+
+        {
+        let mut rc_refmut : RefMut<_> = self.content_rc.borrow_mut();
+        (*rc_refmut).clear();
+        f.read_to_string(&mut rc_refmut)?;
+        }
+
+        let myref : Ref<String> = self.content_rc.borrow();
+
+        return Ok(myref);
     }
 }
 
