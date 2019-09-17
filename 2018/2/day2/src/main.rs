@@ -10,7 +10,7 @@ fn str_to_sorted_vec(line : &str) -> Vec<char> {
     return chars;
 }
 
-fn count_appearing_chars(sorted_chars : &[char]){
+fn count_appearing_chars(sorted_chars : &[char]) -> (i32, i32){
     let mut goal_2: i32 = 0;
     let mut goal_3: i32 = 0;
     let charset : HashSet<char> = HashSet::from_iter(sorted_chars.iter().cloned());
@@ -26,6 +26,7 @@ fn count_appearing_chars(sorted_chars : &[char]){
             _ => (),
         }
     }
+    return (goal_2, goal_3);
 }
 
 fn main() {
