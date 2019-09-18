@@ -48,3 +48,60 @@ fn main() {
     println!("Checksum: {}", results.0*results.1);
 
 }
+
+
+//TESTS
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_count_sorted_line(){
+        let input = vec!['a','a','b','b','b','c','d', 'd'];
+        let (goal_2, goal_3) = count_appearing_chars(&input);
+        assert_eq!(goal_2, 2);
+        assert_eq!(goal_3, 1);
+    }
+
+    #[test]
+    fn test_count_sorted_line_2(){
+        let input = vec!['a','b','c','d','d'];
+        let (goal_2, goal_3) = count_appearing_chars(&input);
+        assert_eq!(goal_2, 1);
+        assert_eq!(goal_3, 0);
+    }
+
+    #[test]
+    fn test_count_sorted_line_3(){
+        let input = vec!['d'];
+        let (goal_2, goal_3) = count_appearing_chars(&input);
+        assert_eq!(goal_2, 0);
+        assert_eq!(goal_3, 0);
+    }
+
+    #[test]
+    fn test_count_sorted_line_4(){
+        let input = vec!['a','a'];
+        let (goal_2, goal_3) = count_appearing_chars(&input);
+        assert_eq!(goal_2, 1);
+        assert_eq!(goal_3, 0);
+    }
+
+    #[test]
+    fn test_count_sorted_line_5(){
+        let input = vec!['a','a', 'a', 'b'];
+        let (goal_2, goal_3) = count_appearing_chars(&input);
+        assert_eq!(goal_2, 0);
+        assert_eq!(goal_3, 1);
+    }
+
+
+    #[test]
+    fn test_count_sorted_line_5_inv(){
+        let input = vec!['b', 'a','a', 'a'];
+        let (goal_2, goal_3) = count_appearing_chars(&input);
+        assert_eq!(goal_2, 0);
+        assert_eq!(goal_3, 1);
+    }
+}
+
