@@ -10,11 +10,14 @@ fn str_to_sorted_vec(line : &str) -> Vec<char> {
 fn count_appearing_chars(sorted_chars : &[char]) -> (i32, i32){
     let mut goal_2: i32 = 0;
     let mut goal_3: i32 = 0;
-    let charset : HashSet<char> = HashSet::from_iter(sorted_chars.iter().cloned());
-    'initial: for initial_c in charset {
-        let mut count : i32 = 0;
-        'current: for c in sorted_chars{
-            if *c != initial_c {break 'current;}
+    let mut initial_c : char;
+    let mut count : i32 = 0;
+    let mut index : usize = 0;
+    while index < sorted_chars.len() {
+        initial_c = sorted_chars[index];
+        for c in sorted_chars{
+            index+=1;
+            if *c != initial_c {break;}
             count += 1;
         }
         match count {
@@ -22,6 +25,7 @@ fn count_appearing_chars(sorted_chars : &[char]) -> (i32, i32){
             3 => goal_3 += 1,
             _ => (),
         }
+    // repeat for initial_c = sorted_chars[index]
     }
     return (goal_2, goal_3);
 }
