@@ -11,18 +11,27 @@ fn count_appearing_chars(sorted_chars : &[char]) -> (i32, i32){
     let mut goal_3: i32 = 0;
 
     let mut i : usize = 0;
-    while i < sorted_chars.len() {
+    let mut stop : bool = false;
+    while (i < sorted_chars.len()-1) && !stop {
         let initial_c : char = sorted_chars[i];
         let mut count : i32 = 0;
 
-        for cc in i..sorted_chars.len() {
+        'inner: for cc in i..sorted_chars.len() {
             let c:char = sorted_chars[cc];
+            println!("current character: {}", c);
             if c != initial_c {
-                // skip ahead so that the next i is cc+1;
-                i = cc+1;
-                break;
+                // skip ahead so that the next i points to the new character;
+                // and decrement by one because the outer loop will increment it again
+                i = cc -1 ;
+                println!("c does not equal initial_c at pos {}: c={}, initial_c={}", i, c, initial_c);
+                break 'inner;
             }
+
+            // count current character
             count += 1;
+
+            // stop if at last char
+            if cc+1 == sorted_chars.len() {stop = true;}
         }
 
 
@@ -71,7 +80,7 @@ mod tests {
     fn test_count_sorted_line_1(){
         let input = vec!['a','a','b','b','b','c','d', 'd'];
         let (goal_2, goal_3) = count_appearing_chars(&input);
-        assert_eq!(goal_2, 0, "goal_2 was {} but should have been {}", goal_2, 2);
+        assert_eq!(goal_2, 2, "goal_2 was {} but should have been {}", goal_2, 2);
         assert_eq!(goal_3, 1, "goal_3 was {} but should have been {}", goal_3, 1);
     }
 
@@ -112,8 +121,8 @@ mod tests {
     fn test_count_sorted_line_5_inv(){
         let input = vec!['b', 'a','a', 'a'];
         let (goal_2, goal_3) = count_appearing_chars(&input);
-        assert_eq!(goal_2, 0);
-        assert_eq!(goal_3, 1);
+        assert_eq!(goal_2, 0, "goal_2 was {}", goal_2);
+        assert_eq!(goal_3, 1, "goal_3 was {}", goal_3);
     }
 }
 
