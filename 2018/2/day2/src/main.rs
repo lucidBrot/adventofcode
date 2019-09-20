@@ -18,12 +18,10 @@ fn count_appearing_chars(sorted_chars : &[char]) -> (i32, i32){
 
         'inner: for cc in i..sorted_chars.len() {
             let c:char = sorted_chars[cc];
-            println!("current character: {}", c);
             if c != initial_c {
                 // skip ahead so that the next i points to the new character;
                 // and decrement by one because the outer loop will increment it again
                 i = cc -1 ;
-                println!("c does not equal initial_c at pos {}: c={}, initial_c={}", i, c, initial_c);
                 break 'inner;
             }
 
@@ -35,7 +33,6 @@ fn count_appearing_chars(sorted_chars : &[char]) -> (i32, i32){
         }
 
 
-        println!("Count: {}", count);
         match count {
             2 => goal_2 += 1,
             3 => goal_3 += 1,
