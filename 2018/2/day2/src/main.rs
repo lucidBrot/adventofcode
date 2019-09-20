@@ -10,24 +10,30 @@ fn count_appearing_chars(sorted_chars : &[char]) -> (i32, i32){
     let mut goal_2: i32 = 0;
     let mut goal_3: i32 = 0;
 
-    for i in 0..sorted_chars.len(){
+    let mut i : usize = 0;
+    while i < sorted_chars.len() {
         let initial_c : char = sorted_chars[i];
         let mut count : i32 = 0;
 
         for cc in i..sorted_chars.len() {
             let c:char = sorted_chars[cc];
             if c != initial_c {
+                // skip ahead so that the next i is cc+1;
+                i = cc+1;
                 break;
             }
             count += 1;
         }
-        // TODO: skip ahead so that the next i is cc+1;
+
+
         println!("Count: {}", count);
         match count {
             2 => goal_2 += 1,
             3 => goal_3 += 1,
             _ => (),
         }
+
+        i+=1;
     }
     return (goal_2, goal_3);
 }
@@ -65,8 +71,8 @@ mod tests {
     fn test_count_sorted_line_1(){
         let input = vec!['a','a','b','b','b','c','d', 'd'];
         let (goal_2, goal_3) = count_appearing_chars(&input);
-        assert_eq!(goal_2, 2);
-        assert_eq!(goal_3, 1);
+        assert_eq!(goal_2, 0, "goal_2 was {} but should have been {}", goal_2, 2);
+        assert_eq!(goal_3, 1, "goal_3 was {} but should have been {}", goal_3, 1);
     }
 
     #[test]
