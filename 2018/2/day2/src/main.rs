@@ -1,5 +1,4 @@
 use std::iter::FromIterator;
-use std::collections::HashSet;
 
 fn str_to_sorted_vec(line : &str) -> Vec<char> {
     let mut chars: Vec<char> = line.chars().collect();
@@ -10,14 +9,16 @@ fn str_to_sorted_vec(line : &str) -> Vec<char> {
 fn count_appearing_chars(sorted_chars : &[char]) -> (i32, i32){
     let mut goal_2: i32 = 0;
     let mut goal_3: i32 = 0;
-    let mut initial_c : char;
-    let mut count : i32 = 0;
-    let mut index : usize = 0;
-    while index < sorted_chars.len() {
-        initial_c = sorted_chars[index];
-        for c in sorted_chars{
-            index+=1;
-            if *c != initial_c {break;}
+
+    for i in 0..sorted_chars.len(){
+        let mut count : i32 = 0;
+        let initial_c : char = sorted_chars[i];
+
+        for cc in i..sorted_chars.len() {
+            let c = sorted_chars[cc];
+            if c != initial_c {
+                break;
+            }
             count += 1;
         }
         match count {
@@ -25,7 +26,6 @@ fn count_appearing_chars(sorted_chars : &[char]) -> (i32, i32){
             3 => goal_3 += 1,
             _ => (),
         }
-    // repeat for initial_c = sorted_chars[index]
     }
     return (goal_2, goal_3);
 }
@@ -60,7 +60,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_count_sorted_line(){
+    fn test_count_sorted_line_1(){
         let input = vec!['a','a','b','b','b','c','d', 'd'];
         let (goal_2, goal_3) = count_appearing_chars(&input);
         assert_eq!(goal_2, 2);
