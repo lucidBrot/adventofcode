@@ -39,7 +39,10 @@ fn count_appearing_chars(sorted_chars : &[char]) -> (i32, i32){
 
         i+=1;
     }
-    return (goal_2, goal_3);
+    return (
+        if goal_2 > 0 { 1 } else { 0 },
+        if goal_3 > 0 { 1 } else { 0 }
+        );
 }
 
 fn parse_buffer(buffer: &String) -> (i32, i32) {
