@@ -47,7 +47,6 @@ fn parse_buffer(buffer: &String) -> (i32, i32) {
     let mut score_3 : i32 = 0;
     let res = buffer.lines().map(|s| count_appearing_chars(&str_to_sorted_vec(s)));
     let (score_2, score_3) = res.fold((0,0), |(a,b), (c,d)| (a+b, c+d));
-    println!("scores:: {:?}", (score_2, score_3));
     return (score_2, score_3);
 }
 
@@ -68,17 +67,23 @@ fn main() {
 
 //TESTS
 macro_rules! test_parse_buffer {
-    ( $name:ident, $input:expr ) => {
+    ( $name:ident, $input:expr, $expected:expr ) => {
         #[test]
         fn $name () {
             println!("Testing {:?}", $input);
+            let strinput = String::from($input);
+            let res = parse_buffer(&strinput);
+            assert_eq!(res, $expected, "\nResult was {:?} but should have been {:?}", res, $expected);
         }
     };
 }
 
 #[cfg(test)]
 mod parse_tests {
-    test_parse_buffer!(hai, "hello");
+    use super::*;
+
+    test_parse_buffer!(hai, "aabbcccd",
+                       (2,1));
 }
 
 #[cfg(test)]
