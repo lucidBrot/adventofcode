@@ -86,7 +86,7 @@ mod parse_tests {
 
     test_parse_buffer!(sorted, "abbccddde", (2,1));
     
-    test_parse_buffer!(unsorted, "edbdcddcab", (2,1));
+    test_parse_buffer!(unsorted, "ebdcddcab", (2,1));
     
     test_parse_buffer!(short, "aba", (1,0));
 }
