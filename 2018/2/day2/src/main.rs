@@ -48,24 +48,25 @@ fn parse_buffer(buffer: &String) -> (i32, i32) {
     return (score_2, score_3);
 }
 
-fn main() {
+fn checksum(filename: &str) -> i32 {
     // read from file to string
-    let filename = "input.txt";
     let text = std::fs::read_to_string(filename).expect(
         format!("Problem reading file {}", &filename).as_str()
         );
-    println!("File length: {}", text.len());
 
     // parse text into number of exactly two-times-occurring characters
     let results = parse_buffer(&text);
-    println!("Checksum: {}", results.0*results.1);
+    return results.0*results.1;
+}
 
+fn main() {
+    println!("Checksum: {}", checksum(&"input.txt"));
 }
 
 
 //TESTS
 /// macro that generates test functions for calling parse_buffer
-#[allow(unused_macros)]
+#[cfg(test)]
 macro_rules! test_parse_buffer {
     ( $name:ident, $input:expr, $expected:expr ) => {
         #[test]
@@ -80,7 +81,7 @@ macro_rules! test_parse_buffer {
 
 /// macro that generates test functions for calling any function that takes a string as input and
 /// returns something that returns a vector of chars
-#[allow(unused_macros)]
+#[cfg(test)]
 macro_rules! test_str_fun {
     ( $fun:ident, $name:ident, $input:expr, $expected:expr ) => {
         #[test]
