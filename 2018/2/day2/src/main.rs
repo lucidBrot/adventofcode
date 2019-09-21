@@ -43,10 +43,8 @@ fn count_appearing_chars(sorted_chars : &[char]) -> (i32, i32){
 }
 
 fn parse_buffer(buffer: &String) -> (i32, i32) {
-    let mut score_2 : i32 = 0;
-    let mut score_3 : i32 = 0;
     let res = buffer.lines().map(|s| count_appearing_chars(&str_to_sorted_vec(s)));
-    let (score_2, score_3) = res.fold((0,0), |(a,b), (c,d)| (a+b, c+d));
+    let (score_2, score_3) = res.fold((0,0), |(a,b), (c,d)| (a+c, b+d));
     return (score_2, score_3);
 }
 
@@ -82,8 +80,15 @@ macro_rules! test_parse_buffer {
 mod parse_tests {
     use super::*;
 
-    test_parse_buffer!(hai, "aabbcccd",
-                       (2,1));
+    test_parse_buffer!(hai, "aabbcccd", (2,1));
+
+    test_parse_buffer!(empty, "", (0,0));
+
+    test_parse_buffer!(sorted, "abbccddde", (2,1));
+    
+    test_parse_buffer!(unsorted, "edbdcddcab", (2,1));
+    
+    test_parse_buffer!(short, "aba", (1,0));
 }
 
 #[cfg(test)]
