@@ -113,7 +113,7 @@ mod checksum_tests {
  
     test_checksum!(file1, "test/test1.txt", (1+0+1+1+1+0)*(1+0+0+0+1));
     test_checksum!(file2, "test/test2.txt", 3);
-    test_checksum!(file3, "test/test3.txt", (0+2+1+0)*(4+2+3+0));
+    test_checksum!(file3, "test/test3.txt", (0+3+1+0)*(4+2+3+0));
 }
 
 
@@ -138,6 +138,11 @@ mod parse_tests {
     test_parse_buffer!(three_lines, "aba\ndddafa\ngay", (1+1+0, 0+1+0));
  
     test_parse_buffer!(unsorted_longer, "fzostwblnqkhpuzxirnevmaycq", (3,0));
+
+    test_parse_buffer!(file3_line1, "asdfasdfasdf", (0,4));
+    test_parse_buffer!(file3_line2, "dfdfasasdfll", (3,2));
+    test_parse_buffer!(file3_line3, "asdfasdfasdg", (1,3));
+    test_parse_buffer!(file3_line4, "ijklmnopqrst", (0,0));
 }
 
 #[cfg(test)]
