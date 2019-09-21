@@ -64,6 +64,7 @@ fn main() {
 
 
 //TESTS
+#[allow(unused_macros)]
 macro_rules! test_parse_buffer {
     ( $name:ident, $input:expr, $expected:expr ) => {
         #[test]
@@ -89,6 +90,8 @@ mod parse_tests {
     test_parse_buffer!(unsorted, "ebdcddcab", (2,1));
     
     test_parse_buffer!(short, "aba", (1,0));
+    
+    test_parse_buffer!(two_lines, "aba\nbbadae", (1+1,1));
 }
 
 #[cfg(test)]
