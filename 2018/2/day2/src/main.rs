@@ -94,6 +94,25 @@ macro_rules! test_str_fun {
     };
 }
 
+/// macro that generates test functions for checksum
+#[cfg(test)]
+macro_rules! test_checksum {
+    ( $testname:ident, $filename:expr, $expected:expr ) => {
+        #[test]
+        fn $testname () {
+            let res = checksum($filename);
+            assert_eq!(res, $expected, "\nResult was {:?} but should have been {:?}", res, $expected);
+        }
+    };
+}
+
+#[cfg(test)]
+mod checksum_tests {
+    use super::*;
+ 
+    test_checksum!(file1, "test/test1.txt", (1+0+1+1+1+0)*(1+0+0+0+1));
+}
+
 
 #[cfg(test)]
 mod parse_tests {
