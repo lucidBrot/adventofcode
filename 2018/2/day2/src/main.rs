@@ -65,6 +65,33 @@ fn checksum(filename: &str) -> i32 {
 
 fn main() {
     println!("Checksum: {}", checksum(&"input.txt"));
+    println!("Day2: {}", day2(27, &"input.txt"));
+}
+
+/// finds letters that are common between the ONLY TWO correct lines
+/// assuming strings of size at least 1
+fn day2(line_length:usize, filename: &str) -> String {
+    let text = std::fs::read_to_string(filename).expect(
+        format!("Problem reading file {}", &filename).as_str()
+        );
+
+    for n in 0..line_length {
+        let mut set : std::collections::HashSet<String> = std::collections::HashSet::new();
+        // build a set ignoring the n-th character of each line
+        // if there is already an entry, this is the solution
+        for line in text.lines(){
+            let censored_part_1 = &line[..n];
+            let censored_part_2 = &line[n+1..];
+            let mut linestring : String = String::from(censored_part_1);
+            linestring.push_str(censored_part_2);
+
+            match set.get::<String>(&linestring) {
+                Some(string) => return String::from(string),
+                None => set.insert(linestring),
+            };
+        }
+    }
+    panic!("Day2: No result found!");
 }
 
 
