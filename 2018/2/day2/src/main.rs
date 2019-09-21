@@ -109,6 +109,10 @@ mod parse_tests {
     test_parse_buffer!(short, "aba", (1,0));
     
     test_parse_buffer!(two_lines, "aba\nbbadae", (1+1,1));
+
+    test_parse_buffer!(two_lines_one_empty, "aba\n", (1, 0));
+
+    test_parse_buffer!(three_lines, "aba\ndddafa\ngay", (1+1+0, 0+1+0));
 }
 
 #[cfg(test)]
