@@ -56,6 +56,7 @@ fn checksum(filename: &str) -> i32 {
 
     // parse text into number of exactly two-times-occurring characters
     let results = parse_buffer(&text);
+    println!("Duo: {}, Trio:{}", results.0, results.1);
     return results.0*results.1;
 }
 
@@ -111,6 +112,7 @@ mod checksum_tests {
     use super::*;
  
     test_checksum!(file1, "test/test1.txt", (1+0+1+1+1+0)*(1+0+0+0+1));
+    test_checksum!(file2, "test/test2.txt", 3);
 }
 
 
@@ -133,6 +135,8 @@ mod parse_tests {
     test_parse_buffer!(two_lines_one_empty, "aba\n", (1, 0));
 
     test_parse_buffer!(three_lines, "aba\ndddafa\ngay", (1+1+0, 0+1+0));
+ 
+    test_parse_buffer!(unsorted_longer, "fzostwblnqkhpuzxirnevmaycq", (3,0));
 }
 
 #[cfg(test)]
