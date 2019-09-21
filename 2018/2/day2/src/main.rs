@@ -1,5 +1,3 @@
-use std::iter::FromIterator;
-
 fn str_to_sorted_vec(line : &str) -> Vec<char> {
     let mut chars: Vec<char> = line.chars().collect();
     chars.sort();
@@ -69,8 +67,22 @@ fn main() {
 
 
 //TESTS
+macro_rules! test_parse_buffer {
+    ( $name:ident, $input:expr ) => {
+        #[test]
+        fn $name () {
+            println!("Testing {:?}", $input);
+        }
+    };
+}
+
 #[cfg(test)]
-mod tests {
+mod parse_tests {
+    test_parse_buffer!(hai, "hello");
+}
+
+#[cfg(test)]
+mod count_tests {
     use super::*;
 
     #[test]
