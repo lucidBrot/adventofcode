@@ -64,6 +64,7 @@ fn main() {
 
 
 //TESTS
+/// macro that generates test functions for calling parse_buffer
 #[allow(unused_macros)]
 macro_rules! test_parse_buffer {
     ( $name:ident, $input:expr, $expected:expr ) => {
@@ -76,6 +77,22 @@ macro_rules! test_parse_buffer {
         }
     };
 }
+
+/// macro that generates test functions for calling any function that takes a string as input and
+/// returns something that returns a vector of chars
+#[allow(unused_macros)]
+macro_rules! test_str_fun {
+    ( $fun:ident, $name:ident, $input:expr, $expected:expr ) => {
+        #[test]
+        fn $name () {
+            println!("Testing {:?}", $input);
+            let strinput = String::from($input);
+            let res : String = $fun(&strinput).iter().collect();
+            assert_eq!(res, $expected, "\nResult was {:?} but should have been {:?}", res, $expected);
+        }
+    };
+}
+
 
 #[cfg(test)]
 mod parse_tests {
@@ -92,6 +109,15 @@ mod parse_tests {
     test_parse_buffer!(short, "aba", (1,0));
     
     test_parse_buffer!(two_lines, "aba\nbbadae", (1+1,1));
+}
+
+#[cfg(test)]
+mod str_tests {
+    use super::*;
+
+    test_str_fun!(str_to_sorted_vec, strtest1, "aba", "aab");
+
+    test_str_fun!(str_to_sorted_vec, strtest2, "abzaefe", "aabeefz");
 }
 
 #[cfg(test)]
