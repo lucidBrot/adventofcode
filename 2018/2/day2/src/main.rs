@@ -115,8 +115,6 @@ mod checksum_tests {
     use super::*;
  
     test_checksum!(file1, "test/test1.txt", (1+0+1+1+1+0)*(1+0+0+0+1));
-    test_checksum!(file2, "test/test2.txt", 3);
-    test_checksum!(file3, "test/test3.txt", (0+3+1+0)*(4+2+3+0));
 }
 
 
@@ -124,14 +122,8 @@ mod checksum_tests {
 mod parse_tests {
     use super::*;
 
-    test_parse_buffer!(hai, "aabbcccd", (2,1));
-
     test_parse_buffer!(empty, "", (0,0));
 
-    test_parse_buffer!(sorted, "abbccddde", (2,1));
-    
-    test_parse_buffer!(unsorted, "ebdcddcab", (2,1));
-    
     test_parse_buffer!(short, "aba", (1,0));
     
     test_parse_buffer!(two_lines, "aba\nbbadbae", (1+1,1));
@@ -140,11 +132,6 @@ mod parse_tests {
 
     test_parse_buffer!(three_lines, "aba\ndddafa\ngay", (1+1+0, 0+1+0));
  
-    test_parse_buffer!(unsorted_longer, "fzostwblnqkhpuzxirnevmaycq", (3,0));
-
-    test_parse_buffer!(file3_line1, "asdfasdfasdf", (0,4));
-    test_parse_buffer!(file3_line2, "dfdfasasdfll", (3,2));
-    test_parse_buffer!(file3_line3, "asdfasdfasdg", (1,3));
     test_parse_buffer!(file3_line4, "ijklmnopqrst", (0,0));
 }
 
@@ -160,14 +147,6 @@ mod str_tests {
 #[cfg(test)]
 mod count_tests {
     use super::*;
-
-    #[test]
-    fn test_count_sorted_line_1(){
-        let input = vec!['a','a','b','b','b','c','d', 'd'];
-        let (goal_2, goal_3) = count_appearing_chars(&input);
-        assert_eq!(goal_2, 2, "goal_2 was {} but should have been {}", goal_2, 2);
-        assert_eq!(goal_3, 1, "goal_3 was {} but should have been {}", goal_3, 1);
-    }
 
     #[test]
     fn test_count_sorted_line_2(){
