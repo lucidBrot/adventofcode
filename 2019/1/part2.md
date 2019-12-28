@@ -1,4 +1,7 @@
+http://play.starmaninnovations.com/minkolang/?code=
+
 ### First attempt
+
 ```Minkolang
 n02F       /}
            #>x$+N.
@@ -49,3 +52,4 @@ Works but is ugly
 n3:2-1{(d3:2-d0`)x$+}nd1+5&x$+N.10F
 ```
 
+Takes the first number and does the computation (number / 3 - 2). Stores that on 
