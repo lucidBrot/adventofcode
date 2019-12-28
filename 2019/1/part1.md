@@ -24,3 +24,8 @@ $n0($r3:2-+I1-)N.
 `N` print the topmost number as a number
 
 `.` End program
+
+```
+output: 3329926
+```
+
