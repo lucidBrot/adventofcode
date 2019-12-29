@@ -1,14 +1,20 @@
 HAI 1.3
   CAN HAS STDIO?
-  I HAS A something
-  GIMMEH something
-  something IS NOW A NUMBR
-  I HAS A otherthing
-  GIMMEH otherthing
-  otherthing IS NOW A NUMBR
+  
+  IM IN YR LOOP UPPIN YR ITERATOR WILE DIFFRINT ITERATOR AN -1
+      I HAS A something
+      GIMMEH something
+      something IS NOW A YARN
+      BOTH SAEM something AN "", O RLY?
+        YA RLY
+          VISIBLE "End of input"
+          GTFO
+        NO WAI
+      OIC
+      something IS NOW A NUMBR
+  IM OUTTA YR LOOP
   VISIBLE "HAI WORLD!!!1!"
   VISIBLE something
-  VISIBLE otherthing
 KTHXBYE
 
 OBTW
