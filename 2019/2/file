@@ -1,4 +1,24 @@
-HAI 1.2
+HAI 1.3
   CAN HAS STDIO?
+  I HAS A something
+  GIMMEH something
+  something IS NOW A NUMBR
+  I HAS A otherthing
+  GIMMEH otherthing
+  otherthing IS NOW A NUMBR
   VISIBLE "HAI WORLD!!!1!"
+  VISIBLE something
+  VISIBLE otherthing
 KTHXBYE
+
+OBTW
+    OPCODES:
+        1:  ADD
+            add up next two numbers as pointers to the inputs,
+            store in *num3
+        2:  MULTIPLY
+        99: HALT
+
+    After operation, move forward 4 positions (opcode, input, input, output)
+
+TLDR
