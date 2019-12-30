@@ -10,12 +10,12 @@ O HAI IM problem
         OPCODE, WTF?
             OMG 1 BTW ADD
                 VISIBLE "Should add"
-                I HAS A thing ITZ SUM OF ME'Z SRS BASE AN ME'Z SRS ARG
+                ME HAS A thing ITZ SUM OF ME'Z SRS BASE AN ME'Z SRS ARG
                 ME'Z SRS TARGET R thing
                 GTFO
             OMG 2 BTW MULTIPLY
                 VISIBLE "Should multiply"
-                I HAS A thing ITZ PRODUKT OF ME'Z SRS BASE AN ME'Z SRS ARG
+                ME HAS A thing ITZ PRODUKT OF ME'Z SRS BASE AN ME'Z SRS ARG
                 ME'Z SRS TARGET R thing
                 GTFO
             OMG 99
@@ -42,7 +42,7 @@ O HAI IM problem
             NO WAI
           OIC
           something IS NOW A NUMBR
-          I HAS A SRS INDEX ITZ something
+          ME HAS A SRS INDEX ITZ something
       IM OUTTA YR LOOP
 
       BTW set up program alarm state
@@ -63,7 +63,7 @@ O HAI IM problem
 
         BTW EXECUTE
       I HAS A val
-      val R I IZ DOTHING YR opcode AN YR base AN YR arg AN YR target MKAY
+      val R ME IZ DOTHING YR opcode AN YR base AN YR arg AN YR target MKAY
       BOTH SAEM val AN -1, O RLY?
         YA RLY, VISIBLE "Should Terminate: TODO"
         GTFO
