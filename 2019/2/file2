@@ -3,8 +3,8 @@ HAI 1.4
 
 HOW IZ I XCUTE YR MOI
   BTW execute
-  IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX ME'Z len
-    I HAS A opcode ITZ ME'Z SRS INDEX
+  IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX MOI'Z len
+    I HAS A opcode ITZ MOI'Z SRS INDEX
     BOTH SAEM opcode AN 99, O RLY?
         YA RLY, GTFO
     OIC
@@ -45,12 +45,12 @@ HOW IZ I DOTHING YR MOI AN YR OPCODE AN YR BASE AN YR ARG AN YR TARGET
     OPCODE, WTF?
         OMG 1 BTW ADD
             VISIBLE "Should add"
-            I HAS A thing ITZ SUM OF ME'Z SRS BASE AN ME'Z SRS ARG
+            I HAS A thing ITZ SUM OF MOI'Z SRS BASE AN MOI'Z SRS ARG
             MOI'Z SRS TARGET R thing
             GTFO
         OMG 2 BTW MULTIPLY
             VISIBLE "Should multiply"
-            I HAS A thing ITZ PRODUKT OF ME'Z SRS BASE AN ME'Z SRS ARG
+            I HAS A thing ITZ PRODUKT OF MOI'Z SRS BASE AN MOI'Z SRS ARG
             MOI'Z SRS TARGET R thing
             GTFO
         OMG 99
