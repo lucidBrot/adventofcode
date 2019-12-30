@@ -1,5 +1,6 @@
-HAI 1.3
+HAI 1.4
   CAN HAS STDIO?
+  CAN HAS STRING?
 
   I HAS A problem ITZ A BUKKIT
 
@@ -27,7 +28,33 @@ HOW IZ problem DOTHING YR OPCODE AN YR BASE AN YR ARG AN YR TARGET
     GTFO
 IF U SAY SO
 
+OBTW THIS WOULD REQUIRE FUTURE BRANCH
+    BTW PARSE BUKKIT from comma delimited input
+    I HAS A CORD
+    GIMMEH CORD
+    I HAS A numnum ITZ 0
+    I HAS A county ITZ 0
+    I HAS A index
+    IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX STRING'Z LEN YR CORD MKAY 
+      I HAS A char ITZ I IZ STRING'Z AT YR CORD AN YR INDEX MKAY
+      BOTH SAEM char ",", O RLY?
+        YA RLY
+          BTW ITZ A COMMA
+          problem HAS A SRS numnum ITZ county
+          county R 0
+          numnum R SUM OF numnum AN 1
+        NO WAI
+          BTW ITZ A GUD NUMBER
+          county R PRODUKT OF county AN 10
+          char IS NOW A NUMBER
+          county R SUM OF county AN char
+      OIC
+      index R INDEX
+    IM OUTTA YR LOOP
+    problem HAS A len ITZ index
+TLDR
 
+    BTW PARSING BUKKIT from newline delimited input
   IM IN YR LOOP UPPIN YR INDEX
       I HAS A something
       GIMMEH something
@@ -42,6 +69,7 @@ IF U SAY SO
       something IS NOW A NUMBR
       problem HAS A SRS INDEX ITZ something
   IM OUTTA YR LOOP
+
   VISIBLE "HAI WORLD!!!1!"
 
   BTW set up program alarm state
