@@ -9,7 +9,8 @@ HOW IZ problem DOTHING YR OPCODE AN YR BASE AN YR ARG AN YR TARGET
     OPCODE, WTF?
         OMG 1 BTW ADD
             VISIBLE "Should add"
-            ME'Z SRS TARGET R 1337
+            I HAS A thing ITZ SUM OF BASE AN ARG
+            ME'Z SRS TARGET R thing
             GTFO
         OMG 2 BTW MULTIPLY
             VISIBLE "Should multiply"
@@ -42,12 +43,10 @@ IF U SAY SO
   VISIBLE "HAI WORLD!!!1!"
   problem IZ DOTHING YR problem'Z SRS 0 AN YR problem'Z SRS 1 AN YR problem'Z SRS 2 AN YR problem'Z SRS 3 MKAY
 
-OBTW
   BTW print contents
 IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX problem'Z len
          VISIBLE problem'Z SRS INDEX
    IM OUTTA YR LOOP
-TLDR
 
 KTHXBYE
 
