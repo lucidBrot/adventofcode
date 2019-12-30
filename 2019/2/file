@@ -44,6 +44,10 @@ IF U SAY SO
   IM OUTTA YR LOOP
   VISIBLE "HAI WORLD!!!1!"
 
+  BTW set up program alarm state
+  problem'Z SRS 1 R 12
+  problem'Z SRS 2 R 2
+
   BTW execute
   IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX problem'Z len
     I HAS A opcode ITZ problem'Z SRS INDEX
@@ -68,9 +72,13 @@ IF U SAY SO
   IM OUTTA YR LOOP
 
   BTW print contents
+  VISIBLE ""
 IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX problem'Z len
          VISIBLE problem'Z SRS INDEX
    IM OUTTA YR LOOP
+
+   BTW print pos 0
+   VISIBLE SMOOSH "Pos Zero: " AN problem'Z SRS 0 MKAY
 
 KTHXBYE
 
