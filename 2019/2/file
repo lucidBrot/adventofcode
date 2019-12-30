@@ -62,7 +62,7 @@ TLDR
     I HAS A base ITZ problem'Z SRS SUM OF INDEX AN 1
     I HAS A arg ITZ problem'Z SRS SUM OF INDEX AN 2
     I HAS A target ITZ problem'Z SRS SUM OF INDEX AN 3
-    VISIBLE SMOOSH "Should Execute: " AN opcode AN " " AN base AN " " AN target MKAY
+    VISIBLE SMOOSH "Should Execute: " AN opcode AN " " AN base AN " " AN arg AN " " AN target MKAY
     INDEX R SUM OF INDEX AN 3 BTW UPP THEM INDEX
   IM OUTTA YR LOOP
 
