@@ -43,11 +43,28 @@ IF U SAY SO
       problem HAS A SRS INDEX ITZ something
   IM OUTTA YR LOOP
   VISIBLE "HAI WORLD!!!1!"
+
+OBTW
   I HAS A val
   val R problem IZ DOTHING YR problem'Z SRS 0 AN YR problem'Z SRS 1 AN YR problem'Z SRS 2 AN YR problem'Z SRS 3 MKAY
   BOTH SAEM val AN -1, O RLY?
     YA RLY, VISIBLE "Should Terminate: TODO"
   OIC
+TLDR
+
+  BTW execute
+  IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX problem'Z len
+    I HAS A opcode ITZ problem'Z SRS INDEX
+    BOTH SAEM opcode AN 99, O RLY?
+        YA RLY, GTFO
+    OIC
+
+    I HAS A base ITZ problem'Z SRS SUM OF INDEX AN 1
+    I HAS A arg ITZ problem'Z SRS SUM OF INDEX AN 2
+    I HAS A target ITZ problem'Z SRS SUM OF INDEX AN 3
+    VISIBLE SMOOSH "Should Execute: " AN opcode AN " " AN base AN " " AN target MKAY
+    INDEX R SUM OF INDEX AN 3 BTW UPP THEM INDEX
+  IM OUTTA YR LOOP
 
   BTW print contents
 IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX problem'Z len
