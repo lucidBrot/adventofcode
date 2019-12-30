@@ -27,33 +27,7 @@ HOW IZ problem DOTHING YR OPCODE AN YR BASE AN YR ARG AN YR TARGET
     GTFO
 IF U SAY SO
 
-OBTW THIS WOULD REQUIRE FUTURE BRANCH
-    CAN HAS STRING?
-    BTW PARSE BUKKIT from comma delimited input
-    I HAS A CORD
-    GIMMEH CORD
-    I HAS A numnum ITZ 0
-    I HAS A county ITZ 0
-    I HAS A index
-    IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX STRING'Z LEN YR CORD MKAY 
-      I HAS A char ITZ I IZ STRING'Z AT YR CORD AN YR INDEX MKAY
-      BOTH SAEM char ",", O RLY?
-        YA RLY
-          BTW ITZ A COMMA
-          problem HAS A SRS numnum ITZ county
-          county R 0
-          numnum R SUM OF numnum AN 1
-        NO WAI
-          BTW ITZ A GUD NUMBER
-          county R PRODUKT OF county AN 10
-          char IS NOW A NUMBER
-          county R SUM OF county AN char
-      OIC
-      index R INDEX
-    IM OUTTA YR LOOP
-    problem HAS A len ITZ index
-TLDR
-
+HOW IZ problem ACTIN YR NOUN AN YR VERB
     BTW PARSING BUKKIT from newline delimited input
   IM IN YR LOOP UPPIN YR INDEX
       I HAS A something
@@ -70,11 +44,9 @@ TLDR
       problem HAS A SRS INDEX ITZ something
   IM OUTTA YR LOOP
 
-  VISIBLE "HAI WORLD!!!1!"
-
   BTW set up program alarm state
-  problem'Z SRS 1 R 12
-  problem'Z SRS 2 R 2
+  problem'Z SRS 1 R NOUN
+  problem'Z SRS 2 R VERB
 
   BTW execute
   IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX problem'Z len
@@ -99,15 +71,17 @@ TLDR
     INDEX R SUM OF INDEX AN 3 BTW UPP THEM INDEX
   IM OUTTA YR LOOP
 
-  BTW print contents
-  VISIBLE ""
-IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX problem'Z len
-         VISIBLE problem'Z SRS INDEX
-   IM OUTTA YR LOOP
+   BTW return pos 0
+   FOUND YR problem'Z SRS 0
 
-   BTW print pos 0
-   VISIBLE SMOOSH "Pos Zero: " AN problem'Z SRS 0 MKAY
+IF U SAY SO
 
+
+I HAS A SOLUTION
+I HAS A ISSUE ITZ LIEK A problem
+SOLUTION R ISSUE IZ ACTIN YR 1 AN YR 0 MKAY
+VISIBLE "Solution: "
+VISIBLE SOLUTION
 KTHXBYE
 
 OBTW
