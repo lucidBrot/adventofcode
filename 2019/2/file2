@@ -1,6 +1,36 @@
 HAI 1.4
   CAN HAS STDIO?
 
+HOW IZ I XCUTE YR MOI
+  BTW execute
+  IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX ME'Z len
+    I HAS A opcode ITZ ME'Z SRS INDEX
+    BOTH SAEM opcode AN 99, O RLY?
+        YA RLY, GTFO
+    OIC
+
+    I HAS A base ITZ MOI'Z SRS SUM OF INDEX AN 1
+    I HAS A arg ITZ MOI'Z SRS SUM OF INDEX AN 2
+    I HAS A target ITZ MOI'Z SRS SUM OF INDEX AN 3
+    VISIBLE SMOOSH "Should Execute: " AN opcode AN " " AN base AN " " AN arg AN " " AN target MKAY
+
+    BTW EXECUTE
+    I HAS A val
+    val R I IZ DOTHING YR MOI AN YR opcode AN YR base AN YR arg AN YR target MKAY
+    BOTH SAEM val AN -1, O RLY?
+      YA RLY
+        GTFO
+    OIC
+
+    INDEX R SUM OF INDEX AN 3 BTW UPP THEM INDEX
+  IM OUTTA YR LOOP
+
+   BTW return pos 0
+   VISIBLE SMOOSH "Round Res: " AN MOI'Z SRS 0 MKAY
+   FOUND YR MOI'Z SRS 0
+
+IF U SAY SO
+
 HOW IZ I CONSUMING YR MOI AN YR NOUN AN YR VERB
     BTW set up program alarm state
     MOI'Z SRS 1 R NOUN
@@ -64,7 +94,6 @@ IF U SAY SO
 O HAI IM problem
     I HAS A len ITZ 0
 
-
     HOW IZ I PREPPIN
         BTW PARSING BUKKIT from newline delimited input
       IM IN YR LOOP UPPIN YR INDEX
@@ -84,35 +113,6 @@ O HAI IM problem
       GTFO
     IF U SAY SO
 
-    HOW IZ I XCUTE
-      BTW execute
-      IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX ME'Z len
-        I HAS A opcode ITZ ME'Z SRS INDEX
-        BOTH SAEM opcode AN 99, O RLY?
-            YA RLY, GTFO
-        OIC
-
-        I HAS A base ITZ ME'Z SRS SUM OF INDEX AN 1
-        I HAS A arg ITZ ME'Z SRS SUM OF INDEX AN 2
-        I HAS A target ITZ ME'Z SRS SUM OF INDEX AN 3
-        VISIBLE SMOOSH "Should Execute: " AN opcode AN " " AN base AN " " AN arg AN " " AN target MKAY
-
-        BTW EXECUTE
-        I HAS A val
-        val R I IZ DOTHING YR ME AN YR opcode AN YR base AN YR arg AN YR target MKAY
-        BOTH SAEM val AN -1, O RLY?
-          YA RLY
-            GTFO
-        OIC
-
-        INDEX R SUM OF INDEX AN 3 BTW UPP THEM INDEX
-      IM OUTTA YR LOOP
-
-       BTW return pos 0
-       VISIBLE SMOOSH "Round Res: " AN ME'Z SRS 0 MKAY
-       FOUND YR ME'Z SRS 0
-
-    IF U SAY SO
 
     HOW IZ I DUPLICATIN
        I HAS A NEWME ITZ A BUKKIT
@@ -141,11 +141,11 @@ I HAS A V ITZ 0
 problem IZ PREPPIN MKAY
 
 IM IN YR LOOP NERFIN YR MOM WILE BOTH SAEM LOOPY AN WIN
-    I HAS A ISSUE ITZ LIEK A problem
+    I HAS A ISSUE ITZ problem IZ DUPLICATIN MKAY
 
     I IZ CONSUMING YR ISSUE AN YR N AN YR V MKAY
     VISIBLE SMOOSH "Brute: " AN N AN " " AN V MKAY
-    SOLUTION R ISSUE IZ XCUTE MKAY
+    SOLUTION R I IZ XCUTE YR ISSUE MKAY
     BOTH SAEM SOLUTION AN 19690720, O RLY?
         YA RLY
             I HAS A PRO ITZ PRODUKT OF 100 AN N
