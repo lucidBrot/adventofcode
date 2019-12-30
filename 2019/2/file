@@ -1,13 +1,15 @@
 HAI 1.3
   CAN HAS STDIO?
 
+  I HAS A problem ITZ A BUKKIT
+
 BTW prints opcode and switchcases execution
-HOW IZ I DOTHING YR OPCODE AN YR BASE AN YR ARG AN YR TARGET AN YR PROBLEM
+HOW IZ problem DOTHING YR OPCODE AN YR BASE AN YR ARG AN YR TARGET
     VISIBLE SMOOSH "Execute function DOTHING " AN OPCODE AN " " AN BASE AN " " AN ARG MKAY
     OPCODE, WTF?
         OMG 1 BTW ADD
             VISIBLE "Should add"
-            PROBLEM'Z SRS TARGET R "1337"
+            ME'Z SRS TARGET R "1337"
             GTFO
         OMG 2 BTW MULTIPLY
             VISIBLE "Should multiply"
@@ -22,7 +24,6 @@ HOW IZ I DOTHING YR OPCODE AN YR BASE AN YR ARG AN YR TARGET AN YR PROBLEM
     GTFO
 IF U SAY SO
 
-  I HAS A problem ITZ A BUKKIT
 
   IM IN YR LOOP UPPIN YR INDEX
       I HAS A something
@@ -39,7 +40,7 @@ IF U SAY SO
       problem HAS A SRS INDEX ITZ something
   IM OUTTA YR LOOP
   VISIBLE "HAI WORLD!!!1!"
-  I IZ DOTHING YR problem'Z SRS 0 AN YR problem'Z SRS 1 AN YR problem'Z SRS 2 AN YR problem'Z SRS 3 AN YR problem MKAY
+  problem IZ DOTHING YR problem'Z SRS 0 AN YR problem'Z SRS 1 AN YR problem'Z SRS 2 AN YR problem'Z SRS 3 MKAY
 
 OBTW
   BTW print contents
