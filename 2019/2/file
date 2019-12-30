@@ -63,6 +63,15 @@ TLDR
     I HAS A arg ITZ problem'Z SRS SUM OF INDEX AN 2
     I HAS A target ITZ problem'Z SRS SUM OF INDEX AN 3
     VISIBLE SMOOSH "Should Execute: " AN opcode AN " " AN base AN " " AN arg AN " " AN target MKAY
+
+    BTW EXECUTE
+  I HAS A val
+  val R problem IZ DOTHING YR problem'Z SRS 0 AN YR problem'Z SRS 1 AN YR problem'Z SRS 2 AN YR problem'Z SRS 3 MKAY
+  BOTH SAEM val AN -1, O RLY?
+    YA RLY, VISIBLE "Should Terminate: TODO"
+    GTFO
+  OIC
+
     INDEX R SUM OF INDEX AN 3 BTW UPP THEM INDEX
   IM OUTTA YR LOOP
 
