@@ -9,7 +9,7 @@ HOW IZ problem DOTHING YR OPCODE AN YR BASE AN YR ARG AN YR TARGET
     OPCODE, WTF?
         OMG 1 BTW ADD
             VISIBLE "Should add"
-            ME'Z SRS TARGET R "1337"
+            ME'Z SRS TARGET R 1337
             GTFO
         OMG 2 BTW MULTIPLY
             VISIBLE "Should multiply"
