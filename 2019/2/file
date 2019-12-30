@@ -1,7 +1,8 @@
 HAI 1.3
   CAN HAS STDIO?
-  
-  IM IN YR LOOP UPPIN YR ITERATOR WILE DIFFRINT ITERATOR AN -1
+  I HAS A problem ITZ A BUKKIT
+
+  IM IN YR LOOP UPPIN YR INDEX
       I HAS A something
       GIMMEH something
       something IS NOW A YARN
@@ -12,9 +13,10 @@ HAI 1.3
         NO WAI
       OIC
       something IS NOW A NUMBR
+      problem HAS A SRS INDEX ITZ something
   IM OUTTA YR LOOP
   VISIBLE "HAI WORLD!!!1!"
-  VISIBLE something
+  VISIBLE problem'Z SRS 0
 KTHXBYE
 
 OBTW
