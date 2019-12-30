@@ -19,10 +19,10 @@ HOW IZ problem DOTHING YR OPCODE AN YR BASE AN YR ARG AN YR TARGET
             GTFO
         OMG 99
             VISIBLE "Should stop"
-            GTFO
-            BTW TODO QUIT
+            FOUND YR -1
         OMGWTF
             VISIBLE SMOOSH "Unexpected Opcode: " AN OPCODE MKAY
+            FOUND YR -1
     OIC
     GTFO
 IF U SAY SO
@@ -43,7 +43,11 @@ IF U SAY SO
       problem HAS A SRS INDEX ITZ something
   IM OUTTA YR LOOP
   VISIBLE "HAI WORLD!!!1!"
-  problem IZ DOTHING YR problem'Z SRS 0 AN YR problem'Z SRS 1 AN YR problem'Z SRS 2 AN YR problem'Z SRS 3 MKAY
+  I HAS A val
+  val R problem IZ DOTHING YR problem'Z SRS 0 AN YR problem'Z SRS 1 AN YR problem'Z SRS 2 AN YR problem'Z SRS 3 MKAY
+  BOTH SAEM val AN -1, O RLY?
+    YA RLY, VISIBLE "Should Terminate: TODO"
+  OIC
 
   BTW print contents
 IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX problem'Z len
