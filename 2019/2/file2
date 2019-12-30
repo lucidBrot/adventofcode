@@ -89,32 +89,16 @@ KTHX
 I HAS A SOLUTION
 I HAS A LOOPY ITZ A TROOF
 LOOPY R WIN
-I HAS A N ITZ 99
+I HAS A N ITZ 0
 I HAS A V ITZ 0
 
 problem IZ PREPPIN MKAY
 
 IM IN YR LOOP NERFIN YR MOM WILE BOTH SAEM LOOPY AN WIN
     I HAS A ISSUE ITZ LIEK A problem
-    N, WTF?
-        OMG 1
-            N R 2
-            GTFO
-        OMG 2
-            N R 99
-            V R SUM OF 1 AN V
-            BTW INCREASE V BY ONE
-            GTFO
-        OMG 99
-            N R 1
-            GTFO
-        OMGWTF
-            VISIBLE SMOOSH "WTF OPERATOR: " AN N MKAY
-            N R 1
-            GTFO
-    OIC
 
     ISSUE IZ CONSUMIN YR N AN YR V MKAY
+    VISIBLE SMOOSH "Brute: " AN N AN " " AN V MKAY
     SOLUTION R ISSUE IZ XCUTE MKAY
     BOTH SAEM SOLUTION AN 19690720, O RLY?
         YA RLY
@@ -122,6 +106,12 @@ IM IN YR LOOP NERFIN YR MOM WILE BOTH SAEM LOOPY AN WIN
             VISIBLE SMOOSH "Found: " SUM OF V AN PRO MKAY
             LOOPY R FAIL
             GTFO
+    OIC
+
+    BTW INCREMENT FIRST ONE AND THEN THE OTHER
+    BOTH SAEM N AN V, O RLY?
+        YA RLY, N R SUM OF N AN 1
+        NO WAI, V R N
     OIC
 
 IM OUTTA YR LOOP
