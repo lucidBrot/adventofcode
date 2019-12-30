@@ -145,16 +145,15 @@ IM IN YR LOOP NERFIN YR MOM WILE BOTH SAEM LOOPY AN WIN
     VISIBLE SMOOSH "MAX: " AN ISSUE'Z len MKAY BTW 113
 
     BTW INCREMENT FIRST ONE AND WHEN REACH MAXIMUM THE OTHER
-    I HAS A tempthing ITZ ISSUE'Z len
-    BOTH SAEM tempthing AN 113, O RLY?
+    I HAS A maxthing ITZ DIFF OF ISSUE'Z len AN 1
+    BOTH SAEM V AN maxthing, O RLY?
         YA RLY
             V R 0
             N R SUM OF N AN 1
         NO WAI
             V R SUM OF V AN 1
-            VISIBLE SMOOSH " V: " AN V AN "    MAX: " AN ISSUE'Z len MKAY
     OIC
-    BOTH SAEM N AN ISSUE'Z len, O RLY?
+    BOTH SAEM N AN maxthing, O RLY?
         YA RLY
             VISIBLE "Checked all inputs that make sense"
             GTFO
