@@ -28,7 +28,14 @@ O HAI IM problem
         GTFO
     IF U SAY SO
 
-    HOW IZ I ACTIN YR NOUN AN YR VERB
+    HOW IZ I CONSUMIN YR NOUN AN YR VERB
+          BTW set up program alarm state
+          ME'Z SRS 1 R NOUN
+          ME'Z SRS 2 R VERB
+        GTFO
+    IF U SAY SO
+
+    HOW IZ I PREPPIN
         BTW PARSING BUKKIT from newline delimited input
       IM IN YR LOOP UPPIN YR INDEX
           I HAS A something
@@ -44,11 +51,10 @@ O HAI IM problem
           something IS NOW A NUMBR
           ME HAS A SRS INDEX ITZ something
       IM OUTTA YR LOOP
+      GTFO
+    IF U SAY SO
 
-      BTW set up program alarm state
-      ME'Z SRS 1 R NOUN
-      ME'Z SRS 2 R VERB
-
+    HOW IZ I XCUTE
       BTW execute
       IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX ME'Z len
         I HAS A opcode ITZ ME'Z SRS INDEX
@@ -84,6 +90,9 @@ I HAS A LOOPY ITZ A TROOF
 LOOPY R WIN
 I HAS A N ITZ 99
 I HAS A V ITZ 0
+
+problem IZ PREPPIN MKAY
+
 IM IN YR LOOP NERFIN YR MOM WILE BOTH SAEM LOOPY AN WIN
     I HAS A ISSUE ITZ LIEK A problem
     N, WTF?
@@ -104,8 +113,8 @@ IM IN YR LOOP NERFIN YR MOM WILE BOTH SAEM LOOPY AN WIN
             GTFO
     OIC
 
-
-    SOLUTION R ISSUE IZ ACTIN YR N AN YR V MKAY
+    ISSUE IZ CONSUMIN YR N AN YR V MKAY
+    SOLUTION R ISSUE IZ XCUTE MKAY
     BOTH SAEM SOLUTION AN 19690720, O RLY?
         YA RLY
         I HAS A PRO ITZ PRODUKT OF 100 AN N
