@@ -68,17 +68,18 @@ O HAI IM problem
         VISIBLE SMOOSH "Should Execute: " AN opcode AN " " AN base AN " " AN arg AN " " AN target MKAY
 
         BTW EXECUTE
-      I HAS A val
-      val R ME IZ DOTHING YR opcode AN YR base AN YR arg AN YR target MKAY
-      BOTH SAEM val AN -1, O RLY?
-        YA RLY
+        I HAS A val
+        val R ME IZ DOTHING YR opcode AN YR base AN YR arg AN YR target MKAY
+        BOTH SAEM val AN -1, O RLY?
+          YA RLY
             GTFO
-      OIC
+        OIC
 
         INDEX R SUM OF INDEX AN 3 BTW UPP THEM INDEX
       IM OUTTA YR LOOP
 
        BTW return pos 0
+       VISIBLE SMOOSH "Round Res: " AN ME'Z SRS 0 MKAY
        FOUND YR ME'Z SRS 0
 
     IF U SAY SO
