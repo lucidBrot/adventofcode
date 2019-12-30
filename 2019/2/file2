@@ -1,86 +1,88 @@
 HAI 1.4
   CAN HAS STDIO?
 
-  I HAS A problem ITZ A BUKKIT
+O HAI IM problem
+    I HAS A len ITZ 0
 
-BTW prints opcode and switchcases execution
-HOW IZ problem DOTHING YR OPCODE AN YR BASE AN YR ARG AN YR TARGET
-    VISIBLE SMOOSH "Execute function DOTHING " AN OPCODE AN " " AN BASE AN " " AN ARG MKAY
-    OPCODE, WTF?
-        OMG 1 BTW ADD
-            VISIBLE "Should add"
-            I HAS A thing ITZ SUM OF ME'Z SRS BASE AN ME'Z SRS ARG
-            ME'Z SRS TARGET R thing
-            GTFO
-        OMG 2 BTW MULTIPLY
-            VISIBLE "Should multiply"
-            I HAS A thing ITZ PRODUKT OF ME'Z SRS BASE AN ME'Z SRS ARG
-            ME'Z SRS TARGET R thing
-            GTFO
-        OMG 99
-            VISIBLE "Should stop"
-            FOUND YR -1
-        OMGWTF
-            VISIBLE SMOOSH "Unexpected Opcode: " AN OPCODE MKAY
-            FOUND YR -1
-    OIC
-    GTFO
-IF U SAY SO
+    BTW prints opcode and switchcases execution
+    HOW IZ I DOTHING YR OPCODE AN YR BASE AN YR ARG AN YR TARGET
+        VISIBLE SMOOSH "Execute function DOTHING " AN OPCODE AN " " AN BASE AN " " AN ARG MKAY
+        OPCODE, WTF?
+            OMG 1 BTW ADD
+                VISIBLE "Should add"
+                I HAS A thing ITZ SUM OF ME'Z SRS BASE AN ME'Z SRS ARG
+                ME'Z SRS TARGET R thing
+                GTFO
+            OMG 2 BTW MULTIPLY
+                VISIBLE "Should multiply"
+                I HAS A thing ITZ PRODUKT OF ME'Z SRS BASE AN ME'Z SRS ARG
+                ME'Z SRS TARGET R thing
+                GTFO
+            OMG 99
+                VISIBLE "Should stop"
+                FOUND YR -1
+            OMGWTF
+                VISIBLE SMOOSH "Unexpected Opcode: " AN OPCODE MKAY
+                FOUND YR -1
+        OIC
+        GTFO
+    IF U SAY SO
 
-HOW IZ problem ACTIN YR NOUN AN YR VERB
-    BTW PARSING BUKKIT from newline delimited input
-  IM IN YR LOOP UPPIN YR INDEX
-      I HAS A something
-      GIMMEH something
-      something IS NOW A YARN
-      BOTH SAEM something AN "", O RLY?
-        YA RLY
-          VISIBLE "End of input"
-          problem HAS A len ITZ INDEX
-          GTFO
-        NO WAI
+    HOW IZ I ACTIN YR NOUN AN YR VERB
+        BTW PARSING BUKKIT from newline delimited input
+      IM IN YR LOOP UPPIN YR INDEX
+          I HAS A something
+          GIMMEH something
+          something IS NOW A YARN
+          BOTH SAEM something AN "", O RLY?
+            YA RLY
+              VISIBLE "End of input"
+              ME'Z len R INDEX
+              GTFO
+            NO WAI
+          OIC
+          something IS NOW A NUMBR
+          I HAS A SRS INDEX ITZ something
+      IM OUTTA YR LOOP
+
+      BTW set up program alarm state
+      ME'Z SRS 1 R NOUN
+      ME'Z SRS 2 R VERB
+
+      BTW execute
+      IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX ME'Z len
+        I HAS A opcode ITZ ME'Z SRS INDEX
+        BOTH SAEM opcode AN 99, O RLY?
+            YA RLY, GTFO
+        OIC
+
+        I HAS A base ITZ ME'Z SRS SUM OF INDEX AN 1
+        I HAS A arg ITZ ME'Z SRS SUM OF INDEX AN 2
+        I HAS A target ITZ ME'Z SRS SUM OF INDEX AN 3
+        VISIBLE SMOOSH "Should Execute: " AN opcode AN " " AN base AN " " AN arg AN " " AN target MKAY
+
+        BTW EXECUTE
+      I HAS A val
+      val R I IZ DOTHING YR opcode AN YR base AN YR arg AN YR target MKAY
+      BOTH SAEM val AN -1, O RLY?
+        YA RLY, VISIBLE "Should Terminate: TODO"
+        GTFO
       OIC
-      something IS NOW A NUMBR
-      problem HAS A SRS INDEX ITZ something
-  IM OUTTA YR LOOP
 
-  BTW set up program alarm state
-  problem'Z SRS 1 R NOUN
-  problem'Z SRS 2 R VERB
+        INDEX R SUM OF INDEX AN 3 BTW UPP THEM INDEX
+      IM OUTTA YR LOOP
 
-  BTW execute
-  IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX problem'Z len
-    I HAS A opcode ITZ problem'Z SRS INDEX
-    BOTH SAEM opcode AN 99, O RLY?
-        YA RLY, GTFO
-    OIC
+       BTW return pos 0
+       FOUND YR ME'Z SRS 0
 
-    I HAS A base ITZ problem'Z SRS SUM OF INDEX AN 1
-    I HAS A arg ITZ problem'Z SRS SUM OF INDEX AN 2
-    I HAS A target ITZ problem'Z SRS SUM OF INDEX AN 3
-    VISIBLE SMOOSH "Should Execute: " AN opcode AN " " AN base AN " " AN arg AN " " AN target MKAY
-
-    BTW EXECUTE
-  I HAS A val
-  val R problem IZ DOTHING YR opcode AN YR base AN YR arg AN YR target MKAY
-  BOTH SAEM val AN -1, O RLY?
-    YA RLY, VISIBLE "Should Terminate: TODO"
-    GTFO
-  OIC
-
-    INDEX R SUM OF INDEX AN 3 BTW UPP THEM INDEX
-  IM OUTTA YR LOOP
-
-   BTW return pos 0
-   FOUND YR problem'Z SRS 0
-
-IF U SAY SO
+    IF U SAY SO
+KTHX
 
 
 I HAS A SOLUTION
 I HAS A LOOPY ITZ A TROOF
 LOOPY R WIN
-I HAS A N ITZ 0
+I HAS A N ITZ 99
 I HAS A V ITZ -1
 IM IN YR LOOP NERFIN YR MOM WILE BOTH SAEM LOOPY AN WIN
     I HAS A ISSUE ITZ LIEK A problem
@@ -90,6 +92,8 @@ IM IN YR LOOP NERFIN YR MOM WILE BOTH SAEM LOOPY AN WIN
             GTFO
         OMG 2
             N R 99
+            V R SUM OF 1 AN V
+            BTW INCREASE V BY ONE
             GTFO
         OMG 99
             N R 1
@@ -100,8 +104,6 @@ IM IN YR LOOP NERFIN YR MOM WILE BOTH SAEM LOOPY AN WIN
             GTFO
     OIC
 
-    V R SUM OF 1 AN V
-    BTW INCREASE V BY ONE
 
     SOLUTION R ISSUE IZ ACTIN YR N AN YR V MKAY
     BOTH SAEM SOLUTION AN 19690720, O RLY?
