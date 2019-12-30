@@ -8,6 +8,31 @@ HOW IZ I CONSUMING YR MOI AN YR NOUN AN YR VERB
     GTFO
 IF U SAY SO
 
+
+BTW prints opcode and switchcases execution
+HOW IZ I DOTHING YR MOI AN YR OPCODE AN YR BASE AN YR ARG AN YR TARGET
+    VISIBLE SMOOSH "Execute function DOTHING " AN OPCODE AN " " AN BASE AN " " AN ARG MKAY
+    OPCODE, WTF?
+        OMG 1 BTW ADD
+            VISIBLE "Should add"
+            I HAS A thing ITZ SUM OF ME'Z SRS BASE AN ME'Z SRS ARG
+            MOI'Z SRS TARGET R thing
+            GTFO
+        OMG 2 BTW MULTIPLY
+            VISIBLE "Should multiply"
+            I HAS A thing ITZ PRODUKT OF ME'Z SRS BASE AN ME'Z SRS ARG
+            MOI'Z SRS TARGET R thing
+            GTFO
+        OMG 99
+            VISIBLE "Should stop"
+            FOUND YR -1
+        OMGWTF
+            VISIBLE SMOOSH "Unexpected Opcode: " AN OPCODE MKAY
+            FOUND YR -1
+    OIC
+    GTFO
+IF U SAY SO
+
 OBTW
     Testing the copying of a bukkit
 TLDR
@@ -18,7 +43,7 @@ HOW IZ I TESTIN
     OUTERISSUE HAS A SRS 1 ITZ 2
     OUTERISSUE HAS A SRS 2 ITZ 2
     OUTERISSUE HAS A len ITZ 3
-    OUTERISSUE IZ CONSUMIN YR 1111 AN YR 0 MKAY
+    I IZ CONSUMING YR OUTERISSUE AN YR 1111 AN YR 0 MKAY
     VISIBLE SMOOSH "OUTER ISSUE: " AN OUTERISSUE'Z SRS 1 MKAY
     IM IN YR LOOP NERFIN YR MOM TIL BOTH SAEM MOM -5
 BTW        I HAS A ISSUE ITZ LIEK A OUTERISSUE
@@ -39,36 +64,6 @@ IF U SAY SO
 O HAI IM problem
     I HAS A len ITZ 0
 
-    BTW prints opcode and switchcases execution
-    HOW IZ I DOTHING YR OPCODE AN YR BASE AN YR ARG AN YR TARGET
-        VISIBLE SMOOSH "Execute function DOTHING " AN OPCODE AN " " AN BASE AN " " AN ARG MKAY
-        OPCODE, WTF?
-            OMG 1 BTW ADD
-                VISIBLE "Should add"
-                I HAS A thing ITZ SUM OF ME'Z SRS BASE AN ME'Z SRS ARG
-                ME'Z SRS TARGET R thing
-                GTFO
-            OMG 2 BTW MULTIPLY
-                VISIBLE "Should multiply"
-                I HAS A thing ITZ PRODUKT OF ME'Z SRS BASE AN ME'Z SRS ARG
-                ME'Z SRS TARGET R thing
-                GTFO
-            OMG 99
-                VISIBLE "Should stop"
-                FOUND YR -1
-            OMGWTF
-                VISIBLE SMOOSH "Unexpected Opcode: " AN OPCODE MKAY
-                FOUND YR -1
-        OIC
-        GTFO
-    IF U SAY SO
-
-    HOW IZ I CONSUMIN YR NOUN AN YR VERB
-          BTW set up program alarm state
-          ME'Z SRS 1 R NOUN
-          ME'Z SRS 2 R VERB
-        GTFO
-    IF U SAY SO
 
     HOW IZ I PREPPIN
         BTW PARSING BUKKIT from newline delimited input
@@ -104,7 +99,7 @@ O HAI IM problem
 
         BTW EXECUTE
         I HAS A val
-        val R ME IZ DOTHING YR opcode AN YR base AN YR arg AN YR target MKAY
+        val R I IZ DOTHING YR ME AN YR opcode AN YR base AN YR arg AN YR target MKAY
         BOTH SAEM val AN -1, O RLY?
           YA RLY
             GTFO
@@ -148,7 +143,7 @@ problem IZ PREPPIN MKAY
 IM IN YR LOOP NERFIN YR MOM WILE BOTH SAEM LOOPY AN WIN
     I HAS A ISSUE ITZ LIEK A problem
 
-    ISSUE IZ CONSUMIN YR N AN YR V MKAY
+    I IZ CONSUMING YR ISSUE AN YR N AN YR V MKAY
     VISIBLE SMOOSH "Brute: " AN N AN " " AN V MKAY
     SOLUTION R ISSUE IZ XCUTE MKAY
     BOTH SAEM SOLUTION AN 19690720, O RLY?
