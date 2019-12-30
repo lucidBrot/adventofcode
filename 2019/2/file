@@ -1,5 +1,11 @@
 HAI 1.3
   CAN HAS STDIO?
+
+HOW IZ I DOTHING YR OPCODE AN YR BASE AN YR ARG
+    VISIBLE SMOOSH "Execute function DOTHING " AN OPCODE AN " " AN BASE AN " " AN ARG MKAY
+    GTFO
+IF U SAY SO
+
   I HAS A problem ITZ A BUKKIT
 
   IM IN YR LOOP UPPIN YR INDEX
@@ -17,11 +23,15 @@ HAI 1.3
       problem HAS A SRS INDEX ITZ something
   IM OUTTA YR LOOP
   VISIBLE "HAI WORLD!!!1!"
+  I IZ DOTHING YR 0 AN YR 1 AN YR 2 MKAY
 
+OBTW
   BTW print contents
 IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX problem'Z len
          VISIBLE problem'Z SRS INDEX
    IM OUTTA YR LOOP
+TLDR
+
 KTHXBYE
 
 OBTW
@@ -35,3 +45,4 @@ OBTW
     After operation, move forward 4 positions (opcode, input, input, output)
 
 TLDR
+
