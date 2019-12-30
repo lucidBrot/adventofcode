@@ -71,8 +71,8 @@ O HAI IM problem
       I HAS A val
       val R ME IZ DOTHING YR opcode AN YR base AN YR arg AN YR target MKAY
       BOTH SAEM val AN -1, O RLY?
-        YA RLY, VISIBLE "Should Terminate: TODO"
-        GTFO
+        YA RLY
+            GTFO
       OIC
 
         INDEX R SUM OF INDEX AN 3 BTW UPP THEM INDEX
@@ -117,10 +117,10 @@ IM IN YR LOOP NERFIN YR MOM WILE BOTH SAEM LOOPY AN WIN
     SOLUTION R ISSUE IZ XCUTE MKAY
     BOTH SAEM SOLUTION AN 19690720, O RLY?
         YA RLY
-        I HAS A PRO ITZ PRODUKT OF 100 AN N
-        VISIBLE SMOOSH "Found: " SUM OF V AN PRO MKAY
-        LOOPY R FAIL
-        GTFO
+            I HAS A PRO ITZ PRODUKT OF 100 AN N
+            VISIBLE SMOOSH "Found: " SUM OF V AN PRO MKAY
+            LOOPY R FAIL
+            GTFO
     OIC
 
 IM OUTTA YR LOOP
