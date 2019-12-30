@@ -44,14 +44,6 @@ IF U SAY SO
   IM OUTTA YR LOOP
   VISIBLE "HAI WORLD!!!1!"
 
-OBTW
-  I HAS A val
-  val R problem IZ DOTHING YR problem'Z SRS 0 AN YR problem'Z SRS 1 AN YR problem'Z SRS 2 AN YR problem'Z SRS 3 MKAY
-  BOTH SAEM val AN -1, O RLY?
-    YA RLY, VISIBLE "Should Terminate: TODO"
-  OIC
-TLDR
-
   BTW execute
   IM IN YR LOOP UPPIN YR INDEX TIL BOTH SAEM INDEX problem'Z len
     I HAS A opcode ITZ problem'Z SRS INDEX
@@ -66,7 +58,7 @@ TLDR
 
     BTW EXECUTE
   I HAS A val
-  val R problem IZ DOTHING YR problem'Z SRS 0 AN YR problem'Z SRS 1 AN YR problem'Z SRS 2 AN YR problem'Z SRS 3 MKAY
+  val R problem IZ DOTHING YR opcode AN YR base AN YR arg AN YR target MKAY
   BOTH SAEM val AN -1, O RLY?
     YA RLY, VISIBLE "Should Terminate: TODO"
     GTFO
