@@ -12,7 +12,7 @@ HOW IZ I XCUTE YR MOI
     I HAS A base ITZ MOI'Z SRS SUM OF INDEX AN 1
     I HAS A arg ITZ MOI'Z SRS SUM OF INDEX AN 2
     I HAS A target ITZ MOI'Z SRS SUM OF INDEX AN 3
-    VISIBLE SMOOSH "Should Execute: " AN opcode AN " " AN base AN " " AN arg AN " " AN target MKAY
+    BTW VISIBLE SMOOSH "Should Execute: " AN opcode AN " " AN base AN " " AN arg AN " " AN target MKAY
 
     BTW EXECUTE
     I HAS A val
@@ -41,20 +41,20 @@ IF U SAY SO
 
 BTW prints opcode and switchcases execution
 HOW IZ I DOTHING YR MOI AN YR OPCODE AN YR BASE AN YR ARG AN YR TARGET
-    VISIBLE SMOOSH "Execute function DOTHING " AN OPCODE AN " " AN BASE AN " " AN ARG MKAY
+    BTW VISIBLE SMOOSH "Execute function DOTHING " AN OPCODE AN " " AN BASE AN " " AN ARG MKAY
     OPCODE, WTF?
         OMG 1 BTW ADD
-            VISIBLE "Should add"
+            BTW VISIBLE "Should add"
             I HAS A thing ITZ SUM OF MOI'Z SRS BASE AN MOI'Z SRS ARG
             MOI'Z SRS TARGET R thing
             GTFO
         OMG 2 BTW MULTIPLY
-            VISIBLE "Should multiply"
+            BTW VISIBLE "Should multiply"
             I HAS A thing ITZ PRODUKT OF MOI'Z SRS BASE AN MOI'Z SRS ARG
             MOI'Z SRS TARGET R thing
             GTFO
         OMG 99
-            VISIBLE "Should stop"
+            BTW VISIBLE "Should stop"
             FOUND YR -1
         OMGWTF
             VISIBLE SMOOSH "Unexpected Opcode: " AN OPCODE MKAY
@@ -158,6 +158,13 @@ IM IN YR LOOP NERFIN YR MOM WILE BOTH SAEM LOOPY AN WIN
     BOTH SAEM N AN V, O RLY?
         YA RLY, N R SUM OF N AN 1
         NO WAI, V R N
+    OIC
+
+    BTW IF INPUT IS SHORTER THAN BRUTE, IT BAD
+    EITHER OF BOTH SAEM N AN ISSUE'Z len AN BOTH SAEM V AN ISSUE'Z len, O RLY?, YA RLY
+        VISIBLE "Reached numbers larger than input length"
+        LOOPY R FAIL
+        GTFO
     OIC
 
 IM OUTTA YR LOOP
