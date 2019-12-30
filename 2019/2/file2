@@ -10,12 +10,12 @@ O HAI IM problem
         OPCODE, WTF?
             OMG 1 BTW ADD
                 VISIBLE "Should add"
-                ME HAS A thing ITZ SUM OF ME'Z SRS BASE AN ME'Z SRS ARG
+                I HAS A thing ITZ SUM OF ME'Z SRS BASE AN ME'Z SRS ARG
                 ME'Z SRS TARGET R thing
                 GTFO
             OMG 2 BTW MULTIPLY
                 VISIBLE "Should multiply"
-                ME HAS A thing ITZ PRODUKT OF ME'Z SRS BASE AN ME'Z SRS ARG
+                I HAS A thing ITZ PRODUKT OF ME'Z SRS BASE AN ME'Z SRS ARG
                 ME'Z SRS TARGET R thing
                 GTFO
             OMG 99
@@ -36,7 +36,7 @@ O HAI IM problem
           something IS NOW A YARN
           BOTH SAEM something AN "", O RLY?
             YA RLY
-              VISIBLE "End of input"
+              VISIBLE SMOOSH "End of input at index " AN INDEX MKAY
               ME'Z len R INDEX
               GTFO
             NO WAI
@@ -83,7 +83,7 @@ I HAS A SOLUTION
 I HAS A LOOPY ITZ A TROOF
 LOOPY R WIN
 I HAS A N ITZ 99
-I HAS A V ITZ -1
+I HAS A V ITZ 0
 IM IN YR LOOP NERFIN YR MOM WILE BOTH SAEM LOOPY AN WIN
     I HAS A ISSUE ITZ LIEK A problem
     N, WTF?
