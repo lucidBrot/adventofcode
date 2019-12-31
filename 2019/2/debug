@@ -1,43 +1,60 @@
 HAI 1.4
 
-O HAI IM cybersecinfluencer
-    I HAS A GAYNESS ITZ 100
+OBTW
+    I HAS A [var] ITZ LIEK A [other var]
+
+    Declares a variable and copies the contents of the other variable into the newly created variable. This is only valid if the other variable is a BUKKIT.
+
+    According to https://esolangs.org/wiki/LOLCODE
+
+    But it does not create a deep copy
+TLDR
+
+O HAI IM SOCIALCONSTRUCT
+    I HAS A PROBBERTY ITZ 100
 
     HOW IZ I DUPLICATIN
-        I HAS A THING ITZ LIEK A cybersecinfluencer
-        THING'Z GAYNESS R ME'Z GAYNESS
+        I HAS A THING ITZ LIEK A SOCIALCONSTRUCT
+        THING'Z PROBBERTY R ME'Z PROBBERTY
         FOUND YR THING
     IF U SAY SO
 
     HOW IZ I CLONINGWEIRDLY
         I HAS A THING ITZ A BUKKIT
-        THING HAS A GAYNESS ITZ ME'Z GAYNESS
+        THING HAS A PROBBERTY ITZ ME'Z PROBBERTY
         FOUND YR THING
     IF U SAY SO
 KTHX
 
-HOW IZ I COPYIN YR INPUT
-    FOUND YR INPUT
-IF U SAY SO
+VISIBLE SMOOSH "Original Property is " AN SOCIALCONSTRUCT'Z PROBBERTY MKAY
 
-BTW I HAS A lailo ITZ LIEK A cybersecinfluencer
-BTW I HAS A siguza ITZ LIEK A cybersecinfluencer
-I HAS A lailo ITZ LIEK A cybersecinfluencer
-I HAS A siguza ITZ lailo IZ DUPLICATIN MKAY
+BTW CREATE A COPY WITH "LIEK"
+I HAS A problem ITZ LIEK A SOCIALCONSTRUCT
+
+BTW CREATE A COPY WITH "LIEK" FOLLOWED BY "R"-ASSIGNMENT OF THE PROPERTY
+I HAS A sex ITZ problem IZ DUPLICATIN MKAY
+
+BTW CREATE A COPY WITHOUT "LIEK", SIMPLY ASSIGN THE PROPERTY
+I HAS A issue
+issue R problem IZ CLONINGWEIRDLY MKAY
+
+VISIBLE "------", VISIBLE ""
 
 
-VISIBLE SMOOSH "lailo gayness: " AN lailo'Z GAYNESS MKAY
-VISIBLE SMOOSH "sig gayness: " AN siguza'Z GAYNESS MKAY
-lailo'Z GAYNESS R 99
-VISIBLE SMOOSH "lailo gayness: " AN lailo'Z GAYNESS MKAY
-VISIBLE SMOOSH "sig gayness: " AN siguza'Z GAYNESS MKAY
+VISIBLE SMOOSH "problem probberty: " AN problem'Z PROBBERTY MKAY
+VISIBLE SMOOSH "sex probberty: " AN sex'Z PROBBERTY MKAY
+problem'Z PROBBERTY R 99
+VISIBLE SMOOSH "problem probberty: " AN problem'Z PROBBERTY MKAY
+VISIBLE SMOOSH "sex probberty: " AN sex'Z PROBBERTY MKAY
 
-I HAS A josh
-josh R lailo IZ CLONINGWEIRDLY MKAY
-lailo'Z GAYNESS R 88
-VISIBLE SMOOSH "lailo gayness: " AN lailo'Z GAYNESS MKAY
-VISIBLE SMOOSH "josh gayness: " AN josh'Z GAYNESS MKAY
+VISIBLE "THE VALUE OF SEX'Z PROPERTY CHANGED! BAD!"
+VISIBLE ""
 
+problem'Z PROBBERTY R 88
+VISIBLE SMOOSH "problem probberty: " AN problem'Z PROBBERTY MKAY
+VISIBLE SMOOSH "issue probberty: " AN issue'Z PROBBERTY MKAY
+
+VISIBLE "THE VALUE OF ISSUE'Z PROPERTY DOESNT CHANGE! GUD!"
 
 
 KTHXBYE
