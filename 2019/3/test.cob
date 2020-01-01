@@ -6,11 +6,11 @@
        ENVIRONMENT DIVISION.
       * Sections are parts of a division:
        CONFIGURATION SECTION.
+      * Optional: Specify the OS of the building and executing computer
       ** SOURCE-COMPUTER. XXX.
       ** OBJECT-COMPUTER. XXX
        INPUT OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT FILENAME 
       * Constants
        DATA DIVISION.
         * File, Working-storage for temp variables, Local-Storage for allocated variables, Linkage
