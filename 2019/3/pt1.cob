@@ -120,6 +120,7 @@
            SET NAVX TO CENTEER .
            MOVE CENTEER TO NAVY .
            PERFORM UNTIL LOOP-CTR > 1000
+               ADD 1 TO LOOP-CTR
                MOVE CONE-STUFF(LOOP-CTR) TO TEMP-CABLE-STEP
       * TODO: interpret commandsj
                DISPLAY "CABLE 1 DO "TEMP-CABLE-STEP
