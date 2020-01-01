@@ -39,11 +39,12 @@
       * X(Alphanumeric), Z, 1, 9 and *
       * I don't know yet what all of them do.
        01 GRID.
-           05 GRID-ROW OCCURS 10000 TIMES.
-               10 GRID-COL OCCURS 10000 TIMES.
+           05 GRID-ROW OCCURS 20000 TIMES.
+               10 GRID-COL OCCURS 20000 TIMES.
                    15 GRID-CHARACTER PIC X(1) VALUE 'E'.
        01 CH1 PIC X(1) VALUE '1'.
        01 CH2 PIC X(1) VALUE '2'.
+       01 CHBOTH PIC X(1) VALUE 'B'.
        01 CHEMPTY PIC X(1) VALUE 'E'.
 
        01 TEMP-CABLE-STEP.
@@ -68,7 +69,7 @@
 
        01 LOOP-CTR PIC 9(10) VALUE 1 .
            
-       01 CENTEER PIC S9(9) USAGE IS COMPUTATIONAL VALUE 5000 .
+       01 CENTEER PIC S9(9) USAGE IS COMPUTATIONAL VALUE 10000 .
        01 NAVX PIC S9(9) USAGE IS COMPUTATIONAL.
        01 NAVY PIC S9(9) USAGE IS COMPUTATIONAL.
 
@@ -160,7 +161,45 @@
                MOVE CH1 TO GRID-CHARACTER(NAVX, NAVY)
            END-PERFORM.
 
-       DISPLAY "MAP: "GRID
       *TODO: store second cable and intersections
+           SET LOOP-CTR TO 0 .
+           SET NAVX TO CENTEER .
+           SET NAVY TO CENTEER .
+           PERFORM UNTIL LOOP-CTR > 1000
+               ADD 1 TO LOOP-CTR
+               MOVE CTWO-STUFF(LOOP-CTR) TO TEMP-CABLE-STEP
 
-           STOP RUN.
+               DISPLAY "CABLE 2 DO "DIRECTION OF
+               TEMP-CABLE-STEP":"NUM-STEPS OF TEMP-CABLE-STEP
+               IF ( DIRECTION OF TEMP-CABLE-STEP =
+                   UNINITIALIZED-DIRECTION )
+                   SET LOOP-CTR TO 1001
+               END-IF
+
+               IF DIRECTION OF TEMP-CABLE-STEP = RIGHT-DIRECTION
+                   ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVX
+               END-IF
+
+               IF DIRECTION OF TEMP-CABLE-STEP = UP-DIRECTION
+                   ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVY
+               END-IF
+               
+               IF DIRECTION OF TEMP-CABLE-STEP = LEFT-DIRECTION
+                   SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM NAVX
+               END-IF
+
+               IF DIRECTION OF TEMP-CABLE-STEP = DOWN-DIRECTION
+                   SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM NAVY
+               END-IF
+
+               DISPLAY "(NAVX, NAVY): ("NAVX", "NAVY")"
+               IF GRID-CHARACTER(NAVX, NAVY) = CH1
+                   MOVE CHBOTH TO GRID-CHARACTER(NAVX, NAVY)
+               ELSE
+                   MOVE CH2 TO GRID-CHARACTER(NAVX, NAVY)
+               END-IF
+           END-PERFORM.
+
+           DISPLAY "REACHED HERE".
+
+       STOP RUN.
