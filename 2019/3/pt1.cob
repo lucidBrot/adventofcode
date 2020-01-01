@@ -41,6 +41,10 @@
                10 GRID-COL OCCURS 3000 TIMES.
                    15 GRID-CHARACTER PIC X(1).
 
+       01 TEMP-CABLE-STEP.
+           05 DIRECTION PIC A(1) VALUE 'Z'.
+           05 NUM-STEPS PIC 9(4) VALUE 0.
+
        01 CABLE-ONE.
            02 STUFF OCCURS 1000 TIMES.
                05 DIRECTION PIC A(1) VALUE 'Z'.
@@ -57,6 +61,11 @@
            DISPLAY 'Hello World!'.
       *    Specify Grid Size
            OPEN Input MYINPUTFILE.
+           READ MYINPUTFILE INTO TEMP-CABLE-STEP.
+           DISPLAY TEMP-CABLE-STEP
+           DISPLAY DIRECTION OF TEMP-CABLE-STEP.
+           DISPLAY NUM-STEPS OF TEMP-CABLE-STEP.
+           DISPLAY "".
            PERFORM UNTIL WS-EOF='Y'
                READ MYINPUTFILE INTO WS-CONTENT
                    AT END MOVE 'Y' TO WS-EOF
