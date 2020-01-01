@@ -41,8 +41,7 @@
        01 GRID.
            05 GRID-ROW OCCURS 1 TO 10000 TIMES DEPENDING ON
            NUM-GRID-ROWS.
-               10 GRID-COL OCCURS 1 TO 10000 TIMES DEPENDING ON
-               NUM-GRID-COLS.
+               10 GRID-COL OCCURS 10000.
                    15 GRID-CHARACTER PIC X(1).
 
       * Executable Code
