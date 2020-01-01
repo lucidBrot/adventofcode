@@ -46,6 +46,11 @@
                05 DIRECTION PIC A(1) VALUE 'Z'.
                05 NUM-STEPS PIC 9(4) VALUE 0.
 
+       01 CABLE-TWO.
+           02 STUFF OCCURS 1000 TIMES.
+               05 DIRECTION PIC A(1) VALUE 'Z'.
+               05 NUM-STEPS PIC 9(4) VALUE 0.
+
       * Executable Code
        PROCEDURE DIVISION.
            DISPLAY WS-SOMETHING.
