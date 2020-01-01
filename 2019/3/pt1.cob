@@ -62,8 +62,8 @@
       *    Specify Grid Size
            OPEN Input MYINPUTFILE.
                UNSTRING "U12,D124,C23" DELIMITED BY "," INTO
-               TEMP-CABLE-STEP.
-               DISPLAY "First line:"TEMP-CABLE-STEP
+               CABLE-TWO.
+               DISPLAY "First line:"CABLE-TWO
                DISPLAY " "
            PERFORM UNTIL WS-EOF='Y'
                READ MYINPUTFILE INTO TEMP-CABLE-STEP
