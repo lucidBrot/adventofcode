@@ -11,10 +11,12 @@
       ** OBJECT-COMPUTER. XXX
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
+       SELECT MYINPUTFILE ASSIGN TO 'input.txt'
+       ORGANIZATION IS LINE SEQUENTIAL.
       * Constants
-       DATA DIVISION.
       * File, Working-storage for temp variables, Local-Storage for allocated variables, Linkage
       * Executable Code
        PROCEDURE DIVISION.
            DISPLAY 'Hello World!'.
+           OPEN Input MYINPUTFILE.
            STOP RUN.
