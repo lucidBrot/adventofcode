@@ -94,6 +94,8 @@
       *                    WS-CONTENT
                    NOT AT END 
 
+                DISPLAY "GUGUS: "TEMP-CABLE-STEP
+                DISPLAY "DADA: "DIRECTION OF TEMP-CABLE-STEP
                    MOVE DIRECTION OF TEMP-CABLE-STEP TO DIRECTION OF
                    CONE-STUFF(LOOP-CTR)
                    MOVE NUM-STEPS OF TEMP-CABLE-STEP TO NUM-STEPS OF
