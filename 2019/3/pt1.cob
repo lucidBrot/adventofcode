@@ -160,5 +160,6 @@
            END-PERFORM.
 
       DISPLAY "MAP: "GRID
+      *TODO: store second cable and intersections
 
            STOP RUN.
