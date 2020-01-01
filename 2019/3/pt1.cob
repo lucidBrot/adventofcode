@@ -36,14 +36,9 @@
       * same as X(2)),
       * X(Alphanumeric), Z, 1, 9 and *
       * I don't know yet what all of them do.
-       01 TABLE-REC. 
-       02 NUM-GRID-ROWS PIC S9(10) BINARY.
-       02 NUM-GRID-COLS PIC S9(10) BINARY.
-       02 GRID.
-           05 GRID-ROW OCCURS 1 TO 10000 TIMES DEPENDING ON
-           NUM-GRID-ROWS.
-               10 GRID-COL OCCURS 1 TO 10000 TIMES DEPENDING ON
-               NUM-GRID-COLS.
+       01 GRID.
+           05 GRID-ROW OCCURS 3000 TIMES.
+               10 GRID-COL OCCURS 3000 TIMES.
                    15 GRID-CHARACTER PIC X(1).
 
       * Executable Code
@@ -51,8 +46,6 @@
            DISPLAY WS-SOMETHING.
            DISPLAY 'Hello World!'.
       *    Specify Grid Size
-           MOVE 2000 TO NUM-GRID-ROWS.
-           MOVE 2000 TO NUM-GRID-COLS.
            OPEN Input MYINPUTFILE.
            PERFORM UNTIL WS-EOF='Y'
                READ MYINPUTFILE INTO WS-CONTENT
