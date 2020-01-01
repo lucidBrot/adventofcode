@@ -11,7 +11,7 @@
       ** OBJECT-COMPUTER. XXX
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-       SELECT MYINPUTFILE ASSIGN TO 'input.txt'
+       SELECT ONEINPUTFILE ASSIGN TO 'cable1.txt'
            ORGANIZATION IS LINE SEQUENTIAL.
       * Constants and Variables are in the Data Division:
       * File, Working-storage for temp variables, Local-Storage for allocated variables, Linkage
@@ -62,9 +62,9 @@
            DISPLAY WS-SOMETHING.
            DISPLAY 'Hello World!'.
       *    Specify Grid Size
-           OPEN Input MYINPUTFILE.
+           OPEN Input ONEINPUTFILE.
            PERFORM UNTIL WS-EOF='Y'
-               READ MYINPUTFILE INTO TEMP-CABLE-STEP
+               READ ONEINPUTFILE INTO TEMP-CABLE-STEP
                    AT END MOVE 'Y' TO WS-EOF
       *                    Invalidly structured data is printed empty when using
       *                    WS-SOME-NAME but is printed entirely when using
@@ -83,5 +83,5 @@
                END-READ
            END-PERFORM.
            DISPLAY "CABLE: "CABLE-ONE.
-           CLOSE MYINPUTFILE.
+           CLOSE ONEINPUTFILE.
            STOP RUN.
