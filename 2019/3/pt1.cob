@@ -61,18 +61,17 @@
            DISPLAY 'Hello World!'.
       *    Specify Grid Size
            OPEN Input MYINPUTFILE.
-           READ MYINPUTFILE INTO TEMP-CABLE-STEP.
-           DISPLAY TEMP-CABLE-STEP
-           DISPLAY DIRECTION OF TEMP-CABLE-STEP.
-           DISPLAY NUM-STEPS OF TEMP-CABLE-STEP.
-           DISPLAY "".
            PERFORM UNTIL WS-EOF='Y'
-               READ MYINPUTFILE INTO WS-CONTENT
+               READ MYINPUTFILE INTO TEMP-CABLE-STEP
                    AT END MOVE 'Y' TO WS-EOF
-      *            Invalidly structured data is printed empty when using
-      *            WS-SOME-NAME but is printed entirely when using
-      *            WS-CONTENT
-                   NOT AT END DISPLAY WS-SOME-NAME
+      *                    Invalidly structured data is printed empty when using
+      *                    WS-SOME-NAME but is printed entirely when using
+      *                    WS-CONTENT
+                   NOT AT END 
+                   DISPLAY TEMP-CABLE-STEP
+                   DISPLAY DIRECTION OF TEMP-CABLE-STEP
+                   DISPLAY NUM-STEPS OF TEMP-CABLE-STEP
+                   DISPLAY " "
                END-READ
            END-PERFORM.
            CLOSE MYINPUTFILE.
