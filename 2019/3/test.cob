@@ -45,6 +45,9 @@
            PERFORM UNTIL WS-EOF='Y'
                READ MYINPUTFILE INTO WS-CONTENT
                    AT END MOVE 'Y' TO WS-EOF
+      *            Invalidly structured data is printed empty when using
+      *            WS-SOME-NAME but is printed entirely when using
+      *            WS-CONTENT
                    NOT AT END DISPLAY WS-SOME-NAME
                END-READ
            END-PERFORM.
