@@ -36,12 +36,14 @@
       * same as X(2)),
       * X(Alphanumeric), Z, 1, 9 and *
       * I don't know yet what all of them do.
-       01 NUM-GRID-ROWS PIC 9(1).
-       01 NUM-GRID-COLS PIC 9(1).
-       01 GRID.
+       01 TABLE-REC. 
+       02 NUM-GRID-ROWS PIC S9(10) BINARY.
+       02 NUM-GRID-COLS PIC S9(10) BINARY.
+       02 GRID.
            05 GRID-ROW OCCURS 1 TO 10000 TIMES DEPENDING ON
            NUM-GRID-ROWS.
-               10 GRID-COL OCCURS 10000.
+               10 GRID-COL OCCURS 1 TO 10000 TIMES DEPENDING ON
+               NUM-GRID-COLS.
                    15 GRID-CHARACTER PIC X(1).
 
       * Executable Code
