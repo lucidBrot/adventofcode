@@ -133,7 +133,8 @@
                ADD 1 TO LOOP-CTR
                MOVE CONE-STUFF(LOOP-CTR) TO TEMP-CABLE-STEP
 
-               DISPLAY "CABLE 1 DO "TEMP-CABLE-STEP
+               DISPLAY "CABLE 1 DO "DIRECTION OF
+               TEMP-CABLE-STEP":"NUM-STEPS OF TEMP-CABLE-STEP
                IF ( DIRECTION OF TEMP-CABLE-STEP =
                    UNINITIALIZED-DIRECTION )
                    SET LOOP-CTR TO 1001
@@ -159,7 +160,7 @@
                MOVE CH1 TO GRID-CHARACTER(NAVX, NAVY)
            END-PERFORM.
 
-      DISPLAY "MAP: "GRID
+       DISPLAY "MAP: "GRID
       *TODO: store second cable and intersections
 
            STOP RUN.
