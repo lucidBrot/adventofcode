@@ -58,6 +58,10 @@
                05 NUM-STEPS PIC 9(4) VALUE 0.
 
        01 UNINITIALIZED-DIRECTION PIC A(1) VALUE 'Z'.
+       01 UP-DIRECTION PIC A(1) VALUE 'U'.
+       01 DOWN-DIRECTION PIC A(1) VALUE 'D'.
+       01 LEFT-DIRECTION PIC A(1) VALUE 'L'.
+       01 RIGHT-DIRECTION PIC A(1) VALUE 'R'.
 
        01 LOOP-CTR PIC 9(10) VALUE 1 .
            
@@ -115,7 +119,8 @@
       *    Later find again using a search where DIRECTION is X (and not
       *    Z for uninitialized or U,D,L,R for up down left right)
 
-      * read cable 1 into the grid
+      * read cable 1 into the grid. X is right/left, Y is up/down. 0,0
+      * is at top left corner
            SET LOOP-CTR TO 0 .
            SET NAVX TO CENTEER .
            MOVE CENTEER TO NAVY .
@@ -128,6 +133,24 @@
                    UNINITIALIZED-DIRECTION )
                    SET LOOP-CTR TO 1001
                END-IF
+
+               IF DIRECTION OF TEMP-CABLE-STEP = RIGHT-DIRECTION
+                   ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVX
+               END-IF
+
+               IF DIRECTION OF TEMP-CABLE-STEP = UP-DIRECTION
+                   ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVY
+               END-IF
+               
+               IF DIRECTION OF TEMP-CABLE-STEP = LEFT-DIRECTION
+                   SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM NAVX
+               END-IF
+
+               IF DIRECTION OF TEMP-CABLE-STEP = DOWN-DIRECTION
+                   SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM NAVY
+               END-IF
+
+               DISPLAY "(NAVX, NAVY): ("NAVX", "NAVY")"
            END-PERFORM.
 
            STOP RUN.
