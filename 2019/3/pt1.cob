@@ -139,10 +139,6 @@
                    SET LOOP-CTR TO 1001
                END-IF
 
-               DISPLAY "NUM-STEPS: "NUM-STEPS OF TEMP-CABLE-STEP
-           DISPLAY CONE-STUFF(1)
-           DISPLAY NUM-STEPS OF CONE-STUFF(1)
-
                IF DIRECTION OF TEMP-CABLE-STEP = RIGHT-DIRECTION
                    ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVX
                END-IF
