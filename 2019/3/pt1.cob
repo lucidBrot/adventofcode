@@ -48,17 +48,17 @@
 
        01 TEMP-CABLE-STEP.
            05 DIRECTION PIC A(1) VALUE 'Z'.
-           05 NUM-STEPS PIC S9(9) VALUE 0.
+           05 NUM-STEPS PIC S9(9) BINARY VALUE 0.
 
        01 CABLE-ONE.
            02 CONE-STUFF OCCURS 1000 TIMES.
                05 DIRECTION PIC A(1) VALUE 'Z'.
-               05 NUM-STEPS PIC S9(9) VALUE 0.
+               05 NUM-STEPS PIC S9(9) BINARY VALUE 0.
 
        01 CABLE-TWO.
            02 CTWO-STUFF OCCURS 1000 TIMES.
                05 DIRECTION PIC A(1) VALUE 'Z'.
-               05 NUM-STEPS PIC S9(9) VALUE 0.
+               05 NUM-STEPS PIC S9(9) BINARY VALUE 0.
 
        01 UNINITIALIZED-DIRECTION PIC A(1) VALUE 'Z'.
        01 UP-DIRECTION PIC A(1) VALUE 'U'.
@@ -68,9 +68,9 @@
 
        01 LOOP-CTR PIC 9(10) VALUE 1 .
            
-       01 CENTEER PIC S9(10) VALUE 500 .
-       01 NAVX PIC S9(10).
-       01 NAVY PIC S9(10).
+       01 CENTEER PIC S9(10) BINARY VALUE 500 .
+       01 NAVX PIC S9(10) BINARY.
+       01 NAVY PIC S9(10) BINARY.
 
       * Executable Code
        PROCEDURE DIVISION.
