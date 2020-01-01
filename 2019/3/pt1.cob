@@ -126,7 +126,7 @@
       * is at top left corner
            SET LOOP-CTR TO 0 .
            SET NAVX TO CENTEER .
-           MOVE CENTEER TO NAVY .
+           SET NAVY TO CENTEER .
            PERFORM UNTIL LOOP-CTR > 1000
                ADD 1 TO LOOP-CTR
                MOVE CONE-STUFF(LOOP-CTR) TO TEMP-CABLE-STEP
