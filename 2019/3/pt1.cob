@@ -61,6 +61,10 @@
            DISPLAY 'Hello World!'.
       *    Specify Grid Size
            OPEN Input MYINPUTFILE.
+               UNSTRING "U12,D124,C23" DELIMITED BY "," INTO
+               TEMP-CABLE-STEP.
+               DISPLAY "First line:"TEMP-CABLE-STEP
+               DISPLAY " "
            PERFORM UNTIL WS-EOF='Y'
                READ MYINPUTFILE INTO TEMP-CABLE-STEP
                    AT END MOVE 'Y' TO WS-EOF
