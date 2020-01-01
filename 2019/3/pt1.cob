@@ -13,6 +13,8 @@
        FILE-CONTROL.
        SELECT ONEINPUTFILE ASSIGN TO 'cable1.txt'
            ORGANIZATION IS LINE SEQUENTIAL.
+       SELECT TWOINPUTFILE ASSIGN TO 'cable2.txt'
+           ORGANIZATION IS LINE SEQUENTIAL.
       * Constants and Variables are in the Data Division:
       * File, Working-storage for temp variables, Local-Storage for allocated variables, Linkage
        DATA DIVISION.
@@ -59,8 +61,8 @@
 
       * Executable Code
        PROCEDURE DIVISION.
-           DISPLAY WS-SOMETHING.
-           DISPLAY 'Hello World!'.
+           SET LOOP-CTR TO 1 .
+           MOVE 'N' TO WS-EOF .
       *    Specify Grid Size
            OPEN Input ONEINPUTFILE.
            PERFORM UNTIL WS-EOF='Y'
@@ -70,10 +72,6 @@
       *                    WS-SOME-NAME but is printed entirely when using
       *                    WS-CONTENT
                    NOT AT END 
-                   DISPLAY DIRECTION OF TEMP-CABLE-STEP
-                   DISPLAY NUM-STEPS OF TEMP-CABLE-STEP
-                   DISPLAY "CTR: "LOOP-CTR
-                   DISPLAY " "
 
                    MOVE DIRECTION OF TEMP-CABLE-STEP TO DIRECTION OF
                    CONE-STUFF(LOOP-CTR)
@@ -84,4 +82,26 @@
            END-PERFORM.
            DISPLAY "CABLE: "CABLE-ONE.
            CLOSE ONEINPUTFILE.
+
+           SET LOOP-CTR TO 1 .
+           MOVE 'N' TO WS-EOF .
+           OPEN Input TWOINPUTFILE.
+           PERFORM UNTIL WS-EOF='Y'
+               READ TWOINPUTFILE INTO TEMP-CABLE-STEP
+                   AT END MOVE 'Y' TO WS-EOF
+      *                    Invalidly structured data is printed empty when using
+      *                    WS-SOME-NAME but is printed entirely when using
+      *                    WS-CONTENT
+                   NOT AT END 
+
+                   MOVE DIRECTION OF TEMP-CABLE-STEP TO DIRECTION OF
+                   CONE-STUFF(LOOP-CTR)
+                   MOVE NUM-STEPS OF TEMP-CABLE-STEP TO NUM-STEPS OF
+                   CONE-STUFF(LOOP-CTR)
+                   ADD 1 TO LOOP-CTR
+               END-READ
+           END-PERFORM.
+           DISPLAY "CABLE: "CABLE-TWO.
+           CLOSE TWOINPUTFILE.
+
            STOP RUN.
