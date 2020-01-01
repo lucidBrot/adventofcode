@@ -104,4 +104,9 @@
            DISPLAY "CABLE: "CABLE-TWO.
            CLOSE TWOINPUTFILE.
 
+      *    Cables parsed.
+      *    Now write to grid and when they cross, mark as X
+      *    Later find again using a search where DIRECTION is X (and not
+      *    Z for uninitialized or U,D,L,R for up down left right)
+
            STOP RUN.
