@@ -57,7 +57,13 @@
                05 DIRECTION PIC A(1) VALUE 'Z'.
                05 NUM-STEPS PIC 9(4) VALUE 0.
 
-       01 LOOP-CTR PIC 9(10) VALUE 1.
+       01 UNINITIALIZED-DIRECTION PIC A(1) VALUE 'Z'.
+
+       01 LOOP-CTR PIC 9(10) VALUE 1 .
+           
+       01 CENTEER PIC 9(10) VALUE 500 .
+       01 NAVX PIC 9(10).
+       01 NAVY PIC 9(10).
 
       * Executable Code
        PROCEDURE DIVISION.
@@ -108,5 +114,19 @@
       *    Now write to grid and when they cross, mark as X
       *    Later find again using a search where DIRECTION is X (and not
       *    Z for uninitialized or U,D,L,R for up down left right)
+
+      * read cable 1 into the grid
+           SET LOOP-CTR TO 0 .
+           SET NAVX TO CENTEER .
+           MOVE CENTEER TO NAVY .
+           PERFORM UNTIL LOOP-CTR > 1000
+               MOVE CONE-STUFF(LOOP-CTR) TO TEMP-CABLE-STEP
+      * TODO: interpret commandsj
+               DISPLAY "CABLE 1 DO "TEMP-CABLE-STEP
+               IF ( DIRECTION OF TEMP-CABLE-STEP =
+                   UNINITIALIZED-DIRECTION )
+                   SET LOOP-CTR TO 1001
+               END-IF
+           END-PERFORM.
 
            STOP RUN.
