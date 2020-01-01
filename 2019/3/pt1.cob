@@ -68,9 +68,9 @@
 
        01 LOOP-CTR PIC 9(10) VALUE 1 .
            
-       01 CENTEER PIC S9(10) USAGE IS COMPUTATIONAL VALUE 500 .
-       01 NAVX PIC S9(10) USAGE IS COMPUTATIONAL.
-       01 NAVY PIC S9(10) USAGE IS COMPUTATIONAL.
+       01 CENTEER PIC S9(9) USAGE IS COMPUTATIONAL VALUE 500 .
+       01 NAVX PIC S9(9) USAGE IS COMPUTATIONAL.
+       01 NAVY PIC S9(9) USAGE IS COMPUTATIONAL.
 
       * Executable Code
        PROCEDURE DIVISION.
@@ -88,7 +88,8 @@
 
                    MOVE DIRECTION OF TEMP-CABLE-STEP TO DIRECTION OF
                    CONE-STUFF(LOOP-CTR)
-                   MOVE NUM-STEPS OF TEMP-CABLE-STEP TO NUM-STEPS OF
+                   MOVE FUNCTION NUMVAL(NUM-STEPS OF TEMP-CABLE-STEP)
+                   TO NUM-STEPS OF
                    CONE-STUFF(LOOP-CTR)
                    ADD 1 TO LOOP-CTR
                END-READ
@@ -109,7 +110,8 @@
 
                    MOVE DIRECTION OF TEMP-CABLE-STEP TO DIRECTION OF
                    CTWO-STUFF(LOOP-CTR)
-                   MOVE NUM-STEPS OF TEMP-CABLE-STEP TO NUM-STEPS OF
+                   MOVE FUNCTION NUMVAL(NUM-STEPS OF TEMP-CABLE-STEP)
+                   TO NUM-STEPS OF
                    CTWO-STUFF(LOOP-CTR)
                    ADD 1 TO LOOP-CTR
                END-READ
@@ -137,6 +139,10 @@
                    SET LOOP-CTR TO 1001
                END-IF
 
+               DISPLAY "NUM-STEPS: "NUM-STEPS OF TEMP-CABLE-STEP
+           DISPLAY CONE-STUFF(1)
+           DISPLAY NUM-STEPS OF CONE-STUFF(1)
+
                IF DIRECTION OF TEMP-CABLE-STEP = RIGHT-DIRECTION
                    ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVX
                END-IF
@@ -157,6 +163,6 @@
                MOVE CH1 TO GRID-CHARACTER(NAVX, NAVY)
            END-PERFORM.
 
-           DISPLAY "MAP: "GRID
+      * DISPLAY "MAP: "GRID
 
            STOP RUN.
