@@ -41,7 +41,10 @@
        01 GRID.
            05 GRID-ROW OCCURS 3000 TIMES.
                10 GRID-COL OCCURS 3000 TIMES.
-                   15 GRID-CHARACTER PIC X(1).
+                   15 GRID-CHARACTER PIC X(1) VALUE 'E'.
+       01 CH1 PIC X(1) VALUE '1'.
+       01 CH2 PIC X(1) VALUE '2'.
+       01 CHEMPTY PIC X(1) VALUE 'E'.
 
        01 TEMP-CABLE-STEP.
            05 DIRECTION PIC A(1) VALUE 'Z'.
@@ -127,7 +130,7 @@
            PERFORM UNTIL LOOP-CTR > 1000
                ADD 1 TO LOOP-CTR
                MOVE CONE-STUFF(LOOP-CTR) TO TEMP-CABLE-STEP
-      * TODO: interpret commandsj
+
                DISPLAY "CABLE 1 DO "TEMP-CABLE-STEP
                IF ( DIRECTION OF TEMP-CABLE-STEP =
                    UNINITIALIZED-DIRECTION )
@@ -151,6 +154,9 @@
                END-IF
 
                DISPLAY "(NAVX, NAVY): ("NAVX", "NAVY")"
+               MOVE CH1 TO GRID-CHARACTER(NAVX, NAVY)
            END-PERFORM.
+
+           DISPLAY "MAP: "GRID
 
            STOP RUN.
