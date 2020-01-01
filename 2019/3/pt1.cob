@@ -46,14 +46,16 @@
            05 NUM-STEPS PIC 9(4) VALUE 0.
 
        01 CABLE-ONE.
-           02 STUFF OCCURS 1000 TIMES.
+           02 CONE-STUFF OCCURS 1000 TIMES.
                05 DIRECTION PIC A(1) VALUE 'Z'.
                05 NUM-STEPS PIC 9(4) VALUE 0.
 
        01 CABLE-TWO.
-           02 STUFF OCCURS 1000 TIMES.
+           02 CTWO-STUFF OCCURS 1000 TIMES.
                05 DIRECTION PIC A(1) VALUE 'Z'.
                05 NUM-STEPS PIC 9(4) VALUE 0.
+
+       01 LOOP-CTR PIC 9(10) VALUE 1.
 
       * Executable Code
        PROCEDURE DIVISION.
@@ -61,10 +63,6 @@
            DISPLAY 'Hello World!'.
       *    Specify Grid Size
            OPEN Input MYINPUTFILE.
-               UNSTRING "U12,D124,C23" DELIMITED BY "," INTO
-               CABLE-TWO.
-               DISPLAY "First line:"CABLE-TWO
-               DISPLAY " "
            PERFORM UNTIL WS-EOF='Y'
                READ MYINPUTFILE INTO TEMP-CABLE-STEP
                    AT END MOVE 'Y' TO WS-EOF
@@ -72,11 +70,18 @@
       *                    WS-SOME-NAME but is printed entirely when using
       *                    WS-CONTENT
                    NOT AT END 
-                   DISPLAY TEMP-CABLE-STEP
                    DISPLAY DIRECTION OF TEMP-CABLE-STEP
                    DISPLAY NUM-STEPS OF TEMP-CABLE-STEP
+                   DISPLAY "CTR: "LOOP-CTR
                    DISPLAY " "
+
+                   MOVE DIRECTION OF TEMP-CABLE-STEP TO DIRECTION OF
+                   CONE-STUFF(LOOP-CTR)
+                   MOVE NUM-STEPS OF TEMP-CABLE-STEP TO NUM-STEPS OF
+                   CONE-STUFF(LOOP-CTR)
+                   ADD 1 TO LOOP-CTR
                END-READ
            END-PERFORM.
+           DISPLAY "CABLE: "CABLE-ONE.
            CLOSE MYINPUTFILE.
            STOP RUN.
