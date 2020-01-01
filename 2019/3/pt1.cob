@@ -39,8 +39,8 @@
       * X(Alphanumeric), Z, 1, 9 and *
       * I don't know yet what all of them do.
        01 GRID.
-           05 GRID-ROW OCCURS 3000 TIMES.
-               10 GRID-COL OCCURS 3000 TIMES.
+           05 GRID-ROW OCCURS 10000 TIMES.
+               10 GRID-COL OCCURS 10000 TIMES.
                    15 GRID-CHARACTER PIC X(1) VALUE 'E'.
        01 CH1 PIC X(1) VALUE '1'.
        01 CH2 PIC X(1) VALUE '2'.
@@ -68,7 +68,7 @@
 
        01 LOOP-CTR PIC 9(10) VALUE 1 .
            
-       01 CENTEER PIC S9(9) USAGE IS COMPUTATIONAL VALUE 500 .
+       01 CENTEER PIC S9(9) USAGE IS COMPUTATIONAL VALUE 5000 .
        01 NAVX PIC S9(9) USAGE IS COMPUTATIONAL.
        01 NAVY PIC S9(9) USAGE IS COMPUTATIONAL.
 
@@ -159,6 +159,6 @@
                MOVE CH1 TO GRID-CHARACTER(NAVX, NAVY)
            END-PERFORM.
 
-      * DISPLAY "MAP: "GRID
+      DISPLAY "MAP: "GRID
 
            STOP RUN.
