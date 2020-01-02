@@ -11,9 +11,9 @@
       ** OBJECT-COMPUTER. XXX
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-SELECT ONEINPUTFILE ASSIGN TO 'cable1.txt'
+       SELECT ONEINPUTFILE ASSIGN TO 'cable1.txt'
            ORGANIZATION IS LINE SEQUENTIAL.
-SELECT TWOINPUTFILE ASSIGN TO 'cable2.txt'
+       SELECT TWOINPUTFILE ASSIGN TO 'cable2.txt'
            ORGANIZATION IS LINE SEQUENTIAL.
       * Constants and Variables are in the Data Division:
       * File, Working-storage for temp variables, Local-Storage for allocated variables, Linkage
@@ -49,13 +49,13 @@ SELECT TWOINPUTFILE ASSIGN TO 'cable2.txt'
 
        01 CABLE-ONE.
            02 CONE-STUFF OCCURS 1000 TIMES.
-           05 DIRECTION PIC A(1) VALUE 'Z'.
-           05 NUM-STEPS PIC S9(9) USAGE IS COMPUTATIONAL VALUE 0.
+               05 DIRECTION PIC A(1) VALUE 'Z'.
+               05 NUM-STEPS PIC S9(9) USAGE IS COMPUTATIONAL VALUE 0.
 
        01 CABLE-TWO.
            02 CTWO-STUFF OCCURS 1000 TIMES.
-           05 DIRECTION PIC A(1) VALUE 'Z'.
-           05 NUM-STEPS PIC S9(9) USAGE IS COMPUTATIONAL VALUE 0.
+               05 DIRECTION PIC A(1) VALUE 'Z'.
+               05 NUM-STEPS PIC S9(9) USAGE IS COMPUTATIONAL VALUE 0.
 
        01 UNINITIALIZED-DIRECTION PIC A(1) VALUE 'Z'.
        01 UP-DIRECTION PIC A(1) VALUE 'U'.
@@ -64,7 +64,7 @@ SELECT TWOINPUTFILE ASSIGN TO 'cable2.txt'
        01 RIGHT-DIRECTION PIC A(1) VALUE 'R'.
 
        01 LOOP-CTR PIC 9(10) VALUE 1 .
-
+           
        01 CENTEER PIC S9(9) USAGE IS COMPUTATIONAL VALUE 38500 .
        01 NAVX PIC S9(9) USAGE IS COMPUTATIONAL.
        01 NAVX-PREV PIC S9(9) USAGE IS COMPUTATIONAL.
@@ -75,16 +75,16 @@ SELECT TWOINPUTFILE ASSIGN TO 'cable2.txt'
 
        01 GRIDSET.
            03 SET-ENTRY OCCURS 1000 TIMES INDEXED BY SEARCHINDEX.
-           05 X-COORD PIC 9(9).
-           05 Y-COORD PIC 9(9).
-           05 CHAR PIC X(1) VALUE 'E'.
+               05 X-COORD PIC 9(9).
+               05 Y-COORD PIC 9(9).
+               05 CHAR PIC X(1) VALUE 'E'.
            03 LATEST-INSERT PIC 9(9) VALUE 0.
 
        01 GRIDSET1AND2.
            03 SET-ENTRY2 OCCURS 1000 TIMES INDEXED BY SEARCHINDEX2.
-           05 X-COORD PIC 9(9).
-           05 Y-COORD PIC 9(9).
-           05 CHAR PIC X(1) VALUE 'E'.
+               05 X-COORD PIC 9(9).
+               05 Y-COORD PIC 9(9).
+               05 CHAR PIC X(1) VALUE 'E'.
            03 LATEST-INSERT2 PIC 9(9) VALUE 0.
 
        01 INSERTSETENTRY2.
@@ -109,12 +109,12 @@ SELECT TWOINPUTFILE ASSIGN TO 'cable2.txt'
       *                    WS-CONTENT
                    NOT AT END 
 
-                       MOVE DIRECTION OF TEMP-CABLE-STEP TO DIRECTION OF
-                       CONE-STUFF(LOOP-CTR)
-                       MOVE FUNCTION NUMVAL(NUM-STEPS OF TEMP-CABLE-STEP)
-                       TO NUM-STEPS OF
-                       CONE-STUFF(LOOP-CTR)
-                       ADD 1 TO LOOP-CTR
+                   MOVE DIRECTION OF TEMP-CABLE-STEP TO DIRECTION OF
+                   CONE-STUFF(LOOP-CTR)
+                   MOVE FUNCTION NUMVAL(NUM-STEPS OF TEMP-CABLE-STEP)
+                   TO NUM-STEPS OF
+                   CONE-STUFF(LOOP-CTR)
+                   ADD 1 TO LOOP-CTR
                END-READ
            END-PERFORM.
       *DISPLAY "CABLE: "CABLE-ONE.
@@ -131,12 +131,12 @@ SELECT TWOINPUTFILE ASSIGN TO 'cable2.txt'
       *                    WS-CONTENT
                    NOT AT END 
 
-                       MOVE DIRECTION OF TEMP-CABLE-STEP TO DIRECTION OF
-                       CTWO-STUFF(LOOP-CTR)
-                       MOVE FUNCTION NUMVAL(NUM-STEPS OF TEMP-CABLE-STEP)
-                       TO NUM-STEPS OF
-                       CTWO-STUFF(LOOP-CTR)
-                       ADD 1 TO LOOP-CTR
+                   MOVE DIRECTION OF TEMP-CABLE-STEP TO DIRECTION OF
+                   CTWO-STUFF(LOOP-CTR)
+                   MOVE FUNCTION NUMVAL(NUM-STEPS OF TEMP-CABLE-STEP)
+                   TO NUM-STEPS OF
+                   CTWO-STUFF(LOOP-CTR)
+                   ADD 1 TO LOOP-CTR
                END-READ
            END-PERFORM.
       *DISPLAY "CABLE: "CABLE-TWO.
@@ -165,12 +165,12 @@ SELECT TWOINPUTFILE ASSIGN TO 'cable2.txt'
 
       * set every value from the current position up to (including) the
       * final position
-                   SET NAVY-PREV TO NAVY
-                   SET NAVX-PREV TO NAVX
-                   ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVX-PREV
-GIVING NAVX-POST
+           SET NAVY-PREV TO NAVY
+           SET NAVX-PREV TO NAVX
+           ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVX-PREV
+               GIVING NAVX-POST
            ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVY-PREV
-GIVING NAVY-POST
+               GIVING NAVY-POST
       * only NAVX-POST XOR NAVY-POST are relevant, only NAVY XOR NAVX
       * shall be modified
            PERFORM UNTIL NAVX = NAVX-POST AND NAVY = NAVY-POST
@@ -182,33 +182,33 @@ GIVING NAVY-POST
                IF DIRECTION OF TEMP-CABLE-STEP = UP-DIRECTION
                    ADD 1 TO NAVY
                END-IF
-
+               
                IF DIRECTION OF TEMP-CABLE-STEP = LEFT-DIRECTION
-SUBTRACT 1 FROM NAVX
+                   SUBTRACT 1 FROM NAVX
                END-IF
 
                IF DIRECTION OF TEMP-CABLE-STEP = DOWN-DIRECTION
-SUBTRACT 1 FROM NAVY
+                   SUBTRACT 1 FROM NAVY
                END-IF
 
       * search list for that value and if it is not there, set it
                SET SEARCHINDEX TO 1
-SEARCH SET-ENTRY OF GRIDSET
-           VARYING SEARCHINDEX
-           AT END 
-               ADD 1 TO LATEST-INSERT OF GRIDSET
-               MOVE CH1 TO CHAR OF SET-ENTRY(LATEST-INSERT)
-               MOVE NAVX TO X-COORD OF SET-ENTRY(LATEST-INSERT)
-               MOVE NAVY TO Y-COORD OF SET-ENTRY(LATEST-INSERT)
-               DISPLAY "INSERTED CABLE1: ("NAVX", "NAVY")"
-           WHEN ( X-COORD OF SET-ENTRY(SEARCHINDEX) = NAVX ) AND
-               ( Y-COORD OF SET-ENTRY(SEARCHINDEX) = NAVY )
-               MOVE CH1 TO CHAR OF SET-ENTRY(SEARCHINDEX)
-               DISPLAY "MODIFIED CABLE1: ("NAVX", "NAVY")"
-           END-SEARCH
+               SEARCH SET-ENTRY OF GRIDSET
+                   VARYING SEARCHINDEX
+                   AT END 
+                       ADD 1 TO LATEST-INSERT OF GRIDSET
+                       MOVE CH1 TO CHAR OF SET-ENTRY(LATEST-INSERT)
+                       MOVE NAVX TO X-COORD OF SET-ENTRY(LATEST-INSERT)
+                       MOVE NAVY TO Y-COORD OF SET-ENTRY(LATEST-INSERT)
+                       DISPLAY "INSERTED CABLE1: ("NAVX", "NAVY")"
+                   WHEN ( X-COORD OF SET-ENTRY(SEARCHINDEX) = NAVX ) AND
+                       ( Y-COORD OF SET-ENTRY(SEARCHINDEX) = NAVY )
+                       MOVE CH1 TO CHAR OF SET-ENTRY(SEARCHINDEX)
+                       DISPLAY "MODIFIED CABLE1: ("NAVX", "NAVY")"
+               END-SEARCH
                END-IF
-           END-PERFORM
-           END-PERFORM.
+               END-PERFORM
+               END-PERFORM.
 
       *TODO: store second cable and intersections
            SET LOOP-CTR TO 0 .
@@ -232,35 +232,35 @@ SEARCH SET-ENTRY OF GRIDSET
                IF DIRECTION OF TEMP-CABLE-STEP = UP-DIRECTION
                    ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVY
                END-IF
-
+               
                IF DIRECTION OF TEMP-CABLE-STEP = LEFT-DIRECTION
-SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM NAVX
+                   SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM NAVX
                END-IF
 
                IF DIRECTION OF TEMP-CABLE-STEP = DOWN-DIRECTION
-SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM NAVY
+                   SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM NAVY
                END-IF
 
                DISPLAY "(NAVX, NAVY): ("NAVX", "NAVY")"
 
                SET SEARCHINDEX TO 1
-SEARCH SET-ENTRY OF GRIDSET
-           VARYING SEARCHINDEX
-           AT END
+               SEARCH SET-ENTRY OF GRIDSET
+                   VARYING SEARCHINDEX
+                   AT END
       *            This was not crossed by cable 1
-               DISPLAY "NOPE"
-           WHEN ( X-COORD OF SET-ENTRY(SEARCHINDEX) = NAVX ) AND
-               ( Y-COORD OF SET-ENTRY(SEARCHINDEX) = NAVY )
-               DISPLAY "FOUND "
+                       DISPLAY "NOPE"
+                   WHEN ( X-COORD OF SET-ENTRY(SEARCHINDEX) = NAVX ) AND
+                       ( Y-COORD OF SET-ENTRY(SEARCHINDEX) = NAVY )
+                       DISPLAY "FOUND "
       *            This was crossed by cable 1, add it to new list
-               MOVE CH2 TO CHAR OF INSERTSETENTRY2
-               MOVE NAVX TO X-COORD OF INSERTSETENTRY2
-               MOVE NAVY TO Y-COORD OF INSERTSETENTRY2
-               DISPLAY "FOUND VISITED BY BOTH: ("NAVX", "NAVY")"
-               PERFORM INSERTION
-           END-SEARCH
+                       MOVE CH2 TO CHAR OF INSERTSETENTRY2
+                       MOVE NAVX TO X-COORD OF INSERTSETENTRY2
+                       MOVE NAVY TO Y-COORD OF INSERTSETENTRY2
+                       DISPLAY "FOUND VISITED BY BOTH: ("NAVX", "NAVY")"
+                       PERFORM INSERTION
+               END-SEARCH
 
-               END-PERFORM.
+           END-PERFORM.
 
            DISPLAY "REACHED HERE".
 
@@ -270,14 +270,14 @@ SEARCH SET-ENTRY OF GRIDSET
 
        INSERTION.
            SET SEARCHINDEX2 TO 1.
-SEARCH SET-ENTRY2 OF GRIDSET1AND2
-           AT END
-               ADD 1 TO LATEST-INSERT2 OF GRIDSET1AND2
-               MOVE INSERTSETENTRY2 TO SET-ENTRY2(LATEST-INSERT2)
-           WHEN ( X-COORD OF INSERTSETENTRY2 = X-COORD OF
-               SET-ENTRY2(SEARCHINDEX2)
-               AND Y-COORD OF INSERTSETENTRY2 = Y-COORD OF
-               SET-ENTRY2(SEARCHINDEX2))
-               MOVE CHAR OF INSERTSETENTRY2 TO
-               CHAR OF SET-ENTRY2(SEARCHINDEX2)
+           SEARCH SET-ENTRY2 OF GRIDSET1AND2
+               AT END
+                   ADD 1 TO LATEST-INSERT2 OF GRIDSET1AND2
+                   MOVE INSERTSETENTRY2 TO SET-ENTRY2(LATEST-INSERT2)
+               WHEN ( X-COORD OF INSERTSETENTRY2 = X-COORD OF
+                       SET-ENTRY2(SEARCHINDEX2)
+                   AND Y-COORD OF INSERTSETENTRY2 = Y-COORD OF
+                       SET-ENTRY2(SEARCHINDEX2))
+                   MOVE CHAR OF INSERTSETENTRY2 TO
+                       CHAR OF SET-ENTRY2(SEARCHINDEX2)
            END-SEARCH.
