@@ -281,3 +281,4 @@
                    MOVE CHAR OF INSERTSETENTRY2 TO
                        CHAR OF SET-ENTRY2(SEARCHINDEX2)
            END-SEARCH.
+
