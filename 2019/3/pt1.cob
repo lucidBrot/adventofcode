@@ -94,6 +94,12 @@
 
        01 TEMP-NUM PIC 9(10) VALUE 0.
 
+       01 VAL-A PIC 9(9) VALUE 0.
+       01 VAL-D PIC 9(9) VALUE 0.
+       01 VAL-C PIC 9(9) VALUE 0.
+       01 VAL-B PIC 9(9) VALUE 0.
+
+
 
       * Executable Code
        PROCEDURE DIVISION.
@@ -296,6 +302,13 @@
 
        DISPLAY "MATCHES: "GRIDSET1AND2.
       * TODO: compute manhattan distance of each match
+
+           PERFORM VARYING LOOP-CTR
+               FROM 1 BY 1 UNTIL LOOP-CTR = LATEST-INSERT2
+               ADD X-COORD OF SET-ENTRY2(LOOP-CTR) 
+                   TO CENTEER GIVING VAL-A
+               
+           END-PERFORM.
 
        STOP RUN.
 
