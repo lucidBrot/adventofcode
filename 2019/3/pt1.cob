@@ -227,7 +227,8 @@
                SET SEARCHINDEX TO 1
                SEARCH SET-ENTRY OF GRIDSET
                    VARYING SEARCHINDEX
-      *             AT END
+                   AT END
+                       DISPLAY "NOPE"
       *            This was not crossed by cable 1
                    WHEN ( X-COORD OF SET-ENTRY(SEARCHINDEX) = NAVX ) AND
                        ( Y-COORD OF SET-ENTRY(SEARCHINDEX) = NAVY )
@@ -236,12 +237,15 @@
                        MOVE CH2 TO CHAR OF INSERTSETENTRY2
                        MOVE NAVX TO X-COORD OF INSERTSETENTRY2
                        MOVE NAVY TO Y-COORD OF INSERTSETENTRY2
-                   PERFORM INSERTION
+                       DISPLAY "FOUND VISITED BY BOTH: ("NAVX", "NAVY")"
+                       PERFORM INSERTION
                END-SEARCH
 
            END-PERFORM.
 
            DISPLAY "REACHED HERE".
+
+           DISPLAY "MATCHES: "GRIDSET1AND2.
 
            STOP RUN.
 
