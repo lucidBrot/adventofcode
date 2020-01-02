@@ -83,6 +83,11 @@
                05 CHAR PIC X(1) VALUE 'E'.
            03 LATEST-INSERT2 PIC 9(9) VALUE 0.
 
+       01 INSERTSETENTRY2.
+           03 X-COORD PIC 9(9).
+           03 Y-COORD PIC 9(9).
+           03 CHAR PIC X(1) VALUE 'E'.
+
        01 TEMP-NUM PIC 9(10) VALUE 0.
 
 
@@ -228,10 +233,28 @@
                        ( Y-COORD OF SET-ENTRY(SEARCHINDEX) = NAVY )
                        DISPLAY "FOUND "
       *            This was crossed by cable 1, add it to new list
+                       MOVE CH2 TO CHAR OF INSERTSETENTRY2
+                       MOVE NAVX TO X-COORD OF INSERTSETENTRY2
+                       MOVE NAVY TO Y-COORD OF INSERTSETENTRY2
+                   PERFORM INSERTION
                END-SEARCH
 
            END-PERFORM.
 
            DISPLAY "REACHED HERE".
 
-       STOP RUN.
+           STOP RUN.
+
+       INSERTION.
+           SET SEARCHINDEX2 TO 1.
+           SEARCH SET-ENTRY2 OF GRIDSET1AND2
+               AT END
+                   ADD 1 TO LATEST-INSERT2 OF GRIDSET1AND2
+                   MOVE INSERTSETENTRY2 TO SET-ENTRY2(LATEST-INSERT2)
+               WHEN ( X-COORD OF INSERTSETENTRY2 = X-COORD OF
+                       SET-ENTRY2(SEARCHINDEX2)
+                   AND Y-COORD OF INSERTSETENTRY2 = Y-COORD OF
+                       SET-ENTRY2(SEARCHINDEX2))
+                   MOVE CHAR OF INSERTSETENTRY2 TO
+                       CHAR OF SET-ENTRY2(SEARCHINDEX2)
+           END-SEARCH.
