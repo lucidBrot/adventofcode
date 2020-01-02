@@ -76,6 +76,13 @@
                05 CHAR PIC X(1) VALUE 'E'.
            03 LATEST-INSERT PIC 9(9) VALUE 0.
 
+       01 GRIDSET1AND2.
+           03 SET-ENTRY2 OCCURS 1000 TIMES INDEXED BY SEARCHINDEX2.
+               05 X-COORD PIC 9(9).
+               05 Y-COORD PIC 9(9).
+               05 CHAR PIC X(1) VALUE 'E'.
+           03 LATEST-INSERT2 PIC 9(9) VALUE 0.
+
        01 TEMP-NUM PIC 9(10) VALUE 0.
 
 
@@ -176,7 +183,7 @@
                    WHEN ( X-COORD OF SET-ENTRY(SEARCHINDEX) = NAVX ) AND
                        ( Y-COORD OF SET-ENTRY(SEARCHINDEX) = NAVY )
                        MOVE CH1 TO CHAR OF SET-ENTRY(SEARCHINDEX)
-               END-SEARCH.
+               END-SEARCH
            END-PERFORM.
 
       *TODO: store second cable and intersections
@@ -211,11 +218,18 @@
                END-IF
 
                DISPLAY "(NAVX, NAVY): ("NAVX", "NAVY")"
-               IF GRID-CHARACTER(NAVX, NAVY) = CH1
-                   MOVE CHBOTH TO GRID-CHARACTER(NAVX, NAVY)
-               ELSE
-                   MOVE CH2 TO GRID-CHARACTER(NAVX, NAVY)
-               END-IF
+
+               SET SEARCHINDEX TO 1
+               SEARCH SET-ENTRY OF GRIDSET
+                   VARYING SEARCHINDEX
+      *             AT END
+      *            This was not crossed by cable 1
+                   WHEN ( X-COORD OF SET-ENTRY(SEARCHINDEX) = NAVX ) AND
+                       ( Y-COORD OF SET-ENTRY(SEARCHINDEX) = NAVY )
+                       DISPLAY "FOUND "
+      *            This was crossed by cable 1, add it to new list
+               END-SEARCH
+
            END-PERFORM.
 
            DISPLAY "REACHED HERE".
