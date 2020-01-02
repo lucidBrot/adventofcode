@@ -163,52 +163,55 @@
                    SET LOOP-CTR TO 1001
                ELSE
 
-      * set every value from the current position up to (including) the
-      * final position
-           SET NAVY-PREV TO NAVY
-           SET NAVX-PREV TO NAVX
-           ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVX-PREV
-               GIVING NAVX-POST
-           ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVY-PREV
-               GIVING NAVY-POST
-      * only NAVX-POST XOR NAVY-POST are relevant, only NAVY XOR NAVX
-      * shall be modified
-           PERFORM UNTIL NAVX = NAVX-POST AND NAVY = NAVY-POST
-
-               IF DIRECTION OF TEMP-CABLE-STEP = RIGHT-DIRECTION
-                   ADD 1 TO NAVX
+      *    set every value from the current position up to (including) the
+      *    final position
+               SET NAVY-PREV TO NAVY
+               SET NAVX-PREV TO NAVX
+               ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVX-PREV
+                   GIVING NAVX-POST
+               ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVY-PREV
+                   GIVING NAVY-POST
+      *    only NAVX-POST XOR NAVY-POST are relevant, only NAVY XOR NAVX
+      *    shall be modified
+               PERFORM UNTIL NAVX = NAVX-POST AND NAVY = NAVY-POST
+     
+                   IF DIRECTION OF TEMP-CABLE-STEP = RIGHT-DIRECTION
+                       ADD 1 TO NAVX
+                   END-IF
+     
+                   IF DIRECTION OF TEMP-CABLE-STEP = UP-DIRECTION
+                       ADD 1 TO NAVY
+                   END-IF
+                    
+                   IF DIRECTION OF TEMP-CABLE-STEP = LEFT-DIRECTION
+                       SUBTRACT 1 FROM NAVX
+                   END-IF
+     
+                   IF DIRECTION OF TEMP-CABLE-STEP = DOWN-DIRECTION
+                       SUBTRACT 1 FROM NAVY
+                   END-IF
+     
+      *    search list for that value and if it is not there, set it
+                   SET SEARCHINDEX TO 1
+                   SEARCH SET-ENTRY OF GRIDSET
+                       VARYING SEARCHINDEX
+                       AT END 
+                           ADD 1 TO LATEST-INSERT OF GRIDSET
+                           MOVE CH1 TO CHAR OF SET-ENTRY(LATEST-INSERT)
+                           MOVE NAVX TO 
+                           X-COORD OF SET-ENTRY(LATEST-INSERT)
+                           MOVE NAVY TO 
+                           Y-COORD OF SET-ENTRY(LATEST-INSERT)
+                           DISPLAY "INSERTED CABLE1: ("NAVX", "NAVY")"
+                       WHEN ( X-COORD OF SET-ENTRY(SEARCHINDEX) = NAVX )
+                           AND
+                           ( Y-COORD OF SET-ENTRY(SEARCHINDEX) = NAVY )
+                           MOVE CH1 TO CHAR OF SET-ENTRY(SEARCHINDEX)
+                           DISPLAY "MODIFIED CABLE1: ("NAVX", "NAVY")"
+                   END-SEARCH
+                END-PERFORM
                END-IF
-
-               IF DIRECTION OF TEMP-CABLE-STEP = UP-DIRECTION
-                   ADD 1 TO NAVY
-               END-IF
-               
-               IF DIRECTION OF TEMP-CABLE-STEP = LEFT-DIRECTION
-                   SUBTRACT 1 FROM NAVX
-               END-IF
-
-               IF DIRECTION OF TEMP-CABLE-STEP = DOWN-DIRECTION
-                   SUBTRACT 1 FROM NAVY
-               END-IF
-
-      * search list for that value and if it is not there, set it
-               SET SEARCHINDEX TO 1
-               SEARCH SET-ENTRY OF GRIDSET
-                   VARYING SEARCHINDEX
-                   AT END 
-                       ADD 1 TO LATEST-INSERT OF GRIDSET
-                       MOVE CH1 TO CHAR OF SET-ENTRY(LATEST-INSERT)
-                       MOVE NAVX TO X-COORD OF SET-ENTRY(LATEST-INSERT)
-                       MOVE NAVY TO Y-COORD OF SET-ENTRY(LATEST-INSERT)
-                       DISPLAY "INSERTED CABLE1: ("NAVX", "NAVY")"
-                   WHEN ( X-COORD OF SET-ENTRY(SEARCHINDEX) = NAVX ) AND
-                       ( Y-COORD OF SET-ENTRY(SEARCHINDEX) = NAVY )
-                       MOVE CH1 TO CHAR OF SET-ENTRY(SEARCHINDEX)
-                       DISPLAY "MODIFIED CABLE1: ("NAVX", "NAVY")"
-               END-SEARCH
-               END-IF
-               END-PERFORM
-               END-PERFORM.
+            END-PERFORM.
 
       *TODO: store second cable and intersections
            SET LOOP-CTR TO 0 .
@@ -259,14 +262,13 @@
                        DISPLAY "FOUND VISITED BY BOTH: ("NAVX", "NAVY")"
                        PERFORM INSERTION
                END-SEARCH
-
            END-PERFORM.
 
-           DISPLAY "REACHED HERE".
+       DISPLAY "REACHED HERE".
 
-           DISPLAY "MATCHES: "GRIDSET1AND2.
+       DISPLAY "MATCHES: "GRIDSET1AND2.
 
-           STOP RUN.
+       STOP RUN.
 
        INSERTION.
            SET SEARCHINDEX2 TO 1.
