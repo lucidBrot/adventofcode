@@ -234,47 +234,68 @@
                IF ( DIRECTION OF TEMP-CABLE-STEP =
                    UNINITIALIZED-DIRECTION )
                    SET LOOP-CTR TO 1001
-               END-IF
+               ELSE
 
+
+      *    set every value from the current position up to (including) the
+      *    final position
+               SET NAVY-PREV TO NAVY
+               SET NAVX-PREV TO NAVX
                IF DIRECTION OF TEMP-CABLE-STEP = RIGHT-DIRECTION
-                   ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVX
+                   OR DIRECTION OF TEMP-CABLE-STEP = UP-DIRECTION
+               ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVX-PREV
+                   GIVING NAVX-POST
+               ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVY-PREV
+                   GIVING NAVY-POST
+               ELSE
+               SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM NAVX-PREV
+                   GIVING NAVX-POST
+               SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM NAVY-PREV
+                   GIVING NAVY-POST
                END-IF
-
-               IF DIRECTION OF TEMP-CABLE-STEP = UP-DIRECTION
-                   ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVY
+      *    only NAVX-POST XOR NAVY-POST are relevant, only NAVY XOR NAVX
+      *    shall be modified
+               PERFORM UNTIL NAVX = NAVX-POST OR NAVY = NAVY-POST
+     
+                   IF DIRECTION OF TEMP-CABLE-STEP = RIGHT-DIRECTION
+                       ADD 1 TO NAVX
+                   END-IF
+     
+                   IF DIRECTION OF TEMP-CABLE-STEP = UP-DIRECTION
+                       ADD 1 TO NAVY
+                   END-IF
+                    
+                   IF DIRECTION OF TEMP-CABLE-STEP = LEFT-DIRECTION
+                       SUBTRACT 1 FROM NAVX
+                   END-IF
+     
+                   IF DIRECTION OF TEMP-CABLE-STEP = DOWN-DIRECTION
+                       SUBTRACT 1 FROM NAVY
+                   END-IF
+     
+                   SET SEARCHINDEX TO 1
+                   SEARCH SET-ENTRY OF GRIDSET
+                       VARYING SEARCHINDEX
+                       AT END
+      *                This was not crossed by cable 1
+                           DISPLAY "NOPE"
+                       WHEN ( X-COORD OF SET-ENTRY(SEARCHINDEX) = NAVX )
+                           AND
+                           ( Y-COORD OF SET-ENTRY(SEARCHINDEX) = NAVY )
+      *                This was crossed by cable 1, add it to new list
+                           MOVE CH2 TO CHAR OF INSERTSETENTRY2
+                           MOVE NAVX TO X-COORD OF INSERTSETENTRY2
+                           MOVE NAVY TO Y-COORD OF INSERTSETENTRY2
+                           DISPLAY 
+                           "FOUND VISITED BY BOTH: ("NAVX", "NAVY")"
+                           PERFORM INSERTION
+                   END-SEARCH
+                END-PERFORM
                END-IF
-               
-               IF DIRECTION OF TEMP-CABLE-STEP = LEFT-DIRECTION
-                   SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM NAVX
-               END-IF
-
-               IF DIRECTION OF TEMP-CABLE-STEP = DOWN-DIRECTION
-                   SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM NAVY
-               END-IF
-
-               DISPLAY "(NAVX, NAVY): ("NAVX", "NAVY")"
-
-               SET SEARCHINDEX TO 1
-               SEARCH SET-ENTRY OF GRIDSET
-                   VARYING SEARCHINDEX
-                   AT END
-      *            This was not crossed by cable 1
-                       DISPLAY "NOPE"
-                   WHEN ( X-COORD OF SET-ENTRY(SEARCHINDEX) = NAVX ) AND
-                       ( Y-COORD OF SET-ENTRY(SEARCHINDEX) = NAVY )
-                       DISPLAY "FOUND "
-      *            This was crossed by cable 1, add it to new list
-                       MOVE CH2 TO CHAR OF INSERTSETENTRY2
-                       MOVE NAVX TO X-COORD OF INSERTSETENTRY2
-                       MOVE NAVY TO Y-COORD OF INSERTSETENTRY2
-                       DISPLAY "FOUND VISITED BY BOTH: ("NAVX", "NAVY")"
-                       PERFORM INSERTION
-               END-SEARCH
            END-PERFORM.
 
-       DISPLAY "REACHED HERE".
-
        DISPLAY "MATCHES: "GRIDSET1AND2.
+      * TODO: compute manhattan distance of each match
 
        STOP RUN.
 
