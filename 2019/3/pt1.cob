@@ -157,7 +157,7 @@
                IF ( DIRECTION OF TEMP-CABLE-STEP =
                    UNINITIALIZED-DIRECTION )
                    SET LOOP-CTR TO 1001
-               END-IF
+               ELSE
 
                IF DIRECTION OF TEMP-CABLE-STEP = RIGHT-DIRECTION
                    ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVX
@@ -175,7 +175,6 @@
                    SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM NAVY
                END-IF
 
-               DISPLAY "(NAVX, NAVY): ("NAVX", "NAVY")"
       * search list for that value and if it is not there, set it
                SET SEARCHINDEX TO 1
                SEARCH SET-ENTRY OF GRIDSET
@@ -185,10 +184,13 @@
                        MOVE CH1 TO CHAR OF SET-ENTRY(LATEST-INSERT)
                        MOVE NAVX TO X-COORD OF SET-ENTRY(LATEST-INSERT)
                        MOVE NAVY TO Y-COORD OF SET-ENTRY(LATEST-INSERT)
+                       DISPLAY "INSERTED CABLE1: ("NAVX", "NAVY")"
                    WHEN ( X-COORD OF SET-ENTRY(SEARCHINDEX) = NAVX ) AND
                        ( Y-COORD OF SET-ENTRY(SEARCHINDEX) = NAVY )
                        MOVE CH1 TO CHAR OF SET-ENTRY(SEARCHINDEX)
+                       DISPLAY "MODIFIED CABLE1: ("NAVX", "NAVY")"
                END-SEARCH
+               END-IF
            END-PERFORM.
 
       *TODO: store second cable and intersections
