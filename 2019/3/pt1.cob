@@ -67,7 +67,11 @@
            
        01 CENTEER PIC S9(9) USAGE IS COMPUTATIONAL VALUE 38500 .
        01 NAVX PIC S9(9) USAGE IS COMPUTATIONAL.
+       01 NAVX-PREV PIC S9(9) USAGE IS COMPUTATIONAL.
+       01 NAVX-POST PIC S9(9) USAGE IS COMPUTATIONAL.
        01 NAVY PIC S9(9) USAGE IS COMPUTATIONAL.
+       01 NAVY-POST PIC S9(9) USAGE IS COMPUTATIONAL.
+       01 NAVY-PREV PIC S9(9) USAGE IS COMPUTATIONAL.
 
        01 GRIDSET.
            03 SET-ENTRY OCCURS 1000 TIMES INDEXED BY SEARCHINDEX.
@@ -159,20 +163,32 @@
                    SET LOOP-CTR TO 1001
                ELSE
 
+      * set every value from the current position up to (including) the
+      * final position
+           SET NAVY-PREV TO NAVY
+           SET NAVX-PREV TO NAVX
+           ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVX-PREV
+               GIVING NAVX-POST
+           ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVY-PREV
+               GIVING NAVY-POST
+      * only NAVX-POST XOR NAVY-POST are relevant, only NAVY XOR NAVX
+      * shall be modified
+           PERFORM UNTIL NAVX = NAVX-POST AND NAVY = NAVY-POST
+
                IF DIRECTION OF TEMP-CABLE-STEP = RIGHT-DIRECTION
-                   ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVX
+                   ADD 1 TO NAVX
                END-IF
 
                IF DIRECTION OF TEMP-CABLE-STEP = UP-DIRECTION
-                   ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVY
+                   ADD 1 TO NAVY
                END-IF
                
                IF DIRECTION OF TEMP-CABLE-STEP = LEFT-DIRECTION
-                   SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM NAVX
+                   SUBTRACT 1 FROM NAVX
                END-IF
 
                IF DIRECTION OF TEMP-CABLE-STEP = DOWN-DIRECTION
-                   SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM NAVY
+                   SUBTRACT 1 FROM NAVY
                END-IF
 
       * search list for that value and if it is not there, set it
@@ -191,7 +207,8 @@
                        DISPLAY "MODIFIED CABLE1: ("NAVX", "NAVY")"
                END-SEARCH
                END-IF
-           END-PERFORM.
+               END-PERFORM
+               END-PERFORM.
 
       *TODO: store second cable and intersections
            SET LOOP-CTR TO 0 .
