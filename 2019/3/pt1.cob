@@ -98,6 +98,8 @@
        01 VAL-D PIC 9(9) VALUE 0.
        01 VAL-C PIC 9(9) VALUE 0.
        01 VAL-B PIC 9(9) VALUE 0.
+       01 VAL-F PIC 9(9) VALUE 0.
+       01 VAL-E PIC 9(9) VALUE 0.
 
 
 
@@ -301,14 +303,21 @@
            END-PERFORM.
 
        DISPLAY "MATCHES: "GRIDSET1AND2.
-      * TODO: compute manhattan distance of each match
-
+      * compute manhattan distance of each match, keep the minimum
+           SET VAL-F TO 10000000
            PERFORM VARYING LOOP-CTR
                FROM 1 BY 1 UNTIL LOOP-CTR = LATEST-INSERT2
-               ADD X-COORD OF SET-ENTRY2(LOOP-CTR) 
-                   TO CENTEER GIVING VAL-A
-               
+               SUBTRACT X-COORD OF SET-ENTRY2(LOOP-CTR) 
+                   FROM CENTEER GIVING VAL-A
+               SUBTRACT Y-COORD OF SET-ENTRY2(LOOP-CTR)
+                   FROM CENTEER GIVING VAL-B
+               Set VAL-C TO FUNCTION ABS ( VAL-A )
+               set VAL-D TO FUNCTION ABS ( VAL-B )
+               ADD VAL-C TO VAL-D GIVING VAL-E
+               SET VAL-F TO FUNCTION MIN ( VAL-F VAL-E )
            END-PERFORM.
+
+           DISPLAY "MINIMUM MANHATTAN DISTANCE: "VAL-F.
 
        STOP RUN.
 
