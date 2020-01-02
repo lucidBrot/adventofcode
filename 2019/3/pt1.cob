@@ -152,8 +152,8 @@
                ADD 1 TO LOOP-CTR
                MOVE CONE-STUFF(LOOP-CTR) TO TEMP-CABLE-STEP
 
-               DISPLAY "CABLE 1 DO "DIRECTION OF
-               TEMP-CABLE-STEP":"NUM-STEPS OF TEMP-CABLE-STEP
+      *DISPLAY "CABLE 1 DO "DIRECTION OF
+      *TEMP-CABLE-STEP":"NUM-STEPS OF TEMP-CABLE-STEP
                IF ( DIRECTION OF TEMP-CABLE-STEP =
                    UNINITIALIZED-DIRECTION )
                    SET LOOP-CTR TO 1001
@@ -201,8 +201,8 @@
                ADD 1 TO LOOP-CTR
                MOVE CTWO-STUFF(LOOP-CTR) TO TEMP-CABLE-STEP
 
-               DISPLAY "CABLE 2 DO "DIRECTION OF
-               TEMP-CABLE-STEP":"NUM-STEPS OF TEMP-CABLE-STEP
+      *DISPLAY "CABLE 2 DO "DIRECTION OF
+      *TEMP-CABLE-STEP":"NUM-STEPS OF TEMP-CABLE-STEP
                IF ( DIRECTION OF TEMP-CABLE-STEP =
                    UNINITIALIZED-DIRECTION )
                    SET LOOP-CTR TO 1001
@@ -230,8 +230,8 @@
                SEARCH SET-ENTRY OF GRIDSET
                    VARYING SEARCHINDEX
                    AT END
-                       DISPLAY "NOPE"
       *            This was not crossed by cable 1
+                       DISPLAY "NOPE"
                    WHEN ( X-COORD OF SET-ENTRY(SEARCHINDEX) = NAVX ) AND
                        ( Y-COORD OF SET-ENTRY(SEARCHINDEX) = NAVY )
                        DISPLAY "FOUND "
