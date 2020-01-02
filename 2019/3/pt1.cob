@@ -38,10 +38,6 @@
       * same as X(2)),
       * X(Alphanumeric), Z, 1, 9 and *
       * I don't know yet what all of them do.
-       01 GRID.
-           05 GRID-ROW OCCURS 77000 TIMES.
-               10 GRID-COL OCCURS 77000 TIMES.
-                   15 GRID-CHARACTER PIC X(1) VALUE 'E'.
        01 CH1 PIC X(1) VALUE '1'.
        01 CH2 PIC X(1) VALUE '2'.
        01 CHBOTH PIC X(1) VALUE 'B'.
@@ -72,6 +68,16 @@
        01 CENTEER PIC S9(9) USAGE IS COMPUTATIONAL VALUE 38500 .
        01 NAVX PIC S9(9) USAGE IS COMPUTATIONAL.
        01 NAVY PIC S9(9) USAGE IS COMPUTATIONAL.
+
+       01 SEARCHINDEX.
+
+       01 GRIDSET.
+           03 SET-ENTRY OCCURS 1000 TIMES.
+               05 X-COORD PIC 9(9).
+               05 Y-COORD PIC 9(9).
+               05 CHAR PIC X(1) VALUE 'E'.
+           03 LATEST-INSERT PIC 9(9) VALUE 0.
+
 
       * Executable Code
        PROCEDURE DIVISION.
@@ -158,7 +164,20 @@
                END-IF
 
                DISPLAY "(NAVX, NAVY): ("NAVX", "NAVY")"
-               MOVE CH1 TO GRID-CHARACTER(NAVX, NAVY)
+      * search list for that value and if it is not there, set it
+               SET SEARCHINDEX TO 1
+               SEARCH SET-ENTRY OF GRIDSET
+                   VARYING SEARCHINDEX
+                   AT END 
+                       SET LATEST-INSERT OF GRIDSET TO SUM OF
+                       LATEST-INSERT OF GRIDSET AND 1
+                       MOVE CH1 TO CHAR OF SET-ENTRY(LATEST-INSERT)
+                       MOVE NAVX TO X-COORD OF SET-ENTRY(LATEST-INSERT)
+                       MOVE NAVY TO Y-COORD OF SET-ENTRY(LATEST-INSERT)
+                   WHEN ( X-COORD OF SET-ENTRY(SEARCHINDEX) = NAVX ) AND
+                       ( Y-COORD OF SET-ENTRY(SEARCHINDEX) = NAVY )
+                       MOVE CH1 TO CHAR OF SET-ENTRY(SEARCHINDEX)
+               END-SEARCH.
            END-PERFORM.
 
       *TODO: store second cable and intersections
