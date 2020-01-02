@@ -173,7 +173,7 @@
                    GIVING NAVY-POST
       *    only NAVX-POST XOR NAVY-POST are relevant, only NAVY XOR NAVX
       *    shall be modified
-               PERFORM UNTIL NAVX = NAVX-POST AND NAVY = NAVY-POST
+               PERFORM UNTIL NAVX = NAVX-POST OR NAVY = NAVY-POST
      
                    IF DIRECTION OF TEMP-CABLE-STEP = RIGHT-DIRECTION
                        ADD 1 TO NAVX
@@ -202,7 +202,8 @@
                            X-COORD OF SET-ENTRY(LATEST-INSERT)
                            MOVE NAVY TO 
                            Y-COORD OF SET-ENTRY(LATEST-INSERT)
-                           DISPLAY "INSERTED CABLE1: ("NAVX", "NAVY")"
+                           DISPLAY "["LOOP-CTR"] INSERTED CABLE1: ("
+                           NAVX", "NAVY")"
                        WHEN ( X-COORD OF SET-ENTRY(SEARCHINDEX) = NAVX )
                            AND
                            ( Y-COORD OF SET-ENTRY(SEARCHINDEX) = NAVY )
