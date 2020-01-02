@@ -74,14 +74,14 @@
        01 NAVY-PREV PIC S9(9) USAGE IS COMPUTATIONAL.
 
        01 GRIDSET.
-           03 SET-ENTRY OCCURS 1000 TIMES INDEXED BY SEARCHINDEX.
+           03 SET-ENTRY OCCURS 10000 TIMES INDEXED BY SEARCHINDEX.
                05 X-COORD PIC 9(9).
                05 Y-COORD PIC 9(9).
                05 CHAR PIC X(1) VALUE 'E'.
            03 LATEST-INSERT PIC 9(9) VALUE 0.
 
        01 GRIDSET1AND2.
-           03 SET-ENTRY2 OCCURS 1000 TIMES INDEXED BY SEARCHINDEX2.
+           03 SET-ENTRY2 OCCURS 10000 TIMES INDEXED BY SEARCHINDEX2.
                05 X-COORD PIC 9(9).
                05 Y-COORD PIC 9(9).
                05 CHAR PIC X(1) VALUE 'E'.
@@ -147,8 +147,7 @@
       *    Later find again using a search where DIRECTION is X (and not
       *    Z for uninitialized or U,D,L,R for up down left right)
 
-      * read cable 1 into the grid. X is right/left, Y is up/down. 0,0
-      * is at top left corner
+      * read cable 1 into the grid. X is right/left, Y is up/down.
            SET LOOP-CTR TO 0 .
            SET NAVX TO CENTEER .
            SET NAVY TO CENTEER .
@@ -167,10 +166,18 @@
       *    final position
                SET NAVY-PREV TO NAVY
                SET NAVX-PREV TO NAVX
+               IF DIRECTION OF TEMP-CABLE-STEP = RIGHT-DIRECTION
+                   OR DIRECTION OF TEMP-CABLE-STEP = UP-DIRECTION
                ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVX-PREV
                    GIVING NAVX-POST
                ADD NUM-STEPS OF TEMP-CABLE-STEP TO NAVY-PREV
                    GIVING NAVY-POST
+               ELSE
+               SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM NAVX-PREV
+                   GIVING NAVX-POST
+               SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM NAVY-PREV
+                   GIVING NAVY-POST
+               END-IF
       *    only NAVX-POST XOR NAVY-POST are relevant, only NAVY XOR NAVX
       *    shall be modified
                PERFORM UNTIL NAVX = NAVX-POST OR NAVY = NAVY-POST
@@ -203,7 +210,7 @@
                            MOVE NAVY TO 
                            Y-COORD OF SET-ENTRY(LATEST-INSERT)
                            DISPLAY "["LOOP-CTR"] INSERTED CABLE1: ("
-                           NAVX", "NAVY")"
+                           NAVX", "NAVY") at ["LATEST-INSERT"]"
                        WHEN ( X-COORD OF SET-ENTRY(SEARCHINDEX) = NAVX )
                            AND
                            ( Y-COORD OF SET-ENTRY(SEARCHINDEX) = NAVY )
