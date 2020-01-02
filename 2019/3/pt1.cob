@@ -69,14 +69,14 @@
        01 NAVX PIC S9(9) USAGE IS COMPUTATIONAL.
        01 NAVY PIC S9(9) USAGE IS COMPUTATIONAL.
 
-       01 SEARCHINDEX.
-
        01 GRIDSET.
-           03 SET-ENTRY OCCURS 1000 TIMES.
+           03 SET-ENTRY OCCURS 1000 TIMES INDEXED BY SEARCHINDEX.
                05 X-COORD PIC 9(9).
                05 Y-COORD PIC 9(9).
                05 CHAR PIC X(1) VALUE 'E'.
            03 LATEST-INSERT PIC 9(9) VALUE 0.
+
+       01 TEMP-NUM PIC 9(10) VALUE 0.
 
 
       * Executable Code
@@ -169,8 +169,7 @@
                SEARCH SET-ENTRY OF GRIDSET
                    VARYING SEARCHINDEX
                    AT END 
-                       SET LATEST-INSERT OF GRIDSET TO SUM OF
-                       LATEST-INSERT OF GRIDSET AND 1
+                       ADD 1 TO LATEST-INSERT OF GRIDSET
                        MOVE CH1 TO CHAR OF SET-ENTRY(LATEST-INSERT)
                        MOVE NAVX TO X-COORD OF SET-ENTRY(LATEST-INSERT)
                        MOVE NAVY TO Y-COORD OF SET-ENTRY(LATEST-INSERT)
