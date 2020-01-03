@@ -1,0 +1,33 @@
+- [x] COBOL
+- [x] Minkolang
+- [x] LOLCODE
+- [ ] C+=
+- [ ] Velato
+- [ ] Typescript
+- [ ] PHP
+- [ ] goto++
+- [ ] hack
+- [ ] toiton
+- [ ] rust
+- [ ] F\*
+- [ ] go
+- [ ] LeGit
+- [ ] F#
+- [ ] Fortran
+- [ ] Powershell
+- [ ] ~~Malbolge~~
+- [ ] LISP
+- [ ] piet
+- [ ] Rust DSL
+- [ ] seed
+- [ ] factor
+- [ ] Webassembly
+- [ ] /// (slashes)
+- [ ] kotlin
+- [ ] vimscript
+- [ ] Linda/ether
+- [ ] GolfScript/Jelly/05AB1E/Pyth
+- [ ] Chef
+- [ ] Fetlang
+- [ ] Q#
+- [ ] scala
