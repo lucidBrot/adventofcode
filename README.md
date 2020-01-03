@@ -34,7 +34,7 @@ I didn't realize beforehand that segfaults were supposed to happen, but I guess 
 
 I expected **COBOL** to be full of ancient secrets and dark magic. And indeed, magic awaited me. The initial impression of assembly that the few code samples I found in the modern global weave made were a ruse. 
 
-It's not just a crumbly scroll, that scroll is alive! Whereas modern languages lack quick-and-deep-dive-tutorials, COBOL has a 100-page [Quick Guide](https://open-cobol.sourceforge.io/guides/GnuCOBOL 2.2 OCT2017 Quick Reference (A4).pdf) for the wizards that don't need the [2017 Programmer's Guide](https://open-cobol.sourceforge.io/HTML/gnucobpg.html) with the full 1000 pages that still somehow lacks useful examples. (In case you need it, check out my [Hello World](./2019/3/test.cob)). So of course I reached out into the weave's collection of the hive's ancient knowledge.
+It's not just a crumbly scroll, that scroll is alive! Whereas modern languages lack quick-and-deep-dive-tutorials, COBOL has a 100-page [Quick Guide](https://open-cobol.sourceforge.io/guides/GnuCOBOL%202.2%20OCT2017%20Quick%20Reference%20(A4).pdf) for the wizards that don't need the [2017 Programmer's Guide](https://open-cobol.sourceforge.io/HTML/gnucobpg.html) with the full 1000 pages that still somehow lacks useful examples. (In case you need it, check out my [Hello World](./2019/3/test.cob)). So of course I reached out into the weave's collection of the hive's ancient knowledge.
 
 The hivemind answered my prayers: "That should be outlined in the fine manual".
 
