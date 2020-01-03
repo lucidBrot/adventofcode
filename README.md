@@ -44,3 +44,4 @@ In order to find the answers in the tome, you need to already know the spell tho
 
 > TIL: COBOL-CASE is a thing and it's also called TRAIN-CASE 
 
+By the Way, COBOL is sentient, and it thinks it is better than java. But even the examples it gives itself show that it's not.
