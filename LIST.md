@@ -31,4 +31,5 @@
 - [ ] Fetlang
 - [ ] Q#
 - [ ] scala
+- [ ] Prolog
 - [ ] Pure HTML+CSS
