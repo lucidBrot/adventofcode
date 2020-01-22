@@ -371,16 +371,16 @@
            SET SS-NUM-STEPS TO 0.
       * Get next step, and next, and next...
            PERFORM UNTIL LOOP-CTR > 1000 OR SS-SHOULD-STOP = 1
-               MOVE CONE-STUFF(SS-INDEX) TO TEMP-CABLE-STEP.
-               PERFORM COUNT-STEPS-ANOTHER-INNER.
-               ADD SS-COUNTER TO SS-NUM-STEPS.
+               MOVE CONE-STUFF(SS-INDEX) TO TEMP-CABLE-STEP
+               PERFORM COUNT-STEPS-ANOTHER-INNER
+               ADD SS-COUNTER TO SS-NUM-STEPS
       *     SS-COUNTER WAS SET BY THE PERFORM
            END-PERFORM
       * Also for the second cable. Sum together.
            PERFORM UNTIL LOOP-CTR > 1000 OR SS-SHOULD-STOP = 1
-               MOVE CTWO-STUFF(SS-INDEX) TO TEMP-CABLE-STEP.
-               PERFORM COUNT-STEPS-ANOTHER-INNER.
-               ADD SS-COUNTER TO SS-NUM-STEPS.
+               MOVE CTWO-STUFF(SS-INDEX) TO TEMP-CABLE-STEP
+               PERFORM COUNT-STEPS-ANOTHER-INNER
+               ADD SS-COUNTER TO SS-NUM-STEPS
       *     SS-COUNTER WAS SET BY THE PERFORM
            END-PERFORM
 
