@@ -101,6 +101,13 @@
        01 STEPS-SUM PIC 9(9) VALUE 0.
        01 VAL-E PIC 9(9) VALUE 0.
 
+       01 SS-INDEX PIC 9(9) VALUE 0.
+       01 SS-COUNTER PIC 9(9) VALUE 0.
+       01 SS-CROSSES PIC 9(9) VALUE 0.
+       01 SS-CURR-X PIC 9(9) VALUE 0.
+       01 SS-CURR-Y PIC 9(9) VALUE 0.
+       01 SS-VAL-Q PIC 9(9) VALUE 0.
+
 
 
       * Executable Code
@@ -339,12 +346,36 @@
 
        
        COUNT-STEPS.
-      * Inputs are VAL-A as x coord, VAL-B as y coord
+      * Inputs are VAL-A as x coord , VAL-B as y coord
       *     CABLE-ONE and CABLE-TWO
-      
-      * Get next step
+           SET SS-INDEX TO 0
+           SET SS-CURR-X TO CENTEER
+           SET SS-CURR-Y TO CENTEER
       * Set Counter to zero
+           SET SS-COUNTER TO 0
+
+      * Get next step
+           SET TEMP-CABLE-STEP TO CONE-STUFF(SS-INDEX) OF CABLE-ONE
       * Check whether the next step crosses the goal field
+           IF DIRECTION OF TEMP-CABLE-STEP = RIGHT-DIRECTION
+               ADD SS-CURR-X TO NUM-STEPS OF TEMP-CABLE-STEP
+                   GIVING SS-VAL-Q
+               IF VAL-A < SS-VAL-Q
+                   SET SS-CROSSES TO 1
+               END-IF
+           END-IF
+     
+           IF DIRECTION OF TEMP-CABLE-STEP = UP-DIRECTION
+               ADD 1 TO NAVY
+           END-IF
+                    
+           IF DIRECTION OF TEMP-CABLE-STEP = LEFT-DIRECTION
+               SUBTRACT 1 FROM NAVX
+           END-IF
+     
+           IF DIRECTION OF TEMP-CABLE-STEP = DOWN-DIRECTION
+               SUBTRACT 1 FROM NAVY
+           END-IF
       * If not:
       *     Counter += number of steps
       *     Update current position
@@ -352,4 +383,6 @@
       *     Counter += abs(VAL-A minus CURR-POS-X) + abs(VAL-B minus
       *     CURR-POS-Y) // one of these is zero anyways
       *     Reset current position
+      * Increment step
+           ADD 1 TO SS-INDEX
 
