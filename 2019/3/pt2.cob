@@ -372,6 +372,7 @@
       * Get next step, and next, and next...
            PERFORM UNTIL LOOP-CTR > 1000 OR SS-SHOULD-STOP = 1
                MOVE CONE-STUFF(SS-INDEX) TO TEMP-CABLE-STEP
+               DISPLAY "Lp 1: "LOOP-CTR",  Cur Best Sum: "STEPS-SUM
                PERFORM COUNT-STEPS-ANOTHER-INNER
                ADD SS-COUNTER TO SS-NUM-STEPS
       *     SS-COUNTER WAS SET BY THE PERFORM
@@ -379,6 +380,7 @@
       * Also for the second cable. Sum together.
            PERFORM UNTIL LOOP-CTR > 1000 OR SS-SHOULD-STOP = 1
                MOVE CTWO-STUFF(SS-INDEX) TO TEMP-CABLE-STEP
+               DISPLAY "Lp 2: "LOOP-CTR",  Cur Best Sum: "STEPS-SUM
                PERFORM COUNT-STEPS-ANOTHER-INNER
                ADD SS-COUNTER TO SS-NUM-STEPS
       *     SS-COUNTER WAS SET BY THE PERFORM
