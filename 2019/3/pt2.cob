@@ -324,9 +324,9 @@
       * VAL-A and VAL-B are inputs to Procedure COUNT-STEPS. 
       * As are the cables stored in CABLE-ONE and CABLE-TWO
       * Output will
-      * be in VAL-C
+      * be in SS-NUM-STEPS
                PERFORM COUNT-STEPS
-               SET STEPS-SUM TO FUNCTION MIN ( STEPS-SUM VAL-C )
+               SET STEPS-SUM TO FUNCTION MIN ( STEPS-SUM SS-NUM-STEPS )
       * no need to track which intersection it was, because we only need
       * to know the combined sum of steps for the best intersection
            END-PERFORM.
@@ -449,8 +449,5 @@
            IF VAL-B = SS-CURR-Y AND VAL-A = SS-CURR-X
                SET SS-SHOULD-STOP TO 1
            END-IF.
-      * TODO: Loop this for until one cable is done. Then for the other.
-      * Sum up and return.
-      * After the return, find the best one.
 
 
