@@ -110,6 +110,8 @@
        01 SS-VAL-U PIC 9(9) VALUE 0.
        01 SS-VAL-V PIC 9(9) VALUE 0.
        01 SS-VAL-W PIC 9(9) VALUE 0.
+       01 SS-SHOULD-STOP PIC 9(9) VALUE 0.
+       01 SS-NUM-STEPS PIC 9(9) VALUE 0.
 
 
 
@@ -366,14 +368,29 @@
        COUNT-STEPS.
       * Inputs are VAL-A as x coord , VAL-B as y coord
       *     CABLE-ONE and CABLE-TWO
+           SET SS-NUM-STEPS TO 0.
+      * Get next step, and next, and next...
+           PERFORM UNTIL LOOP-CTR > 1000 OR SS-SHOULD-STOP = 1
+               MOVE CONE-STUFF(SS-INDEX) TO TEMP-CABLE-STEP.
+               PERFORM COUNT-STEPS-ANOTHER-INNER.
+               ADD SS-COUNTER TO SS-NUM-STEPS.
+      *     SS-COUNTER WAS SET BY THE PERFORM
+           END-PERFORM
+      * Also for the second cable. Sum together.
+           PERFORM UNTIL LOOP-CTR > 1000 OR SS-SHOULD-STOP = 1
+               MOVE CTWO-STUFF(SS-INDEX) TO TEMP-CABLE-STEP.
+               PERFORM COUNT-STEPS-ANOTHER-INNER.
+               ADD SS-COUNTER TO SS-NUM-STEPS.
+      *     SS-COUNTER WAS SET BY THE PERFORM
+           END-PERFORM
+
+       COUNT-STEPS-ANOTHER-INNER.
            SET SS-INDEX TO 0.
+           SET SS-SHOULD-STOP TO 0.
            SET SS-CURR-X TO CENTEER.
            SET SS-CURR-Y TO CENTEER.
       * Set Counter to zero
            SET SS-COUNTER TO 0.
-
-      * Get next step
-           MOVE CONE-STUFF(SS-INDEX) TO TEMP-CABLE-STEP.
       * Check whether the next step crosses the goal field
            SET SS-CROSSES TO 0.
 
@@ -428,6 +445,10 @@
            END-IF
       * Increment step
            ADD 1 TO SS-INDEX.
+      * Set early-abort condition
+           IF VAL-B = SS-CURR-Y AND VAL-A = SS-CURR-X
+               SET SS-SHOULD-STOP TO 1
+           END-IF
       * TODO: Loop this for until one cable is done. Then for the other.
       * Sum up and return.
       * After the return, find the best one.
