@@ -365,20 +365,9 @@
            IF DIRECTION OF TEMP-CABLE-STEP = RIGHT-DIRECTION
                ADD SS-CURR-X TO NUM-STEPS OF TEMP-CABLE-STEP
                    GIVING SS-VAL-Q
-               IF VAL-A <= SS-VAL-Q AND VAL-A >= SS-CURR-X
-                   SET SS-CROSSES TO 1
-      *             It crosses here. Compute the Distance Moved
-                   SUBTRACT VAL-A FROM CURR-POS-X GIVING SS-VAL-U
-                   SUBTRACT VAL-B FROM CURR-POS-Y GIVING SS-VAL-V
-      *             One of these is zero anyways
-                   SET SS-VAL-U TO FUNCTION ABS ( SS-VAL-U )
-                   SET SS-VAL-V TO FUNCTION ABS ( SS-VAL-V )
-                   ADD SS-VAL-U TO SS-VAL-V GIVING SS-VAL-W
-      *             SS-VAL-W is now the distance moved
-                   ADD SS-VAL-W TO SS-COUNTER
-      *             Update current position
-                   SET SS-CURR-X TO VAL-A
-                   SET SS-CURR-Y TO VAL-B
+               IF VAL-A <= SS-VAL-Q AND VAL-A >= SS-CURR-X AND VAL-B =
+                   SS-CURR-Y
+                   PERFORM COUNT-STEPS-INNER-COMPUTATION
                ELSE
       *             Update current position
                    SET SS-CURR-X TO SS-VAL-Q
@@ -390,22 +379,55 @@
            IF DIRECTION OF TEMP-CABLE-STEP = UP-DIRECTION
                ADD SS-CURR-Y TO NUM-STEPS OF TEMP-CABLE-STEP
                    GIVING SS-VAL-Q
-               IF VAL-B < SS-VAL-Q AND
-                   SET SS-CROSSES TO 1
+               IF VAL-B <= SS-VAL-Q AND VAL-B >= SS-CURR-Y AND VAL-A =
+                   SS-CURR-X
+                   PERFORM COUNT-STEPS-INNER-COMPUTATION
+               ELSE
+                   SET SS-CURR-Y TO SS-VAL-Q
+                   ADD NUM-STEPS OF TEMP-CABLE-STEP TO SS-COUNTER
                END-IF
            END-IF
-                    
+
            IF DIRECTION OF TEMP-CABLE-STEP = LEFT-DIRECTION
                SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM SS-CURR-X
-               GIVING SS-VAL-Q
-               IF VAL-A > SS-VAL-Q 
+                   GIVING SS-VAL-Q
+               IF VAL-A >= SS-VAL-Q AND VAL-A <= SS-CURR-X AND VAL-B =
+                   SS-CURR-Y
+                   PERFORM COUNT-STEPS-INNER-COMPUTATION
+               ELSE
+                   SET SS-CURR-X TO SS-VAL-Q
+                   ADD NUM-STEPS OF TEMP-CABLE-STEP TO SS-COUNTER
+               END-IF
            END-IF
      
            IF DIRECTION OF TEMP-CABLE-STEP = DOWN-DIRECTION
-               SUBTRACT 1 FROM NAVY
+               SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM SS-CURR-Y
+                   GIVING SS-VAL-Q
+               IF VAL-B >= SS-VAL-Q AND VAL-B <= SS-CURR-Y AND VAL-A =
+                   SS-CURR-X
+                   PERFORM COUNT-STEPS-INNER-COMPUTATION
+               ELSE
+                   SET SS-CURR-Y TO SS-VAL-Q
+                   ADD NUM-STEPS OF TEMP-CABLE-STEP TO SS-COUNTER
+               END-IF
            END-IF
       * Increment step
            ADD 1 TO SS-INDEX
       * TODO: Loop this for until one cable is done. Then for the other.
       * Sum up and return.
+
+       COUNT-STEPS-INNER-COMPUTATION.
+           SET SS-CROSSES TO 1
+      *     It crosses here. Compute the Distance Moved
+           SUBTRACT VAL-A FROM CURR-POS-X GIVING SS-VAL-U
+           SUBTRACT VAL-B FROM CURR-POS-Y GIVING SS-VAL-V
+      *     One of these is zero anyways
+           SET SS-VAL-U TO FUNCTION ABS ( SS-VAL-U )
+           SET SS-VAL-V TO FUNCTION ABS ( SS-VAL-V )
+           ADD SS-VAL-U TO SS-VAL-V GIVING SS-VAL-W
+      *     SS-VAL-W is now the distance moved
+           ADD SS-VAL-W TO SS-COUNTER
+      *     Update current position
+           SET SS-CURR-X TO VAL-A
+           SET SS-CURR-Y TO VAL-B
 
