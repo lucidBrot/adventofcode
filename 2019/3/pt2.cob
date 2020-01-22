@@ -107,6 +107,9 @@
        01 SS-CURR-X PIC 9(9) VALUE 0.
        01 SS-CURR-Y PIC 9(9) VALUE 0.
        01 SS-VAL-Q PIC 9(9) VALUE 0.
+       01 SS-VAL-U PIC 9(9) VALUE 0.
+       01 SS-VAL-V PIC 9(9) VALUE 0.
+       01 SS-VAL-W PIC 9(9) VALUE 0.
 
 
 
@@ -357,32 +360,52 @@
       * Get next step
            SET TEMP-CABLE-STEP TO CONE-STUFF(SS-INDEX) OF CABLE-ONE
       * Check whether the next step crosses the goal field
+           SET SS-CROSSES TO 0
+
            IF DIRECTION OF TEMP-CABLE-STEP = RIGHT-DIRECTION
                ADD SS-CURR-X TO NUM-STEPS OF TEMP-CABLE-STEP
                    GIVING SS-VAL-Q
-               IF VAL-A < SS-VAL-Q
+               IF VAL-A <= SS-VAL-Q AND VAL-A >= SS-CURR-X
                    SET SS-CROSSES TO 1
+      *             It crosses here. Compute the Distance Moved
+                   SUBTRACT VAL-A FROM CURR-POS-X GIVING SS-VAL-U
+                   SUBTRACT VAL-B FROM CURR-POS-Y GIVING SS-VAL-V
+      *             One of these is zero anyways
+                   SET SS-VAL-U TO FUNCTION ABS ( SS-VAL-U )
+                   SET SS-VAL-V TO FUNCTION ABS ( SS-VAL-V )
+                   ADD SS-VAL-U TO SS-VAL-V GIVING SS-VAL-W
+      *             SS-VAL-W is now the distance moved
+                   ADD SS-VAL-W TO SS-COUNTER
+      *             Update current position
+                   SET SS-CURR-X TO VAL-A
+                   SET SS-CURR-Y TO VAL-B
+               ELSE
+      *             Update current position
+                   SET SS-CURR-X TO SS-VAL-Q
+      *             Update Counter
+                   ADD NUM-STEPS OF TEMP-CABLE-STEP TO SS-COUNTER
                END-IF
            END-IF
      
            IF DIRECTION OF TEMP-CABLE-STEP = UP-DIRECTION
-               ADD 1 TO NAVY
+               ADD SS-CURR-Y TO NUM-STEPS OF TEMP-CABLE-STEP
+                   GIVING SS-VAL-Q
+               IF VAL-B < SS-VAL-Q AND
+                   SET SS-CROSSES TO 1
+               END-IF
            END-IF
                     
            IF DIRECTION OF TEMP-CABLE-STEP = LEFT-DIRECTION
-               SUBTRACT 1 FROM NAVX
+               SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM SS-CURR-X
+               GIVING SS-VAL-Q
+               IF VAL-A > SS-VAL-Q 
            END-IF
      
            IF DIRECTION OF TEMP-CABLE-STEP = DOWN-DIRECTION
                SUBTRACT 1 FROM NAVY
            END-IF
-      * If not:
-      *     Counter += number of steps
-      *     Update current position
-      * If yes:
-      *     Counter += abs(VAL-A minus CURR-POS-X) + abs(VAL-B minus
-      *     CURR-POS-Y) // one of these is zero anyways
-      *     Reset current position
       * Increment step
            ADD 1 TO SS-INDEX
+      * TODO: Loop this for until one cable is done. Then for the other.
+      * Sum up and return.
 
