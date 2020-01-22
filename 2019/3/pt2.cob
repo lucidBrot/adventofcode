@@ -375,14 +375,14 @@
                PERFORM COUNT-STEPS-ANOTHER-INNER
                ADD SS-COUNTER TO SS-NUM-STEPS
       *     SS-COUNTER WAS SET BY THE PERFORM
-           END-PERFORM
+               END-PERFORM.
       * Also for the second cable. Sum together.
            PERFORM UNTIL LOOP-CTR > 1000 OR SS-SHOULD-STOP = 1
                MOVE CTWO-STUFF(SS-INDEX) TO TEMP-CABLE-STEP
                PERFORM COUNT-STEPS-ANOTHER-INNER
                ADD SS-COUNTER TO SS-NUM-STEPS
       *     SS-COUNTER WAS SET BY THE PERFORM
-           END-PERFORM
+               END-PERFORM.
 
        COUNT-STEPS-ANOTHER-INNER.
            SET SS-INDEX TO 0.
@@ -406,7 +406,7 @@
       *             Update Counter
                    ADD NUM-STEPS OF TEMP-CABLE-STEP TO SS-COUNTER
                END-IF
-           END-IF
+           END-IF.
      
            IF DIRECTION OF TEMP-CABLE-STEP = UP-DIRECTION
                ADD SS-CURR-Y TO NUM-STEPS OF TEMP-CABLE-STEP
@@ -418,7 +418,7 @@
                    SET SS-CURR-Y TO SS-VAL-Q
                    ADD NUM-STEPS OF TEMP-CABLE-STEP TO SS-COUNTER
                END-IF
-           END-IF
+           END-IF.
 
            IF DIRECTION OF TEMP-CABLE-STEP = LEFT-DIRECTION
                SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM SS-CURR-X
@@ -430,7 +430,7 @@
                    SET SS-CURR-X TO SS-VAL-Q
                    ADD NUM-STEPS OF TEMP-CABLE-STEP TO SS-COUNTER
                END-IF
-           END-IF
+           END-IF.
      
            IF DIRECTION OF TEMP-CABLE-STEP = DOWN-DIRECTION
                SUBTRACT NUM-STEPS OF TEMP-CABLE-STEP FROM SS-CURR-Y
@@ -442,13 +442,13 @@
                    SET SS-CURR-Y TO SS-VAL-Q
                    ADD NUM-STEPS OF TEMP-CABLE-STEP TO SS-COUNTER
                END-IF
-           END-IF
+           END-IF.
       * Increment step
            ADD 1 TO SS-INDEX.
       * Set early-abort condition
            IF VAL-B = SS-CURR-Y AND VAL-A = SS-CURR-X
                SET SS-SHOULD-STOP TO 1
-           END-IF
+           END-IF.
       * TODO: Loop this for until one cable is done. Then for the other.
       * Sum up and return.
       * After the return, find the best one.
