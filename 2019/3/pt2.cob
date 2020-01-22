@@ -347,20 +347,35 @@
                        CHAR OF SET-ENTRY2(SEARCHINDEX2)
            END-SEARCH.
 
+       COUNT-STEPS-INNER-COMPUTATION.
+           SET SS-CROSSES TO 1.
+      *     It crosses here. Compute the Distance Moved
+           SUBTRACT VAL-A FROM SS-CURR-X GIVING SS-VAL-U.
+           SUBTRACT VAL-B FROM SS-CURR-Y GIVING SS-VAL-V.
+      *     One of these is zero anyways
+           SET SS-VAL-U TO FUNCTION ABS ( SS-VAL-U ).
+           SET SS-VAL-V TO FUNCTION ABS ( SS-VAL-V ).
+           ADD SS-VAL-U TO SS-VAL-V GIVING SS-VAL-W.
+      *     SS-VAL-W is now the distance moved
+           ADD SS-VAL-W TO SS-COUNTER.
+      *     Update current position
+           SET SS-CURR-X TO VAL-A.
+           SET SS-CURR-Y TO VAL-B.
+
        
        COUNT-STEPS.
       * Inputs are VAL-A as x coord , VAL-B as y coord
       *     CABLE-ONE and CABLE-TWO
-           SET SS-INDEX TO 0
-           SET SS-CURR-X TO CENTEER
-           SET SS-CURR-Y TO CENTEER
+           SET SS-INDEX TO 0.
+           SET SS-CURR-X TO CENTEER.
+           SET SS-CURR-Y TO CENTEER.
       * Set Counter to zero
-           SET SS-COUNTER TO 0
+           SET SS-COUNTER TO 0.
 
       * Get next step
-           SET TEMP-CABLE-STEP TO CONE-STUFF(SS-INDEX) OF CABLE-ONE
+           MOVE CONE-STUFF(SS-INDEX) TO TEMP-CABLE-STEP.
       * Check whether the next step crosses the goal field
-           SET SS-CROSSES TO 0
+           SET SS-CROSSES TO 0.
 
            IF DIRECTION OF TEMP-CABLE-STEP = RIGHT-DIRECTION
                ADD SS-CURR-X TO NUM-STEPS OF TEMP-CABLE-STEP
@@ -412,22 +427,9 @@
                END-IF
            END-IF
       * Increment step
-           ADD 1 TO SS-INDEX
+           ADD 1 TO SS-INDEX.
       * TODO: Loop this for until one cable is done. Then for the other.
       * Sum up and return.
+      * After the return, find the best one.
 
-       COUNT-STEPS-INNER-COMPUTATION.
-           SET SS-CROSSES TO 1
-      *     It crosses here. Compute the Distance Moved
-           SUBTRACT VAL-A FROM CURR-POS-X GIVING SS-VAL-U
-           SUBTRACT VAL-B FROM CURR-POS-Y GIVING SS-VAL-V
-      *     One of these is zero anyways
-           SET SS-VAL-U TO FUNCTION ABS ( SS-VAL-U )
-           SET SS-VAL-V TO FUNCTION ABS ( SS-VAL-V )
-           ADD SS-VAL-U TO SS-VAL-V GIVING SS-VAL-W
-      *     SS-VAL-W is now the distance moved
-           ADD SS-VAL-W TO SS-COUNTER
-      *     Update current position
-           SET SS-CURR-X TO VAL-A
-           SET SS-CURR-Y TO VAL-B
 
