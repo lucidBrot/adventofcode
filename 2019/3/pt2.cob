@@ -370,6 +370,10 @@
       *     CABLE-ONE and CABLE-TWO
            SET SS-NUM-STEPS TO 0.
       * Get next step, and next, and next...
+           SET SS-INDEX TO 0.
+           SET SS-CURR-X TO CENTEER.
+           SET SS-CURR-Y TO CENTEER.
+           SET SS-SHOULD-STOP TO 0.
            PERFORM UNTIL LOOP-CTR > 1000 OR SS-SHOULD-STOP = 1
                MOVE CONE-STUFF(SS-INDEX) TO TEMP-CABLE-STEP
                DISPLAY "Lp 1: "LOOP-CTR",  Cur Best Sum: "STEPS-SUM
@@ -377,6 +381,10 @@
                ADD SS-COUNTER TO SS-NUM-STEPS
       *     SS-COUNTER WAS SET BY THE PERFORM
                END-PERFORM.
+           SET SS-INDEX TO 0.
+           SET SS-CURR-X TO CENTEER.
+           SET SS-CURR-Y TO CENTEER.
+           SET SS-SHOULD-STOP TO 0.
       * Also for the second cable. Sum together.
            PERFORM UNTIL LOOP-CTR > 1000 OR SS-SHOULD-STOP = 1
                MOVE CTWO-STUFF(SS-INDEX) TO TEMP-CABLE-STEP
@@ -387,10 +395,6 @@
                END-PERFORM.
 
        COUNT-STEPS-ANOTHER-INNER.
-           SET SS-INDEX TO 0.
-           SET SS-SHOULD-STOP TO 0.
-           SET SS-CURR-X TO CENTEER.
-           SET SS-CURR-Y TO CENTEER.
       * Set Counter to zero
            SET SS-COUNTER TO 0.
       * Check whether the next step crosses the goal field
