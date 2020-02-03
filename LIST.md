@@ -33,3 +33,4 @@
 - [ ] scala
 - [ ] Prolog
 - [ ] Pure HTML+CSS
+- [ ] Zig
