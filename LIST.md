@@ -34,3 +34,6 @@
 - [ ] Prolog
 - [ ] Pure HTML+CSS
 - [ ] Zig
+
+## If Frameworks Count
+- [ ] Greensock (JS animation framework)
