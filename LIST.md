@@ -19,7 +19,6 @@
 - [ ] LISP
 - [ ] piet
 - [ ] Rust DSL
-- [ ] seed
 - [ ] factor
 - [ ] Webassembly
 - [ ] /// (slashes)
