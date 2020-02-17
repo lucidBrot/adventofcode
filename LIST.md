@@ -7,7 +7,7 @@
 - [ ] PHP
 - [ ] goto++
 - [ ] hack
-- [ ] toiton
+- [ ] teuton
 - [ ] rust
 - [ ] F\*
 - [ ] go
@@ -19,7 +19,6 @@
 - [ ] LISP
 - [ ] piet
 - [ ] Rust DSL
-- [ ] seed
 - [ ] factor
 - [ ] Webassembly
 - [ ] /// (slashes)
