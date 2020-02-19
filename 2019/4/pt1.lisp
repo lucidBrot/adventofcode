@@ -38,9 +38,13 @@
 ;;; Actual advent of code stuff
 (defun compute (lower_n upper_n)
   "Compute advent of code day 4 pt 1 given the two input numbers"
-  (loop for num from lower_n to upper_n
-        do (pprint num)                     ; num is every number in the given range
+  (setq num_nums 0)
+  (loop for num from lower_n to upper_n                     ; num is every number in the given range
+            do(if (check-digits num 10)
+                (setq num_nums (+ num_nums 1))
+              )
   )
+  num_nums
 )
 
 ;;
@@ -61,8 +65,8 @@
         do
         (setq two_repeats (OR two_repeats (= prev r)))
         (setq decreases (OR decreases (> r prev)))
-        (format t "~D  decreases: ~D  repeats: ~D
-                " r decreases two_repeats)
+        ;(format t "~D  decreases: ~D  repeats: ~D
+        ;        " r decreases two_repeats)
         sum r until (zerop q))
   (setq retval nil)
   (if two_repeats
