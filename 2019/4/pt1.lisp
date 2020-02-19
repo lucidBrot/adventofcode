@@ -46,6 +46,14 @@
 ;;
 ;; Check if number contains two adjacent digits
 (defun sum-digits (num base)
+  (setq two_repeats nil)
   (loop for n = num then q
+        for prev = -1 then r
         for (q r) = (multiple-value-list (truncate n base))
-        sum r until (zerop q)))
+        do
+        (setq two_repeats (OR two_repeats (= prev r)))
+        sum r until (zerop q))
+  (if two_repeats
+    (pprint two_repeats)
+    (pprint "none"))
+  )
