@@ -44,16 +44,27 @@
 )
 
 ;;
+;; Assumes that the entered number does not start with the digit 0
+;;
 ;; Check if number contains two adjacent digits
+;; Check if the number is never decreasing
 (defun sum-digits (num base)
   (setq two_repeats nil)
+  (setq decreases nil)       ;; decreases from left to right?
   (loop for n = num then q
-        for prev = -1 then r
+        for prev = (+ base 1) then r ;; Reading from right to left by truncating, so prev is to the right of r. It starts at -1 because that will never be a digit (so never equal) and always smaller than any rightmost digit (thus never falsely triggering the decreases check)
         for (q r) = (multiple-value-list (truncate n base))
         do
         (setq two_repeats (OR two_repeats (= prev r)))
+        (setq decreases (OR decreases (> r prev)))
+        (format t "~D  decreases: ~D  repeats: ~D
+                " r decreases two_repeats)
         sum r until (zerop q))
   (if two_repeats
     (pprint two_repeats)
-    (pprint "none"))
+    (pprint "not repeating"))
+  (if decreases
+        (pprint "decreases at some point")
+        (pprint "never decreases ✓")
+    )
   )
