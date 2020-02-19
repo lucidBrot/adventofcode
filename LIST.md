@@ -1,6 +1,10 @@
 - [x] COBOL
 - [x] Minkolang
 - [x] LOLCODE
+- [x] LISP
+- [ ] ~~Malbolge~~
+- [ ] ~~LeGit~~
+- [ ] ~~Chef~~
 - [ ] C+=
 - [ ] Velato
 - [ ] Typescript
@@ -11,12 +15,9 @@
 - [ ] rust
 - [ ] F\*
 - [ ] go
-- [ ] ~~LeGit~~
 - [ ] F#
 - [ ] Fortran
 - [ ] Powershell
-- [ ] ~~Malbolge~~
-- [ ] LISP
 - [ ] piet
 - [ ] Rust DSL
 - [ ] factor
@@ -26,7 +27,6 @@
 - [ ] vimscript
 - [ ] Linda/ether
 - [ ] GolfScript/Jelly/05AB1E/Pyth
-- [ ] ~~Chef~~
 - [ ] Fetlang
 - [ ] Q#
 - [ ] scala
