@@ -38,5 +38,14 @@
 ;;; Actual advent of code stuff
 (defun compute (lower_n upper_n)
   "Compute advent of code day 4 pt 1 given the two input numbers"
-  (- upper_n lower_n)
+  (loop for num from lower_n to upper_n
+        do (pprint num)                     ; num is every number in the given range
   )
+)
+
+;;
+;; Check if number contains two adjacent digits
+(defun sum-digits (num base)
+  (loop for n = num then q
+        for (q r) = (multiple-value-list (truncate n base))
+        sum r until (zerop q)))
