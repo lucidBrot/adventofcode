@@ -45,14 +45,18 @@
 
 ;;
 ;; Assumes that the entered number does not start with the digit 0
+;; Assumes that the entered number lies between the given lower and upper bound from adventofcode
+;; Assumes that the inputs fulfill the 6-digit-length constraint
 ;;
 ;; Check if number contains two adjacent digits
 ;; Check if the number is never decreasing
-(defun sum-digits (num base)
+;; Return T if the number fulfills both those criteria
+
+(defun check-digits (num base)
   (setq two_repeats nil)
   (setq decreases nil)       ;; decreases from left to right?
   (loop for n = num then q
-        for prev = (+ base 1) then r ;; Reading from right to left by truncating, so prev is to the right of r. It starts at -1 because that will never be a digit (so never equal) and always smaller than any rightmost digit (thus never falsely triggering the decreases check)
+        for prev = (+ base 1) then r ;; Reading from right to left by truncating, so prev is to the right of r. It starts at base+1 because that will never be a digit (so never equal) and always larger than any rightmost digit (thus never falsely triggering the decreases check)
         for (q r) = (multiple-value-list (truncate n base))
         do
         (setq two_repeats (OR two_repeats (= prev r)))
@@ -60,11 +64,12 @@
         (format t "~D  decreases: ~D  repeats: ~D
                 " r decreases two_repeats)
         sum r until (zerop q))
+  (setq retval nil)
   (if two_repeats
-    (pprint two_repeats)
-    (pprint "not repeating"))
+    (setq retval T)
+  )
   (if decreases
-        (pprint "decreases at some point")
-        (pprint "never decreases ✓")
-    )
+    (setq retval nil)
+  )
+  retval
   )
