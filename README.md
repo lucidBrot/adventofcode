@@ -45,3 +45,15 @@ In order to find the answers in the tome, you need to already know the spell tho
 > TIL: COBOL-CASE is a thing and it's also called TRAIN-CASE 
 
 By the Way, COBOL is sentient, and it thinks it is better than java. But even the examples it gives itself show that it's not.
+
+#### D̰̣͓͍̮̘̹͡i̮̥̟ͅa͙̝̪̬͞r̸y͕̞̭̠ ̷̙͙E̻̟̫͓͈̦ͅn̸͓̩̯̜̣̞̦t̢̯̣̗̪ͅr͏̪y̫̹̼͙̣ ̰͕̱̻ợf̨̠̝̮̣͕̘͕ ̡̤̹̬D͓͚̖͍̼̣ͅa͏y̡̫͚̰̙ ̩̫͎͘4̖̥̦̻̖̤
+
+We planned on using **legit**. There's a problem with that, though: Legit only treats numbers as numbers when they are hardcoded - otherwise, they're ascii.
+
+Also, the intially compelling weirdness soon became boring. Legit is based on the commit tree instead of the file contents - that's cool. But in order to write useful code, you pretty much need to write another script that generates you your legit tree.
+
+So we instead tried **chef**. See [./2019/4/pt1.chef](this file) for an example that outputs numbers from 211 to 400 and divides each by 10 as well. It reads like a recipe - somewhat.
+
+However, it turns out that there is neither a way to round floats, nor a way to check for `a < b`. The only comparison available is `a == 0`. So to ascertain that digit `a` is smaller or equal to digit `b`, one has to loop through every digit possible and check whether they are equal. Hardcoding a 6-fold nested loop for that is possible, but not enticing.
+
+So we decided to use **LISP** instead. At least it's a programming language that has specs I think.
