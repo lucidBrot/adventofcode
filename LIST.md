@@ -5,7 +5,7 @@
 - [ ] ~~Malbolge~~
 - [ ] ~~LeGit~~
 - [ ] ~~Chef~~
-- [ ] C+=
+- [ ] ~~C+=~~ ([issue open](https://github.com/ErisBlastar/cplusequality/issues/33))
 - [ ] Velato
 - [ ] Typescript
 - [ ] PHP
@@ -33,6 +33,7 @@
 - [ ] Prolog
 - [ ] Pure HTML+CSS
 - [ ] Zig
+- [ ] Lua
 
 ## If Frameworks Count
 - [ ] Greensock (JS animation framework)
