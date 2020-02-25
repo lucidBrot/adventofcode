@@ -7,6 +7,7 @@
 - [ ] ~~Chef~~
 - [ ] ~~C+=~~ ([issue open](https://github.com/ErisBlastar/cplusequality/issues/33))
 - [ ] Velato
+- [ ] Hexagony
 - [ ] Typescript
 - [ ] PHP
 - [ ] goto++
