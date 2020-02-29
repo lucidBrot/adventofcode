@@ -60,6 +60,10 @@ class IntComputer {
         }
     }
 
+    function set_value($location, $value){
+        $this->memory[$location] = $value;
+    }
+
     function run(){
         $pc = 0;
         $this->program_ended=False;
@@ -105,7 +109,7 @@ class IntComputer {
         }
 
         // combine arguments
-        $valargs = $vals + $outputargs;
+        $valargs = $vals; array_push($valargs, ...$outputargs);
 
         // call the relevant execution
         switch ($opcode) {
@@ -132,6 +136,10 @@ class IntComputer {
 
     function perform_exit(){
         $this->program_ended = true;
+    }
+
+    function perform_add($a, $b, $target){
+        $this->set_value($target, $a+$b);
     }
 }
 
