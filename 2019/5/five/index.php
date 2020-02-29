@@ -44,6 +44,12 @@ class IntComputer {
         $this->memory = $memory;
     }
 
+    function dump_memory(){
+        echo("<div>--- Mem Dump ---<br/>");
+        var_dump($this->memory);
+        echo("<br/>-----------------------</div>");
+    }
+
     function get_value($location_or_value, $accessMode){
         switch ($accessMode) {
         case 00:
@@ -85,12 +91,12 @@ class IntComputer {
             perform_store_input($outputargs[0]);
             break;
         case 04:
-            perform_output($inputargs[0])
+            perform_output($inputargs[0]);
+            break;
         case 99:
+        default:
             perform_exit(); // TODO: how to stop?
             break;
-
-            
 
         }
     }
@@ -105,6 +111,10 @@ $intputarr = array_map('intval', $inputarr);
 $instr = $intputarr[0];
 $lenn = instr_num_args($instr);
 echo("instruction: ".$instr."  numArgs: ".$lenn);
+
+// testing
+$comp = new IntComputer(array(01, 1, 2, 0));
+$comp->dump_memory();
 
 // do actual thing
 $comp = new IntComputer($intputarr);
