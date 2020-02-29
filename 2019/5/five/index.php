@@ -132,7 +132,7 @@ class IntComputer {
             $this->perform_store_input($outputargs[0]);
             break;
         case 04:
-            $this->perform_output($inputargs[0]);
+            $this->perform_output($valargs[0]);
             break;
         case 99:
         default:
