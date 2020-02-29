@@ -15,8 +15,14 @@ class Intstruction {
     }
 }
 
+
 $inst_1 = new Intstruction(array(1,2,3,0));
 var_dump($inst_1);
+
+$inputfile = fopen("./input.txt", "r");
+$inputarr = fgetcsv($inputfile);
+$intputarr = array_map('intval', $inputarr);
+var_dump($intputarr);
 ?>
 
 </br><div>
