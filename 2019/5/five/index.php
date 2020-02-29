@@ -115,20 +115,20 @@ class IntComputer {
         switch ($opcode) {
             // the output arguments are, by the specs, always locations and not immediate values.
         case 01:
-            perform_add(...$valargs);
+            $this->perform_add(...$valargs);
             break;
         case 02:
-            perform_multiply(...$valargs);
+            $this->perform_multiply(...$valargs);
             break;
         case 03:
-            perform_store_input($outputargs[0]);
+            $this->perform_store_input($outputargs[0]);
             break;
         case 04:
-            perform_output($inputargs[0]);
+            $this->perform_output($inputargs[0]);
             break;
         case 99:
         default:
-        perform_exit();
+            $this->perform_exit();
         break;
 
         }
