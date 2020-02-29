@@ -39,6 +39,7 @@ function instr_num_args($opcode) {
 
 class IntComputer {
     protected $memory;
+    protected $program_ended = false;
 
     function __construct($memory){
         $this->memory = $memory;
@@ -57,6 +58,29 @@ class IntComputer {
         case 01:
             return $location_or_value;
         }
+    }
+
+    function run(){
+        $pc = 0;
+        $this->program_ended=False;
+        while (! $this->program_ended ){
+            // 2-digit opcode, leading digits are accessModes
+            $opcodeWithAccessModesAsNumber = $this->memory[$pc];
+            // turn this into an array and an opcode
+            $opcode = $opcodeWithAccessModesAsNumber % 100;
+            $accessModes = array_map('intval', str_split($opcodeWithAccessModesAsNumber / 100));
+
+            // get number of args
+            $n = instr_num_args($opcode);
+
+            // execute instruction
+            $args = array_slice($this->memory, $pc + 1, $n);
+            perform_instruction($opcode, $accessModes, ...$args);
+
+            // increase program counter
+            $pc = $pc + 1 + $n;
+        }
+
     }
 
     // $opcode: int
@@ -100,10 +124,14 @@ class IntComputer {
             break;
         case 99:
         default:
-        perform_exit(); // TODO: how to stop?
+        perform_exit();
         break;
 
         }
+    }
+
+    function perform_exit(){
+        $this->program_ended = true;
     }
 }
 
