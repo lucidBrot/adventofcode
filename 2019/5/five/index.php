@@ -111,6 +111,8 @@ class IntComputer {
         // combine arguments
         $valargs = $vals; array_push($valargs, ...$outputargs);
 
+        echo("[".$opcode."] ".implode(" ", $valargs)."<br/>");
+
         // call the relevant execution
         switch ($opcode) {
             // the output arguments are, by the specs, always locations and not immediate values.
