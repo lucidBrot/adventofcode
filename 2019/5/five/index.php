@@ -70,15 +70,17 @@ class IntComputer {
         while (! $this->program_ended ){
             // 2-digit opcode, leading digits are accessModes
             $opcodeWithAccessModesAsNumber = $this->memory[$pc];
+            echo("opcodeWithAccessModesAsNumber: ".$opcodeWithAccessModesAsNumber."<br/>");
             // turn this into an array and an opcode
             $opcode = $opcodeWithAccessModesAsNumber % 100;
-            $accessModes = array_map('intval', str_split($opcodeWithAccessModesAsNumber / 100));
+            $accessModes = array_map('intval', str_split(intval($opcodeWithAccessModesAsNumber / 100)));
 
             // get number of args
             $n = instr_num_args($opcode);
 
             // execute instruction
             $args = array_slice($this->memory, $pc + 1, $n);
+            echo("About to execute ".$opcode." with access modes ".implode(" ", $accessModes)." and arguments ".implode(" ", $args)."<br/>");
             $this->perform_instruction($opcode, $accessModes, ...$args);
 
             // increase program counter
