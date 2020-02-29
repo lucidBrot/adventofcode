@@ -53,7 +53,7 @@ class IntComputer {
     function get_value($location_or_value, $accessMode){
         switch ($accessMode) {
         case 00:
-            return $this->$memory[$location_or_value];
+            return $this->memory[$location_or_value];
         case 01:
             return $location_or_value;
         }
@@ -63,6 +63,7 @@ class IntComputer {
         // get input args
         $no = instr_num_output_args($opcode);
         $ni = instr_num_input_args($opcode);
+        $n = $no + $ni;
         $inputargs = array_slice($args, 0, $ni);
         $outputargs = array_slice($args, $ni, $no);
 
@@ -114,6 +115,8 @@ echo("instruction: ".$instr."  numArgs: ".$lenn);
 
 // testing
 $comp = new IntComputer(array(01, 1, 2, 0));
+$comp->dump_memory();
+$comp->perform_instruction(01, array(), 1, 2, 0);
 $comp->dump_memory();
 
 // do actual thing
