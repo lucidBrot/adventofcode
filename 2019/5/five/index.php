@@ -1,35 +1,35 @@
 <?php
 function instr_num_input_args($opcode) {
     switch ($opcode) {
-        case 01:
-            return 2;
-        case 02:
-            return 2;
-        case 03:
-            return 0;
-        case 04:
-            return 1;
-        case 99:
-            return 0;
-        default: // shouldn't happen
-            return 0;
+    case 01:
+        return 2;
+    case 02:
+        return 2;
+    case 03:
+        return 0;
+    case 04:
+        return 1;
+    case 99:
+        return 0;
+    default: // shouldn't happen
+        return 0;
     }
 }
 
 function instr_num_output_args($opcode) {
     switch ($opcode) {
-        case 01:
-            return 1;
-        case 02:
-            return 1;
-        case 03:
-            return 1;
-        case 04:
-            return 0;
-        case 99:
-            return 0;
-        default: // shouldn't happen
-            return 0;
+    case 01:
+        return 1;
+    case 02:
+        return 1;
+    case 03:
+        return 1;
+    case 04:
+        return 0;
+    case 99:
+        return 0;
+    default: // shouldn't happen
+        return 0;
     }
 }
 
@@ -59,6 +59,9 @@ class IntComputer {
         }
     }
 
+    // $opcode: int
+    // $accessModes: array
+    // $args: array
     function perform_instruction($opcode, $accessModes, ...$args) {
         // get input args
         $no = instr_num_output_args($opcode);
@@ -73,6 +76,7 @@ class IntComputer {
         // get input argument values
         $vals = [];
         for ($i = 0; $i < $ni; $i++){
+            echo("trying to load inputarg ".$inputargs[$i]."for accessor ".$acc[$i]."<br/>");
             $vals += $this->get_value($inputargs[$i], $acc[$i]);
         }
 
@@ -96,8 +100,8 @@ class IntComputer {
             break;
         case 99:
         default:
-            perform_exit(); // TODO: how to stop?
-            break;
+        perform_exit(); // TODO: how to stop?
+        break;
 
         }
     }
@@ -116,7 +120,7 @@ echo("instruction: ".$instr."  numArgs: ".$lenn);
 // testing
 $comp = new IntComputer(array(01, 1, 2, 0));
 $comp->dump_memory();
-$comp->perform_instruction(01, array(), 1, 2, 0);
+$comp->perform_instruction(01, array(), 1,2,0);
 $comp->dump_memory();
 
 // do actual thing
