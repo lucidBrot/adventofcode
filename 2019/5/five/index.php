@@ -79,7 +79,7 @@ class IntComputer {
 
             // execute instruction
             $args = array_slice($this->memory, $pc + 1, $n);
-            perform_instruction($opcode, $accessModes, ...$args);
+            $this->perform_instruction($opcode, $accessModes, ...$args);
 
             // increase program counter
             $pc = $pc + 1 + $n;
@@ -141,6 +141,19 @@ class IntComputer {
     function perform_add($a, $b, $target){
         $this->set_value($target, $a+$b);
     }
+
+    function perform_multiply($a, $b, $target) {
+        $this->set_value($target, $a * $b);
+    }
+ 
+    function perform_store_input($target){
+        // TODO: actually get input instead of hardcoded 1?
+        $this->set_value($target, 1);
+    }
+
+    function perform_output($something){
+        echo("output:: ".strval($something)."<br/>");
+    }
 }
 
 // read input into int array
@@ -160,7 +173,11 @@ $comp->perform_instruction(01, [0,0], 1,2,0);
 $comp->dump_memory();
 
 // do actual thing
+echo("<br/><br/>Actual execution:<br/>");
 $comp = new IntComputer($intputarr);
+$comp->run();
+echo("<br/>DONE!<br/>");
+$comp->dump_memory();
 ?>
 
 </br><div>
