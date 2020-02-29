@@ -109,7 +109,11 @@ class IntComputer {
         }
 
         // combine arguments
-        $valargs = $vals; array_push($valargs, ...$outputargs);
+        if(count($outputargs) > 0){
+            $valargs = $vals; array_push($valargs, ...$outputargs);
+        } else {
+            $valargs = $vals;
+        }
 
         echo("[".$opcode."] ".implode(" ", $valargs)."<br/>");
 
