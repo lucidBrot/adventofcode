@@ -139,7 +139,7 @@ class IntComputer {
             $valargs = $vals;
         }
 
-        echo("[".$opcode."] ".implode(" ", $valargs)."<br/>");
+        echo("&lt;pc:".$this->pc."&gt; [".$opcode."] ".implode(" ", $valargs)."<br/><br/>");
 
         // call the relevant execution
         switch ($opcode) {
@@ -200,14 +200,15 @@ class IntComputer {
 
     function perform_jnz($conditional, $target_pc){
         // the pc will be increased before the next instruction, so we set it one lower than told to
+        // And since it will be increased by (1+$num_args), we need to subtract 3 here.
         if($conditional != 0) {
-            $this->pc = $target_pc -1;
+            $this->pc = $target_pc - 3;
         }
     }
 
     function perform_jz($conditional, $target_pc){
         if($conditional == 0){
-            $this->pc = $target_pc;
+            $this->pc = $target_pc - 3;
         }
     }
 
