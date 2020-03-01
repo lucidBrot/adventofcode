@@ -56,4 +56,24 @@ So we instead tried **chef**. See [https://github.com/lucidBrot/adventofcode/blo
 
 However, it turns out that there is neither a way to round floats, nor a way to check for `a < b`. The only comparison available is `a == 0`. So to ascertain that digit `a` is smaller or equal to digit `b`, one has to loop through every digit possible and check whether they are equal. Hardcoding a 6-fold nested loop for that is possible, but not enticing.
 
-So we decided to use **LISP** instead. At least it's a programming language that has specs I think.
+So we decided to use **LISP** instead. At least it's a programming language that has specs I think.# 
+
+#### Diary Entry of Day $5
+
+Choosing a disputably usable language now, we wrote the latest IntCode Computer using **php**.
+
+It was less painful than expected, as the weirdnesses resolved quickly. I think it's actually a good thing that my global variables were deemed undefined within the functions. Only this here tripped me up:
+
+> Parse error: Invalid numeric literal in ... on line **23**
+>
+> ```php
+> 20 ...
+> 21    case 07:
+> 22      return 2;
+> 23    case 08:
+> 24      return 2;
+> 25 ...
+> ```
+
+The issue is found quickly though: php interprets any number literal (thank goodness it's only literals!) starting with `0` as provided in octal base. Hence, `08` is not valid and would actually need to be written as `010`  - or simply as `8`.
+
