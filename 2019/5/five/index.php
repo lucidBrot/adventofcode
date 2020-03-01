@@ -101,7 +101,9 @@ class IntComputer {
         $outputargs = array_slice($args, $ni, $no);
 
         // pad accessModes with leading zeros
-        $acc = array_pad($accessModes, -1 * $n, 0);
+        // then reverse because the rightmost accessor is for the leftmost parameter
+        $acc = array_reverse(array_pad($accessModes, -1 * $n, 0), false);
+        echo("  acc padded: ");var_dump($acc);echo("<br/>");
 
         // get input argument values
         $vals = [];
