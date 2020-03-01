@@ -2,6 +2,7 @@
 - [x] Minkolang
 - [x] LOLCODE
 - [x] LISP
+- [x] PHP
 - [ ] ~~Malbolge~~
 - [ ] ~~LeGit~~
 - [ ] ~~Chef~~
@@ -9,7 +10,6 @@
 - [ ] Velato
 - [ ] Hexagony
 - [ ] Typescript
-- [ ] PHP
 - [ ] goto++
 - [ ] hack
 - [ ] teuton
