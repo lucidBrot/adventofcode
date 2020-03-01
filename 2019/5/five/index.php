@@ -106,7 +106,7 @@ class IntComputer {
         // get input argument values
         $vals = [];
         for ($i = 0; $i < $ni; $i++){
-            echo("trying to load inputarg ".$inputargs[$i]." for accessor ".$acc[$i]."<br/>");
+            echo("loading inputarg ".$inputargs[$i]." for accessor ".$acc[$i]."<br/>");
             $vals[] = $this->get_value($inputargs[$i], $acc[$i]);
         }
 
