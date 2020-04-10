@@ -3,6 +3,7 @@
 - [x] LOLCODE
 - [x] LISP
 - [x] PHP
+- [ ] awk
 - [ ] ~~Malbolge~~
 - [ ] ~~LeGit~~
 - [ ] ~~Chef~~
