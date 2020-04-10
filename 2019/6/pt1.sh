@@ -39,13 +39,19 @@ do
     unset next_orbitees
     declare -A next_orbitees
 
-    # make sure we get the line N times before we check again whether the set is empty
-    # get next line
-    local line="$(next_inp_line)"
-    # split the line into orbitee and satellite
-    IFS=';' read -ra ORBIT <<< "$line"
-
-    
+    # For all input lines
+    for line in "${IN[@]}"
+    do
+        # split the line into orbitee and satellite
+        IFS=')' read -ra ORBIT <<< "$line"
+        # TODO: skip duplicate lines somehow
+        local orbitee=${line[0]}
+        if [ "${current_orbitees[$orbitee]}" ]
+        then
+            next_orbitees["$orbitee"]=1
+            num_satellites=$(( 1 + num_satellites ))
+        fi
+    done
 
     orbits_counter=$(( orbits_counter + num_satellites*step ))
     step=$(( step + 1 ))
