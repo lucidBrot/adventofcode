@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eux
+set -ex
 
 # A "set" of orbitees. If they're present, the value is 1, if not it's the empty string
 # test whether something is there using
@@ -41,7 +41,13 @@ do
         # TODO: skip duplicate lines somehow
         orbitee=${ORBIT[0]}
         echo "Considering Line $line"
-        if [ "${current_orbitees[${orbitee}]}" ]
+        if [ "$line" == "" ]
+        then
+            num_satellites=0
+            unset next_orbitees
+            break
+        fi
+        if [ "${current_orbitees[$orbitee]}" ]
         then
             next_orbitees["$orbitee"]=1
             num_satellites=$(( 1 + num_satellites ))
