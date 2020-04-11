@@ -1,78 +1,46 @@
 #!/bin/bash
 set -eux
 step=0
+declare -A santas_orbitees
+declare -A your_orbitees
+
+# --- FUNCTIONS ---
+
+entries_matching () {
+    latest_santa="$1"
+    latest_you="$2"
+    if [[ ${your_orbitees[$latest_santa]} ]]
+    then
+        echo "$latest_santa"
+    fi
+    if [[ ${santas_orbitees[$latest_you]} ]]
+    then
+        echo "$latest_you"
+    fi
+    echo ""
+}
+
+# --- MAIN ---
 
 # This is effectively a do-while loop
+match="a"
 while
     # do everything
     santas_orbitee="$(grep ')SAN$' input1.txt | sed -e 's/).*$//g')"
     your_orbitee="$(grep ')YOU$' input1.txt | sed -e 's/).*$//g')"
     step=$((1 + step))
+    # store the step number for easy retrieval later
+    santas_orbitees[$santas_orbitee]=$step
+    your_orbitees[$your_orbitee]=$step
+
+    match=entries_matching santas_orbitee your_orbitee
+
     # as long as this check holds
-    (( )) # TODO: check here
+    [[ $match != "" ]] # check here
 do
     continue
 done
 
-
-
-# test whether something is there using
-# if [ "${orbits[ASD]}" ] ; then echo World ; fi
-# In the first step, we shall consider all satellites of COM
-current_orbitees["COM"]=1
-# adding and deleting a key
-current_orbitees["ASD"]=""
-unset current_orbitees["ASD"]
-
-declare -A next_orbitees
-# an empty string means it does not exist. But it does show up in the length entry.
-next_orbitees["ASD"]=""
-unset next_orbitees["ASD"]
-
-orbits_counter=0
-step=1
-
-# INP=$'ASD)FGH\nCOM)ASD'
-# alternatively
-INP=$(cat input1.txt)
-# Store input in an array, line by line
-# https://stackoverflow.com/a/918931/2550406
-readarray -O0 -d $'\n' -t IN <<< "$INP"
-
-# while current_orbitee_set_size greater 0
-while [ ${#current_orbitees[@]} -gt 0 ]
-do
-    num_satellites=0
-    unset next_orbitees
-    declare -A next_orbitees
-
-    # For all input lines
-    for line in "${IN[@]}"
-    do
-        # split the line into orbitee and satellite
-        IFS=')' read -ra ORBIT <<< "$line"
-        # TODO: skip duplicate lines somehow
-        orbitee=${ORBIT[0]}
-        satellite=${ORBIT[1]}
-        #echo "Considering Line $line"
-        if [ "${current_orbitees[$orbitee]}" ]
-        then
-            next_orbitees["$satellite"]=1
-            num_satellites=$(( 1 + num_satellites ))
-        fi
-        
-    done
-
-    orbits_counter=$(( orbits_counter + num_satellites*step ))
-    step=$(( step + 1 ))
-
-    # perform current_orbitees=next_orbitees, but in bash
-    unset current_orbitees
-    declare -A current_orbitees
-    for key in "${!next_orbitees[@]}"
-    do
-        current_orbitees["$key"]="${next_orbitees["$key"]}"
-    done
-done
-
-echo $orbits_counter
+# subtract the steps SAN->A, YOU->B and the duplicate count of the intersection
+num_steps_needed = $(( ${santas_orbitees[$match]} + ${your_orbitees[$match]} - 3 ))
+echo "$num_steps_needed"
