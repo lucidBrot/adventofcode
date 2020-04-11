@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eux
+set -ex
 
 #magic imported from stackoverflow
 #https://stackoverflow.com/a/52651361/2550406
@@ -53,6 +53,7 @@ do
         IFS=')' read -ra ORBIT <<< "$line"
         # TODO: skip duplicate lines somehow
         orbitee=${ORBIT[0]}
+        echo ${current_orbitees[@]}
         if [ "${current_orbitees[$orbitee]}" ]
         then
             next_orbitees["$orbitee"]=1
