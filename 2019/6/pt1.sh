@@ -19,7 +19,7 @@ unset next_orbitees["ASD"]
 orbits_counter=0
 step=1
 
-INP=$'ASD)FGH\nCOM)ASD\n'
+INP=$'ASD)FGH\nCOM)ASD'
 # alternatively
 # $INP=`cat input1.txt`
 # Store input in an array, line by line
@@ -40,18 +40,14 @@ do
         IFS=')' read -ra ORBIT <<< "$line"
         # TODO: skip duplicate lines somehow
         orbitee=${ORBIT[0]}
+        satellite=${ORBIT[1]}
         echo "Considering Line $line"
-        if [ "$line" == "" ]
-        then
-            num_satellites=0
-            unset next_orbitees
-            break
-        fi
         if [ "${current_orbitees[$orbitee]}" ]
         then
-            next_orbitees["$orbitee"]=1
+            next_orbitees["$satellite"]=1
             num_satellites=$(( 1 + num_satellites ))
         fi
+        
     done
 
     orbits_counter=$(( orbits_counter + num_satellites*step ))
@@ -64,8 +60,6 @@ do
     do
         current_orbitees["$key"]="${next_orbitees["$key"]}"
     done
-    echo "Current Orbitees:" 
-    echo "${current_orbitees[@]}"
 done
 
 echo $orbits_counter
