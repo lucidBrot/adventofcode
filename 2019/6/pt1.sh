@@ -1,17 +1,5 @@
 #!/bin/bash
-set -ex
-
-#magic imported from stackoverflow
-#https://stackoverflow.com/a/52651361/2550406
-### Function vcp    -VariableCoPy-  
-# $1 Name of existing Source-Variable  
-# $2 Name for the Copy-Target  
-vcp() {
-    local var=$(declare -p $1)
-    var=${var/declare /declare -g }
-    eval "${var/$1=/$2=}"
-}
-
+set -eux
 
 # A "set" of orbitees. If they're present, the value is 1, if not it's the empty string
 # test whether something is there using
@@ -31,13 +19,12 @@ unset next_orbitees["ASD"]
 orbits_counter=0
 step=1
 
-INP=$'ASD)FGH\nCOM)ASD'
+INP=$'ASD)FGH\nCOM)ASD\n'
 # alternatively
 # $INP=`cat input1.txt`
 # Store input in an array, line by line
 # https://stackoverflow.com/a/918931/2550406
-readarray -O0 -d $"\n" -t IN <<< "$INP"
-echo "${IN[@]}"
+readarray -O0 -d $'\n' -t IN <<< "$INP"
 
 # while current_orbitee_set_size greater 0
 while [ ${#current_orbitees[@]} -gt 0 ]
@@ -53,8 +40,8 @@ do
         IFS=')' read -ra ORBIT <<< "$line"
         # TODO: skip duplicate lines somehow
         orbitee=${ORBIT[0]}
-        echo ${current_orbitees[@]}
-        if [ "${current_orbitees[$orbitee]}" ]
+        echo "Considering Line $line"
+        if [ "${current_orbitees[${orbitee}]}" ]
         then
             next_orbitees["$orbitee"]=1
             num_satellites=$(( 1 + num_satellites ))
@@ -63,8 +50,16 @@ do
 
     orbits_counter=$(( orbits_counter + num_satellites*step ))
     step=$(( step + 1 ))
-    #current_orbitees=("${next_orbitees[@]}")
-    vcp next_orbitees current_orbitees
+
+    # perform current_orbitees=next_orbitees, but in bash
+    unset current_orbitees
+    declare -A current_orbitees
+    for key in "${!next_orbitees[@]}"
+    do
+        current_orbitees["$key"]="${next_orbitees["$key"]}"
+    done
+    echo "Current Orbitees:" 
+    echo "${current_orbitees[@]}"
 done
 
 echo $orbits_counter
