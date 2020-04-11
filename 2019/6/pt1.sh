@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+set -e
 
 # A "set" of orbitees. If they're present, the value is 1, if not it's the empty string
 # test whether something is there using
@@ -19,9 +19,9 @@ unset next_orbitees["ASD"]
 orbits_counter=0
 step=1
 
-INP=$'ASD)FGH\nCOM)ASD'
+# INP=$'ASD)FGH\nCOM)ASD'
 # alternatively
-# $INP=`cat input1.txt`
+INP=$(cat input1.txt)
 # Store input in an array, line by line
 # https://stackoverflow.com/a/918931/2550406
 readarray -O0 -d $'\n' -t IN <<< "$INP"
@@ -41,7 +41,7 @@ do
         # TODO: skip duplicate lines somehow
         orbitee=${ORBIT[0]}
         satellite=${ORBIT[1]}
-        echo "Considering Line $line"
+        #echo "Considering Line $line"
         if [ "${current_orbitees[$orbitee]}" ]
         then
             next_orbitees["$satellite"]=1
