@@ -36,13 +36,13 @@ while
     step=$((1 + step))
     if [[ $santas_orbitee != 'COM' ]]
     then
-        santas_orbitee="$(grep ')'$santas_orbitee input2.txt | sed -e 's/).*$//g')"
+        santas_orbitee="$(grep ')'$santas_orbitee input1.txt | sed -e 's/).*$//g')"
         # store the step number for easy retrieval later
         santas_orbitees[$santas_orbitee]=$step
     fi
     if [[ $your_orbitee != 'COM' ]]
     then
-        your_orbitee="$(grep ')'$your_orbitee input2.txt | sed -e 's/).*$//g')"
+        your_orbitee="$(grep ')'$your_orbitee input1.txt | sed -e 's/).*$//g')"
         # store the step number for easy retrieval later
         your_orbitees["$your_orbitee"]=$step
     fi
