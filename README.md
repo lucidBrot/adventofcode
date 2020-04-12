@@ -83,6 +83,6 @@ The issue is found quickly though: php interprets any number literal (thank good
 
 All variables are by default global, even when defined within a function. Functions always return an integer error code, but you can have them echo to `stdout` and capture the output. Variables need quotes everywhere to avoid them splitting in two words, and `set -x` outputs the lines to be executed with already replaced variables.
 
-Comparing integers using `(( a < b ))` is okay but don't do that with strings.![image-20200412143539833](.\2019\6\image-20200412143539833.png)
+Comparing integers using `(( a < b ))` is okay but don't do that with strings.![](/2019/6/image-20200412143539833.png)
 
 [shellcheck.net](shellcheck.net) is nice but only catches half of my mistakes.
