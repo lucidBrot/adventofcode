@@ -1,8 +1,10 @@
 #!/bin/bash
-set -eux
+set -ex
 step=0
 declare -A santas_orbitees
+santas_orbitees["SAN"]=0 # not really needed
 declare -A your_orbitees
+your_orbitees["YOU"]=0 # or perhaps it is needed to have the array not seem unbound
 
 # --- FUNCTIONS ---
 
@@ -24,23 +26,27 @@ entries_matching () {
 
 # This is effectively a do-while loop
 match="a"
+# Start with SAN and YOU as previous values
+santas_orbitee='SAN'
+your_orbitee='YOU'
 while
-    # do everything
-    santas_orbitee="$(grep ')SAN$' input1.txt | sed -e 's/).*$//g')"
-    your_orbitee="$(grep ')YOU$' input1.txt | sed -e 's/).*$//g')"
+    # do everything. TODO: only do that if not COM
+    santas_orbitee="$(grep ')'$santas_orbitee input2.txt | sed -e 's/).*$//g')"
+    your_orbitee="$(grep ')'$your_orbitee input2.txt | sed -e 's/).*$//g')"
     step=$((1 + step))
     # store the step number for easy retrieval later
     santas_orbitees[$santas_orbitee]=$step
-    your_orbitees[$your_orbitee]=$step
+    your_orbitees["$your_orbitee"]=$step
 
-    match=entries_matching santas_orbitee your_orbitee
+    match="$(entries_matching "$santas_orbitee" "$your_orbitee")"
+    empty=''
 
     # as long as this check holds
-    [[ $match != "" ]] # check here
+    (( "match" == empty ))
 do
     continue
 done
 
 # subtract the steps SAN->A, YOU->B and the duplicate count of the intersection
-num_steps_needed = $(( ${santas_orbitees[$match]} + ${your_orbitees[$match]} - 3 ))
+num_steps_needed=$(( ${santas_orbitees[$match]} + ${your_orbitees[$match]} - 3 ))
 echo "$num_steps_needed"
