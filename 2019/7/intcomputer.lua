@@ -134,8 +134,73 @@ IntComputer = {}
             valargs = {table.unpack(vals)} -- copy
         end
 
-        print("<pc:" .. self.pc .. "> [" .. opcode .. "]" .. table.unpack(valargs))
+        print("<pc:" .. self.pc .. "> [" .. opcode .. "]  " .. table.concat(valargs, ", "))
 
+        -- call the relevant execution
+        local instructions = {
+            [01] = function () self:perform_add(table.unpack(valargs)) end,
+            [02] = function () self:perform_multiply(table.unpack(valargs)) end,
+            [03] = function () self:perform_store_input(outputargs[1]) end,
+            [04] = function () self:perform_output(valargs[1]) end,
+            [05] = function () self:perform_jnz(table.unpack(valargs)) end,
+            [06] = function () self:perform_jz(table.unpack(valargs)) end,
+            [07] = function () self:perform_less_than(table.unpack(valargs)) end,
+            [08] = function () self:perform_equals(table.unpack(valargs)) end,
+            [99] = function () self:perform_exit() end,
+        }
+        local instr = instructions[opcode]
+        if (instr) then
+            instr()
+        else
+            print("No instruction for opcode " .. opcode)
+        end
+
+    end
+
+    function IntComputer:perform_exit()
+        self.program_ended = true
+    end
+
+    function IntComputer:perform_add(a, b, target)
+        self:set_value(target, a+b)
+    end
+
+    function IntComputer:perform_multiply(a, b, target)
+        self:set_value(target, a*b)
+    end
+
+    function IntComputer:perform_store_input(target)
+        print("input not yet implemented!")
+        assert(false, "input not yet implemented!")
+        -- TODO: provide inputs
+
+    end
+
+    function IntComputer:perform_output(something)
+        print("<amp" .. self.phase .. " out> " .. tostring(something))
+    end
+
+    function IntComputer:perform_jnz(conditional, target_pc)
+        -- the pc will be increased before the next instruction, so we set it lower than told to
+        -- and since it will be increased by (1+num_args) we need to subtract 3 here
+        if conditional ~= 0 then
+            self.pc = target_pc - 3
+        end
+    end
+
+    function IntComputer:perform_jz(conditional, target_pc)
+        if conditional == 0 then
+            self.pc = target_pc -3
+        end
+    end
+
+    function perform_less_than(sm, lg, target)
+        local v = T(sm < lg, 1, 0)
+        self:set_value(target, v)
+    end
+
+    function perform_equals(a, b, target)
+        self:set_value(target, T(a == b, 1, 0))
     end
 
 -- end IntComputer "class"
