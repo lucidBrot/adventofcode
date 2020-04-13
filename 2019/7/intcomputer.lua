@@ -40,7 +40,7 @@ IntComputer = {}
             phase = phase_setting,           -- user-specified ∈[0,4]
             program_ended = false,
             pc = nil,                        -- program counter
-            memory = mem,
+            memory = mem,                    -- array that stores memory
         }
         self.__index = self
         return setmetatable(newObj, self)
@@ -53,6 +53,29 @@ IntComputer = {}
         elseif accessMode == 01 then return location_or_value
         else return nil
         end
+    end
+
+    function IntComputer:set_value(location, value)
+        self.memory[location] = value
+    end
+
+    function IntComputer:run()
+        self.pc = 0
+        self.program_ended = false
+        repeat
+            -- 2-digit opcode, leading digits are accessModes
+            opcodeWithAccessModesAsNumber = self.memory[self.pc]
+            -- turn this into a string and an opcode
+            opcode = opcodeWithAccessModesAsNumber % 100
+            accessModes = tostring(opcodeWithAccessModesAsNumber / 100)
+            -- the access modes can be fetched using tonumber(accessModes:sub(i,i)) for the ith position
+            n = M.instr_num_args(opcode)
+            
+            -- execute instruction
+            args = { table.unpack(self.memory, self.pc + 1, self.pc + n) } -- TODO: if something is off, the bug might be in this line
+            print("<amp" .. self.phase .. "> about to execute " .. opcode .. " with access modes " .. accessModes .. " and arguments " .. table.unpack(args) .. ".")
+            self:perform_instruction(opcode, accessModes, args)
+        until self.program_ended
     end
 
 -- end IntComputer "class"
