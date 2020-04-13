@@ -46,7 +46,7 @@ IntComputer = {}
         newObj = { 
             phase = phase_setting,                   -- user-specified ∈[0,4]
             program_ended = false,
-            pc = nil,                                -- program counter
+            pc = nil,                                -- program counter, counts from 1
             memory = mem or {},                      -- array that stores memory
             stdin = live_inputs or {},               -- array that contains all user inputs
             stdin_counter = 0,
@@ -62,13 +62,16 @@ IntComputer = {}
             -- because lua starts counting from 1 instead of 0, we need to shift by 1
             return self.memory[location_or_value + 1]
         elseif accessMode == 01 then return location_or_value
-        else return nil
+        else 
+            print("YOU FUCKED UP!")
+            return nil
         end
     end
 
     function IntComputer:set_value(location, value)
         -- because lua starts counting from 1 instead of 0, we need to shift by 1
         self.memory[location + 1] = value
+        print("    set memory[" .. (location+1) .. "] to " .. value )
     end
 
     function IntComputer:run()
@@ -174,12 +177,13 @@ IntComputer = {}
 
     function IntComputer:perform_store_input(target)
         self.stdin_counter = self.stdin_counter + 1 
+        local inp = nil
         if self.stdin_counter > #self.stdin then
-            local inp = io.read("*n") -- read a number from the user
-            return inp
+            inp = io.read("*n") -- read a number from the user
         else
-            return self.stdin[self.stdin_counter]
+            inp = self.stdin[self.stdin_counter]
         end
+        self:set_value(target, inp)
     end
 
     function IntComputer:perform_output(something)
