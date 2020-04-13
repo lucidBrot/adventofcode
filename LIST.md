@@ -1,7 +1,8 @@
+- [x] bash
 - [x] COBOL
-- [x] Minkolang
 - [x] LOLCODE
 - [x] LISP
+- [x] Minkolang
 - [x] PHP
 - [ ] awk
 - [ ] ~~Malbolge~~
