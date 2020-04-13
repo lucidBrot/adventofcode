@@ -57,14 +57,17 @@ IntComputer = {}
     -- get the value from location   if accessMode = 00
     -- return the same value         if accessMode = 01
     function IntComputer:get_value(location_or_value, accessMode)
-        if accessMode == 00 then return self.memory[location_or_value]
+        if accessMode == 00 then 
+            -- because lua starts counting from 1 instead of 0, we need to shift by 1
+            return self.memory[location_or_value + 1]
         elseif accessMode == 01 then return location_or_value
         else return nil
         end
     end
 
     function IntComputer:set_value(location, value)
-        self.memory[location] = value
+        -- because lua starts counting from 1 instead of 0, we need to shift by 1
+        self.memory[location + 1] = value
     end
 
     function IntComputer:run()
