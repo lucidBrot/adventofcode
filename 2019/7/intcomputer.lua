@@ -42,13 +42,14 @@ end
 -- a "class"
 IntComputer = {}
 
-    function IntComputer:new(phase_setting, mem)
-        local m = T(mem == nil, {}, mem)
+    function IntComputer:new(phase_setting, mem, live_inputs)
         newObj = { 
-            phase = phase_setting,           -- user-specified ∈[0,4]
+            phase = phase_setting,                   -- user-specified ∈[0,4]
             program_ended = false,
-            pc = nil,                        -- program counter
-            memory = m,                    -- array that stores memory
+            pc = nil,                                -- program counter
+            memory = mem or {},                      -- array that stores memory
+            stdin = live_inputs or {},               -- array that contains all user inputs
+            stdin_counter = 0,
         }
         self.__index = self
         return setmetatable(newObj, self)
@@ -74,7 +75,8 @@ IntComputer = {}
         self.pc = 1
         self.program_ended = false
         repeat
-            print(" ")
+            print("")
+            print("--- pc:" .. self.pc .. " ---")
             -- 2-digit opcode, leading digits are accessModes
             local opcodeWithAccessModesAsNumber = self.memory[self.pc]
             -- turn this into a string and an opcode
@@ -105,7 +107,7 @@ IntComputer = {}
         assert(n == #args, "Wrong number of arguments.")
         -- TODO: if something is off, the bug might be in the below two lines
         local inputargs = { table.unpack(args, 1, ni) }
-        local outputargs = { table.unpack(args, no) }
+        local outputargs = { table.unpack(args, ni+1) }
 
         -- pad accessModes with leading zeros
         local temp = string.rep('0', n - #accessModes) .. accessModes
@@ -162,6 +164,7 @@ IntComputer = {}
     end
 
     function IntComputer:perform_add(a, b, target)
+        print("    " .. a .. " + " .. b .. " => " .. target)
         self:set_value(target, a+b)
     end
 
@@ -170,10 +173,13 @@ IntComputer = {}
     end
 
     function IntComputer:perform_store_input(target)
-        print("input not yet implemented!")
-        assert(false, "input not yet implemented!")
-        -- TODO: provide inputs
-
+        self.stdin_counter = self.stdin_counter + 1 
+        if self.stdin_counter > #self.stdin then
+            local inp = io.read("*n") -- read a number from the user
+            return inp
+        else
+            return self.stdin[self.stdin_counter]
+        end
     end
 
     function IntComputer:perform_output(something)
@@ -183,14 +189,17 @@ IntComputer = {}
     function IntComputer:perform_jnz(conditional, target_pc)
         -- the pc will be increased before the next instruction, so we set it lower than told to
         -- and since it will be increased by (1+num_args) we need to subtract 3 here
+        --
+        -- BUT because lua counts from 1, our pc counts also from 1 but the intcode thinks it counts from 0.
+        -- So we need to add 1
         if conditional ~= 0 then
-            self.pc = target_pc - 3
+            self.pc = target_pc - 3 + 1
         end
     end
 
     function IntComputer:perform_jz(conditional, target_pc)
         if conditional == 0 then
-            self.pc = target_pc -3
+            self.pc = target_pc -3 +1
         end
     end
 
