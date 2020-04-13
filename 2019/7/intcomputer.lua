@@ -43,6 +43,11 @@ end
 IntComputer = {}
 
     function IntComputer:new(phase_setting, mem, live_inputs)
+        -- make sure the memory is sane
+        for i = 1, #mem do
+            mem[i] = tonumber(mem[i])
+        end
+
         newObj = { 
             phase = phase_setting,                   -- user-specified ∈[0,4]
             program_ended = false,
@@ -90,7 +95,7 @@ IntComputer = {}
             n = M.instr_num_args(opcode)
             
             -- execute instruction
-            local args = { table.unpack(self.memory, self.pc + 1, self.pc + n) } -- TODO: if something is off, the bug might be in this line
+            local args = { table.unpack(self.memory, self.pc + 1, self.pc + n) }
             -- print("<amp" .. self.phase .. "> about to execute opcode " .. opcode .. " with access modes " .. accessModes .. " and arguments " .. table.concat(args,", ") .. ".")
             for a=1, #args do
                 print("    (arg): " .. T(args[a], args[a], "NIL"))
@@ -108,7 +113,7 @@ IntComputer = {}
         local ni = M.instr_num_input_args[opcode]
         local n = ni + no
         assert(n == #args, "Wrong number of arguments.")
-        -- TODO: if something is off, the bug might be in the below two lines
+
         local inputargs = { table.unpack(args, 1, ni) }
         local outputargs = { table.unpack(args, ni+1) }
 
@@ -198,6 +203,7 @@ IntComputer = {}
         -- So we need to add 1
         if conditional ~= 0 then
             self.pc = target_pc - 3 + 1
+            print("    jnz: " .. conditional .. " is not 0.  => " .. self.pc)
         end
     end
 
