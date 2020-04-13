@@ -60,7 +60,7 @@ IntComputer = {}
     end
 
     function IntComputer:run()
-        self.pc = 0
+        self.pc = 1
         self.program_ended = false
         repeat
             -- 2-digit opcode, leading digits are accessModes
@@ -75,7 +75,38 @@ IntComputer = {}
             args = { table.unpack(self.memory, self.pc + 1, self.pc + n) } -- TODO: if something is off, the bug might be in this line
             print("<amp" .. self.phase .. "> about to execute " .. opcode .. " with access modes " .. accessModes .. " and arguments " .. table.unpack(args) .. ".")
             self:perform_instruction(opcode, accessModes, args)
+
+            -- increment program counter
+            self.pc = self.pc + 1
         until self.program_ended
+    end
+
+    function IntComputer:perform_instruction(opcode, accessModes, args)
+        -- get input args
+        local no = M.instr_num_output_args(opcode)
+        local ni = M.instr_num_input_args(opcode)
+        local n = ni + no
+        -- TODO: if something is off, the bug might be in the below two lines
+        local inputargs = { table.unpack(args, 1, ni) }
+        local outputargs = { table.unpack(args, no) }
+
+        -- pad accessModes with leading zeros
+        local temp = string.rep('0', n - #accessModes) .. accessModes
+        -- then reverse because the rightmost accessor is for the leftmost parameter
+        local acc = string.reverse(temp)
+        print("  acc padded: " .. acc)
+
+        -- get input argument values
+        local vals = {}
+        for i = 1, ni do
+            local acci = tonumber(acc:sub(i,i))
+            print("  loading inputarg " .. inputargs[i] .. " for accessor " .. acci )
+            vals[i] = self:get_value(inputargs[i], acci)
+        end
+
+        -- output arguments are always locations
+
+        -- combine arguments
     end
 
 -- end IntComputer "class"
