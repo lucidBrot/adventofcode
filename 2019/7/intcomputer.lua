@@ -213,12 +213,12 @@ IntComputer = {}
         end
     end
 
-    function perform_less_than(sm, lg, target)
+    function IntComputer:perform_less_than(sm, lg, target)
         local v = T(sm < lg, 1, 0)
         self:set_value(target, v)
     end
 
-    function perform_equals(a, b, target)
+    function IntComputer:perform_equals(a, b, target)
         self:set_value(target, T(a == b, 1, 0))
     end
 
