@@ -30,7 +30,7 @@ function Q.run_file(file, phase)
 end
 
 -- run intcode file in a new thread
-local f = function (phas) Q.run_file("input.txt", phas) end
+local f = function (phas) Q.run_file("input_7.txt", phas) end
 lane_a = f(0)
 lane_b = f(1)
 lane_c = f(2)

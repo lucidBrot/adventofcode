@@ -164,7 +164,6 @@ local IntComputer = {}
         else
             print("No instruction for opcode " .. opcode)
         end
-        print(".")
 
     end
 
@@ -182,9 +181,13 @@ local IntComputer = {}
     end
 
     function IntComputer:perform_store_input(target)
-        self.stdin_counter = self.stdin_counter + 1 
         local inp = nil
-        if self.stdin_counter > #self.stdin then
+        self.stdin_counter = self.stdin_counter + 1 
+
+        if self.stdin_counter == 1 then -- no input has yet been provided
+            inp = self.phase
+            io.write("using phase " .. inp .. "\n")
+        elseif self.stdin_counter > #self.stdin then
             io.write("user input: ")
             inp = io.read("*n") -- read a number from the user
         else
