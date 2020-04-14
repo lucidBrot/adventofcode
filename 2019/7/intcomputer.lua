@@ -187,7 +187,7 @@ local IntComputer = {}
 
         if self.stdin_counter == 1 then -- no input has yet been provided. The first input is the phase.
             inp = self.phase
-            io.write("using phase " .. inp .. "\n")
+            io.write("using phase " .. inp .. " as user input\n")
         elseif self.stdin_counter > 1+#self.stdin then
             io.write(self.stdin_counter .. "," .. #self.stdin .. "   " .. "user input: ")
             inp = io.read("*n") -- read a number from the user
@@ -200,7 +200,7 @@ local IntComputer = {}
     function IntComputer:perform_output(something)
         print("<amp" .. self.phase .. " out> " .. tostring(something))
         self.latest_output = something
-        if self.yield_outputs then
+        if self.yield_out then
             coroutine.yield(something)
         end
     end

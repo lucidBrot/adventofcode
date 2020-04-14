@@ -62,13 +62,14 @@ function callback(phases)
             retcode, retval = coroutine.resume(coroutines[i])
             if retcode == false or retval == nil then
                 -- break the outer loop
+                print("bot nr " .. i .. " is done.")
                 repeat_outer = false
                 break
             else
                 -- we have a value in retval
                 -- and we want to pass it into the next coroutine
                 print("result from bot" .. i .. ": " .. retval)
-                local latest_output_that_was_not_nil = retval
+                latest_output_that_was_not_nil = retval
                 local next_bot_nr = T(i == #coroutines, 1, i+1)
                 bots[next_bot_nr]:append_inputs({retval})
             end
