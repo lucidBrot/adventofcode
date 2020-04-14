@@ -164,6 +164,7 @@ local IntComputer = {}
         else
             print("No instruction for opcode " .. opcode)
         end
+        print(".")
 
     end
 
@@ -184,6 +185,7 @@ local IntComputer = {}
         self.stdin_counter = self.stdin_counter + 1 
         local inp = nil
         if self.stdin_counter > #self.stdin then
+            io.write("user input: ")
             inp = io.read("*n") -- read a number from the user
         else
             inp = self.stdin[self.stdin_counter]

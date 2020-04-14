@@ -28,12 +28,9 @@ function Q.run_file(file, phase)
     a:run()
     return a:get_latest_output()
 end
--- import multithreading
-local lanes = require "lanes"
---lanes:configure()
 
 -- run intcode file in a new thread
-f = lanes.gen("*", function(phas) return Q.run_file("input.txt", phas) end)
+local f = function (phas) Q.run_file("input.txt", phas) end
 lane_a = f(0)
 lane_b = f(1)
 lane_c = f(2)
@@ -43,4 +40,4 @@ lane_e = f(4)
 print("------------------")
 print("- Results:       -")
 print("------------------")
-print(lane_a[1], lane_b[1], lane_c[1], lane_d[1], lane_e[1])
+print(lane_a, lane_b, lane_c, lane_d, lane_e)
