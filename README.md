@@ -86,3 +86,31 @@ All variables are by default global, even when defined within a function. Functi
 Comparing integers using `(( a < b ))` is okay but don't do that with strings.![](/2019/6/image-20200412143539833.png)
 
 [shellcheck.net](shellcheck.net) is nice but only catches half of my mistakes.
+
+#### Diary Entry of Day 7
+
+Having heard previously from **lua**, we decided to give it a go. And I was surprised how much it differs from other scripting languages I know. It feels like a union of python and javascript ... or at least of their shortcomings.
+
+Undeclared variables are simply `nil` and you will only realize that at runtime. Same thing for functions.  
+
+*Every* argument is optional. And functions can return multiple values - if you don't read all of them, the rest will be discarded.
+
+Type checking doesn't really exist.
+
+```lua
+local a = '0'
+print(a .. "is not 0: " .. (a ~= 0))
+-- this prints
+-- "0 is not 0"
+-- but try realizing that the csv of numbers you parsed are actually strings without a type error
+```
+
+Every number is a Double.
+
+*Everything is a Table*. There are no classes. But there is inheritance on tables.
+
+The multithreading libraries don't really build/install on windows or cygwin.
+
+At least, the for loops are kinda nice - despite table indices counting from `1`. 
+
+And coroutines are nice too.
