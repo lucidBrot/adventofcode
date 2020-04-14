@@ -42,7 +42,7 @@ end
 -- a "class"
 local IntComputer = {}
 
-    function IntComputer:new(phase_setting, mem, live_inputs)
+    function IntComputer:new(phase_setting, mem, live_inputs, yield_outputs)
         -- make sure the memory is sane
         for i = 1, #mem do
             mem[i] = tonumber(mem[i])
@@ -55,6 +55,7 @@ local IntComputer = {}
             memory = mem or {},                      -- array that stores memory
             stdin = live_inputs or {},               -- array that contains all user inputs
             stdin_counter = 0,
+            yield_out = yield_outputs or false,      -- whether to use coroutine functionality at outputs.
         }
         self.__index = self
         return setmetatable(newObj, self)
@@ -199,6 +200,9 @@ local IntComputer = {}
     function IntComputer:perform_output(something)
         print("<amp" .. self.phase .. " out> " .. tostring(something))
         self.latest_output = something
+        if self.yield_outputs then
+            coroutine.yield(something)
+        end
     end
 
     function IntComputer:perform_jnz(conditional, target_pc)
