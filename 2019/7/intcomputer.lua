@@ -40,7 +40,7 @@ function T(condition, yes, no)
 end
 
 -- a "class"
-IntComputer = {}
+local IntComputer = {}
 
     function IntComputer:new(phase_setting, mem, live_inputs)
         -- make sure the memory is sane
@@ -193,6 +193,7 @@ IntComputer = {}
 
     function IntComputer:perform_output(something)
         print("<amp" .. self.phase .. " out> " .. tostring(something))
+        self.latest_output = something
     end
 
     function IntComputer:perform_jnz(conditional, target_pc)
@@ -222,6 +223,10 @@ IntComputer = {}
         self:set_value(target, T(a == b, 1, 0))
     end
 
+    function IntComputer:get_latest_output()
+        return self.latest_output
+    end
+
 -- end IntComputer "class"
 
-return M
+return IntComputer
