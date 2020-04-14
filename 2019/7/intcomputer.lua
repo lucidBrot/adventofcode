@@ -236,6 +236,12 @@ local IntComputer = {}
         return self.latest_output
     end
 
+    function IntComputer:append_inputs(inputs)
+        for i = 1, #inputs do
+            self.stdin[#self.stdin + 1] = inputs[i]
+        end
+    end
+
 -- end IntComputer "class"
 
 return IntComputer
