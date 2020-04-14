@@ -30,12 +30,17 @@ function Q.run_file(file, phase)
 end
 
 -- run intcode file in a new thread
-local f = function (phas) Q.run_file("input_7.txt", phas) end
+local f = function (phas) return Q.run_file("input_7.txt", phas) end
 lane_a = f(0)
+print("result: " .. lane_a)
 lane_b = f(1)
+print("result: " .. lane_b)
 lane_c = f(2)
+print("result: " .. lane_c)
 lane_d = f(3)
+print("result: " .. lane_d)
 lane_e = f(4)
+print("result: " .. lane_e)
 -- Reading the results joins the threads, waiting for any results not already there.
 print("------------------")
 print("- Results:       -")
