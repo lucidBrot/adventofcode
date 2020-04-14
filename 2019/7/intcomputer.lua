@@ -184,14 +184,14 @@ local IntComputer = {}
         local inp = nil
         self.stdin_counter = self.stdin_counter + 1 
 
-        if self.stdin_counter == 1 then -- no input has yet been provided
+        if self.stdin_counter == 1 then -- no input has yet been provided. The first input is the phase.
             inp = self.phase
             io.write("using phase " .. inp .. "\n")
-        elseif self.stdin_counter > #self.stdin then
-            io.write("user input: ")
+        elseif self.stdin_counter > 1+#self.stdin then
+            io.write(self.stdin_counter .. "," .. #self.stdin .. "   " .. "user input: ")
             inp = io.read("*n") -- read a number from the user
         else
-            inp = self.stdin[self.stdin_counter]
+            inp = self.stdin[self.stdin_counter-1]
         end
         self:set_value(target, inp)
     end

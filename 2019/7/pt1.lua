@@ -24,9 +24,9 @@ end
 -- run intcode file 
 -- phase: int ∈ [0,4]
 -- file: "input.txt"
-function Q.run_file(file, phase)
+function Q.run_file(file, phase, live_inputs)
     local f = Q.read_file(file)
-    local a = IntComputer:new(phase, Q.parse_comma_str(f))
+    local a = IntComputer:new(phase, Q.parse_comma_str(f), live_inputs)
     a:run()
     return a:get_latest_output()
 end
