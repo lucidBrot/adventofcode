@@ -37,6 +37,7 @@
 - [ ] Pure HTML+CSS
 - [ ] Zig
 - [ ] Lua
+- [ ] D
 
 ## If Frameworks Count
 - [ ] Greensock (JS animation framework)
