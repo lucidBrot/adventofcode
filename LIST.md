@@ -38,6 +38,8 @@
 - [ ] Zig
 - [ ] Lua
 - [ ] D
+- [ ] Ruby
+- [ ] [Crystal](https://crystal-lang.org/)
 
 ## If Frameworks Count
 - [ ] Greensock (JS animation framework)
