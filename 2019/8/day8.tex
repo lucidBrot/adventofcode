@@ -1,5 +1,6 @@
 \documentclass{article} \usepackage[utf8]{inputenc}
 \usepackage{xstring}
+\usepackage{calc, xintexpr}
 
 \title{Example of Variable Input}
 \author{Cordelia David} \date{April 2019}
@@ -10,14 +11,17 @@
 \def\isnum#1{%
   \if!\ifnum9<1#1!\else_\fi
     \emph{#1}\else#1\fi}
-\begin{document}
+
 
 \newcommand{\firstchar}[1]{%
     \StrLeft{#1}{1}[\firstletter]%
     \firstletter
 }
 
-\def\charboi[#1]#2{\textit{#1 but #2}}
+\def\charboi[#1]#2{%
+\StrMid{#1}{#2}{\the\numexpr #2 + 0\relax}[\mychar]%
+\mychar}
+\begin{document}
 
 
 \maketitle
@@ -26,7 +30,7 @@
 
 We had \Strawberries\ Strawberries for this year's harvest. Probably not enough.
 
-\charboi[hello]{'world'}
+\charboi[hello]{2}
 %\firstchar{\include{inputfile}}
 
 \end{document}
