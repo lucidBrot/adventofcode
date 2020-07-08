@@ -40,6 +40,7 @@
 - [ ] D
 - [ ] Ruby
 - [ ] [Crystal](https://crystal-lang.org/)
+- [ ] [sage](https://doc.sagemath.org/html/en/faq/faq-general.html#why-does-this-project-exist)
 
 ## If Frameworks Count
 - [ ] Greensock (JS animation framework)
