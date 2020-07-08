@@ -1,12 +1,23 @@
 \documentclass{article} \usepackage[utf8]{inputenc}
-\usepackage{filecontents}
+\usepackage{xstring}
 
 \title{Example of Variable Input}
 \author{Cordelia David} \date{April 2019}
 \input{input.tex}
 
+% https://tex.stackexchange.com/a/7183/102826
+% if is num, emphasize, else ignore.
+\def\isnum#1{%
+  \if!\ifnum9<1#1!\else_\fi
+    \emph{#1}\else#1\fi}
 \begin{document}
 
+\newcommand{\firstchar}[1]{%
+    \StrLeft{#1}{1}[\firstletter]%
+    \firstletter
+}
+
+\def\charboi[#1]#2{\textit{#1 but #2}}
 
 
 \maketitle
@@ -15,6 +26,7 @@
 
 We had \Strawberries\ Strawberries for this year's harvest. Probably not enough.
 
-\include{inputfile}
+\charboi[hello]{'world'}
+%\firstchar{\include{inputfile}}
 
 \end{document}
