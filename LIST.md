@@ -41,6 +41,7 @@
 - [ ] Ruby
 - [ ] [Crystal](https://crystal-lang.org/)
 - [ ] [sage](https://doc.sagemath.org/html/en/faq/faq-general.html#why-does-this-project-exist)
+- [ ] Some crazy regex perhaps?
 
 ## If Frameworks Count
 - [ ] Greensock (JS animation framework)
