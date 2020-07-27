@@ -43,13 +43,39 @@ We had \Strawberries\ Strawberries for this year's harvest. Probably not enough.
 
 % compute integer arithmetic
 % "Although \relax does nothing by itself, it is a safe command to stop expansion of another command"
-\the\numexpr 3 - 2 \relax
+\newcommand\three{3}
+\the\numexpr \three - 2 + 5 \relax
+% and to store it in a variable???? redirection and then reusing \three does not work. We need a new variable.
+\def\tmp{\three}
+\def\four{\the\numexpr \tmp - 2 + 5 }
 
 % include the input file
 \newcommand\inputstring{\input{inputfile.tex}}
+% and print it
 \inputstring
 
+hello world 
 % get second character of inputfile
-%\getchar[\include{inputfile}]{2}
+\getchar[\three]{2}
+\typeout{===>"three"|\three}
+
+% Variables given by the task
+
+
+% Loop through first layer and count digits that are 0
+% multiplication with a constant:
+%\newcounter{imgwidth}{25}
+%\newcounter{imgheigth}{6}
+%\newcounter{digitctr}{
+%2 * \value{imgheight}
+%}
+
+\newcount{\imgwidth}=25\relax
+\newcount{\imgheigth}=6\relax
+\newcount{\digitctr}
+\digitctr=\imgwidth
+\typeout{digitctr is \digitctr}
+\multiply\digitctr by \imgheigth
+I want to loop \digitctr times for the first layer.
 
 \end{document}
