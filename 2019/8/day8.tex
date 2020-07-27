@@ -18,7 +18,7 @@
     \firstletter
 }
 
-\def\charboi[#1]#2{%
+\def\getchar[#1]#2{%
 \StrMid{#1}{#2}{\the\numexpr #2 + 0\relax}[\mychar]%
 \mychar}
 \begin{document}
@@ -30,7 +30,7 @@
 
 We had \Strawberries\ Strawberries for this year's harvest. Probably not enough.
 
-\charboi[hello]{2}
+\getchar[hello]{1}
 %\firstchar{\include{inputfile}}
 
 \end{document}
