@@ -3,6 +3,8 @@
 \usepackage{calc, xintexpr}
 \usepackage{xfp}
 
+% TeX docs at http://pgfplots.sourceforge.net/TeX-programming-notes.pdf
+
 \title{Example of Variable Input}
 \author{Cordelia David} \date{April 2019}
 \input{input.tex}
@@ -94,10 +96,9 @@ I want to loop \the\layersize times for the first layer.
   \message{\the\digitctr}
   \advance \digitctr +1
   % assign current char
-  %\currentchar=\getchar[\inputstring]{\the\digitctr}
-  \currentchar=\digitctr
+  %TODO: \currentchar=\getchar[\inputstring]{\the\digitctr}
   % check if zero
-  \ifnum 0=\the\currentchar
+  \if 0\the\currentchar
     \advance \currentlayerzerocount 1
   \fi
 \ifnum \digitctr<\inteval{\layersize + 1}
@@ -107,7 +108,9 @@ I want to loop \the\layersize times for the first layer.
   \bestlayer=\currentlayer
   \bestlayerzerocount=\currentlayerzerocount
 \fi
-\typeout{Best Layer Zero Count is \the\bestlayerzerocount}
+Best Layer Zero Count is \the\bestlayerzerocount
+
+\getchar[01010]{1}
 
 
 \end{document}
