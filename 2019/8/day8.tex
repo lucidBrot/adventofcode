@@ -69,10 +69,20 @@ hello world
 \imgheigth=6
 
 % compute size of a layer
-\newcount{\digitctr}
-\digitctr=\the\imgwidth
-\multiply\digitctr by \imgheigth \relax
-\typeout{Size of a layer is \the\digitctr}
-I want to loop \the\digitctr times for the first layer.
+\newcount{\layersize}
+\layersize=\the\imgwidth
+\multiply\layersize by \imgheigth \relax
+\typeout{Size of a layer is \the\layersize}
+I want to loop \the\layersize times for the first layer.
+
+% now for the first layer count the number of zeros
+\newcount\digitctr
+\digitctr=\layersize
+\loop
+  \message{\the\digitctr}
+  \advance \digitctr -1
+\ifnum \digitctr>0
+\repeat
+
 
 \end{document}
