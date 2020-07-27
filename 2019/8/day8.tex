@@ -56,7 +56,7 @@ We had \Strawberries\ Strawberries for this year's harvest. Probably not enough.
 
 hello world 
 % get second character of inputfile
-\getchar[\three]{2}
+\getchar[\three]{1}
 \typeout{===>"three"|\three}
 
 % Variables given by the task
@@ -94,7 +94,8 @@ I want to loop \the\layersize times for the first layer.
   \message{\the\digitctr}
   \advance \digitctr +1
   % assign current char
-  % TODO
+  %\currentchar=\getchar[\inputstring]{\the\digitctr}
+  \currentchar=\digitctr
   % check if zero
   \ifnum 0=\the\currentchar
     \advance \currentlayerzerocount 1
