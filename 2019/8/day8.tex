@@ -52,9 +52,15 @@ We had \Strawberries\ Strawberries for this year's harvest. Probably not enough.
 \def\four{\the\numexpr \tmp - 2 + 5 }
 
 % include the input file
-\newcommand\inputstring{\input{inputfile.tex}}
+\def\inputstring{\input{inputfile.tex}}
 % and print it
 \inputstring
+
+% include the input file in a different way because the previous way fails when passed as argument to getchar
+\newread\file
+\openin\file=inputfile.tex
+\read\file to \fileline
+\closein\file
 
 hello world 
 % get second character of inputfile
@@ -110,7 +116,7 @@ I want to loop \the\layersize times for the first layer.
 \fi
 Best Layer Zero Count is \the\bestlayerzerocount
 
-\getchar[01010]{1}
+\getchar[\fileline]{2}
 
 
 \end{document}
