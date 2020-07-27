@@ -44,6 +44,12 @@ We had \Strawberries\ Strawberries for this year's harvest. Probably not enough.
 % compute integer arithmetic
 % "Although \relax does nothing by itself, it is a safe command to stop expansion of another command"
 \the\numexpr 3 - 2 \relax
-blubb
+
+% include the input file
+\newcommand\inputstring{\input{inputfile.tex}}
+\inputstring
+
+% get second character of inputfile
+%\getchar[\include{inputfile}]{2}
 
 \end{document}
