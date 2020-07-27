@@ -5,6 +5,8 @@
 
 % TeX docs at http://pgfplots.sourceforge.net/TeX-programming-notes.pdf
 
+% TODO: https://tex.stackexchange.com/questions/29402/how-do-i-make-my-document-look-like-it-was-written-by-a-cthulhu-worshipping-madm
+
 \title{Example of Variable Input}
 \author{Cordelia David} \date{April 2019}
 \input{input.tex}
@@ -105,13 +107,12 @@ I want to loop \the\layersize times for the first layer.
   \def\currentchar{\getchar[\fileline]{\digitctr}}
   \currentchar
   % check if zero
-  \if 0\currentchar
+  \ifx 0\currentchar
     \advance \currentlayerzerocount 1
     Advanced currentlayerzerocount to \currentlayerzerocount
   \fi
 \ifnum \digitctr<\inteval{\layersize + 1}
 \repeat
-typeout{done}
 % if there were very little zeros, we can update the best layer
 \ifnum \currentlayerzerocount<\bestlayerzerocount
   \bestlayer=\currentlayer
