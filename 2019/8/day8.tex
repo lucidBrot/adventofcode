@@ -74,8 +74,9 @@ hello world
 \newcount{\imgheigth}=6\relax
 \newcount{\digitctr}
 \digitctr=\imgwidth
-\typeout{digitctr is \digitctr}
-\multiply\digitctr by \imgheigth
+\typeout{digitctr is \the\digitctr}
+\multiply\digitctr by \imgheigth \relax
+\typeout{digitctr is \the\digitctr}
 I want to loop \digitctr times for the first layer.
 
 \end{document}
