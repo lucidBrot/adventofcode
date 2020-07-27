@@ -95,18 +95,23 @@ I want to loop \the\layersize times for the first layer.
 \currentlayer=0
 \currentlayerzerocount=0
 \newcount\digitctr
-\digitctr=1 % count from 1, not from zero. So we count from 1 to \layersize
+\digitctr=0 % count from 1, not from zero. So we count from 1 to \layersize because we start atvancing at the start of the loop.
+% TODO: abort early if the zero count is not optimal.
+% TODO: optimize getting current char by deleting from string.
 \loop
   \message{\the\digitctr}
   \advance \digitctr +1
   % assign current char
   \def\currentchar{\getchar[\fileline]{\digitctr}}
+  \currentchar
   % check if zero
   \if 0\currentchar
     \advance \currentlayerzerocount 1
+    Advanced currentlayerzerocount to \currentlayerzerocount
   \fi
 \ifnum \digitctr<\inteval{\layersize + 1}
 \repeat
+typeout{done}
 % if there were very little zeros, we can update the best layer
 \ifnum \currentlayerzerocount<\bestlayerzerocount
   \bestlayer=\currentlayer
