@@ -90,21 +90,19 @@ I want to loop \the\layersize times for the first layer.
 \bestlayerzerocount=\inteval{\layersize + 1}
 \newcount\currentlayerzerocount
 \newcount\currentlayer
-\newcount\currentchar
 
 % now for the first layer count the number of zeros
 \currentlayer=0
 \currentlayerzerocount=0
-\currentchar=0
 \newcount\digitctr
 \digitctr=1 % count from 1, not from zero. So we count from 1 to \layersize
 \loop
   \message{\the\digitctr}
   \advance \digitctr +1
   % assign current char
-  %TODO: \currentchar=\getchar[\inputstring]{\the\digitctr}
+  \def\currentchar{\getchar[\fileline]{\digitctr}}
   % check if zero
-  \if 0\the\currentchar
+  \if 0\currentchar
     \advance \currentlayerzerocount 1
   \fi
 \ifnum \digitctr<\inteval{\layersize + 1}
@@ -116,7 +114,6 @@ I want to loop \the\layersize times for the first layer.
 \fi
 Best Layer Zero Count is \the\bestlayerzerocount
 
-\getchar[\fileline]{2}
 
 
 \end{document}
