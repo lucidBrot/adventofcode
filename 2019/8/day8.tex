@@ -1,6 +1,7 @@
 \documentclass{article} \usepackage[utf8]{inputenc}
 \usepackage{xstring}
 \usepackage{calc, xintexpr}
+\usepackage{xfp}
 
 \title{Example of Variable Input}
 \author{Cordelia David} \date{April 2019}
@@ -18,9 +19,12 @@
     \firstletter
 }
 
+% documentation: \getchar[hello]{5}   is 'h'
 \def\getchar[#1]#2{%
 \StrMid{#1}{#2}{\the\numexpr #2 + 0\relax}[\mychar]%
 \mychar}
+
+
 \begin{document}
 
 
@@ -30,7 +34,16 @@
 
 We had \Strawberries\ Strawberries for this year's harvest. Probably not enough.
 
+% get first character of string hello
 \getchar[hello]{1}
 %\firstchar{\include{inputfile}}
+
+% compute integer arithmetic
+\inteval{3 - 2}
+
+% compute integer arithmetic
+% "Although \relax does nothing by itself, it is a safe command to stop expansion of another command"
+\the\numexpr 3 - 2 \relax
+blubb
 
 \end{document}
