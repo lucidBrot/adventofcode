@@ -8,7 +8,9 @@
 % TODO: https://tex.stackexchange.com/questions/29402/how-do-i-make-my-document-look-like-it-was-written-by-a-cthulhu-worshipping-madm
 
 \newif\ifcomputationenabled
-\computationenabledfalse
+\computationenabledtrue
+\newif\ifdebug
+\debugtrue
 
 \title{Advent of Code\\
 {\large Day Eight}}
@@ -59,15 +61,26 @@ So we are sad now and solve https://adventofcode.com/2019/day/8.
 \def\four{\the\numexpr \tmp - 2 + 5 }
 
 % include the input file
-\def\inputstring{\input{inputfile.tex}}
+\ifdebug
+  \def\inputstring{\input{debuginputfile.tex}}
+\else
+  \def\inputstring{\input{inputfile.tex}}
+\fi
 % and print it
 \inputstring
 
 % include the input file in a different way because the previous way fails when passed as argument to getchar
+\ifdebug
+\newread\file
+\openin\file=debuginputfile.tex
+\read\file to \fileline
+\closein\file
+\else
 \newread\file
 \openin\file=inputfile.tex
 \read\file to \fileline
 \closein\file
+\fi
 
 hello world 
 % get second character of inputfile
@@ -82,6 +95,10 @@ hello world
 \imgwidth=25
 \newcount{\imgheigth}
 \imgheigth=6
+\ifdebug
+\imgwidth=3
+\imgheigth=2
+\fi
 
 %flag condition to skip long computation for debugging layout
 \ifcomputationenabled
@@ -126,7 +143,7 @@ I want to loop \the\layersize \.times for the first layer.
   \bestlayer=\currentlayer
   \bestlayerzerocount=\currentlayerzerocount
 \fi
-Best Layer Zero Count is \the\bestlayerzerocount
+\\Best Layer Zero Count is \the\bestlayerzerocount
 
 % end of flag condition to skip long computation for debugging layout
 \fi
