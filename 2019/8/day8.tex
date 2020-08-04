@@ -3,6 +3,7 @@
 \usepackage{calc, xintexpr}
 \usepackage{xfp}
 \usepackage{pdftexcmds}
+\usepackage{coolstr}
 
 % TeX docs at http://pgfplots.sourceforge.net/TeX-programming-notes.pdf
 
@@ -36,6 +37,12 @@
 \StrMid{#1}{#2}{\numexpr #2 + 0\relax}[\mychar]%
 \mychar}
 
+% same as getchar but maybe it works when used in string comparison?
+\def\getcoolchar[#1]#2{%
+\substr{#1}{#2}{1}%
+}
+% NOPE! It's just as broken, just in a different way. it works as long as the first argument is a string. but if it's a command... then it returns the whole thing as first character.
+
 % https://tex.stackexchange.com/questions/195491/ifthenelse-equal-string-comparison-fails
 \makeatletter
 \newcommand\strcmptozero[1]{%
@@ -62,6 +69,7 @@ So we are sad now and solve https://adventofcode.com/2019/day/8.
 
 % get first character of string hello
 \getchar[hello]{1}
+\getcoolchar[hello]{2}
 %\firstchar{\include{inputfile}}
 
 % compute integer arithmetic
@@ -74,6 +82,8 @@ So we are sad now and solve https://adventofcode.com/2019/day/8.
 % and to store it in a variable???? redirection and then reusing \three does not work. We need a new variable.
 \def\tmp{\three}
 \def\four{\the\numexpr \tmp - 2 + 5 }
+
+\newcommand\threehundred{300}
 
 % include the input file
 \ifdebug
@@ -100,6 +110,8 @@ So we are sad now and solve https://adventofcode.com/2019/day/8.
 hello world 
 % get second character of inputfile
 \getchar[\three]{1}
+\getcoolchar[300]{1}
+\getcoolchar[\threehundred]{1}
 \typeout{===>"three"|\three}
 
 % Variables given by the task
@@ -154,10 +166,12 @@ The input file contains \inteval{\stahp - 1} characters.
 	  \message{\the\digitctr}
 	  \advance \digitctr +1
 	  % assign current char
-	  \def\currentchar{\getchar[\fileline]{\digitctr}}
-\StrMid{\fileline}{\digitctr}{\numexpr \digitctr + 0\relax}[\currentchar]
+	  \def\currentchar{\strchar{\fileline}{\digitctr}}
+%%%\StrMid{\fileline}{\digitctr}{\numexpr \digitctr + 0\relax}[\currentchar]
 	  % check if zero
-             \IfEq {0}{\currentchar}{
+%%%             \IfEq {0}{\currentchar}{
+\def\res{\ifstrchareq{0}{\currentchar}{0}{1}}
+\ifx \res 0
 	    \advance \currentlayerzerocount 1
 	    Advanced currentlayerzerocount to \the\currentlayerzerocount.\\
 	
@@ -170,9 +184,9 @@ The input file contains \inteval{\stahp - 1} characters.
 	      \digictr={\the\numexpr \layersize * \currentlayer + \layersize}
 	Layer \the\currentlayer has more zeros than the current best layer (\the\bestlayer ) so we skip ahead to character at index \digictr to start the next layer.\\
 	    \fi
-             }{%else
-                The current char \currentchar~does not equal 0. It is \meaning\currentchar whereas 0 is \meaning0.\\
-	  }%fi
+             \else
+                The current char \currentchar~does not equal 0.\\
+	 \fi
 	\ifnum \digitctr<\inteval{\layersize * \currentlayer + \layersize}
 	\repeat
 	% if there were very little zeros, we can update the best layer
