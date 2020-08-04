@@ -138,14 +138,14 @@ I want to loop \the\layersize~times for the first layer.
     \advance \currentlayerzerocount 1
     Advanced currentlayerzerocount to \currentlayerzerocount
   \fi
-\ifnum \digitctr<\inteval{\layersize + 1}
+\ifnum \digitctr<\inteval{\layersize}
 \repeat
 % if there were very little zeros, we can update the best layer
 \ifnum \currentlayerzerocount<\bestlayerzerocount
   \bestlayer=\currentlayer
   \bestlayerzerocount=\currentlayerzerocount
 \fi
-\\Best Layer Zero Count is \the\bestlayerzerocount
+\\Best Layer Zero Count is \the\bestlayerzerocount~for layer \the\bestlayer
 
 % end of flag condition to skip long computation for debugging layout
 \fi
