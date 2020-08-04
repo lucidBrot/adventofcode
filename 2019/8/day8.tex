@@ -14,7 +14,7 @@
 \newif\ifcomputationenabled
 \computationenabledtrue
 \newif\ifdebug
-\debugtrue
+\debugfalse
 
 \title{Advent of Code\\
 {\large Day Eight}}
@@ -201,7 +201,7 @@ The input file contains \stahpnow characters.
 	      % for this we set the counter to the first character index of the next layer
 	      \global\digitctr={\the\numexpr \layersize * \currentlayer + \layersize}
 	      \message{Digitcounter reset to \the\digitctr}
-	Layer \the\currentlayer has more zeros than the current best layer (\the\bestlayer ) so we skip ahead to character at index \the\digictr to start the next layer.\\
+	Layer \the\currentlayer has more zeros than the current best layer (\the\bestlayer ) so we skip ahead to character at index \the\digitctr to start the next layer.\\
 	    \fi
              }{%else
                 The current char \currentchar~does not equal 0.\\
