@@ -155,8 +155,9 @@ I want to loop \the\layersize~times for the first layer.
 
 \StrLen{\fileline}[\stahp]%find the strlen and store it in \stahp
 % see https://tex.stackexchange.com/a/15424/102826
+\def\stahpnow{\the\numexpr \stahp - 1}
 
-The input file contains \inteval{\stahp - 1} characters.
+The input file contains \stahpnow characters.
 %flag condition to skip long computation for debugging layout
 \ifcomputationenabled
 % Aand now repeat the inner loop below once per layer. 
@@ -185,7 +186,7 @@ The input file contains \inteval{\stahp - 1} characters.
 	    \fi
              }{%else
                 The current char \currentchar~does not equal 0.\\
-                \message{Msg from IFEQ ELSE branch}
+                \typeout{Msg from IFEQ ELSE branch}
 	 }%fi
 	\ifnum \digitctr<\inteval{\layersize * \currentlayer + \layersize}
 	\repeat
@@ -202,7 +203,7 @@ The input file contains \inteval{\stahp - 1} characters.
 \message{Layer \the\currentlayer is not a new best layer.}
 	\fi
           Best Layer Zero Count is \the\bestlayerzerocount~for layer \the\bestlayer. \\
-\ifnum \digitctr<\stahp
+\ifnum \digitctr<\stahpnow
 	\currentlayerzerocount=0
 	\advance \currentlayer by1
 	Advanced currentlayer to \the\currentlayer.\\
