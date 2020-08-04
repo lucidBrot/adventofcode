@@ -155,13 +155,11 @@ The input file contains \inteval{\stahp - 1} characters.
 	  \advance \digitctr +1
 	  % assign current char
 	  \def\currentchar{\getchar[\fileline]{\digitctr}}
- Char Char Binks: \currentchar\\
 \StrMid{\fileline}{\digitctr}{\numexpr \digitctr + 0\relax}[\currentchar]
-             \IfEq {0}{\currentchar}{hello}{blubb}
 	  % check if zero
-            \ifx 0\currentchar
+             \IfEq {0}{\currentchar}{
 	    \advance \currentlayerzerocount 1
-	    Advanced currentlayerzerocount to \the\currentlayerzerocount
+	    Advanced currentlayerzerocount to \the\currentlayerzerocount.\\
 	
 	    % if the zerocount is not optimal, abort early
 	    \ifnum \currentlayerzerocount<\inteval{\bestlayerzerocount}
@@ -170,26 +168,26 @@ The input file contains \inteval{\stahp - 1} characters.
 	      % abort and check next layer
 	      % for this we set the counter to the first character index of the next layer
 	      \digictr={\the\numexpr \layersize * \currentlayer + \layersize}
-	Layer \the\currentlayer has more zeros than the current best layer (\the\bestlayer ) so we skip ahead to character at index \digictr to start the next layer.
+	Layer \the\currentlayer has more zeros than the current best layer (\the\bestlayer ) so we skip ahead to character at index \digictr to start the next layer.\\
 	    \fi
-             \else
-                The current char \currentchar~does not equal 0. It is \meaning\currentchar whereas 0 is \meaning0.
-	  \fi
+             }{%else
+                The current char \currentchar~does not equal 0. It is \meaning\currentchar whereas 0 is \meaning0.\\
+	  }%fi
 	\ifnum \digitctr<\inteval{\layersize * \currentlayer + \layersize}
 	\repeat
 	% if there were very little zeros, we can update the best layer
 	\ifnum \currentlayerzerocount<\bestlayerzerocount
 	  \bestlayer=\currentlayer
 	  \bestlayerzerocount=\currentlayerzerocount
-             \\Found a new best layer (\the\bestlayer) with zerocount \the\bestlayerzerocount.
+             Found a new best layer (\the\bestlayer) with zerocount \the\bestlayerzerocount.\\
           \else
-             \\Current Layer (\the\currentlayer) with zerocount \the\currentlayerzerocount~is worse than Best Layer (\the\bestlayer, zerocount \the\bestlayerzerocount).
+             Current Layer (\the\currentlayer) with zerocount \the\currentlayerzerocount~is worse than Best Layer (\the\bestlayer, zerocount \the\bestlayerzerocount).\\
 	\fi
-          \\Best Layer Zero Count is \the\bestlayerzerocount~for layer \the\bestlayer. 
+          Best Layer Zero Count is \the\bestlayerzerocount~for layer \the\bestlayer. \\
 \ifnum \digitctr<\stahp
 	\currentlayerzerocount=0
 	\advance \currentlayer 1
-	Advanced currentlayer to \the\currentlayer
+	Advanced currentlayer to \the\currentlayer.\\
 \repeat
 
 The current layer is now \the\currentlayer
