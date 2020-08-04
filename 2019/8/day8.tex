@@ -2,10 +2,12 @@
 \usepackage{xstring}
 \usepackage{calc, xintexpr}
 \usepackage{xfp}
+\usepackage{pdftexcmds}
 
 % TeX docs at http://pgfplots.sourceforge.net/TeX-programming-notes.pdf
 
 % TODO: https://tex.stackexchange.com/questions/29402/how-do-i-make-my-document-look-like-it-was-written-by-a-cthulhu-worshipping-madm
+% cool hack: http://texhacks.blogspot.com/2010/12/forcing-full-expansion.html
 
 \newif\ifcomputationenabled
 \computationenabledtrue
@@ -33,6 +35,19 @@
 \def\getchar[#1]#2{%
 \StrMid{#1}{#2}{\numexpr #2 + 0\relax}[\mychar]%
 \mychar}
+
+% https://tex.stackexchange.com/questions/195491/ifthenelse-equal-string-comparison-fails
+\makeatletter
+\newcommand\mystrcmp[1]{%
+  \ifnum\pdf@strcmp{\unexpanded{#1}}{german}=0 %
+     \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi
+    {TRUE}
+    {FALSE}%
+}
+\makeatother
 
 
 \begin{document}
@@ -134,7 +149,7 @@ The input file contains \inteval{\stahp - 1} characters.\\
 \ifcomputationenabled
 % Aand now repeat the inner loop below once per layer. 
 
-
+\message{\mystrcmp{german}...}
 
 \loop
 	\loop
@@ -143,8 +158,11 @@ The input file contains \inteval{\stahp - 1} characters.\\
 	  % assign current char
 	  \def\currentchar{\getchar[\fileline]{\digitctr}}
  Char Char Binks: \currentchar\\
+\expandafter\def\expandafter\charcharbinks\expandafter{\currentchar}
+\message{char char binks says \charcharbinks}
 	  % check if zero
-	  \IfEq {0}{\currentchar}{
+	  \IfEq {0}{\charcharbinks}{hello}{world}
+            \ifx 0\currentchar
 	    \advance \currentlayerzerocount 1
 	    Advanced currentlayerzerocount to \the\currentlayerzerocount
 	
@@ -157,9 +175,9 @@ The input file contains \inteval{\stahp - 1} characters.\\
 	      \digictr={\the\numexpr \layersize * \currentlayer + \layersize}
 	Layer \the\currentlayer has more zeros than the current best layer (\the\bestlayer ) so we skip ahead to character at index \digictr to start the next layer.
 	    \fi
-             }{%else
+             \else
                 The current char \currentchar~does not equal 0. It is \meaning\currentchar whereas 0 is \meaning0.
-	  }%fi
+	  \fi
 	\ifnum \digitctr<\inteval{\layersize * \currentlayer + \layersize}
 	\repeat
 	% if there were very little zeros, we can update the best layer
