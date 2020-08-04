@@ -93,12 +93,14 @@ hello world
 % variables given by the task:
 \newcount{\imgwidth}
 \imgwidth=25
-\newcount{\imgheigth}
-\imgheigth=6
+\newcount{\imgheight}
+\imgheight=6
 \ifdebug
 \imgwidth=3
-\imgheigth=2
+\imgheight=2
 \fi
+
+Image Width: \the\imgwidth \hspace{1cm}Image Height: \the\imgheight
 
 %flag condition to skip long computation for debugging layout
 \ifcomputationenabled
@@ -106,9 +108,9 @@ hello world
 % compute size of a layer
 \newcount{\layersize}
 \layersize=\the\imgwidth
-\multiply\layersize by \imgheigth \relax
+\multiply\layersize by \imgheight \relax
 \typeout{Size of a layer is \the\layersize}
-I want to loop \the\layersize \.times for the first layer.
+I want to loop \the\layersize~times for the first layer.
 
 % store the index of the best layer. The best layer has the fewest digits. So initialize the counter to maximum possible + 1.
 \newcount\bestlayer
