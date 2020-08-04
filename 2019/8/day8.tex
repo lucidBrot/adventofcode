@@ -38,8 +38,8 @@
 
 % https://tex.stackexchange.com/questions/195491/ifthenelse-equal-string-comparison-fails
 \makeatletter
-\newcommand\mystrcmp[1]{%
-  \ifnum\pdf@strcmp{\unexpanded{#1}}{german}=0 %
+\newcommand\strcmptozero[1]{%
+  \ifnum\pdf@strcmp{\unexpanded{#1}}{0}=0 %
      \expandafter\@firstoftwo
   \else
     \expandafter\@secondoftwo
@@ -144,7 +144,7 @@ I want to loop \the\layersize~times for the first layer.
 \StrLen{\fileline}[\stahp]%find the strlen and store it in \stahp
 % see https://tex.stackexchange.com/a/15424/102826
 
-The input file contains \inteval{\stahp - 1} characters.\\
+The input file contains \inteval{\stahp - 1} characters.
 %flag condition to skip long computation for debugging layout
 \ifcomputationenabled
 % Aand now repeat the inner loop below once per layer. 
@@ -156,10 +156,9 @@ The input file contains \inteval{\stahp - 1} characters.\\
 	  % assign current char
 	  \def\currentchar{\getchar[\fileline]{\digitctr}}
  Char Char Binks: \currentchar\\
-\expandafter\def\expandafter\charcharbinks\expandafter{\currentchar}
-\message{char char binks says \charcharbinks}
+\StrMid{\fileline}{\digitctr}{\numexpr \digitctr + 0\relax}[\currentchar]
+             \IfEq {0}{\currentchar}{hello}{blubb}
 	  % check if zero
-	  \message{\expandafter\mystrcmp\expanded\currentchar ...}
             \ifx 0\currentchar
 	    \advance \currentlayerzerocount 1
 	    Advanced currentlayerzerocount to \the\currentlayerzerocount
