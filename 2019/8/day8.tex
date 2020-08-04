@@ -8,7 +8,7 @@
 % TODO: https://tex.stackexchange.com/questions/29402/how-do-i-make-my-document-look-like-it-was-written-by-a-cthulhu-worshipping-madm
 
 \newif\ifcomputationenabled
-\computationenabledfalse
+\computationenabledtrue
 \newif\ifdebug
 \debugtrue
 
@@ -129,7 +129,7 @@ Test: \StrLen{\fileline}\newline
 \StrLen{\fileline}[\layerafterthelast]%find the strlen and store it in \MyStrLen
 % see https://tex.stackexchange.com/a/15424/102826
 
-The input file contains \layerafterthelast minus one characters. % TODO: compute the index where to stop by adding one.
+The input file contains \inteval{\layerafterthelast - 1} characters. % TODO: compute the index where to stop by adding one.
 %flag condition to skip long computation for debugging layout
 \ifcomputationenabled
 % Aand now repeat the inner loop below once per layer. 
