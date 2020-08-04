@@ -162,15 +162,15 @@ The input file contains \inteval{\stahp - 1} characters.
 % Aand now repeat the inner loop below once per layer. 
 
 \loop
-	\loop
+	{\loop
 	  \message{\the\digitctr}
-	  \advance \digitctr +1
+	  \advance \digitctr by1
 	  % assign current char
 \StrMid{\fileline}{\digitctr}{\numexpr \digitctr + 0\relax}[\currentchar]
 	  % check if zero
             \IfEq {0}{\currentchar}{
-	    \advance \currentlayerzerocount 1
-	    Advanced currentlayerzerocount to \the\currentlayerzerocount.\\
+	    \advance \currentlayerzerocount by1
+	    Advanced currentlayerzerocount to \the\currentlayerzerocount~for layer \the\currentlayer.
 	
 	    % if the zerocount is not optimal, abort early
 	    \ifnum \currentlayerzerocount<\inteval{\bestlayerzerocount}
@@ -186,6 +186,7 @@ The input file contains \inteval{\stahp - 1} characters.
 	 }%fi
 	\ifnum \digitctr<\inteval{\layersize * \currentlayer + \layersize}
 	\repeat
+         }%
 	% if there were very little zeros, we can update the best layer
 	\ifnum \currentlayerzerocount<\bestlayerzerocount
 	  \bestlayer=\currentlayer
@@ -197,7 +198,7 @@ The input file contains \inteval{\stahp - 1} characters.
           Best Layer Zero Count is \the\bestlayerzerocount~for layer \the\bestlayer. \\
 \ifnum \digitctr<\stahp
 	\currentlayerzerocount=0
-	\advance \currentlayer 1
+	\advance \currentlayer by1
 	Advanced currentlayer to \the\currentlayer.\\
 \repeat
 
