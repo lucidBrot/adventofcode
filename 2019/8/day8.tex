@@ -141,7 +141,7 @@ I want to loop \the\layersize~times for the first layer.
 \bestlayer=-1
 \newcount\bestlayerzerocount
 \bestlayerzerocount=\inteval{\layersize + 1}
-\newcount\currentlayerzerocount
+\global\newcount\currentlayerzerocount
 \newcount\currentlayer
 
 % now for the first layer count the number of zeros
@@ -166,12 +166,12 @@ The input file contains \inteval{\stahp - 1} characters.
 	  \message{\the\digitctr}
 	  \global \advance \digitctr by1
 	  % assign current char
-\StrMid{\fileline}{\digitctr}{\numexpr \digitctr + 0\relax}[\currentchar]
+             \StrMid{\fileline}{\digitctr}{\numexpr \digitctr + 0\relax}[\currentchar]
+
 	  % check if zero
             \IfEq {0}{\currentchar}{
-	    \advance \currentlayerzerocount by1
+	    \global \advance \currentlayerzerocount by1
 	    Advanced currentlayerzerocount to \the\currentlayerzerocount~for layer \the\currentlayer.
-	
 	    % if the zerocount is not optimal, abort early
 	    \ifnum \currentlayerzerocount<\inteval{\bestlayerzerocount}
 	      % continue as normal
@@ -185,7 +185,7 @@ The input file contains \inteval{\stahp - 1} characters.
 	    \fi
              }{%else
                 The current char \currentchar~does not equal 0.\\
-                \message{Msg from IFEQ ELSE branch\\}
+                \typeout{Msg from IFEQ ELSE branch}
 	 }%fi
 	\ifnum \digitctr<\inteval{\layersize * \currentlayer + \layersize}
 	\repeat
@@ -196,8 +196,10 @@ The input file contains \inteval{\stahp - 1} characters.
 	  \bestlayer=\currentlayer
 	  \bestlayerzerocount=\currentlayerzerocount
              Found a new best layer (\the\bestlayer) with zerocount \the\bestlayerzerocount.\\
+\message{Found a new best layer \the\bestlayer}
           \else
              Current Layer (\the\currentlayer) with zerocount \the\currentlayerzerocount~is worse than Best Layer (\the\bestlayer, zerocount \the\bestlayerzerocount).\\
+\message{Layer \the\currentlayer is not a new best layer.}
 	\fi
           Best Layer Zero Count is \the\bestlayerzerocount~for layer \the\bestlayer. \\
 \ifnum \digitctr<\stahp
