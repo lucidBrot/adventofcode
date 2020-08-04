@@ -31,7 +31,7 @@
 
 % documentation: \getchar[hello]{5}   is 'h'
 \def\getchar[#1]#2{%
-\StrMid{#1}{#2}{\the\numexpr #2 + 0\relax}[\mychar]%
+\StrMid{#1}{#2}{\numexpr #2 + 0\relax}[\mychar]%
 \mychar}
 
 
@@ -125,7 +125,7 @@ I want to loop \the\layersize~times for the first layer.
 % TODO: optimize getting current char by deleting from string.
 %
 \newcount\layerafterthelast
-Test: \StrLen{\fileline}\newline
+
 \StrLen{\fileline}[\stahp]%find the strlen and store it in \stahp
 % see https://tex.stackexchange.com/a/15424/102826
 
@@ -133,17 +133,20 @@ The input file contains \inteval{\stahp - 1} characters.\\
 %flag condition to skip long computation for debugging layout
 \ifcomputationenabled
 % Aand now repeat the inner loop below once per layer. 
+
+
+
 \loop
 	\loop
 	  \message{\the\digitctr}
 	  \advance \digitctr +1
 	  % assign current char
 	  \def\currentchar{\getchar[\fileline]{\digitctr}}
-
-	  % check if zero
-	  \if 0\currentchar
+ Char Char Binks: \currentchar\\
+%	  % check if zero
+%	  \IfEq {0}{\currentchar}{
 	    \advance \currentlayerzerocount 1
-	    Advanced currentlayerzerocount to \currentlayerzerocount
+	    Advanced currentlayerzerocount to \the\currentlayerzerocount
 	
 	    % if the zerocount is not optimal, abort early
 	    \ifnum \currentlayerzerocount<\inteval{\bestlayerzerocount}
@@ -154,10 +157,9 @@ The input file contains \inteval{\stahp - 1} characters.\\
 	      \digictr={\the\numexpr \layersize * \currentlayer + \layersize}
 	Layer \the\currentlayer has more zeros than the current best layer (\the\bestlayer ) so we skip ahead to character at index \digictr to start the next layer.
 	    \fi
-             \else
-                The current char \currentchar~does not equal 0.
-\explain{\currentchar}, \explain{0}\\
-	  \fi
+%             }{%else
+                The current char \currentchar~does not equal 0. It is \meaning\currentchar whereas 0 is \meaning0.
+%	  }%fi
 	\ifnum \digitctr<\inteval{\layersize * \currentlayer + \layersize}
 	\repeat
 	% if there were very little zeros, we can update the best layer
