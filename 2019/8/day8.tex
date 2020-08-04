@@ -7,8 +7,12 @@
 
 % TODO: https://tex.stackexchange.com/questions/29402/how-do-i-make-my-document-look-like-it-was-written-by-a-cthulhu-worshipping-madm
 
-\title{Example of Variable Input}
-\author{Cordelia David} \date{April 2019}
+\newif\ifcomputationenabled
+\computationenabledfalse
+
+\title{Advent of Code\\
+{\large Day Eight}}
+\author{LucidBrot} \date{August 2020}
 \input{input.tex}
 
 % https://tex.stackexchange.com/a/7183/102826
@@ -37,6 +41,7 @@
 \section{Introduction}
 
 We had \Strawberries\ Strawberries for this year's harvest. Probably not enough.
+So we are sad now and solve https://adventofcode.com/2019/day/8.
 
 % get first character of string hello
 \getchar[hello]{1}
@@ -78,12 +83,15 @@ hello world
 \newcount{\imgheigth}
 \imgheigth=6
 
+%flag condition to skip long computation for debugging layout
+\ifcomputationenabled
+
 % compute size of a layer
 \newcount{\layersize}
 \layersize=\the\imgwidth
 \multiply\layersize by \imgheigth \relax
 \typeout{Size of a layer is \the\layersize}
-I want to loop \the\layersize times for the first layer.
+I want to loop \the\layersize \.times for the first layer.
 
 % store the index of the best layer. The best layer has the fewest digits. So initialize the counter to maximum possible + 1.
 \newcount\bestlayer
@@ -119,6 +127,9 @@ I want to loop \the\layersize times for the first layer.
   \bestlayerzerocount=\currentlayerzerocount
 \fi
 Best Layer Zero Count is \the\bestlayerzerocount
+
+% end of flag condition to skip long computation for debugging layout
+\fi
 
 
 
