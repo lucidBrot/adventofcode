@@ -166,12 +166,9 @@ The input file contains \inteval{\stahp - 1} characters.
 	  \message{\the\digitctr}
 	  \advance \digitctr +1
 	  % assign current char
-	  \def\currentchar{\strchar{\fileline}{\digitctr}}
-%%%\StrMid{\fileline}{\digitctr}{\numexpr \digitctr + 0\relax}[\currentchar]
+\StrMid{\fileline}{\digitctr}{\numexpr \digitctr + 0\relax}[\currentchar]
 	  % check if zero
-%%%             \IfEq {0}{\currentchar}{
-\def\res{\ifstrchareq{0}{\currentchar}{0}{1}}
-\ifx \res 0
+            \IfEq {0}{\currentchar}{
 	    \advance \currentlayerzerocount 1
 	    Advanced currentlayerzerocount to \the\currentlayerzerocount.\\
 	
@@ -184,9 +181,9 @@ The input file contains \inteval{\stahp - 1} characters.
 	      \digictr={\the\numexpr \layersize * \currentlayer + \layersize}
 	Layer \the\currentlayer has more zeros than the current best layer (\the\bestlayer ) so we skip ahead to character at index \digictr to start the next layer.\\
 	    \fi
-             \else
+             }{%else
                 The current char \currentchar~does not equal 0.\\
-	 \fi
+	 }%fi
 	\ifnum \digitctr<\inteval{\layersize * \currentlayer + \layersize}
 	\repeat
 	% if there were very little zeros, we can update the best layer
