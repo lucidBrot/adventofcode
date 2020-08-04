@@ -183,7 +183,8 @@ The input file contains \stahpnow characters.
 	  \message{\the\digitctr}
 	  \global \advance \digitctr by1
 	  % assign current char. Because of optimization, we need to do some math
-             \StrMid{\workingline}{ \modulo{\digitctr}{\layersize} + 1}{\numexpr \digitctr + 0\relax}[\currentchar]
+             \def\accessor{\the\numexpr \modulo{\digitctr}{\layersize} + 1 \relax}
+             \StrMid{\workingline}{ \accessor}{\accessor}[\currentchar]
 
 	  % check if zero
             \IfEq {0}{\currentchar}{
