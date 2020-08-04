@@ -8,7 +8,7 @@
 % TODO: https://tex.stackexchange.com/questions/29402/how-do-i-make-my-document-look-like-it-was-written-by-a-cthulhu-worshipping-madm
 
 \newif\ifcomputationenabled
-\computationenabledtrue
+\computationenabledfalse
 \newif\ifdebug
 \debugtrue
 
@@ -102,9 +102,6 @@ hello world
 
 Image Width: \the\imgwidth \hspace{1cm}Image Height: \the\imgheight
 
-%flag condition to skip long computation for debugging layout
-\ifcomputationenabled
-
 % compute size of a layer
 \newcount{\layersize}
 \layersize=\the\imgwidth
@@ -125,27 +122,49 @@ I want to loop \the\layersize~times for the first layer.
 \currentlayerzerocount=0
 \newcount\digitctr
 \digitctr=0 % count from 1, not from zero. So we count from 1 to \layersize because we start atvancing at the start of the loop.
-% TODO: abort early if the zero count is not optimal.
 % TODO: optimize getting current char by deleting from string.
+%
+\newcount\layerafterthelast
+Test: \StrLen{\fileline}\newline
+\StrLen{\fileline}[\layerafterthelast]%find the strlen and store it in \MyStrLen
+% see https://tex.stackexchange.com/a/15424/102826
+
+The input file contains \layerafterthelast minus one characters. % TODO: compute the index where to stop by adding one.
+%flag condition to skip long computation for debugging layout
+\ifcomputationenabled
+% Aand now repeat the inner loop below once per layer. 
 \loop
-  \message{\the\digitctr}
-  \advance \digitctr +1
-  % assign current char
-  \def\currentchar{\getchar[\fileline]{\digitctr}}
-  \currentchar
-  % check if zero
-  \ifx 0\currentchar
-    \advance \currentlayerzerocount 1
-    Advanced currentlayerzerocount to \currentlayerzerocount
-  \fi
-\ifnum \digitctr<\inteval{\layersize}
-\repeat
-% if there were very little zeros, we can update the best layer
-\ifnum \currentlayerzerocount<\bestlayerzerocount
-  \bestlayer=\currentlayer
-  \bestlayerzerocount=\currentlayerzerocount
-\fi
+	\loop
+	  \message{\the\digitctr}
+	  \advance \digitctr +1
+	  % assign current char
+	  \def\currentchar{\getchar[\fileline]{\digitctr}}
+	  \currentchar
+	  % check if zero
+	  \ifx 0\currentchar
+	    \advance \currentlayerzerocount 1
+	    Advanced currentlayerzerocount to \currentlayerzerocount
+	
+	    % if the zerocount is not optimal, abort early
+	    \ifnum \currentlayerzerocount<\inteval{\bestlayerzerocount}
+	      % continue as normal
+	    \else
+	      % abort and check next layer
+	      % for this we set the counter to the first character index of the next layer
+	      \digictr={\the\numexpr \layersize * \currentlayer + \layersize}
+	Layer \the\currentlayer has more zeros than the current best layer (\the\bestlayer ) so we skip ahead to character at index \digictr to start the next layer.
+	    \fi
+	  \fi
+	\ifnum \digitctr<\inteval{\layersize}
+	\repeat
+	% if there were very little zeros, we can update the best layer
+	\ifnum \currentlayerzerocount<\bestlayerzerocount
+	  \bestlayer=\currentlayer
+	  \bestlayerzerocount=\currentlayerzerocount
+	\fi
 \\Best Layer Zero Count is \the\bestlayerzerocount~for layer \the\bestlayer
+\ifnum \currentlayer<\layerafterthelast
+\repeat
 
 % end of flag condition to skip long computation for debugging layout
 \fi
