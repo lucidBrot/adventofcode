@@ -147,8 +147,8 @@ I want to loop \the\layersize~times for the first layer.
 % now for the first layer count the number of zeros
 \currentlayer=0
 \currentlayerzerocount=0
-\newcount\digitctr
-\digitctr=0 % count from 1, not from zero. So we count from 1 to \layersize because we start atvancing at the start of the loop.
+\global\newcount\digitctr
+\digitctr=0 % count from 1, not from zero. So we count from 1 to \layersize because we start advancing at the start of the loop.
 % TODO: optimize getting current char by deleting from string.
 %
 \newcount\layerafterthelast
@@ -164,7 +164,7 @@ The input file contains \inteval{\stahp - 1} characters.
 \loop
 	{\loop
 	  \message{\the\digitctr}
-	  \advance \digitctr by1
+	  \global \advance \digitctr by1
 	  % assign current char
 \StrMid{\fileline}{\digitctr}{\numexpr \digitctr + 0\relax}[\currentchar]
 	  % check if zero
@@ -175,18 +175,22 @@ The input file contains \inteval{\stahp - 1} characters.
 	    % if the zerocount is not optimal, abort early
 	    \ifnum \currentlayerzerocount<\inteval{\bestlayerzerocount}
 	      % continue as normal
+                \message{Everything is fine with digitcounter \the\digitctr}
 	    \else
 	      % abort and check next layer
 	      % for this we set the counter to the first character index of the next layer
 	      \digitctr={\the\numexpr \layersize * \currentlayer + \layersize}
+	      \message{Digitcounter reset to \the\digitctr}
 	Layer \the\currentlayer has more zeros than the current best layer (\the\bestlayer ) so we skip ahead to character at index \the\digictr to start the next layer.\\
 	    \fi
              }{%else
                 The current char \currentchar~does not equal 0.\\
+                \message{Msg from IFEQ ELSE branch\\}
 	 }%fi
 	\ifnum \digitctr<\inteval{\layersize * \currentlayer + \layersize}
 	\repeat
          }%
+\message{Finished inner loop}
 	% if there were very little zeros, we can update the best layer
 	\ifnum \currentlayerzerocount<\bestlayerzerocount
 	  \bestlayer=\currentlayer
