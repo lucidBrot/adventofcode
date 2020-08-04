@@ -56,6 +56,16 @@
 }
 \makeatother
 
+% modulo computation in plain TeX
+% https://tex.stackexchange.com/a/34434/102826
+\newcount\tmpcnta
+\def\modulo#1#2{\tmpcnta=#1
+        \divide\tmpcnta by #2
+        \multiply\tmpcnta by #2
+        \multiply\tmpcnta by -1
+        \advance\tmpcnta by #1\relax
+        \the\tmpcnta}
+
 
 \begin{document}
 
@@ -160,14 +170,20 @@ I want to loop \the\layersize~times for the first layer.
 The input file contains \stahpnow characters.
 %flag condition to skip long computation for debugging layout
 \ifcomputationenabled
+
+
+% optimization because xstring library is slow.
+% We remove the head of the input string once it has been used. This happens every time the layer has been read.
+\def\workingline{\fileline}
+
 % Aand now repeat the inner loop below once per layer. 
 
 \loop
 	{\loop
 	  \message{\the\digitctr}
 	  \global \advance \digitctr by1
-	  % assign current char
-             \StrMid{\fileline}{\digitctr}{\numexpr \digitctr + 0\relax}[\currentchar]
+	  % assign current char. Because of optimization, we need to do some math
+             \StrMid{\workingline}{ \modulo{\digitctr}{\layersize} + 1}{\numexpr \digitctr + 0\relax}[\currentchar]
 
 	  % check if zero
             \IfEq {0}{\currentchar}{
@@ -180,7 +196,7 @@ The input file contains \stahpnow characters.
 	    \else
 	      % abort and check next layer
 	      % for this we set the counter to the first character index of the next layer
-	      \digitctr={\the\numexpr \layersize * \currentlayer + \layersize}
+	      \global\digitctr={\the\numexpr \layersize * \currentlayer + \layersize}
 	      \message{Digitcounter reset to \the\digitctr}
 	Layer \the\currentlayer has more zeros than the current best layer (\the\bestlayer ) so we skip ahead to character at index \the\digictr to start the next layer.\\
 	    \fi
@@ -203,14 +219,16 @@ The input file contains \stahpnow characters.
 \message{Layer \the\currentlayer is not a new best layer.}
 	\fi
           Best Layer Zero Count is \the\bestlayerzerocount~for layer \the\bestlayer. \\
+
+          % truncate inputstring
+          \StrGobbleLeft{\workingline}{\layersize}[\workingline]
+
 \ifnum \digitctr<\stahpnow
 	\currentlayerzerocount=0
 	\advance \currentlayer by1
 	Advanced currentlayer to \the\currentlayer.\\
 \repeat
-
 The current layer is now \the\currentlayer
-
 % end of flag condition to skip long computation for debugging layout
 \fi
 
