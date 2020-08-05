@@ -5,6 +5,10 @@
 \usepackage{pdftexcmds}
 \usepackage{coolstr}
 \usepackage{intcalc}
+\usepackage{amsrefs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
 
 % TeX docs at http://pgfplots.sourceforge.net/TeX-programming-notes.pdf
 
@@ -12,9 +16,9 @@
 % cool hack: http://texhacks.blogspot.com/2010/12/forcing-full-expansion.html
 
 \newif\ifcomputationenabled
-\computationenabledtrue
+\computationenabledfalse
 \newif\ifdebug
-\debugfalse
+\debugtrue
 
 \title{Advent of Code\\
 {\large Day Eight}}
@@ -67,11 +71,44 @@
         \advance\tmpcnta by #1\relax
         \the\tmpcnta}
 
-
 \begin{document}
 
 
 \maketitle
+
+\section{About}
+The task at \href{https://adventofcode.com/2019/day/8}{adventofcode 2019 day 8} is fairly straightforward itself. It can be summarized as \begin{quote}
+Read the input line of $N$ numeric characters into \textit{layers} of size $width * height$ (which are known) to find the layer that contains the lowest number of zeros. Then return the number of \texttt{'1'} digits multiplied by the number of \texttt{'2'} digits within that layer.
+\end{quote}
+
+However, we're doing this in \LaTeX , which is typeset in spongebob-case for a reason.
+First of all, we're doing something that it was not meant to be used for -- so that means we never get the search results we want. Searching about arrays in \LaTeX for example gives you an explanation about how to typeset matrices. Very useful, but not what I wanted. Thankfully, the \href{http://pgfplots.sourceforge.net/TeX-programming-notes.pdf}{pgfplots sourceforge page} contains a pdf with \textit{Notes On Programming in \TeX}.
+
+Secondly, there don't seem to be any variables. Just \textit{counters}, \textit{counts} which are the \TeX version. and \textit{ifdefs} and most importantly \textit{macros}. But I did not read up on the internals of \TeX and \LaTeX, so I have no clue about the exact way that macros are evaluated. Sometimes you can define a command that works perfectly well for a constant argument, but if you dare use it on the result of another command, you're being had from multiple directions. Because that result has not already been evaluated (expanded) and is passed as-is into the other command. My version of pdfLaTex does not feature the primitive \texttt{\textbackslash expanded} yet. Using \texttt{\textbackslash expandafter} feels very clunky. Luckily there's a hack around that to be found \href{http://texhacks.blogspot.com/2010/12/forcing-full-expansion.html}{here}. And sometimes the problem was actually the \texttt{xstring} package which also breaks the hack.
+
+\begin{quote}
+The macros of this package are not purely expandable, i.e. they cannot be put in the argument of an \textbackslash edef. Nestling macros is not possible neither.
+
+For this reason, all the macros returning a result (i.e. all excepted the tests) have an optional argument in last position. The syntax is \texttt{[ name ]}, where name is the name of the control sequence that will receive the result of the macro: the assignment is made with an \textbackslash edef which make the result of the macro name purely expandable. Of course, if an optional argument is present, the macro does not display anything.\citelist{\cite{Gonzalo}}
+\end{quote}
+
+After eliminating some problems of this sort by storing the result in a new command by virtue of the optional argument, the same problem still appeared because some commands just don't work due to the same issue, even if they are making use of the optional argument to return that in turn (See figure \ref{code:1}).
+
+\begin{figure}[hbtp]
+\begin{lstlisting}[language=TeX]
+\def\getchar[#1]#2{%
+\StrMid{#1}{#2}{\numexpr #2 + 0\relax}[\mychar]%
+\mychar}
+\end{lstlisting}
+\caption{This command does not like to be used on a non-constant string.}
+\label{code:1}
+\end{figure}
+
+\begin{figure}
+\makebox[\textwidth][c]{\includegraphics[width=1.6\textwidth]{diff}}%
+  \caption{The difference between wrong code that compiles (red) and seemingly correct code that produces a compiler error (green).}
+  \label{fig:diff}
+\end{figure}
 
 \section{Introduction}
 
@@ -235,6 +272,34 @@ The current layer is now \the\currentlayer
 % end of flag condition to skip long computation for debugging layout
 \fi
 
+
+
+\begin{bibdiv}
+\begin{biblist}
+%\bib{Bourbaki70}{book}{
+%title={Theorie des ensembles},
+%author={Bourbaki, Nicolas},
+%date={1970},
+%publisher={Hermann},
+%address={Paris}
+%}
+%\bib{Sokal96}{article}{
+%title={Trangressing the boundaries},
+%subtitle={Toward a transformative hermeneutics of quantum gravity},
+%author={Sokal, Alan},
+%journal={Social Text},
+%volume={46/47},
+%date={1996},
+%pages={217--252}
+%}
+\bib{Gonzalo}{webpage}{
+title={Nest StrLen and ifthenelse commands},
+author={Medina, Gonzalo},
+url={https://tex.stackexchange.com/a/15424/102826},
+accessdate={05.08.2020}
+}
+\end{biblist}
+\end{bibdiv}
 
 
 \end{document}
