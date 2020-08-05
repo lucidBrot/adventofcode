@@ -192,10 +192,22 @@ Maybe using python is easier? You'd have to read the source to get this one thou
 print(1+12)
 \end{pycode}
 \end{lstlisting}
-But no, that also results in a problem with writing to a file...
-
+But no, that also results in a problem with writing to a file... So let me try something I understand!
+\begin{mycode}
+\input{|"python -c "print(1+2);""}
+\end{mycode}
 \typeout{trying python}
-\input{|"python -c "print(1+2);\""}
+\input{|"python -c "print(1+2);""}
+\newline
+And as you should be able to see, it works!
+
+So for computing stringlength, a quick python call should speed things up.
+\begin{mycode}
+\input{|"python -c "print(len('mystringofunkownlength'));""}
+\end{mycode}
+\input{|"python -c "print(len('mystringofunkownlength'));""}
+\newline
+It is notable that spaces within that string get lost before they are passed to python. Thankfully we don't need this here. But this reminds my of \href{https://ctftime.org/writeup/21982}{PyAuCalc}.
 
 
 \section{Execution}
