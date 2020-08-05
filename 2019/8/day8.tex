@@ -12,6 +12,25 @@
 \usepackage[most]{tcolorbox}
 \usepackage{lipsum}
 
+% https://tug.org/tug2019/slides/slides-ziegenhagen-python.pdf
+\usepackage{fancyvrb}
+\makeatletter
+\newenvironment{pycode}[1]%
+{\xdef\d@tn@me{#1}\xdef\r@ncmd{python #1.py > #1.plog}%
+\typeout{Writing file #1}\VerbatimOut{#1.py}%
+}
+{\endVerbatimOut %
+\toks0{\immediate\write18}%
+\expandafter\toks\expandafter1\expandafter{\r@ncmd}%
+ \edef\d@r@ncmd{\the\toks0{\the\toks1}}\d@r@ncmd %
+ \noindent Input
+ \inputminted{python}{\d@tn@me.py}%
+ \noindent Output
+ \inputminted{text}{\d@tn@me.plog}%
+ }
+ \makeatother
+
+
 % quote backgrounds: https://tex.stackexchange.com/a/436253/102826
 \definecolor{linequote}{RGB}{224,215,188}
 \definecolor{backquote}{RGB}{249,245,233}
@@ -152,6 +171,33 @@ After eliminating some problems of this sort by storing the result in a new comm
 
 Finally, the performance of the \texttt{xstring} package is whack. It takes more than two minutes to figure out the length of a 15'000 character string. The bash command \texttt{wc -c inputfile.txt} does that in less than a second.
 \clearpage
+\section{StrLen}
+Since \texttt{xstring}'s \texttt{StrLen} is so slow, how about creating a faster one?
+We'll just have to run tex with the \texttt{--shell-escape} flag.\citelist{\cite{shellescape}}. Using that allows us to escape to the shell - which is either bash or the windows cmd.exe.
+
+%\immediate\write18{wc -c inputfile.tex > scriptoutput.tex}
+%Character Count: \input{scriptoutput.tex}
+A simple \texttt{\textbackslash input\{|"echo test"\}} already works!
+\input{|"echo test!"}
+
+But I cannot figure out how to correctly call \texttt{wc -c inputfile.tex} because the shell spawns in the wrong path. And also, for some reason the following code does not even create a file \texttt{outfile.blubb} anywhere on my machine.
+\begin{lstlisting}
+\input{|"echo a > outfile.blubb"}
+\end{lstlisting}
+The problem seems to be, according to the logs, that the pipe closes before the left side is finished writing to stdout. But that is actually happening due to the \texttt{echo} earlier. When I leave it out, that's not logged.
+
+Maybe using python is easier? You'd have to read the source to get this one though.\citelist{\cite{pythonescape}}
+\begin{lstlisting}
+\begin{pycode}{abc}
+print(1+12)
+\end{pycode}
+\end{lstlisting}
+But no, that also results in a problem with writing to a file...
+
+\typeout{trying python}
+\input{|"python -c "print(1+2);\""}
+
+
 \section{Execution}
 
 We had \Strawberries\ Strawberries for this year's harvest. Probably not enough.
@@ -338,6 +384,19 @@ The current layer is now \the\currentlayer
 title={Nest StrLen and ifthenelse commands},
 author={Medina, Gonzalo},
 url={https://tex.stackexchange.com/a/15424/102826},
+accessdate={05.08.2020}
+}
+\bib{shellescape}{webpage}{
+title={texify.exe in TeXworks in MSWindows 10: MiKTex encountered internal error when compile with --shell-escape},
+author={Desyllas, Dimitrios},
+url={https://tex.stackexchange.com/a/437933/1028266},
+accessdate={05.08.2020}
+}
+\bib{pythonescape}{webpage}{
+title={Combining \LaTeX with Python},
+author={Ziegenhagen, Uwe},
+url={https://tug.org/tug2019/slides/slides-ziegenhagen-python.pdf},
+date={09.08.2019},
 accessdate={05.08.2020}
 }
 \end{biblist}
