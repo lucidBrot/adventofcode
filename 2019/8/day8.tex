@@ -9,6 +9,40 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{listings}
+\usepackage[most]{tcolorbox}
+\usepackage{lipsum}
+
+% quote backgrounds: https://tex.stackexchange.com/a/436253/102826
+\definecolor{linequote}{RGB}{224,215,188}
+\definecolor{backquote}{RGB}{249,245,233}
+
+\newtcolorbox{myquote}{%
+    enhanced, breakable, 
+    size=fbox,
+    frame hidden, boxrule=0pt,
+    sharp corners,
+    colback=backquote,
+    borderline horizontal={.5pt}{0pt}{linequote},
+    borderline horizontal={.5pt}{1pt}{linequote}
+}
+
+%% Important!!
+%% Use ! before "O{}" with xparse 2018-05-12 
+%% See: https://tex.stackexchange.com/q/434928/1952
+\NewTCBListing{mycode}{ !O{} }{%
+    enhanced, breakable, 
+    size=fbox,
+    frame hidden, boxrule=0pt,
+    sharp corners,
+    colback=gray!30,
+    listing only, 
+    listing options={%
+        style=tcblatex,
+        keywordstyle=\color{brown!70!black},
+        texcsstyle=*\color{brown!70!black}
+    },
+    #1}
+
 
 % TeX docs at http://pgfplots.sourceforge.net/TeX-programming-notes.pdf
 
@@ -16,7 +50,7 @@
 % cool hack: http://texhacks.blogspot.com/2010/12/forcing-full-expansion.html
 
 \newif\ifcomputationenabled
-\computationenabledfalse
+\computationenabledtrue
 \newif\ifdebug
 \debugtrue
 
@@ -77,9 +111,9 @@
 \maketitle
 
 \section{About}
-The task at \href{https://adventofcode.com/2019/day/8}{adventofcode 2019 day 8} is fairly straightforward itself. It can be summarized as \begin{quote}
+The task at \href{https://adventofcode.com/2019/day/8}{adventofcode 2019 day 8} is fairly straightforward itself. It can be summarized as \begin{myquote}\begin{quote}
 Read the input line of $N$ numeric characters into \textit{layers} of size $width * height$ (which are known) to find the layer that contains the lowest number of zeros. Then return the number of \texttt{'1'} digits multiplied by the number of \texttt{'2'} digits within that layer.
-\end{quote}
+\end{quote}\end{myquote}
 
 However, we're doing this in \LaTeX , which is typeset in spongebob-case for a reason.
 
@@ -88,11 +122,15 @@ First of all, we're doing something that it was not meant to be used for -- so t
 
 Secondly, there don't seem to be any variables. Just \textit{counters}, \textit{counts} which are the \TeX version. and \textit{ifdefs} and most importantly \textit{macros}. But I did not read up on the internals of \TeX and \LaTeX, so I have no clue about the exact way that macros are evaluated. Sometimes you can define a command that works perfectly well for a constant argument, but if you dare use it on the result of another command, you're being had from multiple directions. Because that result has not already been evaluated (expanded) and is passed as-is into the other command. My version of pdfLaTex does not feature the primitive \texttt{\textbackslash expanded} yet. Using \texttt{\textbackslash expandafter} feels very clunky. Luckily there's a hack around that to be found \href{http://texhacks.blogspot.com/2010/12/forcing-full-expansion.html}{here}. And sometimes the problem was actually the \texttt{xstring} package which also breaks the hack.
 
+\begin{samepage}
+\begin{myquote}
 \begin{quote}
 The macros of this package are not purely expandable, i.e. they cannot be put in the argument of an \textbackslash edef. Nestling macros is not possible neither.
 
 For this reason, all the macros returning a result (i.e. all excepted the tests) have an optional argument in last position. The syntax is \texttt{[ name ]}, where name is the name of the control sequence that will receive the result of the macro: the assignment is made with an \textbackslash edef which make the result of the macro name purely expandable. Of course, if an optional argument is present, the macro does not display anything.\citelist{\cite{Gonzalo}}
 \end{quote}
+\end{myquote}
+\end{samepage}
 
 After eliminating some problems of this sort by storing the result in a new command by virtue of the optional argument, the same problem still appeared because some commands just don't work due to the same issue, even if they are making use of the optional argument to return that in turn \hbox{(See Figure \ref{code:1}, Figure \ref{fig:diff}).}
 
@@ -106,15 +144,15 @@ After eliminating some problems of this sort by storing the result in a new comm
 \label{code:1}
 \end{figure}
 
-\begin{figure}[hbtp]
+\begin{figure}[hbt]
 \makebox[\textwidth][c]{\includegraphics[width=1.6\textwidth]{diff}}%
   \caption{The difference between wrong code that compiles (red) and seemingly correct code that produces a compiler error (green).}
   \label{fig:diff}
 \end{figure}
 
 Finally, the performance of the \texttt{xstring} package is whack. It takes more than two minutes to figure out the length of a 15'000 character string. The bash command \texttt{wc -c inputfile.txt} does that in less than a second.
-
-\section{Introduction}
+\clearpage
+\section{Execution}
 
 We had \Strawberries\ Strawberries for this year's harvest. Probably not enough.
 So we are sad now and solve https://adventofcode.com/2019/day/8.
