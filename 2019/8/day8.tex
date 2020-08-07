@@ -209,8 +209,21 @@ So for computing stringlength, a quick python call should speed things up.
 \newline
 It is notable that spaces within that string get lost before they are passed to python. Thankfully we don't need this here. But this reminds my of \href{https://ctftime.org/writeup/21982}{PyAuCalc}.
 
-\def\mystr{mystringofunkownlength}
-\input{|"python -c "print(len('\mystr'));""}
+We can make \LaTeX\, paste a string into that as well...
+
+\begin{mycode}
+\def\mystr{hello}
+\def\mystrtwo{\mystr}
+\input{|"python -c "print(len('\mystrtwo'));""}
+\end{mycode}
+\def\mystr{hello}
+\def\mystrtwo{\mystr}
+\input{|"python -c "print(len('\mystrtwo'));""}
+...but for some reason it fails when used with our included inputstring.
+
+\def\mystr{hello}
+\def\mystrtwo{\mystr}
+\input{|"python -c "print(len('\mystrtwo'));""}
 
 \section{Execution}
 
