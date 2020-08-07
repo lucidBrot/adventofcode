@@ -246,6 +246,11 @@ Well, I can just hardcode the damn string length. That's not really worse than h
 \section{Get Head Performance}
 Again, \texttt{xstring} is extremely slow with big strings. So I split everything into layers of 100 chars. But that's still noticeably slower at the end of the layer than at the start of the layer... even though it's only supposed to be a quick character access. So I'm transforming everything into head accesses at index zero.
 
+\section{Scoping}
+Nested loops require scoping around the inner loop. Which in turn means we need to use the \verb!\global!  keyword to assign to variables from outside the inner scope. And that in turn makes it really weird to use \texttt{StrGobbleLeft} from the \texttt{xstring} package when I'm trying to remove a character and store the result back in the same string.
+
+The solution is probably a rewrite that uses only one loop plus an if condition that checks the modulus of the loop counter and acts appropriately whenever a layer is finished.
+
 \section{Execution}
 
 We had \Strawberries\ Strawberries for this year's harvest. Probably not enough.
