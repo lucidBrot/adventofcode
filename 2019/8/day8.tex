@@ -240,7 +240,7 @@ Well, I can just hardcode the damn string length. That's not really worse than h
 \def\testingfile{\einput{testing.tex}}
 %\showexpanded{\testingfile}
 %\justexpanded{\testingfile}
-\input{|"python -c "print(len('\hardcodedinput'));""}
+%\input{|"python -c "print(len('\hardcodedinput'));""}
 %\hardcodedinput
 
 \section{Execution}
@@ -336,8 +336,10 @@ I want to loop \the\layersize~times for the first layer.
 %
 \newcount\layerafterthelast
 
-\StrLen{\fileline}[\stahp]%find the strlen and store it in \stahp
-% see https://tex.stackexchange.com/a/15424/102826
+%%\StrLen{\fileline}[\stahp]%find the strlen and store it in \stahp
+%% see https://tex.stackexchange.com/a/15424/102826
+\def\stahp{\inputstringlength}
+
 \def\stahpnow{\the\numexpr \stahp - 1}
 
 The input file contains \stahpnow characters.
