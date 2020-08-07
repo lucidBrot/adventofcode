@@ -354,13 +354,16 @@ The input file contains \stahpnow characters.
 % Aand now repeat the inner loop below once per layer. 
 
 \loop
-	{\loop
+	{
+             \newcount\charinlayer
+             \charinlayer=0
+             \loop
+             \advance\charinlayer by1
 	  \message{\the\digitctr}
 	  \global \advance \digitctr by1
-	  % assign current char. Because of optimization, we need to do some math
-             \def\accessor{\the\numexpr \intcalcMod{\digitctr}{\layersize} + 1 \relax}
-\typeout{Accessor is \accessor}
-             \StrMid{\workingline}{ \accessor}{\accessor}[\currentchar]
+             
+	  % assign current char as head
+             \StrMid{\workingline}{1}{1}[\currentchar]
 
 	  % check if zero
             \IfEq {0}{\currentchar}{
@@ -372,8 +375,13 @@ The input file contains \stahpnow characters.
                 \message{Everything is fine with digitcounter \the\digitctr}
 	    \else
 	      % abort and check next layer
+                % this also means we can get rid of a few characters in the input
+                % truncate inputstring by the number of remaining characters in this layer
+                \StrGobbleLeft{\workingline}{\the\numexpr \layersize - \charinlayer}[\workingline]
 	      % for this we set the counter to the first character index of the next layer
 	      \global\digitctr={\the\numexpr \layersize * \currentlayer + \layersize}
+
+
 	      \message{Digitcounter reset to \the\digitctr}
 	Layer \the\currentlayer has more zeros than the current best layer (\the\bestlayer ) so we skip ahead to character at index \the\digitctr to start the next layer.\\
 	    \fi
@@ -382,6 +390,8 @@ The input file contains \stahpnow characters.
                 \typeout{Msg from IFEQ ELSE branch}
 	 }%fi
 	\ifnum \digitctr<\inteval{\layersize * \currentlayer + \layersize}
+          % truncate inputstring by one character at head
+          \StrGobbleLeft{\workingline}{1}[\workingline]
 	\repeat
          }%
 \message{Finished inner loop}
@@ -396,9 +406,6 @@ The input file contains \stahpnow characters.
 \message{Layer \the\currentlayer is not a new best layer.}
 	\fi
           Best Layer Zero Count is \the\bestlayerzerocount~for layer \the\bestlayer. \\
-
-          % truncate inputstring
-          \StrGobbleLeft{\workingline}{\layersize}[\workingline]
 
 \ifnum \digitctr<\stahpnow
 	\currentlayerzerocount=0
