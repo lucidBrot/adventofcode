@@ -221,9 +221,7 @@ We can make \LaTeX\, paste a string into that as well...
 \input{|"python -c "print(len('\mystrtwo'));""}
 ...but for some reason it fails when used with our included inputstring.
 
-\def\mystr{hello}
-\def\mystrtwo{\mystr}
-\input{|"python -c "print(len('\mystrtwo'));""}
+\input{|"python -c "print(len('\input{debuginputfile}'));""}
 
 \section{Execution}
 
