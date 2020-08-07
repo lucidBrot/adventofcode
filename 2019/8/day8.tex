@@ -243,6 +243,9 @@ Well, I can just hardcode the damn string length. That's not really worse than h
 %\input{|"python -c "print(len('\hardcodedinput'));""}
 %\hardcodedinput
 
+\section{Get Head Performance}
+Again, \texttt{xstring} is extremely slow with big strings. So I split everything into layers of 100 chars. But that's still noticeably slower at the end of the layer than at the start of the layer... even though it's only supposed to be a quick character access. So I'm transforming everything into head accesses at index zero.
+
 \section{Execution}
 
 We had \Strawberries\ Strawberries for this year's harvest. Probably not enough.
@@ -298,9 +301,6 @@ hello world
 \typeout{===>"three"|\three}
 
 % Variables given by the task
-
-
-% variables given by the task:
 \newcount{\imgwidth}
 \imgwidth=25
 \newcount{\imgheight}
