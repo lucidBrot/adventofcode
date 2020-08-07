@@ -376,8 +376,8 @@ The input file contains \stahpnow characters.
 	    \else
 	      % abort and check next layer
                 % this also means we can get rid of a few characters in the input
-                % truncate inputstring by the number of remaining characters in this layer
-                \StrGobbleLeft{\workingline}{\the\numexpr \layersize - \charinlayer}[\workingline]
+                % truncate inputstring by the number of remaining characters in this layer. But leave one alive because we will remove that one in the end of the loop.
+                \StrGobbleLeft{\workingline}{\the\numexpr \layersize - \charinlayer -1}[\workingline]
 	      % for this we set the counter to the first character index of the next layer
 	      \global\digitctr={\the\numexpr \layersize * \currentlayer + \layersize}
 
@@ -389,9 +389,9 @@ The input file contains \stahpnow characters.
                 The current char \currentchar~does not equal 0.\\
                 \typeout{Msg from IFEQ ELSE branch}
 	 }%fi
-	\ifnum \digitctr<\inteval{\layersize * \currentlayer + \layersize}
           % truncate inputstring by one character at head
           \StrGobbleLeft{\workingline}{1}[\workingline]
+	\ifnum \digitctr<\inteval{\layersize * \currentlayer + \layersize}
 	\repeat
          }%
 \message{Finished inner loop}
