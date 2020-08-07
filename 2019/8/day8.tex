@@ -361,7 +361,7 @@ The input file contains \stahpnow characters.
              \advance\charinlayer by1
 	  \message{\the\digitctr}
 	  \global \advance \digitctr by1
-             
+             \typeout{Starting loop (Layer \the\currentlayer , Char \the\charinlayer)}
 	  % assign current char as head
              \StrMid{\workingline}{1}{1}[\currentchar]
 
@@ -373,6 +373,7 @@ The input file contains \stahpnow characters.
 	    \ifnum \currentlayerzerocount<\inteval{\bestlayerzerocount}
 	      % continue as normal
                 \message{Everything is fine with digitcounter \the\digitctr}
+                \message{The character is \currentchar}
 	    \else
 	      % abort and check next layer
 	     \typeout{Advancing to Next Layer...}
@@ -380,7 +381,8 @@ The input file contains \stahpnow characters.
                 % truncate inputstring by the number of remaining characters in this layer. But leave one alive because we will remove that one in the end of the loop.
                 \def\someamount{\the\numexpr \layersize - \charinlayer}
                 \typeout{by \someamount characters (leaving one for after the loop) }
-                \StrGobbleLeft{\workingline}{\someamount}[\workingline]
+                \StrGobbleLeft{\workingline}{\someamount}[\workinglinetwo]
+                \global\def\workingline{\workinglinetwo}
 
 	      % for this we set the counter to the first character index of the next layer
                 \typeout{Setting the new digitctr (from \the\digitctr , \the\layersize , \the\currentlayer )...}
@@ -397,7 +399,11 @@ The input file contains \stahpnow characters.
 	 }%fi
           % truncate inputstring by one character at head
            \typeout{about to remove one from head}
-          \StrGobbleLeft{\workingline}{1}[\workingline]
+           \StrGobbleLeft{\workingline}{1}[\workinglinetwo]
+\typeout{reached blubb}
+                \global\def\workingline{\workinglinetwo}
+\typeout{reached blubb2}
+
 	\ifnum \digitctr<\inteval{\layersize * \currentlayer + \layersize}
 	\repeat
          }%
