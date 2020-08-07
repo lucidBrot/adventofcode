@@ -375,12 +375,18 @@ The input file contains \stahpnow characters.
                 \message{Everything is fine with digitcounter \the\digitctr}
 	    \else
 	      % abort and check next layer
+	     \typeout{Advancing to Next Layer...}
                 % this also means we can get rid of a few characters in the input
                 % truncate inputstring by the number of remaining characters in this layer. But leave one alive because we will remove that one in the end of the loop.
-                \StrGobbleLeft{\workingline}{\the\numexpr \layersize - \charinlayer -1}[\workingline]
-	      % for this we set the counter to the first character index of the next layer
-	      \global\digitctr={\the\numexpr \layersize * \currentlayer + \layersize}
+                \def\someamount{\the\numexpr \layersize - \charinlayer}
+                \typeout{by \someamount characters (leaving one for after the loop) }
+                \StrGobbleLeft{\workingline}{\someamount}[\workingline]
 
+	      % for this we set the counter to the first character index of the next layer
+                \typeout{Setting the new digitctr (from \the\digitctr , \the\layersize , \the\currentlayer )...}
+                \def\somevalue{\inteval{\layersize * \currentlayer + \layersize}}
+                \typeout{Will be set to \somevalue}
+	      \global\digitctr=\somevalue
 
 	      \message{Digitcounter reset to \the\digitctr}
 	Layer \the\currentlayer has more zeros than the current best layer (\the\bestlayer ) so we skip ahead to character at index \the\digitctr to start the next layer.\\
@@ -390,6 +396,7 @@ The input file contains \stahpnow characters.
                 \typeout{Msg from IFEQ ELSE branch}
 	 }%fi
           % truncate inputstring by one character at head
+           \typeout{about to remove one from head}
           \StrGobbleLeft{\workingline}{1}[\workingline]
 	\ifnum \digitctr<\inteval{\layersize * \currentlayer + \layersize}
 	\repeat
