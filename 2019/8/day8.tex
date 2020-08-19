@@ -151,7 +151,9 @@ For this reason, all the macros returning a result (i.e. all excepted the tests)
 \end{myquote}
 \end{samepage}
 
-After eliminating some problems of this sort by storing the result in a new command by virtue of the optional argument, the same problem still appeared because some commands just don't work due to the same issue, even if they are making use of the optional argument to return that in turn \hbox{(See Figure \ref{code:1}, Figure \ref{fig:diff}).}
+After eliminating some problems of this sort by storing the result in a new command by virtue of the optional argument, the same problem still appeared because some commands just don't work due to the same issue, even if they are making use of the optional argument to return that in turn \hbox{(See Figure \ref{code:1}, \autoref{fig:diff}).}
+
+(Btw, I have used \texttt{\textbackslash autoref} above, for the second figure reference, instead of \texttt{\textbackslash ref} and that is pretty cool.)
 
 \begin{figure}[hbtp]
 \begin{lstlisting}[language=TeX]
