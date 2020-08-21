@@ -425,7 +425,7 @@ I'm using an \texttt{edef} to overwrite the \texttt{workingline} variable every 
 Computation starting with \numlayers ~ Layers of size \the\imgwidth x\the\imgheight.
 \newcounter{currentlayerzerocounter}\setcounter{currentlayerzerocounter}{0}
 \newcounter{bestlayercounter}\setcounter{bestlayercounter}{0}
-\newcounter{bestlayerzerocountcounter}\setcounter{bestlayerzerocountcounter}{0}
+\newcounter{bestlayerzerocountcounter}\setcounter{bestlayerzerocountcounter}{\the\numexpr \layersize}
 % loop through all layers
 \loop
 	% reset counters to start of layer
