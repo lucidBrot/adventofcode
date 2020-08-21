@@ -365,7 +365,8 @@ The input file contains \stahpnow characters.
 \begin{myquote}\begin{quote}
 \texttt{\textbackslash global} is a TeX command that declares the following definition or assignment to be global, meaning that if TeX is currently inside a group, the definition or assignment will still remain valid when the group is over. Commands that can follow \texttt{\textbackslash global} include \texttt{\textbackslash def}, \texttt{\textbackslash edef}, \texttt{\textbackslash let}, \texttt{\textbackslash count}, \texttt{\textbackslash countdef}, [...]\citelist{\cite{wikibooksglobal}}\\
 \end{quote}\end{myquote}
-An alternative to using globals would be to use tikz loops with the \texttt{remember} option \citelist{\cite{tikzremember}}. Another option I see is using counters instead of counts - they are the latex version of the tex counter. For counters, you can apparently not use \texttt{\textbackslash the \textbackslash ctr}, you have to use\texttt{\textbackslash thectr}.
+An alternative to using globals would be to use tikz loops with the \texttt{remember} option \citelist{\cite{tikzremember}}. Another option I see is using counters instead of counts - they are the latex version of the tex counter. For counters, you can apparently not use \texttt{\textbackslash the \textbackslash ctr}, you have to use\texttt{\textbackslash thectr} (See \autoref{c:simpleLoop}).
+\begin{figure}
 \begin{mycode}
 \newcounter{outerloopcounter}
 \setcounter{outerloopcounter}{0}
@@ -376,8 +377,12 @@ An alternative to using globals would be to use tikz loops with the \texttt{reme
 \repeat
 outerloopcount: \theouterloopcounter
 \end{mycode}
+\caption{Simple Loop using TeX Counters}
+\label{c:simpleLoop}
+\end{figure}
 
-Now let us do the same thing again, but with nested loops
+Now let us do the same thing again, but with nested loops. See \autoref{c:nested}.
+\begin{figure}[htbp]
 \begin{mycode}
 \newcounter{outerloopcounter}
 \setcounter{outerloopcounter}{0}
@@ -396,6 +401,9 @@ Now let us do the same thing again, but with nested loops
 \repeat
 outerloopcount: \theouterloopcounter
 \end{mycode}
+\caption{Nested Loops using LaTeX Counters}
+\label{c:nested}
+\end{figure}
 That requires curly braces around the inner loop. Otherwise, only the first outer loop iteration is run.
 
 \newcounter{outerloopcounter}
