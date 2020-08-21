@@ -406,22 +406,22 @@ outerloopcount: \theouterloopcounter
 \end{figure}
 That requires curly braces around the inner loop. Otherwise, only the first outer loop iteration is run.
 
-\newcounter{outerloopcounter}
-\setcounter{outerloopcounter}{0}
-\newcounter{innerloopcounter}
+\newcounter{layercounter}
+\setcounter{layercounter}{0}
+\newcounter{charinlayercounter}
 \loop
-	\setcounter{innerloopcounter}{0}
-    	\addtocounter{outerloopcounter}{1}
+	\setcounter{charinlayercounter}{0}
+    	\addtocounter{layercounter}{1}
 	
 	{\loop
-	\addtocounter{innerloopcounter}{1}
-           (\theouterloopcounter , \theinnerloopcounter )
-	\ifnum \value{innerloopcounter}<2
+	\addtocounter{charinlayercounter}{1}
+           (\thelayercounter , \thecharinlayercounter )
+	\ifnum \value{charinlayercounter}<2
            \repeat }
 
-           \ifnum \value{outerloopcounter}<3
+           \ifnum \value{layercounter}<3
 \repeat
-outerloopcount: \theouterloopcounter
+outerloopcount: \thelayercounter
 
 % Aand now repeat the inner loop below once per layer. 
 \ifoldcomputationenabled
