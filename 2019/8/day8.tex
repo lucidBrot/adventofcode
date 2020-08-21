@@ -439,6 +439,12 @@ TODO: set up numlayers from input and make sure there is no off-by-one error in 
                        \typeout{Msg from IFEQ ELSE branch}
 		} % fi
 
+		 % truncate inputstring by one character at head
+          		\typeout{about to remove one from head}
+           	\StrGobbleLeft{\workingline}{1}[\workinglinetwo]
+		\typeout{reached blubb}
+                	\global\edef\workingline{\workinglinetwo}
+
 	\ifnum \value{charinlayercounter}<\layersize
            \repeat }
 
