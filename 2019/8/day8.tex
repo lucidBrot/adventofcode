@@ -433,10 +433,10 @@ Computation starting with \numlayers ~ Layers of size \the\imgwidth x\the\imghei
 	\setcounter{charinlayercounter}{0}
     	\addtocounter{layercounter}{1}
 	\setcounter{currentlayerzerocounter}{0}
-	\addtocounter{currentcharpos}{1}
 	
 	{\loop % loop through all characters in the current layer
 	\addtocounter{charinlayercounter}{1}
+	\addtocounter{currentcharpos}{1}
            (\thelayercounter , \thecharinlayercounter )
 
 	% For each character in the current layer
