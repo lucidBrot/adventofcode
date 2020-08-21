@@ -365,19 +365,17 @@ The input file contains \stahpnow characters.
 \begin{myquote}\begin{quote}
 \texttt{\textbackslash global} is a TeX command that declares the following definition or assignment to be global, meaning that if TeX is currently inside a group, the definition or assignment will still remain valid when the group is over. Commands that can follow \texttt{\textbackslash global} include \texttt{\textbackslash def}, \texttt{\textbackslash edef}, \texttt{\textbackslash let}, \texttt{\textbackslash count}, \texttt{\textbackslash countdef}, [...]\citelist{\cite{wikibooksglobal}}\\
 \end{quote}\end{myquote}
-An alternative to using globals would be to use tikz loops with the \texttt{remember} option \citelist{\cite{tikzremember}}.
+An alternative to using globals would be to use tikz loops with the \texttt{remember} option \citelist{\cite{tikzremember}}. Another option I see is using counters instead of counts - they are the latex version of the tex counter. For counters, you can apparently not use \texttt{\textbackslash the \textbackslash ctr}, you have to use\texttt{\textbackslash thectr}. If you care about the following PoC loop, just look at the TeX source.
 
-\newcount\outerloopcount
-\outerloopcount=0
+\newcounter{outerloopcounter}
+\setcounter{outerloopcounter}{0}
 \loop
-  {
-    	\advance\outerloopcount by1
-           \the\outerloopcount,
-	\global\outerloopcount = \outerloopcount
-           \ifnum \the\outerloopcount<3
-           \repeat
-  }
-\\outerloopcount: \the\outerloopcount
+    	\addtocounter{outerloopcounter}{1}
+           \theouterloopcounter ,
+           \ifnum \value{outerloopcounter}<3
+\repeat
+ 
+outerloopcount: \theouterloopcounter
 
 % Aand now repeat the inner loop below once per layer. 
 \ifoldcomputationenabled
