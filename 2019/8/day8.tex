@@ -406,6 +406,10 @@ outerloopcount: \theouterloopcounter
 \end{figure}
 That requires curly braces around the inner loop. Otherwise, only the first outer loop iteration is run.
 
+% optimization because xstring library is slow.
+% We remove the head of the input string once it has been used. This happens every time the layer has been read.
+\def\workingline{\fileline}
+%
 \newcounter{layercounter}
 \setcounter{layercounter}{0}
 \newcounter{charinlayercounter}
@@ -423,6 +427,18 @@ TODO: set up numlayers from input and make sure there is no off-by-one error in 
 	{\loop % loop through all characters in the current layer
 	\addtocounter{charinlayercounter}{1}
            (\thelayercounter , \thecharinlayercounter )
+
+	% For each character in the current layer
+		% assign current char as head
+	             \StrMid{\workingline}{1}{1}[\currentchar]
+		% check if zero
+		\IfEq {0}{\currentchar}{
+		  The current char \currentchar~ equals 0.
+		}{ % else
+		  The current char \currentchar~does not equal 0.\\
+                       \typeout{Msg from IFEQ ELSE branch}
+		} % fi
+
 	\ifnum \value{charinlayercounter}<\layersize
            \repeat }
 
@@ -433,9 +449,6 @@ outerloopcount: \thelayercounter
 % Aand now repeat the inner loop below once per layer. 
 \ifoldcomputationenabled
 \section{Old Computation}
-% optimization because xstring library is slow.
-% We remove the head of the input string once it has been used. This happens every time the layer has been read.
-\def\workingline{\fileline}
 \loop
 	{
              \newcount\charinlayer
