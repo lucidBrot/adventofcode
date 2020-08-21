@@ -12,6 +12,9 @@
 \usepackage[most]{tcolorbox}
 \usepackage{lipsum}
 
+\setlength{\parskip}{\baselineskip}%
+\setlength{\parindent}{0pt}%
+
 % https://tug.org/tug2019/slides/slides-ziegenhagen-python.pdf
 \usepackage{fancyvrb}
 \makeatletter
@@ -407,6 +410,8 @@ outerloopcount: \theouterloopcounter
 That requires curly braces around the inner loop. Otherwise, only the first outer loop iteration is run.
 
 For the actual implementation, we assume that we are given \texttt{inputstringlength}, \texttt{imgwidth}, and \texttt{imgheight}. Computing those from the input string is feasible but takes long.
+
+I'm using an \texttt{edef} to overwrite the \texttt{workingline} variable every loop.
 
 % optimization because xstring library is slow.
 % We remove the head of the input string once it has been used. This happens every time the layer has been read.
