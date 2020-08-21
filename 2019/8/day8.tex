@@ -175,7 +175,13 @@ Finally, the performance of the \texttt{xstring} package is whack. It takes more
 \clearpage
 \section{StrLen}
 Since \texttt{xstring}'s \texttt{StrLen} is so slow, how about creating a faster one?
-We'll just have to run tex with the \texttt{--shell-escape} flag.\citelist{\cite{shellescape}}. Using that allows us to escape to the shell - which is either bash or the windows cmd.exe.
+We'll just have to run tex with the \texttt{--shell-escape} flag.\citelist{\cite{shellescape}} ( See \autoref{fig:typesettingsettings}). Using that allows us to escape to the shell - which is either bash or the windows cmd.exe.
+
+\begin{figure}[htbp]
+\includegraphics{typesettingsettings}
+\caption{TeXworks settings for shellescape}
+\label{fig:typesettingsettings}
+\end{figure}
 
 %\immediate\write18{wc -c inputfile.tex > scriptoutput.tex}
 %Character Count: \input{scriptoutput.tex}
@@ -352,14 +358,28 @@ I want to loop \the\layersize~times for the first layer.
 The input file contains \stahpnow characters.
 %flag condition to skip long computation for debugging layout
 \ifcomputationenabled
+% flag condition to debug the loop by rewriting it piece by piece
+\newif\ifoldcomputationenabled
+\oldcomputationenabledfalse
+\section{ Execution Two}
+Debugging... This is a placeholder\\
+\newcount\outerloopcount
+\outerloopcount=0
+\loop
+  {
+    	\advance\outerloopcount by1
+           \the\outerloopcount,
+           \ifnum \outerloopcount<3
+           \repeat
+  }
+\\outerloopcount: \the\outerloopcount
 
-
+% Aand now repeat the inner loop below once per layer. 
+\ifoldcomputationenabled
+\section{Old Computation}
 % optimization because xstring library is slow.
 % We remove the head of the input string once it has been used. This happens every time the layer has been read.
 \def\workingline{\fileline}
-
-% Aand now repeat the inner loop below once per layer. 
-
 \loop
 	{
              \newcount\charinlayer
@@ -436,7 +456,7 @@ The current layer is now \the\currentlayer
 % end of flag condition to skip long computation for debugging layout
 \fi
 
-
+\fi
 
 \begin{bibdiv}
 \begin{biblist}
