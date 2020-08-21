@@ -423,11 +423,15 @@ I'm using an \texttt{edef} to overwrite the \texttt{workingline} variable every 
 \bigskip\noindent
 \def\numlayers{\the\numexpr \inputstringlength / \layersize \relax}
 Computation starting with \numlayers ~ Layers of size \the\imgwidth x\the\imgheight.
+\newcounter{currentlayerzerocounter}\setcounter{currentlayerzerocounter}{0}
+\newcounter{bestlayer_counter}\setcounter{bestlayer_counter}{0}
+\newcounter{bestlayer_zerocount_counter}\setcounter{bestlayer_zerocount_counter}{0}
 % loop through all layers
 \loop
 	% reset counters to start of layer
 	\setcounter{charinlayercounter}{0}
     	\addtocounter{layercounter}{1}
+	\setcounter{currentlayerzerocounter}{0}
 	
 	{\loop % loop through all characters in the current layer
 	\addtocounter{charinlayercounter}{1}
@@ -439,6 +443,7 @@ Computation starting with \numlayers ~ Layers of size \the\imgwidth x\the\imghei
 		% check if zero
 		\IfEq {0}{\currentchar}{
 		  The current char \currentchar~ equals 0.
+		  \addtocounter{currentlayerzerocounter}{1}
 		}{ % else
 		  The current char \currentchar~does not equal 0.\\
                        \typeout{Msg from IFEQ ELSE branch}
