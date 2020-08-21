@@ -362,14 +362,19 @@ The input file contains \stahpnow characters.
 \newif\ifoldcomputationenabled
 \oldcomputationenabledfalse
 \section{ Execution Two}
-Debugging... This is a placeholder\\
+\begin{myquote}\begin{quote}
+\texttt{\textbackslash global} is a TeX command that declares the following definition or assignment to be global, meaning that if TeX is currently inside a group, the definition or assignment will still remain valid when the group is over. Commands that can follow \texttt{\textbackslash global} include \texttt{\textbackslash def}, \texttt{\textbackslash edef}, \texttt{\textbackslash let}, \texttt{\textbackslash count}, \texttt{\textbackslash countdef}, [...]\citelist{\cite{wikibooksglobal}}\\
+\end{quote}\end{myquote}
+An alternative to using globals would be to use tikz loops with the \texttt{remember} option \citelist{\cite{tikzremember}}.
+
 \newcount\outerloopcount
 \outerloopcount=0
 \loop
   {
     	\advance\outerloopcount by1
            \the\outerloopcount,
-           \ifnum \outerloopcount<3
+	\global\outerloopcount = \outerloopcount
+           \ifnum \the\outerloopcount<3
            \repeat
   }
 \\outerloopcount: \the\outerloopcount
@@ -500,6 +505,18 @@ title={Why is everyeof needed to avoid...},
 author={Gross, Jason},
 url={https://tex.stackexchange.com/q/516031/102826},
 accessdate={07.08.2020}
+}
+\bib{wikibooksglobal}{webpage}{
+title={TeX/global},
+author={Burk},
+url={https://en.wikibooks.org/wiki/TeX/global},
+accessdate={21.08.2020}
+}
+\bib{tikzremember}{webpage}{
+title={Setting a Global Variable in TikZ Loop},
+author={cfr},
+url={https://tex.stackexchange.com/a/436829/102826},
+accessdate={21.08.2020}
 }
 \end{biblist}
 \end{bibdiv}
