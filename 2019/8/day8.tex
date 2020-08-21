@@ -426,12 +426,14 @@ Computation starting with \numlayers ~ Layers of size \the\imgwidth x\the\imghei
 \newcounter{currentlayerzerocounter}\setcounter{currentlayerzerocounter}{0}
 \newcounter{bestlayercounter}\setcounter{bestlayercounter}{0}
 \newcounter{bestlayerzerocountcounter}\setcounter{bestlayerzerocountcounter}{\the\numexpr \layersize}
+\newcounter{currentcharpos}\setcounter{currentcharpos}{\the\numexpr 0 - 1}
 % loop through all layers
 \loop
 	% reset counters to start of layer
 	\setcounter{charinlayercounter}{0}
     	\addtocounter{layercounter}{1}
 	\setcounter{currentlayerzerocounter}{0}
+	\addtocounter{currentcharpos}{1}
 	
 	{\loop % loop through all characters in the current layer
 	\addtocounter{charinlayercounter}{1}
@@ -457,7 +459,7 @@ TODO: actually skip
 		 % truncate inputstring by one character at head
           		\typeout{about to remove one from head}
            	\StrGobbleLeft{\workingline}{1}[\workinglinetwo]
-		\typeout{reached blubb}
+		\typeout{Reached character at position \thecurrentcharpos}
                 	\global\edef\workingline{\workinglinetwo}
 
 	\ifnum \value{charinlayercounter}<\layersize
