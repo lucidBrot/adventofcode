@@ -427,12 +427,14 @@ Computation starting with \numlayers ~ Layers of size \the\imgwidth x\the\imghei
 \newcounter{bestlayercounter}\setcounter{bestlayercounter}{0}
 \newcounter{bestlayerzerocountcounter}\setcounter{bestlayerzerocountcounter}{\the\numexpr \layersize}
 \newcounter{currentcharpos}\setcounter{currentcharpos}{\the\numexpr 0 - 1}
+\newcounter{charstoremoveatendoflayer}\setcounter{charstoremoveatendoflayer}{0}
 % loop through all layers
 \loop
 	% reset counters to start of layer
 	\setcounter{charinlayercounter}{0}
     	\addtocounter{layercounter}{1}
 	\setcounter{currentlayerzerocounter}{0}
+	\setcounter{charstoremoveatendoflayer}{1}
 	
 	{\loop % loop through all characters in the current layer
 	\addtocounter{charinlayercounter}{1}
@@ -448,8 +450,11 @@ Computation starting with \numlayers ~ Layers of size \the\imgwidth x\the\imghei
 		  \addtocounter{currentlayerzerocounter}{1}
 		  % if current layer is worse than the best, no need to proceed checking
 		  \ifnum \value{currentlayerzerocounter} > \value{bestlayerzerocountcounter}
-			Skipping Layer \thelayercounter~ because it has more zeros (i.e. it is worse than) Layer ~\thebestlayercounter.
-TODO: actually skip
+			Skipping Layer \thelayercounter~ because it has more zeros than (i.e. it is worse than) Layer ~\thebestlayercounter.
+			% normally, one character will be removed, but now we need to remove all that are remaining in the layer
+			\setcounter{charstoremoveatendoflayer}{\numexpr \layersize - \value{charinlayercounter}}
+			% trigger stop condition at end of inner loop
+			\setcounter{charinlayercounter}{\layersize}
 		  \fi
 		}{ % else
 		  The current char \currentchar~does not equal 0.\\
@@ -457,8 +462,9 @@ TODO: actually skip
 		} % fi
 
 		 % truncate inputstring by one character at head
-          		\typeout{about to remove one from head}
-           	\StrGobbleLeft{\workingline}{1}[\workinglinetwo]
+          		\typeout{about to remove \thecharstoremoveatendoflayer ~chars from head}
+          		About to remove \thecharstoremoveatendoflayer chars from head
+           	\StrGobbleLeft{\workingline}{\value{charstoremoveatendoflayer}}[\workinglinetwo]
 		\typeout{Reached character at position \thecurrentcharpos}
                 	\global\edef\workingline{\workinglinetwo}
 
@@ -475,7 +481,7 @@ TODO: actually skip
            \ifnum \value{layercounter}<\numlayers
 \repeat
 outerloopcount: \thelayercounter\\
-Best Layer: \thebestlayercounter
+Best Layer: \thebestlayercounter ~with \thebestlayerzerocountcounter ~zeros.
 
 % Aand now repeat the inner loop below once per layer. 
 \ifoldcomputationenabled
@@ -557,6 +563,11 @@ The current layer is now \the\currentlayer
 \fi
 
 \fi
+
+\section{Todo}
+Once this is done, I should inform the person who said I should inform them once this is done, to be found at \href{https://twitter.com/LucidBrot/status/1290792953548615682}{Twitter}.
+
+I should probably also put the shellescape stuff into an optional branch. $\cap$.
 
 \begin{bibdiv}
 \begin{biblist}
