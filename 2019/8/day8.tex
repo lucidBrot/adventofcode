@@ -581,13 +581,13 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 \repeat
 
 % perform some magic https://tex.stackexchange.com/questions/402173/append-strings-to-a-variable-and-display-them-at-the-front-of-the-document
-Let me just perform some magic (See \autoref{fig:magic}) \citelist{\cite{collectvar}}.
+Let me just perform some magic - Consider \autoref{fig:magic} \citelist{\cite{collectvar}}. There's only one problem with that: It assumes that  the input strings are constant. Since I input the value of a counter, mine are not, and the magical string that ends up being collected is just a repetition of the last value it had. Adding \texttt{\textbackslash immediate} and \texttt{\textbackslash edef} was not helpful.
 
 % display the computed variable here
 \makeatletter
 \@starttoc{xyz}% executes stuff in .xyz file
 \makeatother
-\thefinalstring
+Magic: \thefinalstring
 % the following line must be performed at the end of the computation - e.g. at the end of the document.
 \addtocontents{xyz}{\gdef\protect\thefinalstring{\mystring}}
 
