@@ -570,9 +570,9 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 	  \ifnum \value{pixelvalue} > 1
 	\repeat }
 	% undo the hack from the inner loop:
-	%\ifnum \value{pixelvalue}=\inteval{0-1}
-	%	\setcounter{pixelvalue{2}
-	%\fi
+	\ifnum \value{pixelvalue}=\inteval{0 - 1}
+		\setcounter{pixelvalue}{2}
+	\fi
 	\typeout{Found \thepixelvalue ~in Layer \thelayercounter ~for pixel \thecharcounter}
 \edef\tmppixelvalue{\thepixelvalue}
 	\myappendstring{\immediate\tmppixelvalue}
