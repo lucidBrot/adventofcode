@@ -11,7 +11,7 @@
 \usepackage{listings}
 \usepackage[most]{tcolorbox}
 \usepackage{lipsum}
-
+\usepackage{amsmath}
 \setlength{\parskip}{\baselineskip}%
 \setlength{\parindent}{0pt}%
 
@@ -523,6 +523,19 @@ This is a total of $n_\text{ones} \cdot n_{\text{twos}} = \the\res$.
 
 This result is from debug values.
 \fi
+
+\section{Day Eight Part Two: Because this task wasn't that hard}
+
+\begin{myquote}\begin{quote}
+Each image layer consists of numbers that represent pixel information. One digit, one pixel.
+\begin{align*}
+0 & \rightleftarrows \text{black}\\
+1 & \rightleftarrows \text{white}\\
+2 & \rightleftarrows \text{transparent}\\
+\end{align*}
+You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \textit{first} nontransparent value.
+\end{quote}\end{myquote}
+
 
 \section{Todo}
 Once this is done, I should inform the person who said I should inform them once this is done, to be found at \href{https://twitter.com/LucidBrot/status/1290792953548615682}{Twitter}.
