@@ -536,6 +536,14 @@ Each image layer consists of numbers that represent pixel information. One digit
 You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \textit{first} nontransparent value.
 \end{quote}\end{myquote}
 
+\newcounter{charcounter}\setcounter{charcounter}{0}
+\loop
+  \addtocounter{charcounter}{1}
+
+	coord \thecharcounter\\
+
+  \ifnum \value{charcounter} <  \layersize
+\repeat
 
 \section{Todo}
 Once this is done, I should inform the person who said I should inform them once this is done, to be found at \href{https://twitter.com/LucidBrot/status/1290792953548615682}{Twitter}.
