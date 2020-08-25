@@ -143,31 +143,8 @@
 \def\myappendxstring#1{\edef\tmp{#1}\expandafter\g@addto@macro\expandafter\mystring\expandafter{\tmp}}
 \makeatother
 
-
-% right before document start
-%% \usepackage{embedall} % should embed fonts and also the latex code so I cannot lose it.
-% but since this is not working with my image for some reason... a diffferent way
-% https://tex.stackexchange.com/questions/13187/is-there-some-way-to-embed-latex-source-code-in-a-pdf-file
-%\usepackage{embedfile}
-%\embedfile{./CodeBlocks.tex}
-% Above worked, but I'd rather be able to also link to embedded files, so...
-% https://tex.stackexchange.com/questions/19025/embed-link-to-an-embedded-file
-\usepackage{navigator}
-\embeddedfile{mysourcecode}{./day8.tex}
-% see later in the file for a link of the form
-% \openfilelink{myfile.pdf}{Link to the embedded file \texttt{myfile.pdf}}
-% and to color the link differently:
-% \usepackage{hypgotoe}
-% \href{gotoe:embedded=file.pdf}{description}
-% but either only seem to work with pdfs
-%
-% It's also possible to store a password-encrypted file: https://tex.stackexchange.com/questions/26067/is-it-possible-to-embed-attach-a-file-password-protected-in-a-pdf
-%
-% Alternatively:
-% \usepackage{attachfile2}
-% \textattachfile[color= 0 0 0]{Aufgabenstellung_EricMink.pdf}{filetext}
-% -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-
+\usepackage{embedfile}
+\embedfile{./day8.tex}
 \begin{document}
 
 
@@ -660,6 +637,8 @@ Magic: \thefinalstring
 Once this is done, I should inform the person who said I should inform them once this is done, to be found at \href{https://twitter.com/LucidBrot/status/1290792953548615682}{Twitter}.
 
 I should probably also put the shellescape stuff into an optional branch. $\cap$.
+
+I want to attach the source code to this file.
 
 \section{Performance}
 PDF Elapsed Time: \showthe\pdfelapsedtime
