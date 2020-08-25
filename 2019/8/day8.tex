@@ -560,9 +560,9 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounter} * \layersize )}
 		\StrChar{\workingstr}{\totalpos}[\currentchar]
 		\setcounter{pixelvalue}{\inteval{\currentchar}}
-		\typeout{Considering Layer \thelayercounter for pixel \thecharcounter}
+		\typeout{Considering Layer \thelayercounter ~for pixel \thecharcounter}
 		% if we reached the max layer and it's still 2, we keep the 2. But to abort the loop, we claim it's the magic number "minus one"
-		\ifnum \value{layercounter}=\numlayers
+		\ifnum \value{layercounter}=\inteval{\numlayers -1}
 			\ifnum \value{pixelvalue}=2
 				\setcounter{pixelvalue}{-1}
 			\fi
