@@ -74,7 +74,9 @@
 \newif\ifcomputationenabled
 \computationenabledtrue
 \newif\ifdebug
-\debugfalse
+\debugtrue
+\newif\ifverbose
+\verbosefalse
 
 \title{Advent of Code\\
 {\large Day Eight}}
@@ -447,25 +449,33 @@ Normally, I would do a first loop for finding the best Layer and a second block 
 	{\loop % loop through all characters in the current layer
 	\addtocounter{charinlayercounter}{1}
 	\addtocounter{currentcharpos}{1}
+	\ifverbose
            (\thelayercounter , \thecharinlayercounter )
+	\fi
 
 	% For each character in the current layer
 		% assign current char as head
 	             \StrMid{\workingline}{1}{1}[\currentchar]
 		% check if zero
 		\IfEq {0}{\currentchar}{
+		  \ifverbose
 		  The current char \currentchar~ equals 0.
+		  \fi
 		  \addtocounter{currentlayerzerocounter}{1}
 		  % if current layer is worse than the best, no need to proceed checking
 		  \ifnum \value{currentlayerzerocounter} > \value{bestlayerzerocountcounter}
+			\ifverbose
 			Skipping Layer \thelayercounter~ because it has more zeros than (i.e. it is worse than) Layer ~\thebestlayercounter.
+			\fi
 			% normally, one character will be removed, but now we need to remove all that are remaining in the layer
 			\setcounter{charstoremoveatendoflayer}{\numexpr \layersize - \value{charinlayercounter}}
 			% trigger stop condition at end of inner loop
 			\setcounter{charinlayercounter}{\layersize}
 		  \fi
 		}{ % else
+		  \ifverbose
 		  The current char \currentchar~does not equal 0.\\
+		  \fi
                        \typeout{Msg from IFEQ ELSE branch}
 		} % fi
 
@@ -481,7 +491,9 @@ Normally, I would do a first loop for finding the best Layer and a second block 
 
 		 % truncate inputstring by one character at head
           		\typeout{about to remove \thecharstoremoveatendoflayer ~chars from head}
-          		About to remove \thecharstoremoveatendoflayer chars from head
+		\ifverbose
+          		About to remove \thecharstoremoveatendoflayer ~chars from head
+		\fi
            	\StrGobbleLeft{\workingline}{\value{charstoremoveatendoflayer}}[\workinglinetwo]
 		\typeout{Reached character at position \thecurrentcharpos}
                 	\global\edef\workingline{\workinglinetwo}
@@ -491,7 +503,9 @@ Normally, I would do a first loop for finding the best Layer and a second block 
 
 	% update best layer
 	\ifnum \value{currentlayerzerocounter} < \value{bestlayerzerocountcounter}
+		\ifverbose
 		New Best Layer is Layer \thelayercounter.
+		\fi
 		\setcounter{bestlayercounter}{\value{layercounter}}
 		\setcounter{bestlayerzerocountcounter}{\value{currentlayerzerocounter}}
 		\setcounter{bestlayeronedigitscounter}{\value{currentlayeronecounter}}
@@ -505,6 +519,10 @@ Best Layer: \thebestlayercounter ~with \thebestlayerzerocountcounter ~zeros.\\
 It has \thebestlayeronedigitscounter ~Ones and \thebestlayertwodigitscounter ~Twos.\\
 \edef\res{\numexpr \value{bestlayeronedigitscounter} * \value {bestlayertwodigitscounter}}
 This is a total of $n_\text{ones} \cdot n_{\text{twos}} = \the\res$.
+\ifdebug
+
+This result is from debug values.
+\fi
 
 \section{Todo}
 Once this is done, I should inform the person who said I should inform them once this is done, to be found at \href{https://twitter.com/LucidBrot/status/1290792953548615682}{Twitter}.
