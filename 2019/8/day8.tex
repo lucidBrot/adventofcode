@@ -12,6 +12,7 @@
 \usepackage[most]{tcolorbox}
 \usepackage{lipsum}
 \usepackage{amsmath}
+\usepackage{cprotect}
 \setlength{\parskip}{\baselineskip}%
 \setlength{\parindent}{0pt}%
 
@@ -65,6 +66,9 @@
     },
     #1}
 
+% Inline Code customized https://stackoverflow.com/questions/3175105/writing-code-in-latex-document
+\definecolor{codebggray}{rgb}{0.9,0.9,0.9}
+\newcommand{\code}[1]{\colorbox{codebggray}{{\texttt{#1}}}}
 
 % TeX docs at http://pgfplots.sourceforge.net/TeX-programming-notes.pdf
 
@@ -135,6 +139,7 @@
 \def\thefinalstring{} % Saved in aux file
 \makeatletter
 \def\myappendstring#1{\g@addto@macro\mystring{ #1}}
+\def\myappendxstring#1{\edef\tmp{#1}\expandafter\g@addto@macro\expandafter\mystring\expandafter{\tmp}}
 \makeatother
 
 
@@ -574,14 +579,34 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 		\setcounter{pixelvalue}{2}
 	\fi
 	\typeout{Found \thepixelvalue ~in Layer \thelayercounter ~for pixel \thecharcounter}
-\edef\tmppixelvalue{\thepixelvalue}
-	\immediate\myappendstring{\tmppixelvalue}
+	\immediate\myappendxstring{\thepixelvalue}
 \thepixelvalue
   \ifnum \value{charcounter} <  \layersize
 \repeat
 
 % perform some magic https://tex.stackexchange.com/questions/402173/append-strings-to-a-variable-and-display-them-at-the-front-of-the-document
-Let me just perform some magic - Consider \autoref{fig:magic} \citelist{\cite{collectvar}}. There's only one problem with that: It assumes that  the input strings are constant. Since I input the value of a counter, mine are not, and the magical string that ends up being collected is just a repetition of the last value it had. Adding \texttt{\textbackslash immediate} and \texttt{\textbackslash edef} was not helpful.
+Let me just perform some magic - Consider \autoref{fig:magic}. There's only one problem with that: It assumes that  the input strings are constant. Since I input the value of a counter, mine are not, and the magical string that ends up being collected is just a repetition of the last value it had. Adding \texttt{\textbackslash immediate} and \texttt{\textbackslash edef} was not helpful.\citelist{\cite{collectvar} \cite{immediatez}}
+
+Now of course, I don't actually need that collection - I can place my computation wherever I like. It would still have been cool though - partly because I have weird spacing when I output my computation character by character, and partly because this is a nice trick to have in my spellbook at the ready. Luckily, the author of that trick replied to my inquiry by adding an \code{\textbackslash edef} and some \cprotect\code{\verb|\expandafter|} (\autoref{fig:segletes}).
+
+\begin{figure}[hp]
+\begin{myquote}
+@lucidbrot
+\begin{lstlisting}[columns=fullflexible, backgroundcolor = \color{codebggray}]
+\def\myappendxstring#1{
+  \edef\tmp{#1}\expandafter\g@addto@macro%
+    \expandafter\mystring\expandafter{\tmp}
+}\end{lstlisting}
+Then, \begin{lstlisting}[columns=fullflexible, backgroundcolor = \color{codebggray}]
+\stepcounter{mycounter} %
+  \myappendxstring{Counter value is \themycounter. }
+\end{lstlisting}
+ - Steven B. Segletes 
+\end{myquote}
+\caption{S.B. Segletes' addition.}
+\label{fig:segletes}
+\end{figure}
+
 
 % display the computed variable here
 \makeatletter
@@ -673,7 +698,7 @@ author={Segletes, Steven B.},
 url={https://tex.stackexchange.com/a/402174/102826},
 accessdate={25.08.2020}
 }
-\bib{collectvar}{webpage}{
+\bib{immediatez}{webpage}{
 title={What are \textbackslash immediate \& \textbackslash write18 and how does one use them?},
 author={Wright, Joseph},
 url={https://tex.stackexchange.com/a/20446/102826},
