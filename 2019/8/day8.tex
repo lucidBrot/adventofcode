@@ -428,12 +428,22 @@ Computation starting with \numlayers ~ Layers of size \the\imgwidth x\the\imghei
 \newcounter{bestlayerzerocountcounter}\setcounter{bestlayerzerocountcounter}{\the\numexpr \layersize}
 \newcounter{currentcharpos}\setcounter{currentcharpos}{\the\numexpr 0 - 1}
 \newcounter{charstoremoveatendoflayer}\setcounter{charstoremoveatendoflayer}{0}
+
+Normally, I would do a first loop for finding the best Layer and a second block for extracting the relevant information. However, given that the loops are so slow with all those string operations, I'll just spend some brain overhead and do this in one loop, even if it is a bit harder to keep the overview.\\
+
+\newcounter{bestlayeronedigitscounter}
+\newcounter{bestlayertwodigitscounter}
+\newcounter{currentlayeronecounter}
+\newcounter{currentlayertwocounter}
+
 % loop through all layers
 \loop
 	% reset counters to start of layer
 	\setcounter{charinlayercounter}{0}
     	\addtocounter{layercounter}{1}
 	\setcounter{currentlayerzerocounter}{0}
+	\setcounter{currentlayeronecounter}{0}
+	\setcounter{currentlayertwocounter}{0}
 	\setcounter{charstoremoveatendoflayer}{1}
 	
 	{\loop % loop through all characters in the current layer
@@ -461,6 +471,16 @@ Computation starting with \numlayers ~ Layers of size \the\imgwidth x\the\imghei
                        \typeout{Msg from IFEQ ELSE branch}
 		} % fi
 
+		% check if one
+		\IfEq {1}{\currentchar}{
+		  \addtocounter{currentlayeronecounter}{1}
+		}{}
+
+		% check if two
+		\IfEq {2}{\currentchar}{
+		  \addtocounter{currentlayertwocounter}{1}
+		}{}
+
 		 % truncate inputstring by one character at head
           		\typeout{about to remove \thecharstoremoveatendoflayer ~chars from head}
           		About to remove \thecharstoremoveatendoflayer chars from head
@@ -476,12 +496,17 @@ Computation starting with \numlayers ~ Layers of size \the\imgwidth x\the\imghei
 		New Best Layer is Layer \thelayercounter.
 		\setcounter{bestlayercounter}{\value{layercounter}}
 		\setcounter{bestlayerzerocountcounter}{\value{currentlayerzerocounter}}
+		\setcounter{bestlayeronedigitscounter}{\value{currentlayeronecounter}}
+		\setcounter{bestlayertwodigitscounter}{\value{currentlayertwocounter}}
 	\fi
 
            \ifnum \value{layercounter}<\numlayers
 \repeat
 outerloopcount: \thelayercounter\\
-Best Layer: \thebestlayercounter ~with \thebestlayerzerocountcounter ~zeros.
+Best Layer: \thebestlayercounter ~with \thebestlayerzerocountcounter ~zeros.\\
+It has \thebestlayeronedigitscounter ~Ones and \thebestlayertwodigitscounter ~Twos.\\
+\edef\res{\numexpr \value{bestlayeronedigitscounter} * \value {bestlayertwodigitscounter}}
+This is a total of $n_\text{ones} \cdot n_{\text{twos}} = \the\res$.
 
 % Aand now repeat the inner loop below once per layer. 
 \ifoldcomputationenabled
