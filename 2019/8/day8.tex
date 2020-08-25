@@ -561,10 +561,21 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 		\StrChar{\workingstr}{\totalpos}[\currentchar]
 		\setcounter{pixelvalue}{\inteval{\currentchar}}
 		\typeout{Considering Layer \thelayercounter for pixel \thecharcounter}
+		% if we reached the max layer and it's still 2, we keep the 2. But to abort the loop, we claim it's the magic number "minus one"
+		\ifnum \value{layercounter}=\numlayers
+			\ifnum \value{pixelvalue}=2
+				\setcounter{pixelvalue}{-1}
+			\fi
+		\fi
 	  \ifnum \value{pixelvalue} > 1
 	\repeat }
+	% undo the hack from the inner loop:
+	\ifnum \value{pixelvalue}=\inteval{0-1}
+		\setcounter{pixelvalue{2}
+	\fi
 	\typeout{Found \thepixelvalue in Layer \thelayercounter for pixel \thecharcounter}
-	\myappendstring{\thepixelvalue}
+\edef\tmppixelvalue{\thepixelvalue}
+	\myappendstring{\immediate\tmppixelvalue}
 \thepixelvalue
   \ifnum \value{charcounter} <  \layersize
 \repeat
