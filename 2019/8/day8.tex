@@ -575,7 +575,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 	\fi
 	\typeout{Found \thepixelvalue ~in Layer \thelayercounter ~for pixel \thecharcounter}
 \edef\tmppixelvalue{\thepixelvalue}
-	\myappendstring{\immediate\tmppixelvalue}
+	\immediate\myappendstring{\tmppixelvalue}
 \thepixelvalue
   \ifnum \value{charcounter} <  \layersize
 \repeat
@@ -671,6 +671,12 @@ accessdate={21.08.2020}
 title={Append strings to a variable and display them at the front of the document},
 author={Segletes, Steven B.},
 url={https://tex.stackexchange.com/a/402174/102826},
+accessdate={25.08.2020}
+}
+\bib{collectvar}{webpage}{
+title={What are \textbackslash immediate \& \textbackslash write18 and how does one use them?},
+author={Wright, Joseph},
+url={https://tex.stackexchange.com/a/20446/102826},
 accessdate={25.08.2020}
 }
 \end{biblist}
