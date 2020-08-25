@@ -129,6 +129,16 @@
         \advance\tmpcnta by #1\relax
         \the\tmpcnta}
 
+% https://tex.stackexchange.com/questions/402173/append-strings-to-a-variable-and-display-them-at-the-front-of-the-document
+% used in part 2
+\def\mystring{} % temp string
+\def\thefinalstring{} % Saved in aux file
+\makeatletter
+\def\myappendstring#1{\g@addto@macro\mystring{ #1}}
+\makeatother
+
+
+
 \begin{document}
 
 
@@ -554,10 +564,37 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 	  \ifnum \value{pixelvalue} > 1
 	\repeat }
 	\typeout{Found \thepixelvalue in Layer \thelayercounter for pixel \thecharcounter}
+	\myappendstring{\thepixelvalue}
 \thepixelvalue
-%
   \ifnum \value{charcounter} <  \layersize
 \repeat
+
+% perform some magic https://tex.stackexchange.com/questions/402173/append-strings-to-a-variable-and-display-them-at-the-front-of-the-document
+Let me just perform some magic (See \autoref{fig:magic}) \citelist{\cite{collectvar}}.
+
+% display the computed variable here
+\makeatletter
+\@starttoc{xyz}% executes stuff in .xyz file
+\makeatother
+\thefinalstring
+% the following line must be performed at the end of the computation - e.g. at the end of the document.
+\addtocontents{xyz}{\gdef\protect\thefinalstring{\mystring}}
+
+\begin{figure}[htbp]
+\begin{mycode}
+% Throughout the document, collect the variable using
+\myappendstring{hello}
+% display the computed variable here
+\makeatletter
+\@starttoc{xyz}% executes stuff in .xyz file
+\makeatother
+\thefinalstring
+% the following line must be performed at the end of the computation - e.g. at the end of the document.
+\addtocontents{xyz}{\gdef\protect\thefinalstring{\mystring}}
+\end{mycode}
+\caption{Magic to collect a variable, then print it at the start of the document. \citelist{\cite{collectvar}}}
+\label{fig:magic}
+\end{figure}
 
 \section{Todo}
 Once this is done, I should inform the person who said I should inform them once this is done, to be found at \href{https://twitter.com/LucidBrot/status/1290792953548615682}{Twitter}.
@@ -618,6 +655,12 @@ title={Setting a Global Variable in TikZ Loop},
 author={cfr},
 url={https://tex.stackexchange.com/a/436829/102826},
 accessdate={21.08.2020}
+}
+\bib{collectvar}{webpage}{
+title={Append strings to a variable and display them at the front of the document},
+author={Segletes, Steven B.},
+url={https://tex.stackexchange.com/a/402174/102826},
+accessdate={25.08.2020}
 }
 \end{biblist}
 \end{bibdiv}
