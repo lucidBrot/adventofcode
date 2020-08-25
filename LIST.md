@@ -45,6 +45,7 @@
 - [ ] Shaders
 - [ ] GLSL
 - [ ] [X](https://en.wikipedia.org/wiki/Microsoft_Dynamics_AX#MorphX_and_X++)
+- [ ] Erlang
 
 ## If Frameworks Count
 - [ ] Greensock (JS animation framework)

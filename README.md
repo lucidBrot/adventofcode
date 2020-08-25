@@ -114,3 +114,10 @@ The multithreading libraries don't really build/install on windows or cygwin.
 At least, the for loops are kinda nice - despite table indices counting from `1`. 
 
 And coroutines are nice too.
+
+#### $\mathbb{Diary\,\, Entry\,\, of\,\, Day \,\,}$8
+
+We're using $\LaTeX$! It's very much not made to perform computations and it shows. This one took me longer than most other Tasks. It takes some getting used to it, but even then - without *understanding* how $\TeX$ works internally, it's hard to get ahead. And the errors are often so useless that it might just as well only distinguish between "Error" and "No Error". For example, any error within a loop will surface at the end of the loop. Thanks!
+
+But [have a look at the output pdf](./2019/8/day8.pdf) - I wrote that during development. Formatting tricks seem so much easier after trying to use $\TeX$ primitives correctly for a few hours.
+

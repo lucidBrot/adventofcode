@@ -1,4 +1,5 @@
 \documentclass{article} \usepackage[utf8]{inputenc}
+\pdfresettimer
 \usepackage{xstring}
 \usepackage{calc, xintexpr}
 \usepackage{xfp}
@@ -78,7 +79,7 @@
 \newif\ifcomputationenabled
 \computationenabledtrue
 \newif\ifdebug
-\debugtrue
+\debugfalse
 \newif\ifverbose
 \verbosefalse
 
@@ -143,6 +144,29 @@
 \makeatother
 
 
+% right before document start
+%% \usepackage{embedall} % should embed fonts and also the latex code so I cannot lose it.
+% but since this is not working with my image for some reason... a diffferent way
+% https://tex.stackexchange.com/questions/13187/is-there-some-way-to-embed-latex-source-code-in-a-pdf-file
+%\usepackage{embedfile}
+%\embedfile{./CodeBlocks.tex}
+% Above worked, but I'd rather be able to also link to embedded files, so...
+% https://tex.stackexchange.com/questions/19025/embed-link-to-an-embedded-file
+\usepackage{navigator}
+\embeddedfile{mysourcecode}{./day8.tex}
+% see later in the file for a link of the form
+% \openfilelink{myfile.pdf}{Link to the embedded file \texttt{myfile.pdf}}
+% and to color the link differently:
+% \usepackage{hypgotoe}
+% \href{gotoe:embedded=file.pdf}{description}
+% but either only seem to work with pdfs
+%
+% It's also possible to store a password-encrypted file: https://tex.stackexchange.com/questions/26067/is-it-possible-to-embed-attach-a-file-password-protected-in-a-pdf
+%
+% Alternatively:
+% \usepackage{attachfile2}
+% \textattachfile[color= 0 0 0]{Aufgabenstellung_EricMink.pdf}{filetext}
+% -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
 
 \begin{document}
 
@@ -637,6 +661,16 @@ Once this is done, I should inform the person who said I should inform them once
 
 I should probably also put the shellescape stuff into an optional branch. $\cap$.
 
+\section{Performance}
+PDF Elapsed Time: \showthe\pdfelapsedtime
+\begin{myquote}\begin{quote}
+The value of \pdfelapsedtime is the number of seconds elapsed multiplied by 65536. \citelist{\cite{robertson}}
+
+\section{Source}
+The source code is clingy: It attached itself to this file. Open it in Adobe Reader and view it under Attachments.\\
+Linking to it does not work unless the file is also a pdf, it seems.
+\end{quote}\end{myquote}
+
 \begin{bibdiv}
 \begin{biblist}
 %\bib{Bourbaki70}{book}{
@@ -702,6 +736,12 @@ accessdate={25.08.2020}
 title={What are \textbackslash immediate \& \textbackslash write18 and how does one use them?},
 author={Wright, Joseph},
 url={https://tex.stackexchange.com/a/20446/102826},
+accessdate={25.08.2020}
+}
+\bib{robertson}{webpage}{
+title={Are there LaTeX performance profiling tools?},
+author={Wright, Joseph},
+url={https://tex.stackexchange.com/a/547/102826},
 accessdate={25.08.2020}
 }
 \end{biblist}
