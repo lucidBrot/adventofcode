@@ -1,5 +1,5 @@
 \documentclass{article} \usepackage[utf8]{inputenc}
-\pdfresettimer
+%\pdfresettimer
 \usepackage{xstring}
 \usepackage{calc, xintexpr}
 \usepackage{xfp}
@@ -79,7 +79,7 @@
 \newif\ifcomputationenabled
 \computationenabledtrue
 \newif\ifdebug
-\debugfalse
+\debugtrue
 \newif\ifverbose
 \verbosefalse
 
@@ -143,8 +143,6 @@
 \def\myappendxstring#1{\edef\tmp{#1}\expandafter\g@addto@macro\expandafter\mystring\expandafter{\tmp}}
 \makeatother
 
-\usepackage{embedfile}
-\embedfile{./day8.tex}
 \begin{document}
 
 
@@ -579,7 +577,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 	\ifnum \value{pixelvalue}=\inteval{0 - 1}
 		\setcounter{pixelvalue}{2}
 	\fi
-	\typeout{Found \thepixelvalue ~in Layer \thelayercounter ~for pixel \thecharcounter}
+	\typeout{Found \thepixelvalue in Layer \thelayercounter for pixel \thecharcounter}
 	\immediate\myappendxstring{\thepixelvalue}
 \thepixelvalue
   \ifnum \value{charcounter} <  \layersize
@@ -636,14 +634,15 @@ Magic: \thefinalstring
 \section{Todo}
 Once this is done, I should inform the person who said I should inform them once this is done, to be found at \href{https://twitter.com/LucidBrot/status/1290792953548615682}{Twitter}.
 
-I should probably also put the shellescape stuff into an optional branch. $\cap$.
+I should probably also put the shellescape stuff into an optional branch. 
 
 I want to attach the source code to this file.
 
+I also want ot measure how long this takes.
 \section{Performance}
-PDF Elapsed Time: \showthe\pdfelapsedtime
+%PDF Elapsed Time: \showthe\pdfelapsedtime
 \begin{myquote}\begin{quote}
-The value of \pdfelapsedtime is the number of seconds elapsed multiplied by 65536. \citelist{\cite{robertson}}
+The value of \code{\textbackslash pdfelapsedtime} is the number of seconds elapsed multiplied by 65536. \citelist{\cite{robertson}}
 
 \section{Source}
 The source code is clingy: It attached itself to this file. Open it in Adobe Reader and view it under Attachments.\\
