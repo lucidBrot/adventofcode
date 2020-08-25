@@ -537,10 +537,23 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 \end{quote}\end{myquote}
 
 \newcounter{charcounter}\setcounter{charcounter}{0}
+%\newcounter{layercounter} %counter already exists
+\newcounter{pixelvalue}
+\def\workingstr{\fileline}
 \loop
   \addtocounter{charcounter}{1}
-
-	coord \thecharcounter\\
+  % for each pixel in the first layer, search all layers unti a pixel is opaque
+           \setcounter{pixelvalue}{2}
+	\setcounter{layercounter}{0}
+	{\loop
+		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounter} * \layersize )}
+		\StrChar{\workingstr}{\totalpos}[\currentchar]
+		\setcounter{pixelvalue}{\inteval{\currentchar}}
+		\typeout{Considering Layer \thelayercounter for pixel \thecharcounter}
+	  \ifnum \value{pixelvalue} > 1
+	\repeat }
+	\typeout{Found \thepixelvalue in Layer \thelayercounter for pixel \thecharcounter}
+	\thepixelvalue
 
   \ifnum \value{charcounter} <  \layersize
 \repeat
