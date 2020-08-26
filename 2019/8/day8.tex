@@ -584,7 +584,20 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
   % for each pixel in the first layer, search all layers unti a pixel is opaque
            \setcounter{pixelvalue}{2}
 	\setcounter{layercounterx}{-1}
-
+	{\loop
+	  \addtocounter{layercounterx}{1}
+		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounterx} * \layersize )}
+		\StrChar{\workingstr}{\totalpos}[\currentchar]
+		\setcounter{pixelvalue}{\inteval{\currentchar}}
+		\typeout{Considering Layer \thelayercounterx for pixel \thecharcounter}
+		% if we reached the max layer and it's still 2, we keep the 2. But to abort the loop, we claim it's the magic number "minus one"
+		\ifnum \value{layercounterx}=\inteval{\numlayers -1}
+			\ifnum \value{pixelvalue}=2
+				\setcounter{pixelvalue}{-1}
+			\fi
+		\fi
+	  \ifnum \value{pixelvalue} > 1
+	\repeat }
 	% undo the hack from the inner loop:
 	\ifnum \value{pixelvalue}=\inteval{0 - 1}
 		\setcounter{pixelvalue}{2}
