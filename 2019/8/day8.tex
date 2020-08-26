@@ -77,7 +77,7 @@
 % cool hack: http://texhacks.blogspot.com/2010/12/forcing-full-expansion.html
 
 \newif\ifdebug
-\debugtrue
+\debugfalse
 \newif\ifverbose
 \verbosefalse
 \newif\ifrunpartone
@@ -574,40 +574,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 \end{quote}\end{myquote}
 \ifrunparttwo
 \typeout{"Starting the Lord's work!"}
-\def\numlayers{\the\numexpr \inputstringlength / \layersize \relax}
-\newcounter{charcounter}\setcounter{charcounter}{0}
-\newcounter{layercounterx}
-\newcounter{pixelvalue}
-\def\workingstr{\fileline}
-\loop
-  \addtocounter{charcounter}{1}
-  % for each pixel in the first layer, search all layers unti a pixel is opaque
-           \setcounter{pixelvalue}{2}
-	\setcounter{layercounterx}{-1}
-	{\loop
-	  \addtocounter{layercounterx}{1}
-		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounterx} * \layersize )}
-		\StrChar{\workingstr}{\totalpos}[\currentchar]
-		\setcounter{pixelvalue}{\inteval{\currentchar}}
-		\typeout{Considering Layer \thelayercounterx for pixel \thecharcounter}
-		% if we reached the max layer and it's still 2, we keep the 2. But to abort the loop, we claim it's the magic number "minus one"
-		\ifnum \value{layercounterx}=\inteval{\numlayers -1}
-			\ifnum \value{pixelvalue}=2
-				\setcounter{pixelvalue}{-1}
-			\fi
-		\fi
-	  \ifnum \value{pixelvalue} > 1
-	\repeat }
-	% undo the hack from the inner loop:
-	\ifnum \value{pixelvalue}=\inteval{0 - 1}
-		\setcounter{pixelvalue}{2}
-	\fi
-	\typeout{Found \thepixelvalue in Layer \thelayercounterx for pixel \thecharcounter}
-	\immediate\myappendxstring{\thepixelvalue}
-\thepixelvalue
-\pagebreak
-  \ifnum \value{charcounter} <  \layersize
-\repeat
+
 \else
 
 \textbf{Not running part two as per flags.}
@@ -664,7 +631,7 @@ Magic: \thefinalstring
 \section{Todo}
 Once this is done, I should inform the person who said I should inform them once this is done, to be found at \href{https://twitter.com/LucidBrot/status/1290792953548615682}{Twitter}.
 
-I should probably also put the shellescape stuff into an optional branch. 
+Re-enable \code{\textbackslash runshellex}.
 
 I want to attach the source code to this file.
 
