@@ -77,7 +77,7 @@
 % cool hack: http://texhacks.blogspot.com/2010/12/forcing-full-expansion.html
 
 \newif\ifdebug
-\debugfalse
+\debugtrue
 \newif\ifverbose
 \verbosefalse
 \newif\ifrunpartone
@@ -587,9 +587,8 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 	{\loop
 	  \addtocounter{layercounterx}{1}
 		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounterx} * \layersize )}
-\pagebreak
 		\StrMid{\workingstr}{\totalpos}{\inteval{\totalpos + 1}}[\currentchar]
-\pagebreak
+%\def\currentchar{1}
 		\setcounter{pixelvalue}{\inteval{\currentchar}}
 		\typeout{Considering Layer \thelayercounterx for pixel \thecharcounter}
 		% if we reached the max layer and it's still 2, we keep the 2. But to abort the loop, we claim it's the magic number "minus one"
