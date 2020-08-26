@@ -76,8 +76,6 @@
 % TODO: https://tex.stackexchange.com/questions/29402/how-do-i-make-my-document-look-like-it-was-written-by-a-cthulhu-worshipping-madm
 % cool hack: http://texhacks.blogspot.com/2010/12/forcing-full-expansion.html
 
-\newif\ifcomputationenabled
-\computationenabledtrue
 \newif\ifdebug
 \debugtrue
 \newif\ifverbose
@@ -377,8 +375,6 @@ I want to loop \the\layersize~times for the first layer.
 \def\stahpnow{\the\numexpr \stahp - 1}
 
 The input file contains \stahpnow characters.
-%flag condition to skip long computation for debugging layout
-\ifcomputationenabled
 
 \section{ Execution: The Water Is Cold}
 \begin{myquote}\begin{quote}
