@@ -77,7 +77,7 @@
 % cool hack: http://texhacks.blogspot.com/2010/12/forcing-full-expansion.html
 
 \newif\ifdebug
-\debugfalse
+\debugtrue
 \newif\ifverbose
 \verbosefalse
 \newif\ifrunpartone
@@ -229,6 +229,7 @@ But no, that also results in a problem with writing to a file... So let me try s
 \input{|"python -c "print(1+2);""}
 \newline
 And as you should be able to see, it works!
+It does output some \code{SyntaxError} in the Console output, but it seems like I can ignore that?!
 
 So for computing stringlength, a quick python call should speed things up.
 \begin{mycode}
@@ -250,7 +251,8 @@ We can make \LaTeX\, paste a string into that as well...
 \input{|"python -c "print(len('\mystrtwo'));""}
 ...but for some reason it fails when used with our included inputstring. There's a site with an example on how to include text from a file, but it does not work at all for me\citelist{\cite{stackexpand}}. I guess I'll just hardcode it inside this file here instead... For that, however, the line length limit becomes an issue. So I've declared 74 commands and combined them into one. Aand turns out that also didn't help. The string just ends after some two hundred characters.
 
-So to quote a professor of mine, J. Hromkovic, \textit{"\textbf{Strategy: We Give Up!} What can we do to still be able to state something impressive?"}.
+So to quote a professor of mine, J. Hromkovic, 
+\begin{quote}\textit{"\textbf{Strategy: We Give Up!} What can we do to still be able to state something impressive?"}\end{quote}
 Well, I can just hardcode the damn string length. That's not really worse than hardcoding the input.
 
 \makeatletter
@@ -547,8 +549,16 @@ This result is from debug values.
 
 \section{Day Eight Part Two: Because this task wasn't that hard}
 \typeout{"debug Srk 1!"}
-
-\typeout{"debug Srk9!"}
+\begin{myquote}\begin{quote}
+Each image layer consists of numbers that represent pixel information. One digit, one pixel.
+\begin{align*}
+0 & \rightleftarrows \text{black}\\
+1 & \rightleftarrows \text{white}\\
+2 & \rightleftarrows \text{transparent}\\
+\end{align*}
+You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \textit{first} nontransparent value.
+\end{quote}\end{myquote}
+\typeout{"debug Srk 9!"}
 \ifrunparttwo
 \typeout{"Starting the Lord's work!"}
 \def\numlayers{\the\numexpr \inputstringlength / \layersize \relax}
@@ -612,7 +622,6 @@ Then, \begin{lstlisting}[columns=fullflexible, backgroundcolor = \color{codebggr
 \caption{S.B. Segletes' addition.}
 \label{fig:segletes}
 \end{figure}
-
 
 % display the computed variable here
 \makeatletter
