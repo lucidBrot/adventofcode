@@ -79,7 +79,7 @@
 \newif\ifcomputationenabled
 \computationenabledtrue
 \newif\ifdebug
-\debugfalse
+\debugtrue
 \newif\ifverbose
 \verbosefalse
 \newif\ifrunparttwo
@@ -522,6 +522,7 @@ Normally, I would do a first loop for finding the best Layer and a second block 
 		\ifverbose
 		New Best Layer is Layer \thelayercounter.
 		\fi
+		\typeout{New Best Layer is Layer \thelayercounter}
 		\setcounter{bestlayercounter}{\value{layercounter}}
 		\setcounter{bestlayerzerocountcounter}{\value{currentlayerzerocounter}}
 		\setcounter{bestlayeronedigitscounter}{\value{currentlayeronecounter}}
@@ -530,6 +531,7 @@ Normally, I would do a first loop for finding the best Layer and a second block 
 
            \ifnum \value{layercounter}<\numlayers
 \repeat
+\typeout{fFinished computation for Pt 1}
 outerloopcount: \thelayercounter\\
 Best Layer: \thebestlayercounter ~with \thebestlayerzerocountcounter ~zeros.\\
 It has \thebestlayeronedigitscounter ~Ones and \thebestlayertwodigitscounter ~Twos.\\
