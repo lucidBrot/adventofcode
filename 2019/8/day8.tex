@@ -80,6 +80,8 @@
 \debugtrue
 \newif\ifverbose
 \verbosefalse
+\newif\ifrunpartone
+\runpartonefalse
 \newif\ifrunparttwo
 \runparttwofalse
 
@@ -376,6 +378,8 @@ I want to loop \the\layersize~times for the first layer.
 
 The input file contains \stahpnow characters.
 
+%ifrunpartone
+\ifrunpartone
 \section{ Execution: The Water Is Cold}
 \begin{myquote}\begin{quote}
 \texttt{\textbackslash global} is a TeX command that declares the following definition or assignment to be global, meaning that if TeX is currently inside a group, the definition or assignment will still remain valid when the group is over. Commands that can follow \texttt{\textbackslash global} include \texttt{\textbackslash def}, \texttt{\textbackslash edef}, \texttt{\textbackslash let}, \texttt{\textbackslash count}, \texttt{\textbackslash countdef}, [...]\citelist{\cite{wikibooksglobal}}\\
@@ -537,6 +541,9 @@ This is a total of $n_\text{ones} \cdot n_{\text{twos}} = \the\res$.
 
 This result is from debug values.
 \fi
+%
+%endif runpartone
+\fi
 
 \section{Day Eight Part Two: Because this task wasn't that hard}
 
@@ -552,22 +559,22 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 
 \ifrunparttwo
 \newcounter{charcounter}\setcounter{charcounter}{0}
-%\newcounter{layercounter} %counter already exists
+\newcounter{layercounterx}
 \newcounter{pixelvalue}
 \def\workingstr{\fileline}
 \loop
   \addtocounter{charcounter}{1}
   % for each pixel in the first layer, search all layers unti a pixel is opaque
            \setcounter{pixelvalue}{2}
-	\setcounter{layercounter}{-1}
+	\setcounter{layercounterx}{-1}
 	{\loop
-	  \addtocounter{layercounter}{1}
-		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounter} * \layersize )}
+	  \addtocounter{layercounterx}{1}
+		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounterx} * \layersize )}
 		\StrChar{\workingstr}{\totalpos}[\currentchar]
 		\setcounter{pixelvalue}{\inteval{\currentchar}}
 		\typeout{Considering Layer \thelayercounter for pixel \thecharcounter}
 		% if we reached the max layer and it's still 2, we keep the 2. But to abort the loop, we claim it's the magic number "minus one"
-		\ifnum \value{layercounter}=\inteval{\numlayers -1}
+		\ifnum \value{layercounterx}=\inteval{\numlayers -1}
 			\ifnum \value{pixelvalue}=2
 				\setcounter{pixelvalue}{-1}
 			\fi
