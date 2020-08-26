@@ -77,7 +77,7 @@
 % cool hack: http://texhacks.blogspot.com/2010/12/forcing-full-expansion.html
 
 \newif\ifdebug
-\debugtrue
+\debugfalse
 \newif\ifverbose
 \verbosefalse
 \newif\ifrunpartone
@@ -543,10 +543,10 @@ This result is from debug values.
 \fi
 %
 %endif runpartone
-\fi
+\fi\typeout{"Reached the end of ifrunpartone"}
 
 \section{Day Eight Part Two: Because this task wasn't that hard}
-
+\typeout{"debug Srk 1!"}
 \begin{myquote}\begin{quote}
 Each image layer consists of numbers that represent pixel information. One digit, one pixel.
 \begin{align*}
@@ -556,8 +556,9 @@ Each image layer consists of numbers that represent pixel information. One digit
 \end{align*}
 You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \textit{first} nontransparent value.
 \end{quote}\end{myquote}
-
+\typeout{"debug Srk9!"}
 \ifrunparttwo
+\typeout{"Starting the Lord's work!"}
 \def\numlayers{\the\numexpr \inputstringlength / \layersize \relax}
 \newcounter{charcounter}\setcounter{charcounter}{0}
 \newcounter{layercounterx}
