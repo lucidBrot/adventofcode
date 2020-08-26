@@ -79,9 +79,11 @@
 \newif\ifcomputationenabled
 \computationenabledtrue
 \newif\ifdebug
-\debugtrue
+\debugfalse
 \newif\ifverbose
 \verbosefalse
+\newif\ifrunparttwo
+\runparttwofalse
 
 \title{Advent of Code\\
 {\large Day Eight}}
@@ -550,6 +552,7 @@ Each image layer consists of numbers that represent pixel information. One digit
 You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \textit{first} nontransparent value.
 \end{quote}\end{myquote}
 
+\ifrunparttwo
 \newcounter{charcounter}\setcounter{charcounter}{0}
 %\newcounter{layercounter} %counter already exists
 \newcounter{pixelvalue}
@@ -564,7 +567,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounter} * \layersize )}
 		\StrChar{\workingstr}{\totalpos}[\currentchar]
 		\setcounter{pixelvalue}{\inteval{\currentchar}}
-		\typeout{Considering Layer \thelayercounter ~for pixel \thecharcounter}
+		\typeout{Considering Layer \thelayercounter for pixel \thecharcounter}
 		% if we reached the max layer and it's still 2, we keep the 2. But to abort the loop, we claim it's the magic number "minus one"
 		\ifnum \value{layercounter}=\inteval{\numlayers -1}
 			\ifnum \value{pixelvalue}=2
@@ -582,6 +585,11 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 \thepixelvalue
   \ifnum \value{charcounter} <  \layersize
 \repeat
+\else
+
+\textbf{Not running part two as per flags.}
+
+\fi
 
 % perform some magic https://tex.stackexchange.com/questions/402173/append-strings-to-a-variable-and-display-them-at-the-front-of-the-document
 Let me just perform some magic - Consider \autoref{fig:magic}. There's only one problem with that: It assumes that  the input strings are constant. Since I input the value of a counter, mine are not, and the magical string that ends up being collected is just a repetition of the last value it had. Adding \texttt{\textbackslash immediate} and \texttt{\textbackslash edef} was not helpful.\citelist{\cite{collectvar} \cite{immediatez}}
@@ -643,11 +651,11 @@ I also want ot measure how long this takes.
 %PDF Elapsed Time: \showthe\pdfelapsedtime
 \begin{myquote}\begin{quote}
 The value of \code{\textbackslash pdfelapsedtime} is the number of seconds elapsed multiplied by 65536. \citelist{\cite{robertson}}
+\end{quote}\end{myquote}
 
 \section{Source}
 The source code is clingy: It attached itself to this file. Open it in Adobe Reader and view it under Attachments.\\
 Linking to it does not work unless the file is also a pdf, it seems.
-\end{quote}\end{myquote}
 
 \begin{bibdiv}
 \begin{biblist}
