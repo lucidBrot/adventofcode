@@ -77,13 +77,15 @@
 % cool hack: http://texhacks.blogspot.com/2010/12/forcing-full-expansion.html
 
 \newif\ifdebug
-\debugfalse
+\debugtrue
 \newif\ifverbose
 \verbosefalse
 \newif\ifrunpartone
 \runpartonefalse
 \newif\ifrunparttwo
 \runparttwotrue
+\newif\ifrunshellex
+\runshellexfalse
 
 \title{Advent of Code\\
 {\large Day Eight}}
@@ -204,6 +206,17 @@ We'll just have to run tex with the \texttt{--shell-escape} flag.\citelist{\cite
 \label{fig:typesettingsettings}
 \end{figure}
 
+\begin{quote}
+Somehow, pdflatex threads kept running despite me stopping them in TeXworks or even closing TeXworks. For further debugging, the rest of this section is skipped for now, hence. Currently, the section is being
+\ifrunshellex
+run.\\
+\else
+skipped.\\
+\fi
+But as it turned out, skipping this section about shellex helped nothing at all regarding this issue... It happened with the real input, but not with the \code{\textbackslash debug} input.
+\end{quote}
+\ifrunshellex % ifrunshellex
+
 %\immediate\write18{wc -c inputfile.tex > scriptoutput.tex}
 %Character Count: \input{scriptoutput.tex}
 A simple \texttt{\textbackslash input\{|"echo test"\}} already works!
@@ -274,6 +287,7 @@ Well, I can just hardcode the damn string length. That's not really worse than h
 %\input{|"python -c "print(len('\hardcodedinput'));""}
 %\hardcodedinput
 
+\fi % endif ifrunshellex
 \section{Get Head Performance}
 Again, \texttt{xstring} is extremely slow with big strings. So I split everything into layers of 100 chars. But that's still noticeably slower at the end of the layer than at the start of the layer... even though it's only supposed to be a quick character access. So I'm transforming everything into head accesses at index zero.
 
@@ -575,7 +589,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounterx} * \layersize )}
 		\StrChar{\workingstr}{\totalpos}[\currentchar]
 		\setcounter{pixelvalue}{\inteval{\currentchar}}
-		\typeout{Considering Layer \thelayercounterx for pixel \thecharcounter}\pagebreak
+		\typeout{Considering Layer \thelayercounterx for pixel \thecharcounter}
 		% if we reached the max layer and it's still 2, we keep the 2. But to abort the loop, we claim it's the magic number "minus one"
 		\ifnum \value{layercounterx}=\inteval{\numlayers -1}
 			\ifnum \value{pixelvalue}=2
@@ -591,6 +605,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 	\typeout{Found \thepixelvalue in Layer \thelayercounterx for pixel \thecharcounter}
 	\immediate\myappendxstring{\thepixelvalue}
 \thepixelvalue
+\pagebreak
   \ifnum \value{charcounter} <  \layersize
 \repeat
 \else
