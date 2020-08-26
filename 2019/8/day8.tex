@@ -574,7 +574,26 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 \end{quote}\end{myquote}
 \ifrunparttwo
 \typeout{"Starting the Lord's work!"}
+\def\numlayers{\the\numexpr \inputstringlength / \layersize \relax}
+\newcounter{charcounter}\setcounter{charcounter}{0}
+\newcounter{layercounterx}
+\newcounter{pixelvalue}
+\def\workingstr{\fileline}
+\loop
+  \addtocounter{charcounter}{1}
+  % for each pixel in the first layer, search all layers unti a pixel is opaque
+           \setcounter{pixelvalue}{2}
+	\setcounter{layercounterx}{-1}
 
+	% undo the hack from the inner loop:
+	\ifnum \value{pixelvalue}=\inteval{0 - 1}
+		\setcounter{pixelvalue}{2}
+	\fi
+	\typeout{Found \thepixelvalue in Layer \thelayercounterx for pixel \thecharcounter}
+	\immediate\myappendxstring{\thepixelvalue}
+\thepixelvalue
+  \ifnum \value{charcounter} <  \layersize
+\repeat
 \else
 
 \textbf{Not running part two as per flags.}
