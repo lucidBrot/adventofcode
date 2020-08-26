@@ -77,7 +77,7 @@
 % cool hack: http://texhacks.blogspot.com/2010/12/forcing-full-expansion.html
 
 \newif\ifdebug
-\debugtrue
+\debugfalse
 \newif\ifverbose
 \verbosefalse
 \newif\ifrunpartone
@@ -558,7 +558,6 @@ Each image layer consists of numbers that represent pixel information. One digit
 \end{align*}
 You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \textit{first} nontransparent value.
 \end{quote}\end{myquote}
-\typeout{"debug Srk 9!"}
 \ifrunparttwo
 \typeout{"Starting the Lord's work!"}
 \def\numlayers{\the\numexpr \inputstringlength / \layersize \relax}
@@ -576,7 +575,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounterx} * \layersize )}
 		\StrChar{\workingstr}{\totalpos}[\currentchar]
 		\setcounter{pixelvalue}{\inteval{\currentchar}}
-		\typeout{Considering Layer \thelayercounterx for pixel \thecharcounter}
+		\typeout{Considering Layer \thelayercounterx for pixel \thecharcounter}\pagebreak
 		% if we reached the max layer and it's still 2, we keep the 2. But to abort the loop, we claim it's the magic number "minus one"
 		\ifnum \value{layercounterx}=\inteval{\numlayers -1}
 			\ifnum \value{pixelvalue}=2
