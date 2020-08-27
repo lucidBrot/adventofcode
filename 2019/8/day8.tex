@@ -78,7 +78,7 @@
 % cool hack: http://texhacks.blogspot.com/2010/12/forcing-full-expansion.html
 
 \newif\ifdebug
-\debugfalse
+\debugtrue
 \newif\ifverbose
 \verbosefalse
 \newif\ifrunpartone
@@ -589,8 +589,8 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 	{\loop
 	  \addtocounter{layercounterx}{1}
 		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounterx} * \layersize )}
-		\StrMid{\workingstr}{12}{12}[\currentchar]
-		%\StrMid{\workingstr}{\totalpos}{\inteval{\totalpos + 0}}[\currentchar]
+		%\StrMid{\workingstr}{12}{12}[\currentchar]
+		\StrMid{\workingstr}{\totalpos}{\inteval{\totalpos + 0}}[\currentchar]
 		\setcounter{pixelvalue}{\inteval{\currentchar}}
 		\typeout{Considering Layer \thelayercounterx for pixel \thecharcounter with value \thepixelvalue. Total layers is \numlayers}
 		% if we reached the max layer and it's still 2, we keep the 2. But to abort the loop, we claim it's the magic number "minus one"
@@ -673,6 +673,8 @@ Once this is done, I should inform the person who said I should inform them once
 Re-enable \code{\textbackslash runshellex}.
 
 I want to attach the source code to this file.
+
+Fix segletes figure quote.
 
 I also want ot measure how long this takes. See \href{https://tex.stackexchange.com/questions/505770/how-to-measure-the-compilation-time-of-a-document?rq=1}{here for example}.
 \section{Performance}
