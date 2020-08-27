@@ -293,7 +293,7 @@ The output should have been: \lucidcharat{0}, \lucidcharat{1}, \lucidcharat{2},\
 While working on this, I have found an understandable explanation for \code{\textbackslash expandafter}.\citelist{\cite{tugboat}}
 But maybe that's not my problem. Maybe my problem is once again that I'm defining things in a loop.\citelist{\cite{macronamesloop} \cite{loopmathcal}} Maybe those approaches would be a good idea: Create distinct macros in each loop iteration instead of overwriting the same one each time (and failing at overwriting it).
 
-But nevermind! It turns out I did everything well, except that I started my test output at a different index than I thought... the last few hours were spent on a ghost bug
+But nevermind! It turns out I did everything well, except that I started my test output at a different index than I thought... the last few hours were spent on a ghost bug.
 
 \makeatletter
 \def\einput#1{\@@input #1 \space}
@@ -616,10 +616,13 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 	  \addtocounter{layercounterx}{1}
 		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounterx} * \layersize )}
 		%\StrMid{\workingstr}{1}{1}[\currentchar]
-		\StrMid{\workingstr}{\totalpos}{\inteval{\totalpos + 0}}[\currentchar]
+		%\StrMid{\workingstr}{\totalpos}{\inteval{\totalpos + 0}}[\currentchar]
 		%\edef\currentchar\expandafter{\lucidcharat{\numexpr \totalpos - 1}}
 %\edef\tmpinput{\the\numexpr \totalpos - 1}
 %\def\currentchar{\lucidcharat{\tmpinput}}
+\edef\tmpinput{\the\numexpr \totalpos - 1}
+\def\tmpchar{\expandafter\lucidcharat\tmpinput}
+\edef\currentchar{\tmpchar}
 		\setcounter{pixelvalue}{\inteval{\currentchar}}
 		\typeout{Considering Layer \thelayercounterx for pixel \thecharcounter with value \thepixelvalue. Total layers is \numlayers}
 		% if we reached the max layer and it's still 2, we keep the 2. But to abort the loop, we claim it's the magic number "minus one"
