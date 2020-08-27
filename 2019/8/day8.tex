@@ -223,7 +223,7 @@ But as it turned out, skipping this section about shellex helped nothing at all 
 A simple \texttt{\textbackslash input\{|"echo test"\}} already works!
 \input{|"echo test!"}
 
-But I cannot figure out how to correctly call \texttt{wc -c inputfile.tex} because the shell spawns in the wrong path. And also, for some reason the following code does not even create a file \texttt{outfile.blubb} anywhere on my machine.
+But I cannot figure out how to correctly call \texttt{wc -c inputfile.tex} because the shell spawns in the wrong path (\code{AppData/Local/Temp/mik53499/\_src }). And also, for some reason the following code does not even create a file \texttt{outfile.blubb} anywhere on my machine.
 \begin{lstlisting}
 \input{|"echo a > outfile.blubb"}
 \end{lstlisting}
@@ -270,8 +270,7 @@ So to quote a professor of mine, J. Hromkovic,
 \begin{quote}\textit{"\textbf{Strategy: We Give Up!} What can we do to still be able to state something impressive?"}\end{quote}
 Well, I can just hardcode the damn string length. That's not really worse than hardcoding the input.
 
-During Part 2, I'm revisiting this section again, though. because \code{StrMid} is just so very slow! Now I could of course hardcode a command that returns the correct character based on the argument, but isn't that a bit too cheaty? Maybe I'll fall back to that.
-\immediate\write18{ls xyz.* > flerimmcblerim.dat}
+During Part 2, I'm revisiting this section again, though. because \code{StrMid} is just so very slow! Now I could of course hardcode a command that returns the correct character based on the argument, but isn't that a bit too cheaty? Maybe. But my program technically works, it's just too slow.
 
 \makeatletter
 \def\einput#1{\@@input #1 \space}
