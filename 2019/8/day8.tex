@@ -278,7 +278,8 @@ During Part 2, I'm revisiting this section again, though. because \code{StrMid} 
 
 \def\totalpos{3}
 Hardcoded string char access: blubb \lucidcharat{\the\numexpr \totalpos - 0} blubb
-\newcounter{tmpbctr}\setcounter{tmpbctr}{0}
+
+\newcounter{tmpbctr}\setcounter{tmpbctr}{-1}
 \loop
 \stepcounter{tmpbctr}
 \edef\tmpinput{\the\numexpr \value{tmpbctr} - 0}
@@ -290,8 +291,9 @@ Hardcoded string char access: blubb \lucidcharat{\the\numexpr \totalpos - 0} blu
 The output should have been: \lucidcharat{0}, \lucidcharat{1}, \lucidcharat{2},\lucidcharat{3}
 
 While working on this, I have found an understandable explanation for \code{\textbackslash expandafter}.\citelist{\cite{tugboat}}
-But maybe that's not my problem. Maybe my problem is once again that I'm defining things in a loop.\citelist{\cite{macronamesloop} \cite{loopmathcal}}
-%\the\inteval{tmpchar}
+But maybe that's not my problem. Maybe my problem is once again that I'm defining things in a loop.\citelist{\cite{macronamesloop} \cite{loopmathcal}} Maybe those approaches would be a good idea: Create distinct macros in each loop iteration instead of overwriting the same one each time (and failing at overwriting it).
+
+But nevermind! It turns out I did everything well, except that I started my test output at a different index than I thought... the last few hours were spent on a ghost bug
 
 \makeatletter
 \def\einput#1{\@@input #1 \space}
