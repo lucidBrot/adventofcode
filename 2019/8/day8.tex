@@ -608,8 +608,10 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 	  \addtocounter{layercounterx}{1}
 		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounterx} * \layersize )}
 		%\StrMid{\workingstr}{1}{1}[\currentchar]
-		\StrMid{\workingstr}{\totalpos}{\inteval{\totalpos + 0}}[\currentchar]
+		%\StrMid{\workingstr}{\totalpos}{\inteval{\totalpos + 0}}[\currentchar]
 		%\edef\currentchar\expandafter{\lucidcharat{\numexpr \totalpos - 1}}
+\edef\tmpinput{\the\numexpr \totalpos - 1}
+\def\currentchar{\lucidcharat{\tmpinput}}
 		\setcounter{pixelvalue}{\inteval{\currentchar}}
 		\typeout{Considering Layer \thelayercounterx for pixel \thecharcounter with value \thepixelvalue. Total layers is \numlayers}
 		% if we reached the max layer and it's still 2, we keep the 2. But to abort the loop, we claim it's the magic number "minus one"
