@@ -86,7 +86,7 @@
 \newif\ifrunparttwo
 \runparttwotrue
 \newif\ifrunshellex
-\runshellexfalse
+\runshellextrue
 
 \title{Advent of Code\\
 {\large Day Eight}}
@@ -631,8 +631,8 @@ Now of course, I don't actually need that collection - I can place my computatio
 \begin{lstlisting}[columns=fullflexible, backgroundcolor = \color{codebggray}]
 \def\myappendxstring#1{
   \edef\tmp{#1}\expandafter\g@addto@macro%
-    \expandafter\mystring\expandafter{\tmp}
-}\end{lstlisting}
+    \expandafter\mystring\expandafter{\tmp}        }
+\end{lstlisting}
 Then, \begin{lstlisting}[columns=fullflexible, backgroundcolor = \color{codebggray}]
 \stepcounter{mycounter} %
   \myappendxstring{Counter value is \themycounter. }
