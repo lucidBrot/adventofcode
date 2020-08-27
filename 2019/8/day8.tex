@@ -615,11 +615,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 	{\loop
 	  \addtocounter{layercounterx}{1}
 		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounterx} * \layersize )}
-		%\StrMid{\workingstr}{1}{1}[\currentchar]
 		%\StrMid{\workingstr}{\totalpos}{\inteval{\totalpos + 0}}[\currentchar]
-		%\edef\currentchar\expandafter{\lucidcharat{\numexpr \totalpos - 1}}
-%\edef\tmpinput{\the\numexpr \totalpos - 1}
-%\def\currentchar{\lucidcharat{\tmpinput}}
 \edef\tmpinput{\the\numexpr \the\totalpos - 1}
 \def\tmpchar{\expandafter\lucidcharat\tmpinput}
 \edef\currentchar{\tmpchar}
