@@ -282,15 +282,15 @@ Hardcoded string char access: blubb \lucidcharat{\the\numexpr \totalpos - 0} blu
 \loop
 \stepcounter{tmpbctr}
 \edef\tmpinput{\the\numexpr \value{tmpbctr} - 0}
-(\tmpinput )
-\edef\tmpchar{\noexpand\lucidcharat{\tmpinput}}
-\edef\pmpchar{\tmpchar}
-cc \immediate\pmpchar cc
+%\edef\tmpchar{\noexpand\lucidcharat{\tmpinput}}
+\def\tmpchar{\expandafter\lucidcharat\tmpinput}
+(\tmpinput )[\tmpchar],
 \ifnum \value{tmpbctr}<3
 \repeat
 The output should have been: \lucidcharat{0}, \lucidcharat{1}, \lucidcharat{2},\lucidcharat{3}
 
 While working on this, I have found an understandable explanation for \code{\textbackslash expandafter}.\citelist{\cite{tugboat}}
+But maybe that's not my problem. Maybe my problem is once again that I'm defining things in a loop.\citelist{\cite{macronamesloop} \cite{loopmathcal}}
 %\the\inteval{tmpchar}
 
 \makeatletter
@@ -786,7 +786,7 @@ accessdate={25.08.2020}
 }
 \bib{robertson}{webpage}{
 title={Are there LaTeX performance profiling tools?},
-author={Wright, Joseph},
+author={Robertson, Will},
 url={https://tex.stackexchange.com/a/547/102826},
 accessdate={25.08.2020}
 }
@@ -794,6 +794,18 @@ accessdate={25.08.2020}
 title={A tutorial on \textbackslash expandafter},
 author={v. Bechtolsheim, Stefan},
 url={https://www.tug.org/TUGboat/tb09-1/tb20bechtolsheim.pdf},
+accessdate={28.08.2020}
+}
+\bib{macronamesloop}{webpage}{
+title={Defining and expanding macros In loops},
+author={cgnieder and Sebastian},
+url={https://tex.stackexchange.com/a/312177/102826},
+accessdate={28.08.2020}
+}
+\bib{loopmathcal}{webpage}{
+title={Defining new commands inside a for loop},
+author={Carlisle, David},
+url={https://tex.stackexchange.com/a/57037/102826},
 accessdate={28.08.2020}
 }
 \end{biblist}
