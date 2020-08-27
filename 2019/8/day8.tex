@@ -628,7 +628,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 		\setcounter{pixelvalue}{2}
 	\fi
 	\typeout{Found \thepixelvalue in Layer \thelayercounterx for pixel \thecharcounter}
-	%\immediate\myappendxstring{\thepixelvalue}
+	\immediate\myappendxstring{\thepixelvalue}
 \thepixelvalue
   \ifnum \value{charcounter} < \inteval{ \layersize}
 \repeat
