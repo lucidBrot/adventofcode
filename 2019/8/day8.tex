@@ -1,5 +1,5 @@
 \documentclass{article} \usepackage[utf8]{inputenc}
-%\pdfresettimer
+\pdfresettimer
 \usepackage{xstring}
 \usepackage{calc, xintexpr}
 \usepackage{xfp}
@@ -14,6 +14,7 @@
 \usepackage{lipsum}
 \usepackage{amsmath}
 \usepackage{cprotect}
+
 \setlength{\parskip}{\baselineskip}%
 \setlength{\parindent}{0pt}%
 
@@ -573,6 +574,7 @@ Each image layer consists of numbers that represent pixel information. One digit
 You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \textit{first} nontransparent value.
 \end{quote}\end{myquote}
 \ifrunparttwo
+
 \typeout{"Starting the Lord's work!"}
 \def\numlayers{\the\numexpr \inputstringlength / \layersize \relax}
 \newcounter{charcounter}\setcounter{charcounter}{0}
@@ -611,6 +613,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 \thepixelvalue
   \ifnum \value{charcounter} < \inteval{ \layersize}
 \repeat
+
 \else % elseif not runparttwo
 
 \textbf{Not running part two as per flags.}
@@ -673,7 +676,8 @@ I want to attach the source code to this file.
 
 I also want ot measure how long this takes. See \href{https://tex.stackexchange.com/questions/505770/how-to-measure-the-compilation-time-of-a-document?rq=1}{here for example}.
 \section{Performance}
-%PDF Elapsed Time: \showthe\pdfelapsedtime
+I have tried to measure the time of my code using the \code{l3benchmark} package. But including this package failed because LaTeX thinks my PC has no clock.
+PDF Elapsed Time in seconds: \the\numexpr \pdfelapsedtime / 65536 \relax ~seconds
 \begin{myquote}\begin{quote}
 The value of \code{\textbackslash pdfelapsedtime} is the number of seconds elapsed multiplied by 65536. \citelist{\cite{robertson}}
 \end{quote}\end{myquote}
