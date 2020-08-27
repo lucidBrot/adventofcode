@@ -589,7 +589,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 	{\loop
 	  \addtocounter{layercounterx}{1}
 		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounterx} * \layersize )}
-		\StrMid{\workingstr}{12000}{12000}[\currentchar]
+		\StrMid{\workingstr}{12}{12}[\currentchar]
 		%\StrMid{\workingstr}{\totalpos}{\inteval{\totalpos + 0}}[\currentchar]
 		\setcounter{pixelvalue}{\inteval{\currentchar}}
 		\typeout{Considering Layer \thelayercounterx for pixel \thecharcounter with value \thepixelvalue. Total layers is \numlayers}
