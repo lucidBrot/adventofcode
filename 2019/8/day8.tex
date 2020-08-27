@@ -286,6 +286,7 @@ Hardcoded string char access: blubb \lucidcharat{\the\numexpr \totalpos - 0} blu
 cc \tmpchar cc
 \ifnum \value{tmpbctr}<3
 \repeat
+\the\inteval{tmpchar}
 
 \makeatletter
 \def\einput#1{\@@input #1 \space}
