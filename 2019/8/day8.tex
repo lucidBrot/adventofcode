@@ -618,7 +618,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 	\stepcounter{tmpbctr}
 	\edef\tmpinput{\the\numexpr \value{tmpbctr} - 0}
 	\def\tmpchar{\expandafter\lucidcharat\tmpinput}
-	(\tmpinput )[\tmpchar],
+	(\tmpinput )[\tmpchar],\typeout{\tmpinput and \tmpchar}
 	\ifnum \value{tmpbctr}<3
 	\repeat
   % -----------------------------------------------------------
