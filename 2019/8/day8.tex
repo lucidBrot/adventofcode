@@ -614,7 +614,8 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 	\edef\tmpinput{\the\numexpr \value{debugctr} - 0}
 	\def\tmpchar{\expandafter\lucidcharat\tmpinput}
 	(\tmpinput )[\tmpchar],
-	%\typeout{tmpchar is \tmpchar}
+	\edef\tmpcharr{\tmpchar}
+	%\typeout{tmpchar is \tmpcharr}
 	\ifnum \value{debugctr}<3
 	\repeat }
   \ifnum \value{anotherdebugctr}<3
