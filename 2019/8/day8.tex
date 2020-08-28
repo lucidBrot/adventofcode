@@ -611,20 +611,6 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 \newcounter{debugctr}
 \def\workingstr{\fileline}
 
-  % exact paste from before
-  % -----------------------------------------------------------
-  \setcounter{tmpbctr}{-1}
-\loop
-\stepcounter{tmpbctr}
-\edef\tmpinput{\the\numexpr \value{tmpbctr} - 0}
-%\edef\tmpchar{\noexpand\lucidcharat{\tmpinput}}
-\def\tmpchar{\expandafter\lucidcharat\tmpinput}
-(\tmpinput )[\tmpchar],
-\ifnum \value{tmpbctr}<3
-\repeat
-
-  % -----------------------------------------------------------
-
   % -----------------------------------------------------------
   % debug for part two
   \setcounter{debugctr}{-1}
@@ -639,18 +625,6 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 
 \typeout{Pre-Loop}
 \loop
-  % -----------------------------------------------------------
-  % debug for part two
-  \setcounter{debugctr}{-1}
-	{\loop
-	\stepcounter{debugctr}
-	\edef\tmpinput{\the\numexpr \value{debugctr} - 0}
-	\def\tmpchar{\expandafter\lucidcharat\tmpinput}
-	(\tmpinput )[\tmpchar],
-	\typeout{Debug: \tmpinput and \tmpchar}
-	\ifnum \value{debugctr}<3
-	\repeat }
-  % -----------------------------------------------------------
 \typeout{Debug Part Done}
   % actual part two
   \addtocounter{charcounter}{1}
