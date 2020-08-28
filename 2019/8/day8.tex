@@ -608,21 +608,23 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 \newcounter{layercounterx}
 \newcounter{pixelvalue}
 \newcounter{totalpostmp}
+\newcounter{debugctr}
 \def\workingstr{\fileline}
 \typeout{Pre-Loop}
 \loop
   % -----------------------------------------------------------
   % debug for part two
-  \setcounter{tmpbctr}{-1}
-	\loop
-	\stepcounter{tmpbctr}
-	\edef\tmpinput{\the\numexpr \value{tmpbctr} - 0}
+  \setcounter{debugctr}{-1}
+	{\loop
+	\stepcounter{debugctr}
+	\edef\tmpinput{\the\numexpr \value{debugctr} - 0}
 	\def\tmpchar{\expandafter\lucidcharat\tmpinput}
-	(\tmpinput )[\tmpchar],\typeout{\tmpinput and \tmpchar}
+	(\tmpinput )[\tmpchar],
+	\typeout{Debug: \tmpinput and \tmpchar}
 	\ifnum \value{tmpbctr}<3
-	\repeat
+	\repeat }
   % -----------------------------------------------------------
-
+\typeout{Debug Part Done}
   % actual part two
   \addtocounter{charcounter}{1}
   % for each pixel in the first layer, search all layers unti a pixel is opaque
