@@ -607,6 +607,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 \newcounter{charcounter}\setcounter{charcounter}{0}
 \newcounter{layercounterx}
 \newcounter{pixelvalue}
+\newcounter{totalpostmp}
 \def\workingstr{\fileline}
 \typeout{Pre-Loop}
 \loop
@@ -618,11 +619,15 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 	{\loop
 	  \addtocounter{layercounterx}{1}
 		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounterx} * \layersize )}
+		\setcounter{totalpostmp}{\totalpos}
 		\typeout{Inner Loop (layerouncterx = \thelayercounterx) at totalpos \the\totalpos}
 		%\StrMid{\workingstr}{\totalpos}{\inteval{\totalpos + 0}}[\currentchar]
-\edef\tmpinput{\the\numexpr \the\totalpos - 1}
+\edef\tmpinput{\the\numexpr \value{totalpostmp} - 1}
+\typeout{tmpinput is the index \tmpinput ~with meaning \meaning\tmpinput}
 \def\tmpchar{\expandafter\lucidcharat\tmpinput}
+\typeout{tmpchar is the character with meaning \meaning\tmpchar}
 \edef\currentchar{\tmpchar}
+\typeout{currentchar has meaning \meaning\currentchar}
 \typeout{currchar is \the\numexpr \currentchar + 0 \relax}
 		\setcounter{pixelvalue}{\inteval{\currentchar}}
 		\typeout{Considering Layer \thelayercounterx for pixel \thecharcounter with value \thepixelvalue. Total layers is \numlayers}
