@@ -88,7 +88,7 @@
 \newif\ifrunpartone
 \runpartonefalse
 \newif\ifrunparttwo
-\runparttwotrue
+\runparttwofalse
 \newif\ifrunshellex
 \runshellextrue
 
@@ -600,20 +600,11 @@ Each image layer consists of numbers that represent pixel information. One digit
 \end{align*}
 You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \textit{first} nontransparent value.
 \end{quote}\end{myquote}
-\ifrunparttwo
-
-\typeout{"Starting the Lord's work!"}
-\def\numlayers{\the\numexpr \inputstringlength / \layersize \relax}
-\newcounter{charcounter}\setcounter{charcounter}{0}
-\newcounter{layercounterx}
-\newcounter{pixelvalue}
-\newcounter{totalpostmp}
-\newcounter{debugctr}
-\newcounter{anotherdebugctr}
-\def\workingstr{\fileline}
 
   % -----------------------------------------------------------
-  % debug for part two
+  debug for part two
+  \newcounter{debugctr}
+  \newcounter{anotherdebugctr}
   \setcounter{anotherdebugctr}{0}
   \loop
   \stepcounter{anotherdebugctr}
@@ -623,12 +614,23 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 	\edef\tmpinput{\the\numexpr \value{debugctr} - 0}
 	\def\tmpchar{\expandafter\lucidcharat\tmpinput}
 	(\tmpinput )[\tmpchar],
-	\typeout{tmpchar is \tmpchar}
+	%\typeout{tmpchar is \tmpchar}
 	\ifnum \value{debugctr}<3
 	\repeat }
   \ifnum \value{anotherdebugctr}<3
   \repeat
   % -----------------------------------------------------------
+
+
+\ifrunparttwo
+
+\typeout{"Starting the Lord's work!"}
+\def\numlayers{\the\numexpr \inputstringlength / \layersize \relax}
+\newcounter{charcounter}\setcounter{charcounter}{0}
+\newcounter{layercounterx}
+\newcounter{pixelvalue}
+\newcounter{totalpostmp}
+\def\workingstr{\fileline}
 
 \typeout{Pre-Loop}
 \loop
