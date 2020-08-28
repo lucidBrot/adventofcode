@@ -58,7 +58,7 @@
 %% Important!!
 %% Use ! before "O{}" with xparse 2018-05-12 
 %% See: https://tex.stackexchange.com/q/434928/1952
-\NewTCBListing{mycode}{ !O{} }{%
+\NewTCBListing{mycode}{ O{} }{%
     enhanced, breakable, 
     size=fbox,
     frame hidden, boxrule=0pt,
@@ -88,7 +88,7 @@
 \newif\ifrunpartone
 \runpartonefalse
 \newif\ifrunparttwo
-\runparttwotrue
+\runparttwofalse
 \newif\ifrunshellex
 \runshellextrue
 
@@ -245,7 +245,7 @@ But no, that also results in a problem with writing to a file... So let me try s
 \end{mycode}
 \typeout{trying python}
 \input{|"python -c "print(1+2);""}
-\newline
+~\newline
 And as you should be able to see, it works!
 It does output some \code{SyntaxError} in the Console output, but it seems like I can ignore that?!
 
@@ -254,7 +254,7 @@ So for computing stringlength, a quick python call should speed things up.
 \ input{|"python -c "print(len('mystringofunkownlength'));""}
 \end{mycode}
 \input{|"python -c "print(len('mystringofunkownlength'));""}
-\newline
+~\newline
 It is notable that spaces within that string get lost before they are passed to python. Thankfully we don't need this here. But this reminds my of \href{https://ctftime.org/writeup/21982}{PyAuCalc}.
 The loss of spacing also explains why some commands don't work. E.g. importing a python module without spaces is not trivial.
 
