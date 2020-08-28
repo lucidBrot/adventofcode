@@ -609,18 +609,24 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 \newcounter{pixelvalue}
 \newcounter{totalpostmp}
 \newcounter{debugctr}
+\newcounter{anotherdebugctr}
 \def\workingstr{\fileline}
 
   % -----------------------------------------------------------
   % debug for part two
+  \setcounter{anotherdebugctr}{0}
+  \loop
+  \stepcounter{anotherdebugctr}
   \setcounter{debugctr}{-1}
-	\loop
+	{\loop
 	\stepcounter{debugctr}
 	\edef\tmpinput{\the\numexpr \value{debugctr} - 0}
 	\def\tmpchar{\expandafter\lucidcharat\tmpinput}
 	(\tmpinput )[\tmpchar],
 	\ifnum \value{debugctr}<3
-	\repeat
+	\repeat }
+  \ifnum \value{anotherdebugctr}<3
+  \repeat
   % -----------------------------------------------------------
 
 \typeout{Pre-Loop}
