@@ -707,9 +707,12 @@ and a \code{git clone} later and I was almost set up.
 
 Seems like my latex distribution or environment on Ubuntu behaves differently though. First of all, I had to remove an exclamation mark from the definition of my \code{mycode} environment for some reason. I hope it's still valid on Windows with MikTeX.
 And I also had to set up the shell-escape again. It seems like I only have the option of always using it or never, as opposed to the dropdown list with custom options I have on windows. Also, I haven't figured out yet if I'm running the correct tools. On Windows, I'm doing a PdfLaTeX + MakeIndex + BibTex. That does not really exist on my Ubuntu, so I'm just doing PdfLaTeX only. I'll have to learn more about this.
+But it actually seems like just using PdfLaTeX is enough for generating those citation entries.
 
 Also, the error messages are more, and they are more pedantic/verbose. That could be helpful for debugging, but also annoying.
-Searching for the first of those error messages in google led me to a valuable explanation about \href{http://www.texfaq.org/FAQ-extrabrace}{extra closing braces}.
+Searching for the first of those error messages in google led me to a valuable explanation about \href{http://www.texfaq.org/FAQ-extrabrace}{extra closing braces}.\citelist{\cite{endbrace}}
+
+Maybe I should consider all the warnings I'm getting without even running part two first? Maybe also not. They are all just either about design (overfull hbox, fonts) or warn about things that are like I want them to be. E.g. the abbreviation for one of the authors is undefined - but that's totally fine because this is not an abbreviation. It's the authors full name!
 
 \begin{quote}
 Argument of \textbackslash @newctr has an extra \}.$<$inserted text$>$\textbackslash par \textbackslash repeat
@@ -827,6 +830,12 @@ accessdate={28.08.2020}
 title={Defining new commands inside a for loop},
 author={Carlisle, David},
 url={https://tex.stackexchange.com/a/57037/102826},
+accessdate={28.08.2020}
+}
+\bib{endbrace}{webpage}{
+title={An extra \}?},
+author={Unknown},
+url={http://www.texfaq.org/FAQ-extrabrace},
 accessdate={28.08.2020}
 }
 \end{biblist}
