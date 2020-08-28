@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.10.2)  27 AUG 2020 21:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.10.2)  28 AUG 2020 02:05
 entering extended mode
 **N:/Files/projects/adventofcode/2019/8/day8.tex
 (N:/Files/projects/adventofcode/2019/8/day8.tex
@@ -953,37 +953,7 @@ Package: suffix 2006/07/15 1.5a Variant command support
 \c@CPT@numB=\count318
 \CPT@commandatend@toks=\toks39
 )
-("F:\Programme\Programme\MiKTeX 2.9\tex\latex\l3experimental\l3benchmark\l3benc
-hmark.sty"
-Package: l3benchmark 2020-08-07 L3 Experimental benchmarking
-
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
-! Critical benchmark error: "no-time"
-! 
-! The l3benchmark package failed to access a clock.
-! 
-! See the benchmark documentation for further information.
-! 
-! For immediate help type H <return>.
-!...............................................  
-                                                  
-l.80   }
-        
-? H
-|'''''''''''''''''''''''''''''''''''''''''''''''
-| Reading the current file 'l3benchmark' will stop.
-|...............................................
-? j
-Type <return> to proceed, S to scroll future error messages,
-R to run without stopping, Q to run quietly,
-I to insert something, E to edit your file,
-1 or ... or 9 to ignore the next 1 to 9 tokens of input,
-H for help, X to quit.
-? q
-OK, entering \batchmode...
-)
+(N:/Files/projects/adventofcode/2019/8\sneakycode.tex)
 ("F:\Programme\Programme\MiKTeX 2.9\tex\latex\fancyvrb\fancyvrb.sty"
 Package: fancyvrb 2020/05/03 v3.6 verbatim text (tvz,hv)
 \FV@CodeLineNo=\count319
@@ -996,27 +966,29 @@ Package: fancyvrb 2020/05/03 v3.6 verbatim text (tvz,hv)
 .................................................
 . LaTeX info: "xparse/define-environment"
 . 
-. Defining environment 'mycode' with sig. ' !O{} ' on line 69.
+. Defining environment 'mycode' with sig. ' !O{} ' on line 73.
 .................................................
- (N:/Files/projects/adventofcode/2019/8\input.tex)
+
+(N:/Files/projects/adventofcode/2019/8\input.tex)
 \tmpcnta=\count322
- (N:/Files/projects/adventofcode/2019/8\day8.aux)
+
+(N:/Files/projects/adventofcode/2019/8\day8.aux)
 \openout1 = `day8.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 151.
-LaTeX Font Info:    ... okay on input line 151.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 151.
-LaTeX Font Info:    ... okay on input line 151.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 151.
-LaTeX Font Info:    ... okay on input line 151.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 151.
-LaTeX Font Info:    ... okay on input line 151.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 151.
-LaTeX Font Info:    ... okay on input line 151.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 151.
-LaTeX Font Info:    ... okay on input line 151.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 151.
-LaTeX Font Info:    ... okay on input line 151.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
 
 ("F:\Programme\Programme\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1031,8 +1003,7 @@ LaTeX Font Info:    ... okay on input line 151.
 \MPnumerator=\count327
 \makeMPintoPDFobject=\count328
 \everyMPtoPDFconversion=\toks41
-)
-("F:\Programme\Programme\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
+) ("F:\Programme\Programme\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
 ("F:\Programme\Programme\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
@@ -1046,7 +1017,7 @@ G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
 \AtBeginShipoutBox=\box70
-Package hyperref Info: Link coloring OFF on input line 151.
+Package hyperref Info: Link coloring OFF on input line 155.
 
 ("F:\Programme\Programme\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1059,22 +1030,24 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count329
 )
-LaTeX Info: Redefining \ref on input line 151.
-LaTeX Info: Redefining \pageref on input line 151.
-LaTeX Info: Redefining \nameref on input line 151.
- (N:/Files/projects/adventofcode/2019/8\day8.out) (N:/Files/projects/adventofco
-de/2019/8\day8.out)
+LaTeX Info: Redefining \ref on input line 155.
+LaTeX Info: Redefining \pageref on input line 155.
+LaTeX Info: Redefining \nameref on input line 155.
+
+(N:/Files/projects/adventofcode/2019/8\day8.out)
+(N:/Files/projects/adventofcode/2019/8\day8.out)
 \@outlinefile=\write8
 \openout8 = `day8.out'.
 
 \c@lstlisting=\count330
- ABD: EveryShipout initializing macros
-LaTeX Font Info:    Try loading font information for U+msa on input line 155.
+
+ABD: EveryShipout initializing macros
+LaTeX Font Info:    Try loading font information for U+msa on input line 159.
 
 ("F:\Programme\Programme\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 155.
+LaTeX Font Info:    Try loading font information for U+msb on input line 159.
 
 ("F:\Programme\Programme\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1082,81 +1055,81 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                \kern 1.66702pt
-(hyperref)                removed on input line 163.
+(hyperref)                removed on input line 167.
 
 
 Package hyperref Warning: Composite letter `\textdotaccent+E'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textdotaccent' on input line 163.
+(hyperref)                removing `\textdotaccent' on input line 167.
 
 
 Package hyperref Warning: Composite letter `\textdotaccent+x'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textdotaccent' on input line 163.
+(hyperref)                removing `\textdotaccent' on input line 167.
 
 
 Package hyperref Warning: Composite letter `\textdotaccent+p'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textdotaccent' on input line 163.
+(hyperref)                removing `\textdotaccent' on input line 167.
 
 
 Package hyperref Warning: Composite letter `\textdotaccent+e'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textdotaccent' on input line 163.
+(hyperref)                removing `\textdotaccent' on input line 167.
 
 
 Package hyperref Warning: Composite letter `\textdotaccent+r'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textdotaccent' on input line 163.
+(hyperref)                removing `\textdotaccent' on input line 167.
 
 
 Package hyperref Warning: Composite letter `\textdotaccent+e'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textdotaccent' on input line 163.
+(hyperref)                removing `\textdotaccent' on input line 167.
 
 
 Package hyperref Warning: Composite letter `\textdotaccent+n'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textdotaccent' on input line 163.
+(hyperref)                removing `\textdotaccent' on input line 167.
 
 
 Package hyperref Warning: Composite letter `\textdotaccent+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textdotaccent' on input line 163.
+(hyperref)                removing `\textdotaccent' on input line 167.
 
 
 Package hyperref Warning: Composite letter `\textdotaccent+e'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textdotaccent' on input line 163.
+(hyperref)                removing `\textdotaccent' on input line 167.
 
-LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 166
+LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 170
 .
-LaTeX Font Info:    No file OMScmtt.fd. on input line 166.
+LaTeX Font Info:    No file OMScmtt.fd. on input line 170.
 
 LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbackslash' on input line 166.
+(Font)              for symbol `textbackslash' on input line 170.
 
- [1
+[1
 
 {C:/Users/Eric/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 171.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 175.
 
 
 ("F:\Programme\Programme\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 171.
-
-LaTeX Warning: Citation `Gonzalo' on page 2 undefined on input line 173.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 175.
 
 
-LaTeX Warning: Reference `code:1' on page 2 undefined on input line 178.
+LaTeX Warning: Citation `Gonzalo' on page 2 undefined on input line 177.
 
 
-LaTeX Warning: Reference `fig:diff' on page 2 undefined on input line 178.
+LaTeX Warning: Reference `code:1' on page 2 undefined on input line 182.
 
+
+LaTeX Warning: Reference `fig:diff' on page 2 undefined on input line 182.
 
 ("F:\Programme\Programme\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2018/09/02 1.7 listings language file
@@ -1191,129 +1164,47 @@ File: lstmisc.sty 2018/09/02 1.7 (Carsten Heinz)
 <diff.jpg, id=63, 953.81343pt x 404.26031pt>
 File: diff.jpg Graphic file (type jpg)
 <use diff.jpg>
-Package pdftex.def Info: diff.jpg  used on input line 193.
+Package pdftex.def Info: diff.jpg  used on input line 197.
 (pdftex.def)             Requested size: 552.0021pt x 233.9715pt.
- [2] [3 <N:/Files/projects/adventofcode/2019/8/diff.jpg>]
+ [2]
+[3 <N:/Files/projects/adventofcode/2019/8/diff.jpg>]
 
-LaTeX Warning: Citation `shellescape' on page 4 undefined on input line 202.
+LaTeX Warning: Citation `shellescape' on page 4 undefined on input line 206.
 
 
 LaTeX Warning: Reference `fig:typesettingsettings' on page 4 undefined on input
- line 202.
+ line 206.
 
 <typesettingsettings.png, id=80, 349.305pt x 234.8775pt>
 File: typesettingsettings.png Graphic file (type png)
 <use typesettingsettings.png>
-Package pdftex.def Info: typesettingsettings.png  used on input line 205.
+Package pdftex.def Info: typesettingsettings.png  used on input line 209.
 (pdftex.def)             Requested size: 349.30414pt x 234.87692pt.
 
-Overfull \hbox (4.30414pt too wide) in paragraph at lines 205--206
+Overfull \hbox (4.30414pt too wide) in paragraph at lines 209--210
 [][] 
  []
 
+()
+Overfull \hbox (2.94426pt too wide) in paragraph at lines 230--231
+\OT1/cmr/m/n/10 also, for some rea-son the fol-low-ing code does not even cre-a
+te a file \OT1/cmtt/m/n/10 outfile.blubb
+ []
+
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 232.
+
+("F:\Programme\Programme\MiKTeX 2.9\tex\latex\base\omlcmr.fd"
+File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 232.
  [4
 
  <N:/Files/projects/adventofcode/2019/8/typesettingsettings.png>]
-(N:/Files/projects/adventofcode/2019/8\debuginputfile.tex)
-\file=\read6
-===>"three"|3
-\imgwidth=\count331
-\imgheight=\count332
-\layersize=\count333
-Size of a layer is 6
-\bestlayer=\count334
-\bestlayerzerocount=\count335
-\currentlayerzerocount=\count336
-\currentlayer=\count337
-\digitctr=\count338
-\layerafterthelast=\count339
-"Reached the end of ifrunpartone"
-"debug Srk 1!"
- [5]
-! Undefined control sequence.
-l.577 \benchmark
-                _tic:
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.577 \benchmark_
-                 tic:
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-"Starting the Lord's work!"
-\c@charcounter=\count340
-\c@layercounterx=\count341
-\c@pixelvalue=\count342
-Considering Layer 0for pixel 1with value 2. Total layers is 3
-Considering Layer 1for pixel 1with value 2. Total layers is 3
-Considering Layer 2for pixel 1with value 1. Total layers is 3
-if layercounterx = numlayers - 1 
-undoing hack...
-Found 1in Layer 2for pixel 1
-Considering Layer 0for pixel 2with value 2. Total layers is 3
-Considering Layer 1for pixel 2with value 0. Total layers is 3
-undoing hack...
-Found 0in Layer 1for pixel 2
-Considering Layer 0for pixel 3with value 0. Total layers is 3
-undoing hack...
-Found 0in Layer 0for pixel 3
-Considering Layer 0for pixel 4with value 0. Total layers is 3
-undoing hack...
-Found 0in Layer 0for pixel 4
-Considering Layer 0for pixel 5with value 0. Total layers is 3
-undoing hack...
-Found 0in Layer 0for pixel 5
-Considering Layer 0for pixel 6with value 2. Total layers is 3
-Considering Layer 1for pixel 6with value 2. Total layers is 3
-Considering Layer 2for pixel 6with value 2. Total layers is 3
-if layercounterx = numlayers - 1 
-Setting pixelvalue to minus one
-undoing hack...
-Found 2in Layer 2for pixel 6
-! Undefined control sequence.
-l.616 \benchmark
-                _toc:
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.622 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-LaTeX Warning: Reference `fig:magic' on page 6 undefined on input line 624.
-
-
-LaTeX Warning: Citation `collectvar' on page 6 undefined on input line 624.
-
-
-LaTeX Warning: Citation `immediatez' on page 6 undefined on input line 624.
-
-\openout6 = `day8-1.cpt'.
-
- (day8-1.cpt)
-
-LaTeX Warning: Reference `fig:segletes' on page 6 undefined on input line 626.
-
-\tf@xyz=\write9
-\openout9 = `day8.xyz'.
+LaTeX Warning: Citation `pythonescape' on page 5 undefined on input line 236.
 
 \openout4 = `day8.listing'.
-
 
 ("F:\Programme\Programme\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2018/09/02 1.7 listings language file
@@ -1333,120 +1224,82 @@ File: se-utf8.def 2016/05/16 v1.11 stringenc: UTF-8
 ("F:\Programme\Programme\MiKTeX 2.9\tex\generic\oberdiek\se-iso-8859-1.def"
 File: se-iso-8859-1.def 2016/05/16 v1.11 stringenc: ISO-8859-1
 )
+trying python
+()
+\openout4 = `day8.listing'.
 
-Package tcolorbox Warning: The upper box part has become overfull on input line
- 665.
-
-
-Package tcolorbox Warning: The upper box part has become overfull on input line
- 665.
-
-
-Package tcolorbox Warning: The upper box part has become overfull on input line
- 665.
+ ("F:\Programme\Programme\MiKTeX 2.9\tex\latex\base\latin1.def"
+File: latin1.def 2018/04/06 v1.3b Input encoding file
+) ()
+\openout4 = `day8.listing'.
 
 
-Package tcolorbox Warning: The upper box part has become overfull on input line
- 665.
+("F:\Programme\Programme\MiKTeX 2.9\tex\latex\base\latin1.def"
+File: latin1.def 2018/04/06 v1.3b Input encoding file
+) ()
+
+LaTeX Warning: Citation `stackexpand' on page 5 undefined on input line 271.
+
+[5]
+\c@tmpbctr=\count331
 
 
-Package tcolorbox Warning: The upper box part has become overfull on input line
- 665.
+LaTeX Warning: Citation `tugboat' on page 6 undefined on input line 294.
 
 
-Package tcolorbox Warning: The upper box part has become overfull on input line
- 665.
+LaTeX Warning: Citation `macronamesloop' on page 6 undefined on input line 295.
 
 
-Package tcolorbox Warning: The upper box part has become overfull on input line
- 665.
+
+LaTeX Warning: Citation `loopmathcal' on page 6 undefined on input line 295.
 
 
-Package tcolorbox Warning: The upper box part has become overfull on input line
- 665.
-
-
-Package tcolorbox Warning: The upper box part has become overfull on input line
- 665.
-
-
-Package tcolorbox Warning: The upper box part has become overfull on input line
- 665.
-
-
-Package tcolorbox Warning: The upper box part has become overfull on input line
- 665.
-
- [6]
-
-LaTeX Warning: Citation `robertson' on page 7 undefined on input line 681.
-
- [7]
-Underfull \hbox (badness 2790) in paragraph at lines 724--724
-[]\OT1/cmr/m/n/8 Uwe Ziegen-hagen, \OT1/cmr/m/it/8 Com-bin-ing L[]T[]Xwith Pyth
-on \OT1/cmr/m/n/8 (09.08.2019), []$\OT1/cmtt/m/n/8 https : / / tug . org /
+Overfull \hbox (76.72092pt too wide) in paragraph at lines 294--296
+[]\OT1/cmr/m/n/10 While work-ing on this, I have found an un-der-stand-able ex-
+pla-na-tion for [][][][][][].[[]\OT1/cmtt/m/n/10 ?tugboat[]\OT1/cmr/m/n/10 ]
  []
 
+[6] (N:/Files/projects/adventofcode/2019/8\debuginputfile.tex)
+\file=\read6
 
-Package amsrefs Warning: Abbreviation 'cfr' undefined on input line 742.
+===>"three"|3
+\imgwidth=\count332
+\imgheight=\count333
+\layersize=\count334
+Size of a layer is 6
+\bestlayer=\count335
+\bestlayerzerocount=\count336
+\currentlayerzerocount=\count337
+\currentlayer=\count338
+\digitctr=\count339
+\layerafterthelast=\count340
+"Reached the end of ifrunpartone"
+"debug Srk 1!"
+[7]
+"Starting the Lord's work!"
+\c@charcounter=\count341
+\c@layercounterx=\count342
+\c@pixelvalue=\count343
+! Argument of \xs_StrMid has an extra }.
+<inserted text> 
+                \par 
+l.645 \repeat
+             
+? 
+! Emergency stop.
+<inserted text> 
+                \par 
+l.645 \repeat
+             
+End of file on the terminal!
 
-LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 754.
- [8]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 765.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 765.
- (day8.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 765.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 765.
-
-Package rerunfilecheck Warning: File `day8.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `day8.out':
-(rerunfilecheck)             Before: D41D8CD98F00B204E9800998ECF8427E;0
-(rerunfilecheck)             After:  C19927424F29CBD4FBC54BC4BBACB142;525.
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 765.
- ) 
+ 
 Here is how much of TeX's memory you used:
- 35027 strings out of 492970
- 683459 string characters out of 3133212
- 1063583 words of memory out of 3000000
- 38276 multiletter control sequences out of 15000+200000
- 542859 words of font info for 66 fonts, out of 3000000 for 9000
+ 35002 strings out of 492970
+ 682962 string characters out of 3133212
+ 1315241 words of memory out of 3000000
+ 38266 multiletter control sequences out of 15000+200000
+ 542181 words of font info for 63 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 63i,11n,101p,1032b,2444s stack positions out of 5000i,500n,10000p,200000b,50000s
-<F:/Programme/Programme/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
-<F:/Programme/Programme/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><F
-:/Programme/Programme/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmitt10.pfb><F:
-/Programme/Programme/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><F:/P
-rogramme/Programme/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><F:/Prog
-ramme/Programme/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><F:/Program
-me/Programme/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><F:/Programme/
-Programme/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><F:/Programme/Pro
-gramme/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><F:/Programme/Program
-me/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><F:/Programme/Programme/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><F:/Programme/Programme/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><F:/Programme/Programme/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><F:/Programme/Programme/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmti7.pfb><F:/Programme/Programme/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmti8.pfb><F:/Programme/Programme/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmtt10.pfb><F:/Programme/Programme/MiKTeX 2.9/fonts
-/type1/public/amsfonts/cm/cmtt8.pfb><F:/Programme/Programme/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmtt9.pfb><F:/Programme/Programme/MiKTeX 2.9/fonts/type1
-/public/amsfonts/symbols/msam10.pfb>
-Output written on day8.pdf (8 pages, 333041 bytes).
-PDF statistics:
- 257 PDF objects out of 1000 (max. 8388607)
- 65 named destinations out of 1000 (max. 500000)
- 167 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 63i,11n,101p,1032b,2368s stack positions out of 5000i,500n,10000p,200000b,50000s
+!  ==> Fatal error occurred, no output PDF file produced!

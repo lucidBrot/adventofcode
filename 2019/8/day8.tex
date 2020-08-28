@@ -88,7 +88,7 @@
 \newif\ifrunpartone
 \runpartonefalse
 \newif\ifrunparttwo
-\runparttwofalse
+\runparttwotrue
 \newif\ifrunshellex
 \runshellextrue
 
@@ -288,6 +288,7 @@ Hardcoded string char access: blubb \lucidcharat{\the\numexpr \totalpos - 0} blu
 (\tmpinput )[\tmpchar],
 \ifnum \value{tmpbctr}<3
 \repeat
+\newline
 The output should have been: \lucidcharat{0}, \lucidcharat{1}, \lucidcharat{2},\lucidcharat{3}
 
 While working on this, I have found an understandable explanation for \code{\textbackslash expandafter}.\citelist{\cite{tugboat}}
@@ -638,7 +639,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 		\setcounter{pixelvalue}{2}
 	\fi
 	\typeout{Found \thepixelvalue in Layer \thelayercounterx for pixel \thecharcounter}
-	\immediate\myappendxstring{\thepixelvalue}
+	%\immediate\myappendxstring{\thepixelvalue}
 \thepixelvalue
   \ifnum \value{charcounter} < \inteval{ \layersize}
 \repeat
