@@ -1,14 +1,7 @@
 \documentclass{article} \usepackage[utf8]{inputenc}
 \usepackage{xstring}
 
-\newcommand{\lucidcharat}[1]{
-\edef\tmpp{#1}
-\IfEq{\tmpp}{0}{1}{}%
-\IfEq{\tmpp}{1}{2}{}%
-\IfEq{\tmpp}{2}{2}{}%
-}
-
-\DeclareRobustCommand{\jim}{\lucidcharat}
+\input{sneakycode}
 
 \begin{document}
   debug for part two
@@ -17,7 +10,7 @@
     {\loop
     \stepcounter{debugctr}
     \edef\tmpinput{\the\numexpr \value{debugctr} - 0}
-    \def\tmpchar{\expandafter\jim\tmpinput}
+    \def\tmpchar{\expandafter\lucidcharat\tmpinput}
     (\tmpinput)[\tmpchar],
     %\edef\tmpcharr{\tmpchar}
     \show\tmpchar
