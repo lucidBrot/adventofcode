@@ -1,7 +1,9 @@
 \documentclass{article} \usepackage[utf8]{inputenc}
 \usepackage{xstring}
 
-\input{sneakycode}
+\newcommand{\lucidcharat}[1]{%
+\ifcase\numexpr#1\relax
+1\or2\or2\else\fi}
 
 \begin{document}
   debug for part two
@@ -14,7 +16,7 @@
     (\tmpinput)[\tmpchar],
     %\edef\tmpcharr{\tmpchar}
     \show\tmpchar
-    %\typeout{tmpchar is \tmpchar}
+    \typeout{tmpchar is \tmpchar}
     \ifnum \value{debugctr}<3
     \repeat }
 \end{document}
