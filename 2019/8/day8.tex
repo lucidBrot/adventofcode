@@ -604,23 +604,17 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
   % -----------------------------------------------------------
   debug for part two
   \newcounter{debugctr}
-  \newcounter{anotherdebugctr}
-  \setcounter{anotherdebugctr}{0}
-  \loop
-  \stepcounter{anotherdebugctr}
   \setcounter{debugctr}{-1}
 	{\loop
 	\stepcounter{debugctr}
 	\edef\tmpinput{\the\numexpr \value{debugctr} - 0}
 	\def\tmpchar{\expandafter\lucidcharat\tmpinput}
-	(\tmpinput )[\tmpchar],
+	(\tmpinput)[\tmpchar],
 	%\edef\tmpcharr{\tmpchar}
 	\show\tmpchar
-	%\typeout{tmpchar is \tmpcharr}
+	%\typeout{tmpchar is \tmpchar}
 	\ifnum \value{debugctr}<3
 	\repeat }
-  \ifnum \value{anotherdebugctr}<3
-  \repeat
   % -----------------------------------------------------------
 
 
