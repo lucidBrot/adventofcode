@@ -631,7 +631,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
   % for each pixel in the first layer, search all layers unti a pixel is opaque
            \setcounter{pixelvalue}{2}
 	\setcounter{layercounterx}{-1}
-	\typeou\edeft{Outer Loop at charcounter \thecharcounter}
+	\typeout\edef{Outer Loop at charcounter \thecharcounter}
 	{\loop
 	  \addtocounter{layercounterx}{1}
 		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounterx} * \layersize )}
@@ -797,6 +797,59 @@ The same thing attempted again, after having gotten some help by D. Carlisle.\ci
   % -----------------------------------------------------------
   
   We already have in \autoref{fig:hardcodinglucidcharat} the accessor macro for the input string that even works in a loop. Now let's go!
+  
+\typeout{"Starting the Lord's work!"}
+\def\numlayers{\the\numexpr \inputstringlength / \layersize \relax}
+\newcounter{charcounter}\setcounter{charcounter}{0}
+\newcounter{layercounterx}
+\newcounter{pixelvalue}
+\newcounter{totalpostmp}
+\def\workingstr{\fileline}
+
+\typeout{Pre-Loop}
+\loop
+  % actual part two
+  \addtocounter{charcounter}{1}
+  % for each pixel in the first layer, search all layers unti a pixel is opaque
+    \setcounter{pixelvalue}{2}
+	\setcounter{layercounterx}{-1}
+	\typeout{Outer Loop at charcounter \thecharcounter}
+%	{\loop
+%	  \addtocounter{layercounterx}{1}
+%		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounterx} * \layersize )}
+%		\setcounter{totalpostmp}{\totalpos}
+%		\typeout{Inner Loop (layerouncterx = \thelayercounterx) at totalpos \the\totalpos}
+%		%\StrMid{\workingstr}{\totalpos}{\inteval{\totalpos + 0}}[\currentchar]
+%\edef\tmpinput{\the\numexpr \value{totalpostmp} - 1}
+%\typeout{tmpinput is the index \tmpinput ~with meaning \meaning\tmpinput}
+%\def\tmpchar{\expandafter\lucidcharat\tmpinput}
+%\typeout{tmpchar is the character with meaning \meaning\tmpchar}
+%\edef\currentchar{\tmpchar}
+%\typeout{currentchar has meaning \meaning\currentchar}
+%\typeout{currchar is \the\numexpr \currentchar + 0 \relax}
+%		\setcounter{pixelvalue}{\inteval{\currentchar}}
+%		\typeout{Considering Layer \thelayercounterx for pixel \thecharcounter with value \thepixelvalue. Total layers is \numlayers}
+%		% if we reached the max layer and it's still 2, we keep the 2. But to abort the loop, we claim it's the magic number "minus one"
+%		\ifnum \inteval{\value{layercounterx}}=\inteval{\numlayers -1}
+%			\typeout{if layercounterx = numlayers - 1 }
+%			\ifnum \value{pixelvalue}=2
+%				\typeout{Setting pixelvalue to minus one}
+%				\setcounter{pixelvalue}{\inteval{0-1}}
+%			\fi
+%		\fi
+%	  \ifnum \value{pixelvalue} > \inteval{1}
+%	\repeat }
+%	% undo the hack from the inner loop:
+%	\typeout{undoing hack...}
+%	\ifnum \value{pixelvalue}=\inteval{\numexpr 0 - 1}
+%		\setcounter{pixelvalue}{2}
+%	\fi
+%	\typeout{Found \thepixelvalue in Layer \thelayercounterx for pixel \thecharcounter}
+%	\immediate\myappendxstring{\thepixelvalue}
+%\thepixelvalue
+  \ifnum \value{charcounter} < \inteval{ \layersize}
+\repeat
+  
 
 \else
 \textbf{Not running part two (second try) as per flags.}
