@@ -798,6 +798,24 @@ The same thing attempted again, after having gotten some help by D. Carlisle.\ci
   
   We already have in \autoref{fig:hardcodinglucidcharat} the accessor macro for the input string that even works in a loop. Now let's go!
   
+  Somehow... I managed to write a command that can be typeout without compiler error if and only if the result is written to the pdf first.
+  
+  \begin{figure}[htbp]
+  \begin{mycode}
+  Pre-Loop
+Outer Loop at charcounter 1
+Inner Loop (layerouncterx = 0) at totalpos 1
+tmpchar is the character with meaning macro:->\expandafter \lucidcharat \tmpinp
+ut
+tmpchar has value  \edef 0{0} \relax 1
+\end{mycode}
+\caption{Log File}
+\label{fig:blu}
+\end{figure}
+
+The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucidcharat} is not doing what it's supposed to be anyway. It contains the line \code{\textbackslash edef\textbackslash tmpp{\#1}} which should not evaluate \code{\textbackslash tmpp} to \code{0}.
+
+  
 \typeout{"Starting the Lord's work!"}
 \def\numlayers{\the\numexpr \inputstringlength / \layersize \relax}
 \newcounter{charcounter}\setcounter{charcounter}{0}
