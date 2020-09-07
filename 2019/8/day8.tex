@@ -900,9 +900,10 @@ Linking to it does not work unless the file is also a pdf, it seems.
 \section{Fun Facts}
 Read \citelist{\cite{ifnumdanger}} for a good warning about using percentage signs at the end of \code{ifnum} statements. The most intriguing part is displayed in \autoref{fig:dangernoodle}.
 
+\pagebreak
 \begin{figure}[hp]
-\begin{myquote}\begin{quote}
-\begin{mycode}
+\begin{myquote}
+\begin{lstlisting}[columns=fullflexible, backgroundcolor = \color{codebggray}]
 \ifnum1=0%
   \ifnum2=2
     1%
@@ -913,9 +914,10 @@ Read \citelist{\cite{ifnumdanger}} for a good warning about using percentage sig
 \else
   b%
 \fi
-\end{mycode}
+\end{lstlisting}
 produces a, instead of b, as someone that took a quick glance at the \textbackslash ifnum1=0 would guess. If, however, you remove the very first \%, the output is b.
-\end{quote}\end{myquote}
+\end{myquote}
+\caption{dangernoodle}
 \label{fig:dangernoodle}
 \end{figure}
 
