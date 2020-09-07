@@ -758,9 +758,11 @@ Maybe I should consider all the warnings I'm getting without even running part t
 \section{Night Eight Part Two}
 The same thing attempted again, after having gotten some help by D. Carlisle.\citelist{\cite{fragilecommand}}.
 
+\ifrunparttwotrytwo
 
   % -----------------------------------------------------------
-  debug for part two
+  \begin{figure}[hbp]
+  debug for part two:
   \newcounter{debugctr}
   \setcounter{debugctr}{-1}
 	{\loop
@@ -773,9 +775,28 @@ The same thing attempted again, after having gotten some help by D. Carlisle.\ci
 	\typeout{tmpchar is \tmpchar}
 	\ifnum \value{debugctr}<3
 	\repeat }
+	
+	\begin{mycode}
+	
+	\newcounter{debugctr}
+    \setcounter{debugctr}{-1}
+	{\loop
+		\stepcounter{debugctr}
+		\edef\tmpinput{\the\numexpr \value{debugctr} - 0}
+		\def\tmpchar{\expandafter\lucidcharat\tmpinput}
+		(\tmpinput)[\tmpchar],
+		%\edef\tmpcharr{\tmpchar}
+		\show\tmpchar
+		\typeout{tmpchar is \tmpchar}
+		\ifnum \value{debugctr}<3
+		\repeat }
+	\end{mycode}
+  \caption{Fetching characters in the input string by index.}
+  \label{fig:hardcodinglucidcharat}
+  \end{figure}
   % -----------------------------------------------------------
-
-\ifrunparttwotrytwo
+  
+  We already have in \autoref{fig:hardcodinglucidcharat} the accessor macro for the input string that even works in a loop. Now let's go!
 
 \else
 \textbf{Not running part two (second try) as per flags.}
