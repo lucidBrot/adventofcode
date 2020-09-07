@@ -726,7 +726,18 @@ Magic: \thefinalstring
 \label{fig:magic}
 \end{figure}
 
-After playing around with creating my own command for accessing my input string quickly by index, I've come upon the problem that while it worked perfectly for printing the results to the PDF, it caused syntax errors when I tried to reuse the results. E.g. in another \code{\textbackslash edef} or \code{\textbackslash typeout}. I ended up asking about this on stackexchange and was explained that because \code{\textbackslash edef} evaluates its contents, if its argument contains another \code{\textbackslash edef} then it will evaluate to itself and the argument of the inner edef will be an undefined command.\citelist{\cite{fragilecommand}}
+After playing around with creating my own command for accessing my input string quickly by index, I've come upon the problem that while it worked perfectly for printing the results to the PDF, it caused syntax errors when I tried to reuse the results. E.g. in another \code{\textbackslash edef} or \code{\textbackslash typeout}. I ended up asking about this on stackexchange and was explained that because \code{\textbackslash edef} evaluates its contents, if its argument contains another \code{\textbackslash edef} then it will evaluate to itself and the argument of the inner edef will be an undefined command. \citelist{\cite{fragilecommand}}
+
+\begin{figure}[htbp]
+\begin{myquote}
+\begin{quote}
+"If such claims sound too good to be true, keep in
+mind that they were made by TEX’s designer, on a day when TEX happened to
+be working, so the statements may be biased; but read on anyway."
+\end{quote}
+\end{myquote}
+\caption{Donald Knuth displaying the mentality that TeX may sometimes choose not to work.\citelist{\cite{texbook}}}
+\end{figure}
 
 \section{Linux}
 I've thought I'd continue working on this file in the train, on my laptop. Which uses Ubuntu instead of Windows. A quick
@@ -875,6 +886,14 @@ author={Carlisle, David},
 author={LucidBrot},
 url={https://tex.stackexchange.com/a/561561/102826},
 accessdate={06.09.2020}
+}
+\bib{texbook}{book}{
+title={The TeXbook},
+author={Knuth, Donald E.},
+note={http://visualmatheditor.equatheque.net/doc/texbook.pdf},
+accessdate={07.09.2020},
+year={1984},
+pages={6}
 }
 \end{biblist}
 \end{bibdiv}
