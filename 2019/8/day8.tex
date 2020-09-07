@@ -841,7 +841,7 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 \def\tmpchar{\expandafter\lucidcharat\tmpinput}
 (\tmpinput)[\tmpchar],
 \typeout{tmpchar is the character with meaning \meaning\tmpchar}
-\typeout{tmpchar has value \tmpchar}
+\typeout{tmpchar for index \tmpinput ~has value \tmpchar}
 \edef\currentchar{\tmpchar}
 \typeout{currentchar has meaning \meaning\currentchar}
 \typeout{currchar is \the\numexpr \currentchar + 0 \relax}
@@ -856,7 +856,7 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 			\fi
 		\fi
 		TODO: replace 13 with 1 to run more than one loop iteration
-	  \ifnum \value{pixelvalue} > \inteval{1}
+	  \ifnum \value{pixelvalue} > \inteval{13}
 	\repeat }
 	% undo the hack from the inner loop:
 	\typeout{undoing hack...}
@@ -896,6 +896,28 @@ The value of \code{\textbackslash pdfelapsedtime} is the number of seconds elaps
 \section{Source}
 The source code is clingy: It attached itself to this file. Open it in Adobe Reader and view it under Attachments.\\
 Linking to it does not work unless the file is also a pdf, it seems.
+
+\section{Fun Facts}
+Read \citelist{\cite{ifnumdanger}} for a good warning about using percentage signs at the end of \code{ifnum} statements. The most intriguing part is displayed in \autoref{fig:dangernoodle}.
+
+\begin{figure}[hp]
+\begin{myquote}\begin{quote}
+\begin{mycode}
+\ifnum1=0%
+  \ifnum2=2
+    1%
+  \else
+    2%
+  \fi
+  a%
+\else
+  b%
+\fi
+\end{mycode}
+produces a, instead of b, as someone that took a quick glance at the \textbackslash ifnum1=0 would guess. If, however, you remove the very first \%, the output is b.
+\end{quote}\end{myquote}
+\label{fig:dangernoodle}
+\end{figure}
 
 \begin{bibdiv}
 \begin{biblist}
@@ -1008,6 +1030,13 @@ note={http://visualmatheditor.equatheque.net/doc/texbook.pdf},
 accessdate={07.09.2020},
 year={1984},
 pages={6}
+}
+\bib{ifnumdanger}{webpage}{
+title={How to compare number from \textbackslash newenvironment argument},
+author={Oleynik, Phelype},
+author={Brasil},
+url={https://tex.stackexchange.com/a/460014/102826},
+accessdate={07.09.2020},
 }
 \end{biblist}
 \end{bibdiv}
