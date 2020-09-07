@@ -91,6 +91,8 @@
 \runparttwofalse
 \newif\ifrunshellex
 \runshellextrue
+\newif\ifrunparttwotrytwo
+\runparttwotrytwotrue
 
 \title{Advent of Code\\
 {\large Day Eight}}
@@ -611,23 +613,6 @@ Each image layer consists of numbers that represent pixel information. One digit
 You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \textit{first} nontransparent value.
 \end{quote}\end{myquote}
 
-  % -----------------------------------------------------------
-  debug for part two
-  \newcounter{debugctr}
-  \setcounter{debugctr}{-1}
-	{\loop
-	\stepcounter{debugctr}
-	\edef\tmpinput{\the\numexpr \value{debugctr} - 0}
-	\def\tmpchar{\expandafter\lucidcharat\tmpinput}
-	(\tmpinput)[\tmpchar],
-	%\edef\tmpcharr{\tmpchar}
-	\show\tmpchar
-	\typeout{tmpchar is \tmpchar}
-	\ifnum \value{debugctr}<3
-	\repeat }
-  % -----------------------------------------------------------
-
-
 \ifrunparttwo
 
 \typeout{"Starting the Lord's work!"}
@@ -646,7 +631,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
   % for each pixel in the first layer, search all layers unti a pixel is opaque
            \setcounter{pixelvalue}{2}
 	\setcounter{layercounterx}{-1}
-	\typeout{Outer Loop at charcounter \thecharcounter}
+	\typeou\edeft{Outer Loop at charcounter \thecharcounter}
 	{\loop
 	  \addtocounter{layercounterx}{1}
 		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounterx} * \layersize )}
@@ -685,7 +670,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 
 \else % elseif not runparttwo
 
-\textbf{Not running part two as per flags.}
+\textbf{Not running part two (first try) as per flags} because compilation errors remain. See a later section for my second try.
 
 \fi
 
@@ -769,6 +754,32 @@ Argument of \textbackslash @newctr has an extra \}.$<$inserted text$>$\textbacks
 \end{quote}
 
 Maybe I should consider all the warnings I'm getting without even running part two first? Maybe also not. They are all just either about design (overfull hbox, fonts) or warn about things that are like I want them to be. E.g. the abbreviation for one of the authors is undefined - but that's totally fine because this is not an abbreviation. It's the authors full name!
+
+\section{Night Eight Part Two}
+The same thing attempted again, after having gotten some help by D. Carlisle.\citelist{\cite{fragilecommand}}.
+
+
+  % -----------------------------------------------------------
+  debug for part two
+  \newcounter{debugctr}
+  \setcounter{debugctr}{-1}
+	{\loop
+	\stepcounter{debugctr}
+	\edef\tmpinput{\the\numexpr \value{debugctr} - 0}
+	\def\tmpchar{\expandafter\lucidcharat\tmpinput}
+	(\tmpinput)[\tmpchar],
+	%\edef\tmpcharr{\tmpchar}
+	\show\tmpchar
+	\typeout{tmpchar is \tmpchar}
+	\ifnum \value{debugctr}<3
+	\repeat }
+  % -----------------------------------------------------------
+
+\ifrunparttwotrytwo
+
+\else
+\textbf{Not running part two (second try) as per flags.}
+\fi
 
 \section{Todo}
 Once this is done, I should inform the person who said I should inform them once this is done, to be found at \href{https://twitter.com/LucidBrot/status/1290792953548615682}{Twitter}.
