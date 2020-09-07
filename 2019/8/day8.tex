@@ -90,7 +90,7 @@
 \newif\ifrunparttwo
 \runparttwofalse
 \newif\ifrunshellex
-\runshellextrue
+\runshellexfalse
 \newif\ifrunparttwotrytwo
 \runparttwotrytwotrue
 
@@ -814,15 +814,14 @@ The same thing attempted again, after having gotten some help by D. Carlisle.\ci
     \setcounter{pixelvalue}{2}
 	\setcounter{layercounterx}{-1}
 	\typeout{Outer Loop at charcounter \thecharcounter}
-%	{\loop
-%	  \addtocounter{layercounterx}{1}
-%		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounterx} * \layersize )}
-%		\setcounter{totalpostmp}{\totalpos}
-%		\typeout{Inner Loop (layerouncterx = \thelayercounterx) at totalpos \the\totalpos}
-%		%\StrMid{\workingstr}{\totalpos}{\inteval{\totalpos + 0}}[\currentchar]
-%\edef\tmpinput{\the\numexpr \value{totalpostmp} - 1}
-%\typeout{tmpinput is the index \tmpinput ~with meaning \meaning\tmpinput}
-%\def\tmpchar{\expandafter\lucidcharat\tmpinput}
+	{\loop
+	  \addtocounter{layercounterx}{1}
+		\def\totalpos{\numexpr \value{charcounter} + ( \value{layercounterx} * \layersize )}
+		\setcounter{totalpostmp}{\totalpos}
+		\typeout{Inner Loop (layerouncterx = \thelayercounterx) at totalpos \the\totalpos}
+\edef\tmpinput{\the\numexpr \value{totalpostmp} - 1}
+\typeout{tmpinput is the index \tmpinput ~with meaning \meaning\tmpinput}
+\def\tmpchar{\expandafter\lucidcharat\tmpinput}
 %\typeout{tmpchar is the character with meaning \meaning\tmpchar}
 %\edef\currentchar{\tmpchar}
 %\typeout{currentchar has meaning \meaning\currentchar}
@@ -837,8 +836,9 @@ The same thing attempted again, after having gotten some help by D. Carlisle.\ci
 %				\setcounter{pixelvalue}{\inteval{0-1}}
 %			\fi
 %		\fi
-%	  \ifnum \value{pixelvalue} > \inteval{1}
-%	\repeat }
+TODO: replace 13 with 1
+	  \ifnum \value{pixelvalue} > \inteval{13}
+	\repeat }
 %	% undo the hack from the inner loop:
 %	\typeout{undoing hack...}
 %	\ifnum \value{pixelvalue}=\inteval{\numexpr 0 - 1}
