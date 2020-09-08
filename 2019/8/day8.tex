@@ -927,6 +927,7 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 \fi
 \typeout{Found \thepixelvalue in Layer \thelayercounterx for pixel \thecharcounter}%
 \immediate\myappendxstring{\thepixelvalue}%
+\immediate\myappendxstring{,}%
 % print pixel value
 \thepixelvalue%
 \stepcounter{fpfctr}%
@@ -974,7 +975,15 @@ Now that we have the binary representation of the image, we still need to interp
 \begin{table}[h]
 \centering
 \pgfplotstabletypeset[color cells, zero color=black, one color=red]\matrixfile
-\caption{The image interpreted with zeros black.}
+\caption{The image interpreted with zeros black. Hardcoded after the output from part 2.}
+\end{table}
+
+% read the file
+\pgfplotstableread{matrix.cvs}{\matrixfile}
+\begin{table}[h]
+\centering
+%\pgfplotstabletypeset[color cells, zero color=black, one color=lime, col sep=comma]\thefinalstring
+\caption{The image interpreted with zeros black. Read from the Magic string of the previous section.}
 \end{table}
 
 \section{Todo}
@@ -985,8 +994,6 @@ Re-enable \code{\textbackslash runshellex}.
 cite sansero
 
 I want to attach the source code to this file.
-
-Fix segletes figure quote.
 
 I also want ot measure how long this takes. See \href{https://tex.stackexchange.com/questions/505770/how-to-measure-the-compilation-time-of-a-document?rq=1}{here for example}.
 \section{Performance}
