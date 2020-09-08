@@ -677,7 +677,7 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 % perform some magic https://tex.stackexchange.com/questions/402173/append-strings-to-a-variable-and-display-them-at-the-front-of-the-document
 Let me just perform some magic - Consider \autoref{fig:magic}. There's only one problem with that: It assumes that  the input strings are constant. Since I input the value of a counter, mine are not, and the magical string that ends up being collected is just a repetition of the last value it had. Adding \texttt{\textbackslash immediate} and \texttt{\textbackslash edef} was not helpful.\citelist{\cite{collectvar} \cite{immediatez}}
 
-Now of course, I don't actually need that collection - I can place my computation wherever I like. It would still have been cool though - partly because I have weird spacing when I output my computation character by character, and partly because this is a nice trick to have in my spellbook at the ready. Luckily, the author of that trick replied to my inquiry by adding an \code{\textbackslash edef} and some \cprotect\code{\verb|\expandafter|} (\autoref{fig:segletes}).
+\label{sec:magicexplain}Now of course, I don't actually need that collection - I can place my computation wherever I like. It would still have been cool though - partly because I have weird spacing when I output my computation character by character, and partly because this is a nice trick to have in my spellbook at the ready. Luckily, the author of that trick replied to my inquiry by adding an \code{\textbackslash edef} and some \cprotect\code{\verb|\expandafter|} (\autoref{fig:segletes}).
 
 \begin{figure}[hp]
 \begin{myquote}
@@ -870,6 +870,8 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 \thepixelvalue
   \ifnum \value{charcounter} < \inteval{ \layersize}
 \repeat
+  
+For an explanation of the following magic, see \autoref{fig:segletes} in \autoref{sec:magicexplain}. It concatenates a string in a loop.
   
 % display the computed variable here
 \makeatletter
