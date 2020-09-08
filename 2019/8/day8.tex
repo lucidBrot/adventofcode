@@ -837,9 +837,9 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 \typeout{Pre-Loop}
 \begin{center}
 \textbf{The Image}
-%(See \autoref{fig:imgcomp}.)
+(See \autoref{fig:imgcomp}.)
 \end{center}
-%\begin{figure}
+\begin{figure}\begin{center}
 \loop%
 % actual part two
 \addtocounter{charcounter}{1}%
@@ -904,9 +904,9 @@ Aborting due to unexpected value.
 \fi%
 \ifnum \value{charcounter} < \inteval{ \layersize}%
 \repeat
-%\caption{The whole image computation happened within this figure. Here it is, formatted as an image.}
-%\label{fig:imgcomp}
-%\end{figure}
+\caption{The whole image computation happened within this figure. Here it is, formatted as an image.}
+\label{fig:imgcomp}
+\end{center}\end{figure}
   
 For an explanation of the following magic, see \autoref{fig:segletes} in \autoref{sec:magicexplain}. It concatenates a string in a loop.
 
