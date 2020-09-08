@@ -900,10 +900,14 @@ Linking to it does not work unless the file is also a pdf, it seems.
 \section{Fun Facts}
 Read \citelist{\cite{ifnumdanger}} for a good warning about using percentage signs at the end of \code{ifnum} statements. The most intriguing part is displayed in \autoref{fig:dangernoodle}.
 
+Another interesting thing about \autoref{fig:dangernoodle} is that it displays very badly unless preceeded by a \code{\textbackslash pagebreak}, \code{\textbackslash newline}, or \code{\textbackslash clearpage}. I'm curious to see if the addition of this paragraph outlining that changes this fact (due to page break positioning).
+Indeed it turns out that the figure is now displayed correctly without need for a manual page break. Maybe this is because it is now placed "here" instead of on a new page? Nope! Placing it on its own page is okay, this time. I think I won't ever figure this out.
+
 %\pagebreak
 %\newpage
-\begin{figure}[htbp]
+\begin{figure}[hbtp]
 \begin{myquote}
+\begin{quote}
 \begin{lstlisting}[columns=fullflexible, backgroundcolor = \color{codebggray}]
 \ifnum1=0%
   \ifnum2=2
@@ -917,6 +921,7 @@ Read \citelist{\cite{ifnumdanger}} for a good warning about using percentage sig
 \fi
 \end{lstlisting}
 produces a, instead of b, as someone that took a quick glance at the \textbackslash ifnum1=0 would guess. If, however, you remove the very first \%, the output is b.
+\end{quote}
 \end{myquote}
 \caption{dangernoodle}
 \label{fig:dangernoodle}
