@@ -715,7 +715,9 @@ Then, \begin{lstlisting}[columns=fullflexible, backgroundcolor = \color{codebggr
 \@starttoc{xyz}% executes stuff in .xyz file
 \makeatother
 \thefinalstring
-% the following line must be performed at the end of the computation - e.g. at the end of the document.
+% the following line must be performed at 
+% the end of the computation - e.g. at the
+% end of the document.
 \addtocontents{xyz}{\gdef\protect\thefinalstring{\mystring}}
 \end{mycode}
 \caption{Magic to collect a variable, then print it at the start of the document. \citelist{\cite{collectvar}}}
@@ -843,7 +845,7 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 		\setcounter{totalpostmp}{\totalpos}
 		\typeout{Inner Loop (layerouncterx = \thelayercounterx) at totalpos \the\totalpos}
 \edef\tmpinput{\the\numexpr \value{totalpostmp} - 1}
-\def\tmpchar{\lucidcharat\tmpinput}
+\def\tmpchar{\lucidcharat{\tmpinput}}
 (\tmpinput)[\tmpchar],
 \typeout{tmpchar is the character with meaning \meaning\tmpchar}
 \typeout{tmpchar for index \tmpinput{} has value \tmpchar}
@@ -900,6 +902,8 @@ If the magic looks wrong, you might need to run the computation twice. Or just l
 Magic: \thefinalstring
 % the following line must be performed at the end of the computation - e.g. at the end of the document.
 \addtocontents{xyz}{\gdef\protect\thefinalstring{\mystring}}
+
+Reminder that the image has $\the\imgwidth \times \the\imgheight$ pixels.
 
 \else
 \textbf{Not running part two (second try) as per flags.}
