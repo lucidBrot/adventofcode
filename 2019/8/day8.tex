@@ -1,6 +1,7 @@
 \documentclass{article} \usepackage[utf8]{inputenc}
 \pdfresettimer
 \usepackage{xstring}
+\usepackage[table]{xcolor}
 \usepackage{calc, xintexpr}
 \usepackage{xfp}
 \usepackage{pdftexcmds}
@@ -14,6 +15,46 @@
 \usepackage{lipsum}
 \usepackage{amsmath}
 \usepackage{cprotect}
+
+% binary matrix to image
+% https://tex.stackexchange.com/questions/123719/drawing-a-large-binary-matrix-as-colored-grid-in-tikz
+\usepackage{filecontents}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.8}
+
+\begin{filecontents}{matrix.cvs}
+1 0 1 1 0 1 0 1 0 1 0
+1 0 0 1 0 1 0 1 0 1 0
+0 1 0 1 0 1 1 1 0 1 0
+1 1 1 1 0 0 1 0 1 0 0
+0 1 1 0 0 0 1 1 0 0 1
+1 1 1 0 1 0 1 0 1 1 1
+1 0 1 0 1 0 1 0 1 1 1
+\end{filecontents}
+
+\makeatletter
+\pgfplotstableset{
+    zero color/.initial=white,
+    zero color/.get=\zerocol,
+    zero color/.store in=\zerocol,
+    one color/.initial=red,
+    one color/.get=\onecol,
+    one color/.store in=\onecol,
+    color cells/.style={
+        every head row/.style={output empty row},
+        string type,
+        postproc cell content/.code={%
+           \pgfkeysalso{@cell content=\rule{0cm}{2.4ex}\cellcolor{\zerocol}
+           \pgfmathtruncatemacro\number{##1}
+           \ifnum\number>0\cellcolor{\onecol}\fi}%
+        },
+        columns/x/.style={
+            column name={},
+            postproc cell content/.code={}
+        }
+    }
+}
+\makeatother
 
 \setlength{\parskip}{\baselineskip}%
 \setlength{\parindent}{0pt}%
@@ -835,11 +876,10 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 \setcounter{fpfctr}{0}
 
 \typeout{Pre-Loop}
+\begin{figure}[hp]
 \begin{center}
 \textbf{The Image}
-(See \autoref{fig:imgcomp}.)
-\end{center}
-\begin{figure}\begin{center}
+
 \loop%
 % actual part two
 \addtocounter{charcounter}{1}%
@@ -904,9 +944,10 @@ Aborting due to unexpected value.
 \fi%
 \ifnum \value{charcounter} < \inteval{ \layersize}%
 \repeat
+\end{center}
 \caption{The whole image computation happened within this figure. Here it is, formatted as an image.}
 \label{fig:imgcomp}
-\end{center}\end{figure}
+\end{figure}
   
 For an explanation of the following magic, see \autoref{fig:segletes} in \autoref{sec:magicexplain}. It concatenates a string in a loop.
 
@@ -925,6 +966,16 @@ Reminder that the image has $\the\imgwidth \times \the\imgheight$ pixels.
 \else
 \textbf{Not running part two (second try) as per flags.}
 \fi
+
+\section{Interpretation}
+Now that we have the binary representation of the image, we still need to interpret it.\citelist{\cite{tikzmat}}
+
+% read the file
+\pgfplotstableread{matrix.cvs}{\matrixfile}
+\begin{table}
+\centering
+\pgfplotstabletypeset[color cells, zero color=green, one color=cyan]\matrixfile
+\end{table}
 
 \section{Todo}
 Once this is done, I should inform the person who said I should inform them once this is done, to be found at \href{https://twitter.com/LucidBrot/status/1290792953548615682}{Twitter}.
@@ -1103,6 +1154,13 @@ title={Comparison between \textbackslash newpage, \textbackslash clearpage and \
 author={wonderich},
 author={egreg},
 url={https://tex.stackexchange.com/a/497776/102826},
+accessdate={08.09.2020},
+}
+\bib{tikzmat}{webpage}{
+title={Drawing a large binary matrix as colored grid in TikZ},
+author={Fiandrino, Claudio},
+author={Lauridsen, Martin},
+url={https://tex.stackexchange.com/a/123728/102826},
 accessdate={08.09.2020},
 }
 \end{biblist}
