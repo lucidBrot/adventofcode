@@ -971,9 +971,10 @@ Now that we have the binary representation of the image, we still need to interp
 
 % read the file
 \pgfplotstableread{matrix.cvs}{\matrixfile}
-\begin{table}[H]
+\begin{table}[h]
 \centering
 \pgfplotstabletypeset[color cells, zero color=black, one color=red]\matrixfile
+\caption{The image interpreted with zeros black.}
 \end{table}
 
 \section{Todo}
