@@ -216,6 +216,8 @@ However, we're doing this in \LaTeX , which is typeset in spongebob-case for a r
 \caption{-- Donald E. Knuth \citelist{\cite{texbook}}}
 \end{figure}
 
+If you would like to see another, less verbose, solution that is done in \LaTeX, SanseroGames has published a cleaner approach using arrays.\citelist{\cite{sansero}}
+
 \section{The \LaTeX\,\.E\.x\.p\.e\.r\.i\.e\.n\.c\.e}
 First of all, we're doing something that it was not meant to be used for -- so that means we never get the search results we want. Searching about arrays in \LaTeX for example gives you an explanation about how to typeset matrices. Very useful, but not what I wanted. Thankfully, the \href{http://pgfplots.sourceforge.net/TeX-programming-notes.pdf}{pgfplots sourceforge page} contains a pdf with \textit{Notes On Programming in \TeX}.
 
@@ -980,12 +982,14 @@ Now that we have the binary representation of the image, we still need to interp
 \caption{The image interpreted with zeros black. Hardcoded given the output from part 2.}
 \end{table}
 
+It would be nice to plot the colon and semicolon-separated string in the same way. But the \textit{pgfplots} package does not feature anything other than newlines as row separators. And those proved to be a real pain to get inside my magic string.
+
 % read the file
 \pgfplotstableread{matrix.cvs}{\matrixfile}
 \begin{table}[h]
 \centering
 %\pgfplotstabletypeset[color cells, zero color=black, one color=lime, col sep=colon]\thefinalstring
-\textit{Not yet loaded, due to debugging}
+\textit{Not possible with pgfplots.}
 \caption{The image interpreted with zeros black. Read from the Magic string of the previous section.}
 \end{table}
 
@@ -993,8 +997,6 @@ Now that we have the binary representation of the image, we still need to interp
 Once this is done, I should inform the person who said I should inform them once this is done, to be found at \href{https://twitter.com/LucidBrot/status/1290792953548615682}{Twitter}.
 
 Re-enable \code{\textbackslash runshellex}.
-
-cite sansero
 
 Retry if it still works on windows.
 
@@ -1173,6 +1175,12 @@ title={Drawing a large binary matrix as colored grid in TikZ},
 author={Fiandrino, Claudio},
 author={Lauridsen, Martin},
 url={https://tex.stackexchange.com/a/123728/102826},
+accessdate={08.09.2020},
+}
+\bib{sansero}{webpage}{
+title={Advent of Code - Day 8},
+author={SanseroGames}
+url={https://github.com/SanseroGames/adventofcode/tree/master/2019/8},
 accessdate={08.09.2020},
 }
 \end{biblist}
