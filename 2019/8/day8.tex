@@ -697,15 +697,16 @@ Then, \begin{lstlisting}[columns=fullflexible, backgroundcolor = \color{codebggr
 \label{fig:segletes}
 \end{figure}
 
-% display the computed variable here
-\makeatletter
-\@starttoc{xyz}% executes stuff in .xyz file
-\makeatother
-Magic: \thefinalstring
-% the following line must be performed at the end of the computation - e.g. at the end of the document.
-\addtocontents{xyz}{\gdef\protect\thefinalstring{\mystring}}
+%% display the computed variable here
+%\makeatletter
+%\@starttoc{xyz}% executes stuff in .xyz file
+%\makeatother
+%Magic: \thefinalstring
+%% the following line must be performed at the end of the computation - e.g. at the end of the document.
+%\addtocontents{xyz}{\gdef\protect\thefinalstring{\mystring}}
 
 \begin{figure}[htbp]
+\begin{samepage}
 \begin{mycode}
 % Throughout the document, collect the variable using
 \myappendstring{hello}
@@ -719,6 +720,7 @@ Magic: \thefinalstring
 \end{mycode}
 \caption{Magic to collect a variable, then print it at the start of the document. \citelist{\cite{collectvar}}}
 \label{fig:magic}
+\end{samepage}
 \end{figure}
 
 After playing around with creating my own command for accessing my input string quickly by index, I've come upon the problem that while it worked perfectly for printing the results to the PDF, it caused syntax errors when I tried to reuse the results. E.g. in another \code{\textbackslash edef} or \code{\textbackslash typeout}. I ended up asking about this on stackexchange and was explained that because \code{\textbackslash edef} evaluates its contents, if its argument contains another \code{\textbackslash edef} then it will evaluate to itself and the argument of the inner edef will be an undefined command. \citelist{\cite{fragilecommand}}
@@ -869,6 +871,13 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
   \ifnum \value{charcounter} < \inteval{ \layersize}
 \repeat
   
+% display the computed variable here
+\makeatletter
+\@starttoc{xyz}% executes stuff in .xyz file
+\makeatother
+Magic: \thefinalstring
+% the following line must be performed at the end of the computation - e.g. at the end of the document.
+\addtocontents{xyz}{\gdef\protect\thefinalstring{\mystring}}
 
 \else
 \textbf{Not running part two (second try) as per flags.}
@@ -900,7 +909,7 @@ Linking to it does not work unless the file is also a pdf, it seems.
 \section{Fun Facts}
 Read \citelist{\cite{ifnumdanger}} for a good warning about using percentage signs at the end of \code{ifnum} statements. The most intriguing part is displayed in \autoref{fig:dangernoodle}.
 
-Another interesting thing about \autoref{fig:dangernoodle} is that it displays very badly unless preceeded by a \code{\textbackslash pagebreak}, \code{\textbackslash newline}, or \code{\textbackslash clearpage}. I'm curious to see if the addition of this paragraph outlining that changes this fact (due to page break positioning).
+Another interesting thing about \autoref{fig:dangernoodle} is that it displays very badly unless preceeded by a \code{\textbackslash pagebreak}, \code{\textbackslash newline}, or \code{\textbackslash clearpage} \citelist{\cite{paging}}. I'm curious to see if the addition of this paragraph outlining that changes this fact (due to page break positioning).
 Indeed it turns out that the figure is now displayed correctly without need for a manual page break. Maybe this is because it is now placed "here" instead of on a new page? Nope! Placing it on its own page is okay, this time. I think I won't ever figure this out.
 
 %\pagebreak
@@ -923,7 +932,7 @@ Indeed it turns out that the figure is now displayed correctly without need for 
 produces a, instead of b, as someone that took a quick glance at the \textbackslash ifnum1=0 would guess. If, however, you remove the very first \%, the output is b.
 \end{quote}
 \end{myquote}
-\caption{dangernoodle}
+\caption{The dangers of comments.}
 \label{fig:dangernoodle}
 \end{figure}
 
@@ -1045,6 +1054,13 @@ author={Oleynik, Phelype},
 author={Brasil},
 url={https://tex.stackexchange.com/a/460014/102826},
 accessdate={07.09.2020},
+}
+\bib{paging}{webpage}{
+title={Comparison between \textbackslash newpage, \textbackslash clearpage and \textbackslash pagebreak, etc.?},
+author={wonderich},
+author={egreg},
+url={https://tex.stackexchange.com/a/497776/102826},
+accessdate={08.09.2020},
 }
 \end{biblist}
 \end{bibdiv}
