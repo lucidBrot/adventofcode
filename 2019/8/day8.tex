@@ -487,9 +487,10 @@ The input file contains \stahpnow characters.
 %ifrunpartone
 \ifrunpartone
 \section{ Execution: The Water Is Cold}
+\begin{samepage}
 \begin{myquote}\begin{quote}
 \texttt{\textbackslash global} is a TeX command that declares the following definition or assignment to be global, meaning that if TeX is currently inside a group, the definition or assignment will still remain valid when the group is over. Commands that can follow \texttt{\textbackslash global} include \texttt{\textbackslash def}, \texttt{\textbackslash edef}, \texttt{\textbackslash let}, \texttt{\textbackslash count}, \texttt{\textbackslash countdef}, [...]\citelist{\cite{wikibooksglobal}}\\
-\end{quote}\end{myquote}
+\end{quote}\end{myquote}\end{samepage}
 An alternative to using globals would be to use tikz loops with the \texttt{remember} option \citelist{\cite{tikzremember}}. Another option I see is using counters instead of counts - they are the latex version of the tex counter. For counters, you can apparently not use \texttt{\textbackslash the \textbackslash ctr}, you have to use\texttt{\textbackslash thectr} (See \autoref{c:simpleLoop}).
 \begin{figure}
 \begin{mycode}
@@ -887,7 +888,7 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 \setcounter{fpfctr}{0}
 
 \typeout{Pre-Loop}
-\begin{figure}[hp]
+\begin{figure}[h]
 \begin{center}
 \textbf{The Image}
 
@@ -1006,8 +1007,6 @@ It would be nice to plot the colon and semicolon-separated string in the same wa
 \section{Todo}
 Once this is done, I should inform the person who said I should inform them once this is done, to be found at \href{https://twitter.com/LucidBrot/status/1290792953548615682}{Twitter}.
 
-Re-enable \code{\textbackslash runshellex}.
-
 Retry if it still works on windows.
 
 I want to attach the source code to this file.
@@ -1053,7 +1052,7 @@ produces a, instead of b, as someone that took a quick glance at the \textbacksl
 \caption{The dangers of comments.}
 \label{fig:dangernoodle}
 \end{figure}
-
+\newpage
 \begin{bibdiv}
 \begin{biblist}
 %\bib{Bourbaki70}{book}{
