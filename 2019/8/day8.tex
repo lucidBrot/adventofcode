@@ -658,8 +658,8 @@ You're given multiple layers. For each pixel coordinate pair $(x, y)$ find the \
 	  \ifnum \value{pixelvalue} > \inteval{1}
 	\repeat }
 	% undo the hack from the inner loop:
-	\typeout{undoing hack...}
 	\ifnum \value{pixelvalue}=\inteval{\numexpr 0 - 1}
+		\typeout{undoing hack...}
 		\setcounter{pixelvalue}{2}
 	\fi
 	\typeout{Found \thepixelvalue in Layer \thelayercounterx for pixel \thecharcounter}
@@ -883,7 +883,8 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
   % abort if something went wrong
   \ifnum \value{pixelvalue}=-9
     \setcounter{charcounter}{\layersize}
-    \typeout{Aborting due to unexpected value}
+    \typeout{Aborting due to unexpected value.}
+    Aborting due to unexpected value.
   \fi
   \ifnum \value{charcounter} < \inteval{ \layersize}
 \repeat
