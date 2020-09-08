@@ -16,7 +16,7 @@ def main(lin):
     for i, c in enumerate(lin):
         command_a=r"\IfEq{\tmpp}{" + str(i) + "}{" + c + "}{}%"
         command_b=r"\ifnum\tmpp=" + str(i) + r"\relax" + c + r"\fi%"
-        command_c=r"\ifnum#1=" + str(i) + r" " + c + r"\fi%"
+        command_c=r"\ifnum#1=" + str(i) + r" " + c + r"\fi"
         latex.append(command_c)
     latex.extend(latex_end)
     return '\n'.join(latex)

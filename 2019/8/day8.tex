@@ -843,7 +843,7 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 		\setcounter{totalpostmp}{\totalpos}
 		\typeout{Inner Loop (layerouncterx = \thelayercounterx) at totalpos \the\totalpos}
 \edef\tmpinput{\the\numexpr \value{totalpostmp} - 1}
-\def\tmpchar{\expandafter\lucidcharat\tmpinput}
+\def\tmpchar{\lucidcharat\tmpinput}
 (\tmpinput)[\tmpchar],
 \typeout{tmpchar is the character with meaning \meaning\tmpchar}
 \typeout{tmpchar for index \tmpinput{} has value \tmpchar}
