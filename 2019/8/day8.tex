@@ -837,9 +837,9 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 \typeout{Pre-Loop}
 \begin{center}
 \textbf{The Image}
-(See \autoref{fig:imgcomp}.)
+%(See \autoref{fig:imgcomp}.)
 \end{center}
-\begin{figure}
+%\begin{figure}
 \loop
   % actual part two
   \addtocounter{charcounter}{1}
@@ -888,27 +888,27 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 		\setcounter{pixelvalue}{2}
 	\fi
 	\typeout{Found \thepixelvalue in Layer \thelayercounterx for pixel \thecharcounter}
-	\immediate\myappendxstring{\thepixelvalue}
+\immediate\myappendxstring{\thepixelvalue}
 % print pixel value
 \thepixelvalue%
 \stepcounter{fpfctr}
 % if the counter % imagewidth == 0 then newline
-\ifnum \value{fpfctr}=25
+\ifnum \value{fpfctr}=\inteval{25}
   \setcounter{fpfctr}{0}
-  \newline
-\fi
+  \\
+\fi%
 %
   % abort if something went wrong
   \ifnum \value{pixelvalue}=-9
     \setcounter{charcounter}{\layersize}
     \typeout{Aborting due to unexpected value.}
     Aborting due to unexpected value.
-  \fi
-  \ifnum \value{charcounter} < \inteval{ \layersize}
+  \fi%
+  \ifnum \value{charcounter} < \inteval{ \layersize}%
 \repeat
-\caption{The whole image computation happened within this figure. Here it is, formatted as an image.}
-\label{fig:imgcomp}
-\end{figure}
+%\caption{The whole image computation happened within this figure. Here it is, formatted as an image.}
+%\label{fig:imgcomp}
+%\end{figure}
   
 For an explanation of the following magic, see \autoref{fig:segletes} in \autoref{sec:magicexplain}. It concatenates a string in a loop.
 
