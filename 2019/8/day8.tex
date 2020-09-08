@@ -846,6 +846,7 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
   % for each pixel in the first layer, search all layers unti a pixel is opaque
     \setcounter{pixelvalue}{2}
 	\setcounter{layercounterx}{-1}
+	asdf
 	\typeout{Outer Loop at charcounter \thecharcounter}
 	{\loop
 	  \stepcounter{layercounterx}
@@ -870,10 +871,10 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 				\setcounter{pixelvalue}{\inteval{0-1}}
 			\fi
 		\fi
-		% break loop if value is unexpectedly more than one character
+% break loop if value is unexpectedly more than one character
 		\ifbreakonunexpected
 		  \ifnum \inteval{\tmpchar}>9
-		    % pixelvalue should never be negative. So when we set it to -9, it means something is off
+% pixelvalue should never be negative. So when we set it to -9, it means something is off
 		    \setcounter{pixelvalue}{-9}
 		    \typeout{breaking on unexpected value \tmpchar .}
 		  \else
@@ -882,7 +883,7 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 		\fi
 	  \ifnum \value{pixelvalue} > \inteval{1}
 	\repeat }
-	% undo the hack from the inner loop:
+% undo the hack from the inner loop:
 	\ifnum \value{pixelvalue}=\inteval{\numexpr 0 - 1}
 		\typeout{undoing hack...}
 		\setcounter{pixelvalue}{2}
@@ -890,7 +891,7 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 	\typeout{Found \thepixelvalue in Layer \thelayercounterx for pixel \thecharcounter}
 \immediate\myappendxstring{\thepixelvalue}
 % print pixel value
-\thepixelvalue%
+\thepixelvalue
 \stepcounter{fpfctr}
 % if the counter % imagewidth == 0 then newline
 \ifnum \value{fpfctr}=\inteval{25}
@@ -898,7 +899,7 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
   \\
 \fi%
 %
-  % abort if something went wrong
+% abort if something went wrong
   \ifnum \value{pixelvalue}=-9
     \setcounter{charcounter}{\layersize}
     \typeout{Aborting due to unexpected value.}
