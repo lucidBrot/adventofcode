@@ -23,13 +23,12 @@
 \pgfplotsset{compat=1.8}
 
 \begin{filecontents}{matrix.cvs}
-1 0 1 1 0 1 0 1 0 1 0
-1 0 0 1 0 1 0 1 0 1 0
-0 1 0 1 0 1 1 1 0 1 0
-1 1 1 1 0 0 1 0 1 0 0
-0 1 1 0 0 0 1 1 0 0 1
-1 1 1 0 1 0 1 0 1 1 1
-1 0 1 0 1 0 1 0 1 1 1
+1 0 0 1 0 0 1 1 0 0 0 1 1 0 0 1 1 1 1 0 0 1 1 0 0
+1 0 1 0 0 1 0 0 1 0 1 0 0 1 0 1 0 0 0 0 1 0 0 1 0
+1 1 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 1 0 0 1 0 0 0 0
+1 0 1 0 0 1 0 0 0 0 1 0 1 1 0 1 0 0 0 0 1 0 0 0 0
+1 0 1 0 0 1 0 0 1 0 1 0 0 1 0 1 0 0 0 0 1 0 0 1 0 
+1 0 0 1 0 0 1 1 0 0 0 1 1 1 0 1 1 1 1 0 0 1 1 0 0
 \end{filecontents}
 
 \makeatletter
@@ -974,7 +973,7 @@ Now that we have the binary representation of the image, we still need to interp
 \pgfplotstableread{matrix.cvs}{\matrixfile}
 \begin{table}
 \centering
-\pgfplotstabletypeset[color cells, zero color=green, one color=cyan]\matrixfile
+\pgfplotstabletypeset[color cells, zero color=black, one color=red]\matrixfile
 \end{table}
 
 \section{Todo}
