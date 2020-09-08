@@ -866,7 +866,9 @@ iii%
 \typeout{Considering Layer \thelayercounterx{} for pixel \thecharcounter{} with value \thepixelvalue{}. Total layers is \numlayers}%
 % if we reached the max layer and it's still 2, we keep the 2. But to abort the loop, we claim it's the magic number "minus one"
 \ifnum \inteval{\value{layercounterx}}=\inteval{\numlayers -1}
+qqq%
 \typeout{if layercounterx = numlayers - 1 (Value of pixelvalue is \thepixelvalue) }%
+lll%
 \ifnum \value{pixelvalue}=2
 \typeout{Setting pixelvalue to minus one}%
 \setcounter{pixelvalue}{\inteval{0-1}}%
@@ -893,7 +895,7 @@ ccc%
 \fi
 ddd%
 \typeout{Found \thepixelvalue in Layer \thelayercounterx for pixel \thecharcounter}%
-\immediate\myappendxstring{\thepixelvalue}
+\immediate\myappendxstring{\thepixelvalue}%
 % print pixel value
 \thepixelvalue%
 \stepcounter{fpfctr}%
