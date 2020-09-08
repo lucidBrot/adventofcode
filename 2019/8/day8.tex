@@ -856,7 +856,7 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 \def\tmpchar{\lucidcharat{\tmpinput}}%%%(\tmpinput)[\tmpchar],
 \typeout{tmpchar is the character with meaning \meaning\tmpchar}%
 \typeout{tmpchar for index \tmpinput{} has value \tmpchar}%
-\edef\currentchar{\tmpchar}aaa%
+\edef\currentchar{\tmpchar}%
 \typeout{currentchar has meaning \meaning\currentchar}%
 \typeout{currchar is \the\numexpr \currentchar + 0 \relax}%
 \setcounter{pixelvalue}{\inteval{\currentchar}}%
@@ -868,7 +868,6 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 \typeout{Setting pixelvalue to minus one}%
 \setcounter{pixelvalue}{\inteval{0-1}}%
 \fi%
-bbb%
 \fi%
 % break loop if value is unexpectedly more than one character
 \ifbreakonunexpected%
@@ -886,9 +885,7 @@ bbb%
 \ifnum \value{pixelvalue}=\inteval{\numexpr 0 - 1}
 \typeout{undoing hack...}
 \setcounter{pixelvalue}{2}
-ccc%
 \fi
-ddd%
 \typeout{Found \thepixelvalue in Layer \thelayercounterx for pixel \thecharcounter}%
 \immediate\myappendxstring{\thepixelvalue}%
 % print pixel value
@@ -896,7 +893,7 @@ ddd%
 \stepcounter{fpfctr}%
 % if the counter % imagewidth == 0 then newline
 \ifnum \value{fpfctr}=\inteval{25}
-\setcounter{fpfctr}{0}\\
+\setcounter{fpfctr}{0}\newline
 \fi%
 %
 % abort if something went wrong
