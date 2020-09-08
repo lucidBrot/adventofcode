@@ -846,7 +846,7 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 		\typeout{Inner Loop (layerouncterx = \thelayercounterx) at totalpos \the\totalpos}
 \edef\tmpinput{\the\numexpr \value{totalpostmp} - 1}
 \def\tmpchar{\lucidcharat{\tmpinput}}
-(\tmpinput)[\tmpchar],
+%%%(\tmpinput)[\tmpchar],
 \typeout{tmpchar is the character with meaning \meaning\tmpchar}
 \typeout{tmpchar for index \tmpinput{} has value \tmpchar}
 \edef\currentchar{\tmpchar}
@@ -881,7 +881,7 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 	\fi
 	\typeout{Found \thepixelvalue in Layer \thelayercounterx for pixel \thecharcounter}
 	\immediate\myappendxstring{\thepixelvalue}
-\thepixelvalue
+%%%\thepixelvalue
   % abort if something went wrong
   \ifnum \value{pixelvalue}=-9
     \setcounter{charcounter}{\layersize}
