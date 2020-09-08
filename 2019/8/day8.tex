@@ -926,14 +926,14 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 \setcounter{pixelvalue}{2}
 \fi
 \typeout{Found \thepixelvalue in Layer \thelayercounterx for pixel \thecharcounter}%
-\immediate\myappendxstring{\thepixelvalue}%
-\immediate\myappendxstring{,}%
+\immediate\myappendxstring{\thepixelvalue:}%
 % print pixel value
 \thepixelvalue%
 \stepcounter{fpfctr}%
 % if the counter % imagewidth == 0 then newline
 \ifnum \value{fpfctr}=\inteval{25}
-\setcounter{fpfctr}{0}\newline
+\setcounter{fpfctr}{0}\newline%
+\immediate\myappendxstring{;}%
 \fi%
 %
 % abort if something went wrong
@@ -982,7 +982,8 @@ Now that we have the binary representation of the image, we still need to interp
 \pgfplotstableread{matrix.cvs}{\matrixfile}
 \begin{table}[h]
 \centering
-%\pgfplotstabletypeset[color cells, zero color=black, one color=lime, col sep=comma]\thefinalstring
+%\pgfplotstabletypeset[color cells, zero color=black, one color=lime, col sep=colon, row sep=semicolon]\thefinalstring
+\textit{Not yet loaded, due to debugging}
 \caption{The image interpreted with zeros black. Read from the Magic string of the previous section.}
 \end{table}
 
