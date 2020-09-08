@@ -857,8 +857,8 @@ hhh%
 \edef\tmpinput{\the\numexpr \value{totalpostmp} - 1}%
 \def\tmpchar{\lucidcharat{\tmpinput}}%%%(\tmpinput)[\tmpchar],
 iii%
-\typeout{tmpchar is the character with meaning \meaning\tmpchar}
-\typeout{tmpchar for index \tmpinput{} has value \tmpchar}
+\typeout{tmpchar is the character with meaning \meaning\tmpchar}%
+\typeout{tmpchar for index \tmpinput{} has value \tmpchar}%
 \edef\currentchar{\tmpchar}aaa%
 \typeout{currentchar has meaning \meaning\currentchar}%
 \typeout{currchar is \the\numexpr \currentchar + 0 \relax}%
@@ -866,13 +866,13 @@ iii%
 \typeout{Considering Layer \thelayercounterx{} for pixel \thecharcounter{} with value \thepixelvalue{}. Total layers is \numlayers}%
 % if we reached the max layer and it's still 2, we keep the 2. But to abort the loop, we claim it's the magic number "minus one"
 \ifnum \inteval{\value{layercounterx}}=\inteval{\numlayers -1}
-\typeout{if layercounterx = numlayers - 1 (Value of pixelvalue is \thepixelvalue) }
+\typeout{if layercounterx = numlayers - 1 (Value of pixelvalue is \thepixelvalue) }%
 \ifnum \value{pixelvalue}=2
-\typeout{Setting pixelvalue to minus one}
-\setcounter{pixelvalue}{\inteval{0-1}}
-\fi
+\typeout{Setting pixelvalue to minus one}%
+\setcounter{pixelvalue}{\inteval{0-1}}%
+\fi%
 bbb%
-\fi
+\fi%
 % break loop if value is unexpectedly more than one character
 \ifbreakonunexpected
 \ifnum \inteval{\tmpchar}>9
