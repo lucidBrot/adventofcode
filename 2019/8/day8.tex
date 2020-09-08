@@ -846,15 +846,15 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 \def\tmpchar{\expandafter\lucidcharat\tmpinput}
 (\tmpinput)[\tmpchar],
 \typeout{tmpchar is the character with meaning \meaning\tmpchar}
-\typeout{tmpchar for index \tmpinput ~has value \tmpchar}
+\typeout{tmpchar for index \tmpinput{} has value \tmpchar}
 \edef\currentchar{\tmpchar}
 \typeout{currentchar has meaning \meaning\currentchar}
 \typeout{currchar is \the\numexpr \currentchar + 0 \relax}
 		\setcounter{pixelvalue}{\inteval{\currentchar}}
-		\typeout{Considering Layer \thelayercounterx for pixel \thecharcounter with value \thepixelvalue. Total layers is \numlayers}
+		\typeout{Considering Layer \thelayercounterx{} for pixel \thecharcounter{} with value \thepixelvalue{}. Total layers is \numlayers}
 		% if we reached the max layer and it's still 2, we keep the 2. But to abort the loop, we claim it's the magic number "minus one"
 		\ifnum \inteval{\value{layercounterx}}=\inteval{\numlayers -1}
-			\typeout{if layercounterx = numlayers - 1 }
+			\typeout{if layercounterx = numlayers - 1 (Value of pixelvalue is \thepixelvalue) }
 			\ifnum \value{pixelvalue}=2
 				\typeout{Setting pixelvalue to minus one}
 				\setcounter{pixelvalue}{\inteval{0-1}}
@@ -873,8 +873,8 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 	  \ifnum \value{pixelvalue} > \inteval{1}
 	\repeat }
 	% undo the hack from the inner loop:
-	\typeout{undoing hack...}
 	\ifnum \value{pixelvalue}=\inteval{\numexpr 0 - 1}
+		\typeout{undoing hack...}
 		\setcounter{pixelvalue}{2}
 	\fi
 	\typeout{Found \thepixelvalue in Layer \thelayercounterx for pixel \thecharcounter}
