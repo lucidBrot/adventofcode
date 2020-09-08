@@ -874,8 +874,8 @@ iii%
 bbb%
 \fi%
 % break loop if value is unexpectedly more than one character
-\ifbreakonunexpected
-\ifnum \inteval{\tmpchar}>9
+\ifbreakonunexpected%
+\ifnum\inteval{\tmpchar}>9
 % pixelvalue should never be negative. So when we set it to -9, it means something is off
 \setcounter{pixelvalue}{-9}%
 \typeout{breaking on unexpected value \tmpchar .}%
@@ -884,7 +884,7 @@ bbb%
 \fi%
 \fi%
 \ifnum \value{pixelvalue} > \inteval{1}
-\repeat }
+\repeat}%
 % undo the hack from the inner loop:
 \ifnum \value{pixelvalue}=\inteval{\numexpr 0 - 1}
 \typeout{undoing hack...}
@@ -892,11 +892,11 @@ bbb%
 ccc%
 \fi
 ddd%
-\typeout{Found \thepixelvalue in Layer \thelayercounterx for pixel \thecharcounter}
+\typeout{Found \thepixelvalue in Layer \thelayercounterx for pixel \thecharcounter}%
 \immediate\myappendxstring{\thepixelvalue}
 % print pixel value
-\thepixelvalue
-\stepcounter{fpfctr}
+\thepixelvalue%
+\stepcounter{fpfctr}%
 % if the counter % imagewidth == 0 then newline
 \ifnum \value{fpfctr}=\inteval{25}
 \setcounter{fpfctr}{0}\\
