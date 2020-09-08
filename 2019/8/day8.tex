@@ -125,12 +125,16 @@
 \debugfalse
 \newif\ifverbose
 \verbosefalse
+% should be true
 \newif\ifrunpartone
-\runpartonefalse
+\runpartonetrue
+% should be false
 \newif\ifrunparttwo
 \runparttwofalse
+% should be true if -shell-escape is enabled for pdflatex
 \newif\ifrunshellex
-\runshellexfalse
+\runshellextrue
+% should be true
 \newif\ifrunparttwotrytwo
 \runparttwotrytwotrue
 
@@ -216,7 +220,11 @@ However, we're doing this in \LaTeX , which is typeset in spongebob-case for a r
 \caption{-- Donald E. Knuth \citelist{\cite{texbook}}}
 \end{figure}
 
-If you would like to see another, less verbose, solution that is done in \LaTeX, SanseroGames has published a cleaner approach using arrays.\citelist{\cite{sansero}}
+If you would like to see another, less verbose, solution that is done in \LaTeX, SanseroGames has published a cleaner approach using arrays \citelist{\cite{sansero}}.
+
+\newpage
+\tableofcontents
+\newpage
 
 \section{The \LaTeX\,\.E\.x\.p\.e\.r\.i\.e\.n\.c\.e}
 First of all, we're doing something that it was not meant to be used for -- so that means we never get the search results we want. Searching about arrays in \LaTeX for example gives you an explanation about how to typeset matrices. Very useful, but not what I wanted. Thankfully, the \href{http://pgfplots.sourceforge.net/TeX-programming-notes.pdf}{pgfplots sourceforge page} contains a pdf with \textit{Notes On Programming in \TeX}.
@@ -721,7 +729,7 @@ Let me just perform some magic - Consider \autoref{fig:magic}. There's only one 
 
 \label{sec:magicexplain}Now of course, I don't actually need that collection - I can place my computation wherever I like. It would still have been cool though - partly because I have weird spacing when I output my computation character by character, and partly because this is a nice trick to have in my spellbook at the ready. Luckily, the author of that trick replied to my inquiry by adding an \code{\textbackslash edef} and some \cprotect\code{\verb|\expandafter|} (\autoref{fig:segletes}).
 
-\begin{figure}[hp]
+\begin{figure}
 \begin{myquote}
 \begin{quote}
 @lucidbrot
@@ -764,12 +772,12 @@ Then, \begin{lstlisting}[columns=fullflexible, backgroundcolor = \color{codebggr
 % end of the document.
 \addtocontents{xyz}{\gdef\protect\thefinalstring{\mystring}}
 \end{mycode}
-\caption{Magic to collect a variable, then print it at the start of the document. \citelist{\cite{collectvar}}}
+\caption{Magic to collect a variable, then print it at the start of the document~\citelist{\cite{collectvar}}}.
 \label{fig:magic}
 \end{samepage}
 \end{figure}
 
-After playing around with creating my own command for accessing my input string quickly by index, I've come upon the problem that while it worked perfectly for printing the results to the PDF, it caused syntax errors when I tried to reuse the results. E.g. in another \code{\textbackslash edef} or \code{\textbackslash typeout}. I ended up asking about this on stackexchange and was explained that because \code{\textbackslash edef} evaluates its contents, if its argument contains another \code{\textbackslash edef} then it will evaluate to itself and the argument of the inner edef will be an undefined command. \citelist{\cite{fragilecommand}}
+After playing around with creating my own command for accessing my input string quickly by index, I've come upon the problem that while it worked perfectly for printing the results to the PDF, it caused syntax errors when I tried to reuse the results. E.g. in another \code{\textbackslash edef} or \code{\textbackslash typeout}. I ended up asking about this on stackexchange and was explained that because \code{\textbackslash edef} evaluates its contents, if its argument contains another \code{\textbackslash edef} then it will evaluate to itself and the argument of the inner edef will be an undefined command.~\citelist{\cite{fragilecommand}}
 
 \begin{figure}[htbp]
 \begin{myquote}
@@ -779,7 +787,7 @@ mind that they were made by TEX’s designer, on a day when TEX happened to
 be working, so the statements may be biased; but read on anyway."
 \end{quote}
 \end{myquote}
-\caption{Donald Knuth displaying the mentality that TeX may sometimes choose not to work.\citelist{\cite{texbook}}}
+\caption{Donald Knuth displaying the mentality that TeX may sometimes choose not to work.~\citelist{\cite{texbook}}}
 \end{figure}
 
 \section{Linux}
@@ -795,7 +803,7 @@ And I also had to set up the shell-escape again. It seems like I only have the o
 But it actually seems like just using PdfLaTeX is enough for generating those citation entries.
 
 Also, the error messages are more, and they are more pedantic/verbose. That could be helpful for debugging, but also annoying.
-Searching for the first of those error messages in google led me to a valuable explanation about \href{http://www.texfaq.org/FAQ-extrabrace}{extra closing braces}.\citelist{\cite{endbrace}}
+Searching for the first of those error messages in google led me to a valuable explanation about \href{http://www.texfaq.org/FAQ-extrabrace}{extra closing braces}.~\citelist{\cite{endbrace}}
 
 \begin{quote}
 Argument of \textbackslash @newctr has an extra \}.$<$inserted text$>$\textbackslash par \textbackslash repeat
@@ -804,7 +812,7 @@ Argument of \textbackslash @newctr has an extra \}.$<$inserted text$>$\textbacks
 Maybe I should consider all the warnings I'm getting without even running part two first? Maybe also not. They are all just either about design (overfull hbox, fonts) or warn about things that are like I want them to be. E.g. the abbreviation for one of the authors is undefined - but that's totally fine because this is not an abbreviation. It's the authors full name!
 
 \section{Night Eight Part Two}
-The same thing attempted again, after having gotten some help by D. Carlisle.\citelist{\cite{fragilecommand}}.
+The same thing attempted again, after having gotten some help by D. Carlisle~\citelist{\cite{fragilecommand}}.
 
 \ifrunparttwotrytwo
 
@@ -1004,7 +1012,7 @@ Retry if it still works on windows.
 
 I want to attach the source code to this file.
 
-I also want ot measure how long this takes. See \href{https://tex.stackexchange.com/questions/505770/how-to-measure-the-compilation-time-of-a-document?rq=1}{here for example}.
+I want to measure how long this takes. See \href{https://tex.stackexchange.com/questions/505770/how-to-measure-the-compilation-time-of-a-document?rq=1}{here for example}.
 \section{Performance}
 I have tried to measure the time of my code using the \code{l3benchmark} package. But including this package failed because LaTeX thinks my PC has no clock.
 PDF Elapsed Time in seconds: \the\numexpr \pdfelapsedtime / 65536 \relax ~seconds
