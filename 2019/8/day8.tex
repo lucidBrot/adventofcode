@@ -933,8 +933,7 @@ The log (\autoref{fig:blu}) indicates that my command \code{\textbackslash lucid
 % if the counter % imagewidth == 0 then newline
 \ifnum \value{fpfctr}=\inteval{25}
 \setcounter{fpfctr}{0}\newline%
-\immediate\myappendxstring{
-}%
+\immediate\myappendxstring{;}%
 \else%
 \immediate\myappendxstring{:}%
 \fi%
@@ -985,8 +984,8 @@ Now that we have the binary representation of the image, we still need to interp
 \pgfplotstableread{matrix.cvs}{\matrixfile}
 \begin{table}[h]
 \centering
-\pgfplotstabletypeset[color cells, zero color=black, one color=lime, col sep=colon]\thefinalstring
-%\textit{Not yet loaded, due to debugging}
+%\pgfplotstabletypeset[color cells, zero color=black, one color=lime, col sep=colon]\thefinalstring
+\textit{Not yet loaded, due to debugging}
 \caption{The image interpreted with zeros black. Read from the Magic string of the previous section.}
 \end{table}
 
