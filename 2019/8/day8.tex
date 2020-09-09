@@ -15,6 +15,7 @@
 \usepackage{lipsum}
 \usepackage{amsmath}
 \usepackage{cprotect}
+\usepackage{adjustbox}
 
 % binary matrix to image
 % https://tex.stackexchange.com/questions/123719/drawing-a-large-binary-matrix-as-colored-grid-in-tikz
@@ -997,8 +998,9 @@ Now that we have the binary representation of the image, we still need to interp
 \pgfplotstableread{matrix.cvs}{\matrixfile}
 \begin{table}[h]
 \centering
-\noindent\makebox[0.5\textwidth][c]{%
-\pgfplotstabletypeset[color cells, zero color=black, one color=red]\matrixfile}
+\begin{adjustbox}{max width=\textwidth}
+\pgfplotstabletypeset[color cells, zero color=black, one color=red]\matrixfile
+\end{adjustbox}
 \caption{The image interpreted with zeros black. Hardcoded given the output from part 2.}
 \end{table}
 
@@ -1035,6 +1037,19 @@ Another interesting thing about \autoref{fig:dangernoodle} is that it displays v
 Indeed it turns out that the figure is now displayed correctly without need for a manual page break. Maybe this is because it is now placed "here" instead of on a new page? Nope! Placing it on its own page is okay, this time. I think I won't ever figure this out.
 
 Use \code{\textbackslash mbox} around letters that should not be split by line breaks~\citelist{\cite{mboxx}}. This is especially useful in the final stage, when proofreading the document's looks.
+
+A tabular can be resized using the \code{adjustbox} package like this\citelist{\cite{nunzio}}:
+\begin{mycode}
+% read the file
+\pgfplotstableread{matrix.cvs}{\matrixfile}
+\begin{table}[h]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\pgfplotstabletypeset[color cells, zero color=black, one color=red]\matrixfile
+\end{adjustbox}
+\caption{The image interpreted with zeros black. Hardcoded given the output from part 2.}
+\end{table}
+\end{mycode}
 
 %\pagebreak
 %\newpage
@@ -1226,6 +1241,12 @@ title={How can I make a pair of words stick together in line breaks?},
 author={Berg, Emanuel},
 author={Sveinung},
 url={https://tex.stackexchange.com/a/99691/102826},
+accessdate={09.09.2020},
+}
+\bib{nunzio}{webpage}{
+title={Resize a tabular object to textwidth},
+author={nunzio13n},
+url={https://tex.stackexchange.com/a/163250/102826},
 accessdate={09.09.2020},
 }
 \end{biblist}
