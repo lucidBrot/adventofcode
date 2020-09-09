@@ -356,7 +356,7 @@ Hardcoded string char access: blubb \lucidcharat{\the\numexpr \totalpos - 0} blu
 \newline
 The output should have been: \lucidcharat{0}, \lucidcharat{1}, \lucidcharat{2},\lucidcharat{3}
 
-While working on this, I have found an understandable {explanation for \code{\textbackslash expandafter}~\citelist{\cite{tugboat}}.}
+While working on this, I have found an understandable \mbox{explanation for \code{\textbackslash expandafter}~\citelist{\cite{tugboat}}.}
 But maybe that's not my problem. Maybe my problem is once again that I'm defining things in a loop.\citelist{\cite{macronamesloop} \cite{loopmathcal}} Maybe those approaches would be a good idea: Create distinct macros in each loop iteration instead of overwriting the same one each time (and failing at overwriting it).
 
 But nevermind! It turns out I did everything well, except that I started my test output at a different index than I thought... the last few hours were spent on a ghost bug.
@@ -997,7 +997,8 @@ Now that we have the binary representation of the image, we still need to interp
 \pgfplotstableread{matrix.cvs}{\matrixfile}
 \begin{table}[h]
 \centering
-\pgfplotstabletypeset[color cells, zero color=black, one color=red]\matrixfile
+\noindent\makebox[0.5\textwidth][c]{%
+\pgfplotstabletypeset[color cells, zero color=black, one color=red]\matrixfile}
 \caption{The image interpreted with zeros black. Hardcoded given the output from part 2.}
 \end{table}
 
@@ -1016,12 +1017,8 @@ It would be nice to plot the colon and semicolon-separated string in the same wa
 Once this is done, I should inform the person who said I should inform them once this is done, to be found at \href{https://twitter.com/LucidBrot/status/1290792953548615682}{Twitter}.
 
 Retry if it still works on windows.
-
-I want to attach the source code to this file.
-
-I want to measure how long this takes. See \href{https://tex.stackexchange.com/questions/505770/how-to-measure-the-compilation-time-of-a-document?rq=1}{here for example}.
 \section{Performance}
-I have tried to measure the time of my code using the \code{l3benchmark} package. But including this package failed because LaTeX thinks my PC has no clock.
+I have tried to measure the time of my code using the \code{l3benchmark} package~\citelist{\cite{perfl}}. But including this package failed because LaTeX thinks my PC has no clock.
 PDF Elapsed Time in seconds: \the\numexpr \pdfelapsedtime / 65536 \relax ~seconds
 \begin{myquote}\begin{quote}
 The value of \code{\textbackslash pdfelapsedtime} is the number of seconds elapsed multiplied by 65536. \citelist{\cite{robertson}}
@@ -1036,6 +1033,8 @@ Read \citelist{\cite{ifnumdanger}} for a good warning about using percentage sig
 
 Another interesting thing about \autoref{fig:dangernoodle} is that it displays very badly unless preceeded by a \code{\textbackslash pagebreak}, \code{\textbackslash newline}, or \code{\textbackslash clearpage} \citelist{\cite{paging}}. I'm curious to see if the addition of this paragraph outlining that changes this fact (due to page break positioning).
 Indeed it turns out that the figure is now displayed correctly without need for a manual page break. Maybe this is because it is now placed "here" instead of on a new page? Nope! Placing it on its own page is okay, this time. I think I won't ever figure this out.
+
+Use \code{\textbackslash mbox} around letters that should not be split by line breaks~\citelist{\cite{mboxx}}. This is especially useful in the final stage, when proofreading the document's looks.
 
 %\pagebreak
 %\newpage
@@ -1213,6 +1212,20 @@ title={embedall – Embed source files into the generated PDF},
 author={Lichti, David},
 author={Sartori, Alberto},
 url={https://ctan.org/pkg/embedall},
+accessdate={09.09.2020},
+}
+\bib{perfl}{webpage}{
+title={How to measure the compilation time of a document?},
+author={Latexforti},
+author={Phelype, Oleinik},
+url={https://tex.stackexchange.com/a/505840/102826},
+accessdate={09.09.2020},
+}
+\bib{mboxx}{webpage}{
+title={How can I make a pair of words stick together in line breaks?},
+author={Berg, Emanuel},
+author={Sveinung},
+url={https://tex.stackexchange.com/a/99691/102826},
 accessdate={09.09.2020},
 }
 \end{biblist}
