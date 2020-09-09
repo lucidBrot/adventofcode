@@ -198,6 +198,9 @@
 \def\myappendxstring#1{\edef\tmp{#1}\expandafter\g@addto@macro\expandafter\mystring\expandafter{\tmp}}
 \makeatother
 
+% https://tex.stackexchange.com/a/418609/102826
+\usepackage{embedall}
+
 \begin{document}
 
 
@@ -256,7 +259,7 @@ After eliminating some problems of this sort by storing the result in a new comm
 \end{figure}
 
 \begin{figure}[hbt]
-\makebox[\textwidth][c]{\includegraphics[width=1.6\textwidth]{diff}}%
+\makebox[\textwidth][c]{\includegraphics[width=1.6\textwidth]{diff.jpg}}%
   \caption{The difference between wrong code that compiles (red) and seemingly correct code that produces a compiler error (green).}
   \label{fig:diff}
 \end{figure}
@@ -268,7 +271,7 @@ Since \texttt{xstring}'s \texttt{StrLen} is so slow, how about creating a faster
 We'll just have to run tex with the \texttt{--shell-escape} flag.\citelist{\cite{shellescape}} ( See \autoref{fig:typesettingsettings}). Using that allows us to escape to the shell - which is either bash or the windows cmd.exe.
 
 \begin{figure}[htbp]
-\includegraphics{typesettingsettings}
+\includegraphics{typesettingsettings.png}
 \caption{TeXworks settings for shellescape}
 \label{fig:typesettingsettings}
 \end{figure}
@@ -353,7 +356,7 @@ Hardcoded string char access: blubb \lucidcharat{\the\numexpr \totalpos - 0} blu
 \newline
 The output should have been: \lucidcharat{0}, \lucidcharat{1}, \lucidcharat{2},\lucidcharat{3}
 
-While working on this, I have found an understandable explanation for \code{\textbackslash expandafter}.\citelist{\cite{tugboat}}
+While working on this, I have found an understandable {explanation for \code{\textbackslash expandafter}~\citelist{\cite{tugboat}}.}
 But maybe that's not my problem. Maybe my problem is once again that I'm defining things in a loop.\citelist{\cite{macronamesloop} \cite{loopmathcal}} Maybe those approaches would be a good idea: Create distinct macros in each loop iteration instead of overwriting the same one each time (and failing at overwriting it).
 
 But nevermind! It turns out I did everything well, except that I started my test output at a different index than I thought... the last few hours were spent on a ghost bug.
@@ -484,8 +487,8 @@ I want to loop \the\layersize~times for the first layer.
 
 The input file contains \stahpnow characters.
 
-%ifrunpartone
 \ifrunpartone
+\newpage
 \section{ Execution: The Water Is Cold}
 \begin{samepage}
 \begin{myquote}\begin{quote}
@@ -652,6 +655,7 @@ This result is from debug values.
 %endif runpartone
 \fi\typeout{"Reached the end of ifrunpartone"}
 
+\newpage
 \section{Day Eight Part Two: Because this task wasn't that hard}
 \typeout{"debug Srk 1!"}
 \begin{myquote}\begin{quote}
@@ -773,7 +777,7 @@ Then, \begin{lstlisting}[columns=fullflexible, backgroundcolor = \color{codebggr
 % end of the document.
 \addtocontents{xyz}{\gdef\protect\thefinalstring{\mystring}}
 \end{mycode}
-\caption{Magic to collect a variable, then print it at the start of the document~\citelist{\cite{collectvar}}}.
+\caption{Magic to collect a variable, then print it at the start of {the document~\citelist{\cite{collectvar}}}.}
 \label{fig:magic}
 \end{samepage}
 \end{figure}
@@ -791,6 +795,7 @@ be working, so the statements may be biased; but read on anyway."
 \caption{Donald Knuth displaying the mentality that TeX may sometimes choose not to work.~\citelist{\cite{texbook}}}
 \end{figure}
 
+\newpage
 \section{Linux}
 I've thought I'd continue working on this file in the train, on my laptop. Which uses Ubuntu instead of Windows. A quick
 \begin{mycode}
@@ -812,13 +817,15 @@ Argument of \textbackslash @newctr has an extra \}.$<$inserted text$>$\textbacks
 
 Maybe I should consider all the warnings I'm getting without even running part two first? Maybe also not. They are all just either about design (overfull hbox, fonts) or warn about things that are like I want them to be. E.g. the abbreviation for one of the authors is undefined - but that's totally fine because this is not an abbreviation. It's the authors full name!
 
+\newpage
+
 \section{Night Eight Part Two}
 The same thing attempted again, after having gotten some help by D. Carlisle~\citelist{\cite{fragilecommand}}.
 
 \ifrunparttwotrytwo
 
   % -----------------------------------------------------------
-  \begin{figure}
+  \begin{figure}[ht]
   debug for part two:
   \newcounter{debugctr}
   \setcounter{debugctr}{-1}
@@ -982,6 +989,7 @@ Reminder that the image has $\the\imgwidth \times \the\imgheight$ pixels.
 \textbf{Not running part two (second try) as per flags.}
 \fi
 
+\newpage
 \section{Interpretation}
 Now that we have the binary representation of the image, we still need to interpret it.\citelist{\cite{tikzmat}}
 
@@ -1020,7 +1028,7 @@ The value of \code{\textbackslash pdfelapsedtime} is the number of seconds elaps
 \end{quote}\end{myquote}
 
 \section{Source}
-The source code is clingy: It attached itself to this file. Open it in Adobe Reader and view it under Attachments.\\
+The source code is clingy: It attached itself to this file.~\citelist{\cite{embedone} \cite{embedtwo}} Open it in Adobe Reader (on Windows) or Document Viewer (on Ubuntu) and view it under Attachments.\\
 Linking to it does not work unless the file is also a pdf, it seems.
 
 \section{Fun Facts}
@@ -1191,6 +1199,21 @@ title={Advent of Code - Day 8},
 author={SanseroGames}
 url={https://github.com/SanseroGames/adventofcode/tree/master/2019/8},
 accessdate={08.09.2020},
+}
+\bib{embedone}{webpage}{
+title={Is there some way to embed LaTeX source code in a PDF file?},
+author={vy32},
+author={koppor},
+author={diabonas},
+url={https://tex.stackexchange.com/a/418609/102826},
+accessdate={09.09.2020},
+}
+\bib{embedtwo}{webpage}{
+title={embedall – Embed source files into the generated PDF},
+author={Lichti, David},
+author={Sartori, Alberto},
+url={https://ctan.org/pkg/embedall},
+accessdate={09.09.2020},
 }
 \end{biblist}
 \end{bibdiv}
