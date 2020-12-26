@@ -4,6 +4,8 @@
 - [x] LISP
 - [x] Minkolang
 - [x] PHP
+- [x] Lua
+- [x] LaTeX
 - [ ] awk
 - [ ] ~~Malbolge~~
 - [ ] ~~LeGit~~
@@ -36,7 +38,6 @@
 - [ ] Prolog
 - [ ] Pure HTML+CSS
 - [ ] Zig
-- [ ] Lua
 - [ ] D
 - [ ] Ruby
 - [ ] [Crystal](https://crystal-lang.org/)
