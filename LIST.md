@@ -6,6 +6,7 @@
 - [x] PHP
 - [x] Lua
 - [x] LaTeX
+- [x] kotlin
 - [ ] awk
 - [ ] ~~Malbolge~~
 - [ ] ~~LeGit~~
@@ -28,7 +29,6 @@
 - [ ] factor
 - [ ] Webassembly
 - [ ] /// (slashes)
-- [ ] kotlin
 - [ ] vimscript
 - [ ] Linda/ether
 - [ ] GolfScript/Jelly/05AB1E/Pyth

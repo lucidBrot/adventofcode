@@ -121,3 +121,12 @@ We're using $\LaTeX$! It's very much not made to perform computations and it sho
 
 But [have a look at the output pdf](./2019/8/day8.pdf) - I wrote that during development. Formatting tricks seem so much easier after trying to use $\TeX$ primitives correctly for a few hours.
 
+#### Diary.apply { entry Day 9}
+
+Kotlin.
+
+Not much to be said here.
+
+* `.also()`  and ` .apply()`  are nice to have
+* I simply ported the lua solution from day 7 and added a few mistakes.
+
