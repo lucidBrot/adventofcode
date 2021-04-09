@@ -1,0 +1,70 @@
+\documentclass[english,listof=totoc]{scrartcl}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\setlength{\parskip}{\medskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{float}
+
+\usepackage{tabu}
+
+\usepackage{pgfplotstable} %package for automated csv-table-creation
+\usepackage{pgfplots} %see above
+\usepackage{colortbl} %allows coloring in tables
+
+\definecolor{lightergray}{RGB}{242,242,242} % define a color for later use
+
+\usepackage{hhline} %% Alternative horizontal line for tables
+
+\usepackage{tikz}
+\usetikzlibrary{tikzmark}
+
+\begin{document}
+
+First the automatically created table:
+
+\newcounter{mycounter}
+
+\pgfplotstabletypeset[
+debug=true,
+col sep = comma,
+%row sep = newline, %% This does not change anything
+skip coltypes=true,
+begin table={\tikzmark{tabstartmaindim}%
+\begin{tabu} to \textwidth {|>{\columncolor{lightergray}}X|X|} \hhline{--} },
+end table={\end{tabu}\tikzmark{tabendmaindim}},
+skip first n=1,
+columns={[index]0,[index]1},
+%header=false,
+every col no 0/.style={string type},
+every col no 1/.style={string type},
+every head row/.append style={
+before row={%
+\multicolumn{2}{|l|}{\cellcolor{lightergray}\textbf{Custom Title}} \\%
+\hhline{--} 
+},
+after row={%
+            \noalign{\pgfmark{testmark}}\hhline{--}
+%               \stepcounter{mycounter}\noalign{\pgfmark{testmark}}\hhline{--}
+},
+},
+every nth row = {1}{ before row =\noalign{\pgfmark{a4}}\hhline{--}},
+every last row/.style ={ after row ={\hhline{--}  \tabuphantomline}}
+]
+{testfile.dat}
+
+This is the table I want to create:
+
+\tikzmark {tabstartnew}%
+\begin {tabu} to \textwidth {|>{\columncolor {lightergray}}X|X|} \hhline{--}
+\multicolumn {2}{|l|}{\cellcolor {lightergray}\textbf {Custom Title}} \\\hhline{--}
+%0&1\\\hhline{--} %% Note: I don't really understand why this line is created, the option "header=false" does not change anything.
+1&2 \\\noalign{\pgfmark{testmark1}}\hhline{--}
+3&4 \\\noalign{\pgfmark{testmark2}}\hhline{--}
+5&6 \\\noalign{\pgfmark{testmark3}}\hhline{--}
+\tabuphantomline %
+\end {tabu}%
+\tikzmark {tabendnew}%
+
+\end{document}

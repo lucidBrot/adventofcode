@@ -1,0 +1,35 @@
+\newcounter{linespgf}
+\newcounter{forloopcount}
+\setcounter{linespgf}{0}
+
+\pgfplotstabletypeset[
+%debug=true,
+col sep = comma,
+skip coltypes=true,
+begin table={\tikzmark{tabstartmaindim}%
+\begin{tabu} to \textwidth {|>{\columncolor{lightergray}}X|X|} \noalign{\stepcounter{linespgf}\pgfmark{maindim\thelinespgf}} },
+end table={\end{tabu}\tikzmark{tabendmaindim}},
+skip first n=1,
+columns/Species/.style={string type},
+%header=false,
+columns={[index]0,[index]1},
+every col no 0/.style={string type},
+every col no 1/.style={string type},
+every head row/.append style={
+before row={%
+\multicolumn{2}{|l|}{\cellcolor{lightergray}\textbf{Title}} \\%
+\noalign{\stepcounter{linespgf}\pgfmark{maindim\thelinespgf}}
+},
+after row={%
+            \noalign{\stepcounter{linespgf}\pgfmark{maindim\thelinespgf}}
+},
+},
+every nth row = {1}{ before row =\noalign{\stepcounter{linespgf}\pgfmark{maindim\thelinespgf}}},
+every last row/.style ={ after row ={\noalign{\stepcounter{linespgf}\pgfmark{maindim\thelinespgf}}}}
+]
+{testfile.dat}
+
+\forloop{forloopcount}{1}{\value{forloopcount} < \eval{\value{linespgf}+1}}%
+{%
+\tikz[overlay,remember picture]\draw[red,]  ({pic cs:tabstartmaindim} |- {pic cs:maindim\theforloopcount}) --({pic cs:tabendmaindim} |- {pic cs:maindim\theforloopcount});%
+}
