@@ -2,7 +2,6 @@ import java.io.File
 // This file is basically a port from lua to kotlin, form day 7
 
 fun main(args: Array<String>) {
-    println("hello")
     var ic = IntComputer.from_file("../input.txt", listOf(1))
     ic.run()
 }
@@ -61,6 +60,7 @@ class IntComputer() {
     // the opcode and accesscode are one number, the args are in future elements.
     val mem: MutableMap<Long, Long> = mutableMapOf<Long, Long>()
     var user_input: List<Int> = listOf()
+    // user_input is currently ignored.
     constructor(initial_memory: List<String>, user_input: List<Int>) : this() {
         // transform Char Array into Int map
         for ((i, chars) in initial_memory.withIndex()){
@@ -82,7 +82,7 @@ class IntComputer() {
             // compute the access modes for each argument
             var accessModes = (opcodeWithAccessmodesAsNumber / 100L).toString().toCharArray()
                 .also { it.reverse() }
-                .map { c -> c.toLong() }
+                .map { c -> c.toString().toLong() }
                 .toMutableList()
             // access modes can be fetched using indices. It is now in correct order.
 
@@ -107,11 +107,13 @@ class IntComputer() {
     }
 
     fun perform_instruction(opcode: Int, accessModes: List<Long>, args: List<Long>){
+        //println("DEBUG: pc = $pc")
+        //println("     : performing instruction with opcode $opcode, accessModes: $accessModes")
         var n = instr_num_args(opcode)
         assert(n == args.size) { "Wrong number of Arguments"}
         var ni = instr_num_input_args.getOrDefault(opcode, -1)
         var inputargs = args.subList(0,ni)
-        var outputargs = args.subList(ni+1, args.size)
+        var outputargs = args.subList(ni, args.size)
 
         assert(n==accessModes.size){ "Wrong length of AccessModes."}
         // get input argument values
@@ -127,6 +129,7 @@ class IntComputer() {
 
         // combine the arguments into one list
         var args: List<Long> = mutableListOf<Long>().apply{addAll(inputvals)}.apply{addAll(outputvals)}
+        assert(args.size==n)
         // call the relevant execution
         when (opcode){
             1 -> this.perform_add(args[0], args[1], args[2])
@@ -180,7 +183,7 @@ class IntComputer() {
     }
 
     fun perform_output(something:Long){
-        print("output: $something")
+        println("output: $something")
     }
 
     fun perform_jz(cond:Long, target_pc:Long){
