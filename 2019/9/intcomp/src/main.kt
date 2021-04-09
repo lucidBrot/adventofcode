@@ -1,4 +1,5 @@
 import java.io.File
+import java.lang.Math.floor
 
 fun main(args: Array<String>) {
     println("hello")
@@ -56,6 +57,7 @@ class IntComputer() {
     var program_finished: Boolean = false
 
     // mapping addresses to memory entries
+    // the opcode and accesscode are one number, the args are in future elements.
     val mem: MutableMap<Long, Long> = mutableMapOf<Long, Long>()
     var user_input: List<Int> = listOf()
     constructor(initial_memory: List<String>, user_input: List<Int>) : this() {
@@ -73,7 +75,28 @@ class IntComputer() {
 
         while (!this.program_finished) {
             // 2-digit opcode, leading digits are accessmodes
+            var opcodeWithAccessmodesAsNumber = this.mem.getOrDefault(pc, 0)
+            // turn this into the opcode
+            var opcode = opcodeWithAccessmodesAsNumber % 100
+            // compute the access modes for each argument
+            var accessModes = (opcodeWithAccessmodesAsNumber / 100L).toString().toCharArray()
+                .also { it.reverse() }
+                .map { c -> c.toLong() }
+            // access modes can be fetched using indices. It is now in correct order.
 
+            var n = instr_num_args(opcode = opcode.toInt())
+            assert(accessModes.size == n)
+
+            // get all arguments
+            var args = MutableList<Long>(n) { i ->
+                this.mem.getOrDefault(this.pc + 1 + i, 0L)
+            }
+
+            // execute instruction
+            this.perform_instruction(opcode, accessModes, args)
+
+            // increment program counter
+            this.pc += 1 + n
         }
     }
 
