@@ -2,10 +2,10 @@ import java.io.File
 
 fun main(args: Array<String>) {
     println("hello")
-    val name = readLine()
-    println("Hello $name")
-    var ic = IntComputer.from_file("p../input.txt")
+    var ic = IntComputer.from_file("../input.txt", listOf(1))
 }
+
+class FuckupException(msg:String): Exception(msg)
 
 class IntComputer() {
 
@@ -45,19 +45,57 @@ class IntComputer() {
             return instr_num_input_args[opcode]!! + instr_num_output_args[opcode]!!
         }
 
-        fun from_file(filename: String): IntComputer {
-            val initial_memory = File(filename).readText().toCharArray()
-            return IntComputer(initial_memory)
+        fun from_file(filename: String, user_input: List<Int>): IntComputer {
+            val initial_memory = File(filename).readText().split(',').map { s -> s.trim() }
+            return IntComputer(initial_memory, user_input)
         }
     }
+
+    var pc: Long = 0
+    var relative_base: Long = 0
+    var program_finished: Boolean = false
 
     // mapping addresses to memory entries
-    val mem: MutableMap<Int, Int> = mutableMapOf<Int, Int>()
-    constructor(initial_memory: CharArray) : this() {
+    val mem: MutableMap<Long, Long> = mutableMapOf<Long, Long>()
+    var user_input: List<Int> = listOf()
+    constructor(initial_memory: List<String>, user_input: List<Int>) : this() {
         // transform Char Array into Int map
-        for ((i, char) in initial_memory.withIndex()){
-            this.mem[i] = char.toInt()
+        for ((i, chars) in initial_memory.withIndex()){
+            this.mem[i.toLong()] = chars.toLong()
         }
 
+        this.user_input = user_input
     }
+
+    fun run(){
+        this.pc = 0
+        this.relative_base = 0
+
+        while (!this.program_finished) {
+            // 2-digit opcode, leading digits are accessmodes
+
+        }
+    }
+
+    /**
+     * get the value from location    if accessmode = 00
+     * return the same value          if accessmode = 01
+     */
+    fun get_value(location_or_value: Long, accessMode :Int): Long {
+        return when (accessMode){
+            0 -> this.mem.getOrDefault(location_or_value, 0L)
+            1 -> location_or_value
+            else -> throw FuckupException("get_value called with accessMode $accessMode")
+        }
+    }
+
+    fun set_value(location_or_value: Long, value: Long, accessMode: Int){
+        when (accessMode){
+            0 -> this.mem[location_or_value] = value
+            1 -> throw FuckupException("can't set to immediate!")
+            else -> throw FuckupException("what?")
+        }
+    }
+
+
 }
