@@ -86,6 +86,8 @@ class IntComputer() {
                 .toMutableList()
             // access modes can be fetched using indices. It is now in correct order.
 
+            //println("RUN  : opcode to query is $opcode")
+            //println("MEM  : ${this.mem}")
             var n = instr_num_args(opcode = opcode.toInt())
 
             // pad access modes because leading zeros have been lost
@@ -99,15 +101,17 @@ class IntComputer() {
             }
 
             // execute instruction
+            //println("ARGS:  opcode = $opcode, accessModes = $accessModes, args: $args")
             this.perform_instruction(opcode.toInt(), accessModes, args)
 
             // increment program counter
             this.pc += 1 + n
+            //println("AFTER: pc = $pc")
         }
     }
 
     fun perform_instruction(opcode: Int, accessModes: List<Long>, args: List<Long>){
-        //println("DEBUG: pc = $pc")
+        //println("DEBUG: pc = $pc, relative base = ${this.relative_base}")
         //println("     : performing instruction with opcode $opcode, accessModes: $accessModes")
         var n = instr_num_args(opcode)
         assert(n == args.size) { "Wrong number of Arguments"}
@@ -122,13 +126,18 @@ class IntComputer() {
         }
 
         // get output values. They should always be locations
-        var outputvals = outputargs.mapIndexed {index, elem ->
+        /*var outputvals = outputargs.mapIndexed {index, elem ->
             assert(accessModes[index] != 1L){"Output values can never be immediates"}
             get_value(elem, accessModes[index].toInt())
+        }*/
+        var outputvals = outputargs.mapIndexed {index, elem ->
+            if (accessModes[index+inputvals.size] == 2L) (elem + this.relative_base) else elem
         }
 
         // combine the arguments into one list
-        var args: List<Long> = mutableListOf<Long>().apply{addAll(inputvals)}.apply{addAll(outputvals)}
+        var args: List<Long> = mutableListOf<Long>()
+            .apply{addAll(inputvals)}
+            .apply{addAll(outputvals)}
         assert(args.size==n)
         // call the relevant execution
         when (opcode){
@@ -161,6 +170,8 @@ class IntComputer() {
     }
 
     fun set_value(location_or_value: Long, value: Long){
+        //println("SET  : setting value $value to address $location_or_value")
+        if (location_or_value < 0L) throw FuckupException("Yo, PLS! No negative addresses allowed!")
         this.mem[location_or_value] = value
     }
 
