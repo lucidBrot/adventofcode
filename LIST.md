@@ -39,7 +39,7 @@
 - [ ] Pure HTML+CSS
 - [ ] Zig
 - [ ] D
-- [ ] Ruby
+- [ ] **Ruby**
 - [ ] [Crystal](https://crystal-lang.org/)
 - [ ] [sage](https://doc.sagemath.org/html/en/faq/faq-general.html#why-does-this-project-exist) or [CoCalc](https://cocalc.com/app)
 - [ ] Some crazy regex perhaps?
