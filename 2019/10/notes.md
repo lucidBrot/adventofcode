@@ -36,4 +36,10 @@ Given any asteroid pair, I can compute a line from their locations.
 
 Now a straightforward approach would be to compute that multiple times: One time per station candidate. That is $\mathcal O(n^2)$.
 
-But maybe I can do it faster by computing all lines going through each meteor using some hough-transform approach. If I can quickly get a heatmap where every meteor has a count of lines going through it, I just need to filter those lines based on count. I.e. I would have a small amount of lines to consider and all would give at least one count, so that second step would be worth it.
+But maybe I can do it faster or nicer by computing all lines going through each meteor using some hough-transform approach. If I can quickly get a heatmap where every meteor has a count of lines going through it, I just need to filter those lines based on count. I.e. I would have a small amount of lines to consider and all would give at least one count, so that second step would be worth it.
+
+I gave up on that. Instead my approach is basically as above. To track which of the considered station candidates has the most other asteroids in sight, I simply first express *every* line outgoing from that candidate as a string of that candidate's id and the normalized signed line direction vector outgoing from it. Then the sum of unique lines containing the candidate ID at the start is enough to tell which candidate is the best one.
+
+![img](notes.assets/unknown.png)
+
+I don't think I will actually code this in a way that works though...
